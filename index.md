@@ -1,5 +1,7 @@
+# Projects
 
-### Running Analysis
+
+## Running Analysis
 [Repo](https://github.com/omedeiro/activityAnalysis)
 
 ![running_map](/docs/activityAnalysis/running_map.png)
