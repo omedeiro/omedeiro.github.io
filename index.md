@@ -8,6 +8,6 @@
 
 ## Virtual-Physical Interactions
 
-[Final Report](https://github.com/omedeiro/docs/vr-arm/SeniorDesignFinalReport.pdf)
-![vrUserTest](https://github.com/omedeiro/docs/vr-arm/vrUserTest.png)
+[Final Report](/docs/vr-arm/SeniorDesignFinalReport.pdf)
+![vrUserTest](/docs/vr-arm/vrUserTest.png)
 
