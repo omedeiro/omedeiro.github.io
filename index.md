@@ -2,7 +2,7 @@
 ### Running Analysis
 [Repo](https://github.com/omedeiro/activityAnalysis)
 
-![running_map](https://github.com/omedeiro/activityAnalysis/blob/main/running_map.png)
+![running_map](https://github.com/omedeiro/activityAnalysis/main/running_map.png)
 
 
 You can use the [editor on GitHub](https://github.com/omedeiro/omedeiro.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
