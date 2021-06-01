@@ -1,6 +1,6 @@
 
 ### Running Analysis
-[Repo(https://github.com/omedeiro/activityAnalysis)]
+[Repo](https://github.com/omedeiro/activityAnalysis)
 
 
 
