@@ -1,6 +1,11 @@
 # Projects
 
+## Finite Difference TDGL simulations
+[Repo](https://github.com/omedeiro/simulation6336)
 
+![running_map](/docs/tdgl/trapGif20211201T151612.gif)
+
+trapGif20211201T151612
 ## Running Analysis
 [Repo](https://github.com/omedeiro/activityAnalysis)
 
