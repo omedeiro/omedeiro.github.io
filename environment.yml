@@ -1,0 +1,19 @@
+name: github-pages
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.9
+  - pip
+  - jupyter-book
+  - matplotlib
+  - numpy
+  - pandas
+  - seaborn
+  - plotly
+  - ipython
+  - jupyter
+  - pip:
+    - sphinx-external-toc
+    - myst-parser
+    - sphinx-book-theme
