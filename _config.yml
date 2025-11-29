@@ -1,0 +1,51 @@
+# Book settings
+title: "Owen Medeiros - Portfolio"
+author: "Owen Medeiros"
+copyright: "2024"
+
+# Force re-execution of notebooks on each build
+execute:
+  execute_notebooks: force
+  timeout: 30
+  allow_errors: false
+    title: "Budget Dashboard"
+  - file: projects/activityAnalysis/index
+
+# Information about where the book exists on the web
+repository:
+  url: https://github.com/omedeiro/omedeiro.github.io
+  branch: main
+
+# Add GitHub buttons to your book
+html:
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+
+# Advanced and power-user settings
+bibtex_bibfiles:
+  - references.bib
+
+# Sphinx extensions
+sphinx:
+  extra_extensions:
+    - sphinx_copybutton
+    - sphinx_panels
+  config:
+    html_theme_options:
+      repository_url: https://github.com/omedeiro/omedeiro.github.io
+      use_repository_button: true
+      use_issues_button: true
+  - references.bib
+
+# Sphinx extensions
+sphinx:
+  extra_extensions:
+    - sphinx_copybutton
+    - sphinx_panels
+  config:
+    html_theme_options:
+      repository_url: https://github.com/omedeiro/omedeiro.github.io
+      use_repository_button: true
+      use_issues_button: true

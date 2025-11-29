@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owen Medeiros - Developer Portfolio</title>
+    <meta name="description" content="Owen Medeiros - Software Developer Portfolio">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Owen Medeiros</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="nav-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="highlight">Owen Medeiros</span>
+                </h1>
+                <p class="hero-subtitle">Software Developer & Problem Solver</p>
+                <p class="hero-description">
+                    I build modern web applications and love creating solutions that make a difference.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate software developer with experience spanning data analysis, 
+                        scientific computing, virtual reality, and financial technology. I enjoy 
+                        tackling complex problems across diverse domains, from physics simulations 
+                        to interactive VR experiences and data-driven applications.
+                    </p>
+                    <div class="skills">
+                        <h3>Technologies I work with:</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">C#</span>
+                            <span class="skill-tag">Unity 3D</span>
+                            <span class="skill-tag">Data Analysis</span>
+                            <span class="skill-tag">VR/AR</span>
+                            <span class="skill-tag">Scientific Computing</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                
+                <!-- Budget Dashboard -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Budget Dashboard</h3>
+                        <p class="project-description">
+                            A comprehensive personal finance dashboard with data visualization, 
+                            budget tracking, and financial analysis capabilities.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Plotly</span>
+                            <span class="tech-tag">Streamlit</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/omedeiro/budget-dashboard" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="docs/budget-dashboard/" class="project-link" target="_blank">
+                                <i class="fas fa-book"></i> Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Analysis -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-running"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Activity Analysis</h3>
+                        <p class="project-description">
+                            GPS-based activity analysis tool for visualizing running routes, 
+                            performance metrics, and geographical activity patterns.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Matplotlib</span>
+                            <span class="tech-tag">GPS Data</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/omedeiro/activityAnalysis" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="docs/activityAnalysis/" class="project-link" target="_blank">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TDGL Physics Simulation -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">TDGL Simulation</h3>
+                        <p class="project-description">
+                            Time-Dependent Ginzburg-Landau simulation for studying superconducting 
+                            vortex dynamics and flux behavior in materials.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">NumPy</span>
+                            <span class="tech-tag">Physics</span>
+                            <span class="tech-tag">Simulation</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/omedeiro/tdgl" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="docs/tdgl/" class="project-link" target="_blank">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VR Arm System -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">VR Arm System</h3>
+                        <p class="project-description">
+                            Senior design project: Virtual reality system with haptic feedback 
+                            for immersive arm and hand interaction experiences.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Unity 3D</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">VR/AR</span>
+                            <span class="tech-tag">Hardware</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/omedeiro/vr-arm" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                            <a href="docs/vr-arm/" class="project-link" target="_blank">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <p class="contact-description">
+                    I'm always open to discussing new opportunities, interesting projects, 
+                    or just having a chat about technology.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@example.com" class="contact-link">
+                        <i class="fas fa-envelope"></i>
+                        your.email@example.com
+                    </a>
+                    <a href="https://github.com/omedeiro" class="contact-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Owen Medeiros. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

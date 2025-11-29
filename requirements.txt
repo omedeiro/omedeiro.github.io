@@ -1,0 +1,7 @@
+jupyter-book>=0.15.1
+myst-parser>=0.18.0
+sphinx-panels>=0.6.0
+sphinx-copybutton>=0.5.0
+matplotlib>=3.5.0
+numpy>=1.21.0
+plotly>=5.0.0

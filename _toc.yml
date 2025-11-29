@@ -1,0 +1,15 @@
+format: jb-book
+root: intro
+parts:
+- caption: About
+  chapters:
+  - file: about
+- caption: Projects
+  chapters:
+  - file: projects/budget-dashboard/index
+  - file: projects/activityAnalysis/index
+  - file: projects/tdgl/index
+  - file: projects/vr-arm/index
+- caption: Contact
+  chapters:
+  - file: contact
