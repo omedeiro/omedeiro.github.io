@@ -15,6 +15,11 @@
 
 ![running_map](/docs/activityAnalysis/running_map.png)
 
+## Budget Dashboard
+[Repo](https://github.com/omedeiro/budget-dashboard)
+
+[Live Documentation](https://omedeiro.github.io/budget-dashboard)
+
 ## Virtual-Physical Interactions
 
 [Final Report](https://github.com/omedeiro/omedeiro.github.io/blob/main/omedeiro/docs/vr-arm/SeniorDesignFinalReport.pdf)
