@@ -18,7 +18,7 @@
 ## Budget Dashboard
 [Repo](https://github.com/omedeiro/budget-dashboard)
 
-[Live Documentation](https://omedeiro.github.io/budget-dashboard)
+[Documentation](/docs/budget-dashboard/index.md)
 
 ## Virtual-Physical Interactions
 

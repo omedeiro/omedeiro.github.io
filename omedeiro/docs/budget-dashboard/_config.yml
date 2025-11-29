@@ -1,0 +1,41 @@
+title: Personal Finance Dashboard
+description: A comprehensive Python-based tool for analyzing personal financial data with automated data import, cleaning, and visualization capabilities.
+url: https://omedeiro.github.io/budget-dashboard
+baseurl: /budget-dashboard
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Navigation
+header_pages:
+  - getting-started.md
+  - data-import.md
+  - analysis-features.md
+  - customization.md
+  - api-reference.md
+
+# Plugin settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# SEO
+author: Owen Medeiros
+twitter:
+  username: 
+  card: summary_large_image
+
+# Social links
+github_username: omedeiro
+
+# Exclude files
+exclude:
+  - generate_sample_assets.py
+  - examples/
+
+# Include files
+include:
+  - images/
+  - _redirects
