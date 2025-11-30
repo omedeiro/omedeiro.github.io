@@ -40,32 +40,30 @@ The Activity Analysis project transforms raw GPS tracking data into meaningful i
 
 ## Technologies Used
 
-```{panels}
-Data Processing
-^^^
+::::{grid} 3
+
+:::{grid-item-card} Data Processing
 - **Python**: Core programming language
 - **Pandas**: Data manipulation and analysis
 - **NumPy**: Numerical computations
 - **GPX**: GPS data format parsing
+:::
 
----
-
-Visualization
-^^^
+:::{grid-item-card} Visualization
 - **Matplotlib**: Static plot generation
 - **Plotly**: Interactive visualizations
 - **Folium**: Interactive mapping
 - **Seaborn**: Statistical visualizations
+:::
 
----
-
-Geospatial Analysis
-^^^
+:::{grid-item-card} Geospatial Analysis
 - **GeoPandas**: Geospatial data operations
 - **Shapely**: Geometric operations
 - **Haversine**: Distance calculations
 - **Coordinate Systems**: GPS coordinate handling
-```
+:::
+
+::::
 
 ## Sample Analysis
 

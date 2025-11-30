@@ -30,32 +30,30 @@ The Time-Dependent Ginzburg-Landau theory describes the dynamics of the supercon
 
 ## Technologies Used
 
-```{panels}
-Numerical Methods
-^^^
+::::{grid} 3
+
+:::{grid-item-card} Numerical Methods
 - **Python**: Primary programming language
 - **NumPy**: Array operations and linear algebra
 - **SciPy**: Advanced numerical algorithms
 - **Finite Differences**: Spatial discretization
+:::
 
----
-
-Visualization
-^^^
+:::{grid-item-card} Visualization
 - **Matplotlib**: Scientific plotting and animation
 - **VTK**: Advanced 3D visualization
 - **PIL**: Image processing
 - **FFmpeg**: Video generation
+:::
 
----
-
-Computational Physics
-^^^
+:::{grid-item-card} Computational Physics
 - **Runge-Kutta**: Time integration methods
 - **Sparse Matrices**: Efficient linear algebra
 - **Parallel Computing**: Multi-core optimization
 - **Boundary Conditions**: Physical constraint implementation
-```
+:::
+
+::::
 
 ## Key Features
 

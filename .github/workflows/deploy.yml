@@ -23,11 +23,13 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
+        cache: 'npm'
         
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
+        cache: 'pip'
         
     - name: Install MyST
       run: npm install -g mystmd
@@ -38,7 +40,13 @@ jobs:
         pip install -r requirements.txt
         
     - name: Build MyST Site
-      run: myst build --html
+      run: |
+        myst build --html
+        # Check if build was successful
+        if [ ! -f "_build/html/index.html" ]; then
+          echo "Build failed - index.html not found"
+          exit 1
+        fi
       
     - name: Setup Pages
       uses: actions/configure-pages@v3

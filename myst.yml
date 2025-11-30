@@ -2,14 +2,15 @@
 version: 1
 project:
   id: 13657fbb-7d8f-45dd-b745-898388cbda95
-  # title:
-  # description:
-  # keywords: []
-  # authors: []
-  # github:
-  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
+  title: Owen Medeiros - Developer Portfolio
+  description: Portfolio showcasing projects in data analysis, scientific computing, VR development, and financial technology
+  keywords: [python, data-science, vr-development, scientific-computing, portfolio]
+  authors: 
+    - name: Owen Medeiros
+  github: https://github.com/omedeiro
 site:
   template: book-theme
-  # options:
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
+  options:
+    logo: images/logo.png
+  domains:
+    - omedeiro.github.io

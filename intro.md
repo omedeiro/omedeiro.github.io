@@ -17,11 +17,9 @@ I enjoy tackling complex problems across diverse domains, from physics simulatio
 ## Featured Projects
 
 ::::{grid} 2
-:gutter: 3
 
 :::{grid-item-card} Budget Dashboard
 :link: projects/budget-dashboard/index
-:link-type: doc
 
 A comprehensive personal finance dashboard with data visualization, budget tracking, and financial analysis capabilities.
 
@@ -30,7 +28,6 @@ A comprehensive personal finance dashboard with data visualization, budget track
 
 :::{grid-item-card} Activity Analysis  
 :link: projects/activityAnalysis/index
-:link-type: doc
 
 GPS-based activity analysis tool for visualizing running routes, performance metrics, and geographical activity patterns.
 
@@ -39,7 +36,6 @@ GPS-based activity analysis tool for visualizing running routes, performance met
 
 :::{grid-item-card} TDGL Simulation
 :link: projects/tdgl/index
-:link-type: doc
 
 Time-Dependent Ginzburg-Landau simulation for studying superconducting vortex dynamics and flux behavior in materials.
 
@@ -48,7 +44,6 @@ Time-Dependent Ginzburg-Landau simulation for studying superconducting vortex dy
 
 :::{grid-item-card} VR Arm System
 :link: projects/vr-arm/index
-:link-type: doc
 
 Senior design project: Virtual reality system with haptic feedback for immersive arm and hand interaction experiences.
 
@@ -59,32 +54,30 @@ Senior design project: Virtual reality system with haptic feedback for immersive
 
 ## Skills & Technologies
 
-```{panels}
-Programming Languages
-^^^
+::::{grid} 3
+
+:::{grid-item-card} Programming Languages
 - Python
 - JavaScript  
 - C#
 - MATLAB
+:::
 
----
-
-Frameworks & Tools
-^^^
+:::{grid-item-card} Frameworks & Tools
 - Unity 3D
 - Pandas/NumPy
 - Plotly/Matplotlib
 - Streamlit
+:::
 
----
-
-Domains
-^^^
+:::{grid-item-card} Domains
 - Data Analysis
 - Scientific Computing
 - VR/AR Development
 - Financial Technology
-```
+:::
+
+::::
 
 ---
 
