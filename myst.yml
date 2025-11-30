@@ -13,5 +13,9 @@ site:
   options:
     logo: images/logo.png
     hide_footer_text: true
+    footer_text: ""
+    show_source_button: false
+    extra_css:
+      - _static/custom.css
   domains:
     - omedeiro.github.io

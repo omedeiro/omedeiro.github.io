@@ -1,0 +1,17 @@
+/* Hide MyST footer */
+footer {
+  display: none !important;
+}
+
+/* Hide "Made with MyST" text specifically */
+.footer-content,
+.footer-text,
+[class*="footer"],
+[class*="myst-footer"] {
+  display: none !important;
+}
+
+/* Hide any elements containing "Made with MyST" */
+*:contains("Made with MyST") {
+  display: none !important;
+}
