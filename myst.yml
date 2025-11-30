@@ -12,5 +12,6 @@ site:
   template: book-theme
   options:
     logo: images/logo.png
+    hide_footer_text: true
   domains:
     - omedeiro.github.io
