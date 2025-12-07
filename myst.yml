@@ -8,6 +8,7 @@ project:
   authors: 
     - name: Owen Medeiros
   github: https://github.com/omedeiro
+  bibliography: references.bib
 site:
   template: book-theme
   options:
@@ -21,6 +22,5 @@ site:
       - _static/custom.css
   domains:
     - omedeiro.github.io
-  extensions:
-    - sphinxcontrib.bibtex
+project:
   bibliography: references.bib

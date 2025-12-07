@@ -11,11 +11,9 @@ Electrical engineer working on superconducting electronics. Projects here are re
 ## Featured Projects
 
 ::::{grid} 2
-:gutter: 3
 
 :::{grid-item-card} Budget Dashboard
 :link: projects/budget-dashboard/index
-:link-type: doc
 
 A comprehensive personal finance dashboard with data visualization, budget tracking, and financial analysis capabilities.
 
@@ -23,7 +21,6 @@ A comprehensive personal finance dashboard with data visualization, budget track
 
 :::{grid-item-card} Activity Analysis  
 :link: projects/activityAnalysis/index
-:link-type: doc
 
 GPS-based activity analysis tool for visualizing running routes, performance metrics, and geographical activity patterns.
 
@@ -31,7 +28,6 @@ GPS-based activity analysis tool for visualizing running routes, performance met
 
 :::{grid-item-card} TDGL Simulation
 :link: projects/tdgl/index
-:link-type: doc
 
 Time-Dependent Ginzburg-Landau simulation for superconducting vortex dynamics.
 
@@ -39,7 +35,6 @@ Time-Dependent Ginzburg-Landau simulation for superconducting vortex dynamics.
 
 :::{grid-item-card} VR Arm System
 :link: projects/vr-arm/index
-:link-type: doc
 
 Virtual reality system with haptic feedback for immersive arm interaction experiences.
 
