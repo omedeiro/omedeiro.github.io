@@ -21,3 +21,6 @@ site:
       - _static/custom.css
   domains:
     - omedeiro.github.io
+  extensions:
+    - sphinxcontrib.bibtex
+  bibliography: references.bib
