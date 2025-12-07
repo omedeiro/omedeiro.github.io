@@ -70,5 +70,3 @@ Data Analysis, Scientific Computing, VR/AR, FinTech
 
 ::::
 
-Built with MyST and hosted on GitHub Pages.
-
