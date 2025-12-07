@@ -30,30 +30,32 @@ The VR Arm System represents a culmination of virtual reality technology, haptic
 
 ## Technologies Used
 
-::::{grid} 3
-
-:::{grid-item-card} VR Development
+```{panels}
+VR Development
+^^^
 - **Unity 3D**: Game engine and VR framework
 - **SteamVR**: VR hardware integration
 - **C#**: Primary programming language
 - **Oculus SDK**: VR headset integration
-:::
 
-:::{grid-item-card} Hardware Integration
+---
+
+Hardware Integration
+^^^
 - **Arduino**: Haptic device control
 - **Servo Motors**: Force feedback actuation
 - **IMU Sensors**: Orientation tracking
 - **Force Sensors**: Touch detection
-:::
 
-:::{grid-item-card} User Interface
+---
+
+User Interface
+^^^
 - **Custom VR UI**: Intuitive virtual interfaces
 - **Hand Tracking**: Leap Motion integration
 - **Voice Commands**: Speech recognition
 - **Eye Tracking**: Gaze-based interaction
-:::
-
-::::
+```
 
 ## System Architecture
 
