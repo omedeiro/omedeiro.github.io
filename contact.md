@@ -4,44 +4,26 @@ I'm always open to discussing new opportunities, interesting projects, or just h
 
 ## Get In Touch
 
-::::{grid} 3
-
-:::{grid-item-card} Email
-[![Email](https://img.shields.io/badge/Email-omedeiro@gmail.com-blue?style=for-the-badge&logo=gmail)](mailto:omedeiro@gmail.com)
-:::
-
-:::{grid-item-card} GitHub
-[![GitHub](https://img.shields.io/badge/GitHub-omedeiro-black?style=for-the-badge&logo=github)](https://github.com/omedeiro)
-:::
-
-:::{grid-item-card} LinkedIn  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/owen-medeiros)
-:::
-
-::::
-
-## Areas of Interest
-
-I'm particularly interested in discussing:
-
-- **Data Science Projects**: Analysis, visualization, and insights from complex datasets
-- **Scientific Computing**: Numerical methods, simulations, and research collaborations
-- **VR/AR Development**: Immersive experiences and innovative interface design
-- **Open Source Contributions**: Collaborative development and knowledge sharing
-- **Career Opportunities**: Roles in data science, scientific computing, or software development
-
-## Response Time
-
-I typically respond to emails within 24-48 hours. For urgent matters, please mention "URGENT" in the subject line.
-
-## Collaboration
-
-I'm open to:
-- **Research Collaborations**: Academic or industrial research projects
-- **Open Source Contributions**: Contributing to existing projects or starting new ones
-- **Consulting**: Short-term projects in my areas of expertise
-- **Speaking Engagements**: Technical talks or presentations
+```{panels}
+Email
+^^^
+[![Email](https://img.shields.io/badge/Email-medeirosowen@gmail.com-blue?style=for-the-badge&logo=gmail)](mailto:medeirosowen@gmail.com)
 
 ---
 
-*Looking forward to connecting with you!*
+GitHub
+^^^
+[![GitHub](https://img.shields.io/badge/GitHub-omedeiro-black?style=for-the-badge&logo=github)](https://github.com/omedeiro)
+
+---
+
+LinkedIn  
+^^^
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/owen-medeiros)
+```
+
+## Areas of Interest
+
+Superconducting electronics, single photon detection, quantum compujting, microwave design, photonics
+
+
