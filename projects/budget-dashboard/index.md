@@ -2,16 +2,16 @@
 
 A comprehensive Python-based tool for analyzing personal financial data with automated data import, cleaning, and visualization capabilities.
 
-## 🌟 Features
+## Features
 
-- **Multi-Bank Support**: Import from Capital One CSV and Santander statements
-- **Smart Data Cleaning**: Automated merchant standardization and category assignment
-- **Rich Analytics**: Monthly trends, category breakdowns, spending patterns
-- **Interactive Visualizations**: Beautiful charts and an interactive HTML dashboard
-- **Specialized Analyzers**: Custom modules for subscriptions, gas spending, and more
-- **Comprehensive Reports**: Detailed financial insights and recommendations
+- Multi-Bank Support: Import from Capital One CSV and Santander statements
+- Smart Data Cleaning: Automated merchant standardization and category assignment  
+- Rich Analytics: Monthly trends, category breakdowns, spending patterns
+- Interactive Visualizations: Beautiful charts and an interactive HTML dashboard
+- Specialized Analyzers: Custom modules for subscriptions, gas spending, and more
+- Comprehensive Reports: Detailed financial insights and recommendations
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -40,7 +40,7 @@ python main.py --clean     # Clean data only
 python main.py --analyze   # Analyze data only
 ```
 
-## 📊 Dashboard Preview
+## Dashboard Preview
 
 The tool generates a comprehensive interactive dashboard with multiple tabs for detailed analysis:
 
@@ -66,7 +66,7 @@ The tool generates a comprehensive interactive dashboard with multiple tabs for 
 ![Daily Patterns](images/daily-patterns.png)
 *Analyze spending behavior by day of week*
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 budget-dashboard/
@@ -82,7 +82,7 @@ budget-dashboard/
     └── reports/        # Text-based insights
 ```
 
-## 📖 Documentation
+## Documentation
 
 - [Getting Started Guide](getting-started.md) - Step-by-step setup and first analysis
 - [Data Import Guide](data-import.md) - How to prepare and import your financial data
@@ -90,7 +90,7 @@ budget-dashboard/
 - [Customization Guide](customization.md) - How to customize categories and analysis
 - [API Reference](api-reference.md) - Technical documentation for developers
 
-## 🎯 Example Workflows
+## Example Workflows
 
 ### End-to-End Analysis
 ```bash
@@ -111,11 +111,11 @@ python main.py --other
 python main.py --gas
 ```
 
-## 🛡️ Privacy & Security
+## Privacy & Security
 
 This tool processes financial data locally on your machine. No data is transmitted to external services. All analysis is performed offline for maximum privacy.
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](../LICENSE) for details.
 
