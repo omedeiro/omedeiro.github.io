@@ -24,5 +24,9 @@ My research and publications in superconducting electronics, data analysis, and 
 
 ## All Publications
 
+The following includes all publications with explicit citations to ensure proper rendering:
+
+{cite}`castellani2025superconducting,foster2025time,harris2025high,medeiros2025scalable,simon2025ab,tao2025single,castellani2024nanocryotron,colangelo2024molybdenum,karam2024parameter,mauskopf2024technology,simon2024characterizing,batson2023reduced,buzzi2023nanocryotron,charaev2023single,christen2023integrated,foster2023superconducting,piatti2022reversible,medeiros2022investigation,butters2021scalable,xie2021nbn,colangelo2020superconducting,medeiros2019measuring,caraballo2016affordable`
+
 ```{bibliography}
 ```
