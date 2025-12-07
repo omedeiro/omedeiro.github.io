@@ -1,64 +1,49 @@
 # Owen Medeiros - Developer Portfolio
 
-Software developer working on data analysis, scientific computing, VR development, and financial technology.
+Electrical engineer working on superconducting electronics. Projects here are related to data analysis, VR development, and financial tracking.
 
 ```{tableofcontents}
 ```
 
-## Projects
+## Quick Overview
+
+
+## Featured Projects
 
 ::::{grid} 2
+:gutter: 3
 
 :::{grid-item-card} Budget Dashboard
 :link: projects/budget-dashboard/index
+:link-type: doc
 
-Personal finance dashboard with data visualization and budget tracking.
+A comprehensive personal finance dashboard with data visualization, budget tracking, and financial analysis capabilities.
 
-**Tech:** Python, Pandas, Plotly, Streamlit
 :::
 
 :::{grid-item-card} Activity Analysis  
 :link: projects/activityAnalysis/index
+:link-type: doc
 
-GPS activity analysis with route visualization and performance metrics.
+GPS-based activity analysis tool for visualizing running routes, performance metrics, and geographical activity patterns.
 
-**Tech:** Python, Pandas, Matplotlib, GPS Data
 :::
 
 :::{grid-item-card} TDGL Simulation
 :link: projects/tdgl/index
+:link-type: doc
 
 Time-Dependent Ginzburg-Landau simulation for superconducting vortex dynamics.
 
-**Tech:** Python, NumPy, Physics, Simulation
 :::
 
 :::{grid-item-card} VR Arm System
 :link: projects/vr-arm/index
+:link-type: doc
 
-VR system with haptic feedback for immersive arm interaction.
+Virtual reality system with haptic feedback for immersive arm interaction experiences.
 
-**Tech:** Unity 3D, C#, VR/AR, Hardware
 :::
 
 ::::
 
-## Technologies
-
-::::{grid} 3
-
-:::{grid-item-card} Languages
-Python, JavaScript, C#, MATLAB
-:::
-
-:::{grid-item-card} Tools
-Unity 3D, Pandas/NumPy, Plotly/Matplotlib, Streamlit
-:::
-
-:::{grid-item-card} Domains
-Data Analysis, Scientific Computing, VR/AR, FinTech
-:::
-
-::::
-
-Built with MyST and hosted on GitHub Pages.
