@@ -4,6 +4,9 @@ parts:
 - caption: About
   chapters:
   - file: about
+- caption: Research
+  chapters:
+  - file: publications
 - caption: Projects
   chapters:
   - file: projects/budget-dashboard/index

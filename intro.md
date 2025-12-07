@@ -47,3 +47,28 @@ Virtual reality system with haptic feedback for immersive arm interaction experi
 
 ::::
 
+## Publications
+
+```{bibliography}
+```
+
+## Technologies
+
+::::{grid} 3
+
+:::{grid-item-card} Languages
+Python, JavaScript, C#, MATLAB
+:::
+
+:::{grid-item-card} Tools
+Unity 3D, Pandas/NumPy, Plotly/Matplotlib, Streamlit
+:::
+
+:::{grid-item-card} Domains
+Data Analysis, Scientific Computing, VR/AR, FinTech
+:::
+
+::::
+
+Built with MyST and hosted on GitHub Pages.
+
