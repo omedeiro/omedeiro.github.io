@@ -22,5 +22,3 @@ site:
       - _static/custom.css
   domains:
     - omedeiro.github.io
-project:
-  bibliography: references.bib
