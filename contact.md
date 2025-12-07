@@ -15,7 +15,7 @@ I'm always open to discussing new opportunities, interesting projects, or just h
 :::
 
 :::{grid-item-card} LinkedIn
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/owen-medeiros)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/owenmedeiros)
 :::
 
 ::::
