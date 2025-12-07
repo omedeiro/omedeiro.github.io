@@ -3,8 +3,8 @@ version: 1
 project:
   id: 13657fbb-7d8f-45dd-b745-898388cbda95
   title: Owen Medeiros - Developer Portfolio
-  description: Portfolio showcasing projects in data analysis, scientific computing, VR development, and financial technology
-  keywords: [python, data-science, vr-development, scientific-computing, portfolio]
+  description: Portfolio 
+  keywords: [python, superconducting electronics, vr-development]
   authors: 
     - name: Owen Medeiros
   github: https://github.com/omedeiro
