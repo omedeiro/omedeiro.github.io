@@ -50,6 +50,15 @@
 - Remove commented-out configuration options
 - Use descriptive but concise variable names
 
+### 9. Personal Information and Content Accuracy
+- **NEVER** invent or assume personal details, biography, or background information
+- **DO NOT** add filler text about education, experience, or personal history
+- Only use information explicitly provided or already present in existing files
+- When editing intro.md or about.md, preserve existing content exactly unless specifically asked to change it
+- Avoid adding generic biographical statements like "passionate about technology" or career summaries
+- If personal content is needed, ask the user to provide specific information rather than creating placeholder text
+- Focus on technical work and projects that are actually documented in the repository
+
 ## Specific Syntax Corrections
 
 ### Replace This:
@@ -89,6 +98,9 @@ Content 2
 - Excessive use of emojis
 - Long installation/setup sections
 - Generic "future enhancements" lists
+- **Personal biographical filler** like "passionate developer with X years experience"
+- **Assumed career details** or educational background
+- **Generic personal statements** that aren't factually verified
 
 ### Preferred Patterns:
 - Direct technical statements
@@ -117,5 +129,7 @@ Content 2
 2. Can this be expressed more concisely?
 3. Does this add technical value or just fill space?
 4. Is this specific to the project or generic advice?
+5. **Is this personal information factually accurate and verifiable?**
+6. **Am I inventing biographical details that weren't provided?**
 
 Focus on substance over style, technical accuracy over marketing appeal.
