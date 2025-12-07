@@ -1,56 +1,69 @@
-# Copilot Instructions for Portfolio Site
+# Copilot Instructions for MyST Portfolio Site
 
-## Code Generation Guidelines
+## Architecture Overview
 
-### 1. Simplicity First
-- Write minimal, focused code that directly addresses the task
-- Avoid unnecessary complexity or over-engineering
-- Use standard library functions when possible
-- Only add dependencies when genuinely needed
+This is a **MyST Markdown-based portfolio site** built for academic/research professionals, deployed via GitHub Actions to GitHub Pages. Key components:
 
-### 2. Documentation Standards
-- Keep descriptions concise and factual
-- Avoid marketing language or excessive adjectives
-- Focus on technical implementation details
-- Only include examples when specifically requested
-- Use bullet points for feature lists, not lengthy paragraphs
+- **MyST Build System**: Uses `myst.yml` config with book-theme template
+- **Jupyter Book Structure**: `_toc.yml` defines navigation hierarchy
+- **Academic Focus**: Bibliography support with `references.bib` and citations
+- **GitHub Actions**: Automated deployment with Node.js + Python build pipeline
 
-### 3. MyST Markdown Formatting
-- Use modern MyST syntax (grid cards, not panels)
-- Avoid deprecated directives like `{panels}`
-- Remove unnecessary options like `:gutter:` and `:link-type:`
-- Use clean grid layouts: `::::{grid} N` with `:::{grid-item-card}`
+## Critical File Structure
 
-### 4. Content Structure
-- Lead with essential information
-- Omit "getting started" sections unless specifically requested
-- Remove placeholder text and example repositories
-- Focus on actual implementation rather than theoretical benefits
+```
+├── myst.yml              # Main MyST configuration - project metadata, site options
+├── _toc.yml              # Navigation structure - defines page hierarchy
+├── intro.md              # Landing page (root in _toc.yml)
+├── publications.md       # Academic publications with bibliography
+├── references.bib        # BibTeX bibliography database
+├── projects/             # Project showcase directories
+│   ├── budget-dashboard/
+│   ├── activityAnalysis/ 
+│   └── */index.md        # Each project has index.md entry point
+├── _static/custom.css    # Custom styling overrides
+└── .github/workflows/deploy.yml  # Build and deployment automation
+```
 
-### 5. Code Examples
-- Only include code when demonstrating specific functionality
-- Keep examples short and directly relevant
-- Remove installation instructions unless project setup is the focus
-- Avoid generic "hello world" type examples
+## Development Workflow
 
-### 6. Contact Information
-- Use real contact details, not placeholders
-- Keep social media badges minimal
-- Remove redundant contact methods
+### Building Locally
+```bash
+# Install MyST CLI globally
+npm install -g mystmd
 
-### 7. Project Descriptions
-- State what the project does in one clear sentence
-- List technologies used without excessive detail
-- Focus on unique or interesting technical aspects
-- Avoid generic project benefits or marketing copy
+# Build site (creates _build/html/)
+myst build --html
 
-### 8. File Organization
-- Keep configuration files minimal
-- Only include metadata that's actually used
-- Remove commented-out configuration options
-- Use descriptive but concise variable names
+# Serve locally
+myst start
+```
 
-### 9. Personal Information and Content Accuracy
+### Key Build Dependencies
+- **Node.js 18+**: MyST CLI and build system
+- **Python 3.11+**: Bibliography processing, extensions
+- **requirements.txt**: Python packages for MyST extensions
+
+## MyST-Specific Patterns
+
+### Configuration Structure
+- **myst.yml**: Single source of truth - project metadata goes in `project:`, site options in `site:`
+- **No duplicate keys**: YAML validation is strict - watch for duplicate `project:` sections
+- **Bibliography setup**: `bibliography: references.bib` in project section, not site options
+
+### Content Conventions
+- **Grid layouts**: Use `::::{grid} N` with `:::{grid-item-card}` - NOT deprecated `{panels}`
+- **Remove deprecated options**: `:gutter:`, `:link-type:` cause warnings
+- **Bibliography display**: Use `{bibliography}` directive - `:all:` option doesn't work reliably
+- **Image references**: Relative paths from markdown file location
+
+### Project Structure Pattern
+Each project in `projects/*/` follows this structure:
+- `index.md` - Main project page (linked in `_toc.yml`)
+- `README.md` - GitHub repository documentation
+- `images/` - Project-specific assets
+
+## Personal Information and Content Accuracy
 - **NEVER** invent or assume personal details, biography, or background information
 - **DO NOT** add filler text about education, experience, or personal history
 - Only use information explicitly provided or already present in existing files
