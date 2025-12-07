@@ -5,5 +5,6 @@ My research and publications in superconducting electronics, data analysis, and 
 ## All Publications
 
 ```{bibliography} references.bib
+:all:
 :style: unsrt
 ```
