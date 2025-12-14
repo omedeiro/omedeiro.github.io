@@ -9,10 +9,10 @@ parts:
   - file: publications
 - caption: Projects
   chapters:
-  - file: projects/budget-dashboard/index
-  - file: projects/activityAnalysis/index
-  - file: projects/tdgl/index
-  - file: projects/vr-arm/index
+  - file: projects/test-project/finance-dashboard
+  - file: projects/activityAnalysis/activity-analysis
+  - file: projects/tdgl/tdgl-simulation
+  - file: projects/vr-arm/vr-arm-system
 - caption: Contact
   chapters:
   - file: contact

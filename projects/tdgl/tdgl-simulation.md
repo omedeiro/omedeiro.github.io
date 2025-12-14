@@ -1,3 +1,7 @@
+---
+title: TDGL Simulation
+---
+
 # TDGL Simulation
 
 A sophisticated physics simulation tool implementing the Time-Dependent Ginzburg-Landau (TDGL) equations for studying superconducting materials and flux dynamics in type-II superconductors.

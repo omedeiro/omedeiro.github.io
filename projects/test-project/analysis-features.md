@@ -19,8 +19,6 @@ python main.py
 - Transaction volume analysis
 - Seasonal pattern detection
 
-![Monthly Trends](images/monthly-trends.png)
-
 **Key Insights:**
 - Identify months with highest/lowest spending
 - Track savings rate improvements
@@ -42,8 +40,6 @@ Comprehensive categorization of all transactions with visual breakdowns.
 - Healthcare
 - And more...
 
-![Category Breakdown](images/category-breakdown.png)
-
 **Analysis Includes:**
 - Pie chart with percentage breakdown
 - Bar chart showing absolute amounts
@@ -59,8 +55,6 @@ Deep dive into spending patterns by merchant/vendor.
 - Top merchants by transaction frequency
 - Merchant spending trends over time
 - Duplicate merchant detection and standardization
-
-![Top Merchants](images/top-merchants.png)
 
 **Use Cases:**
 - Identify primary spending locations
@@ -83,8 +77,6 @@ python main.py
 - Income vs expenses correlation
 - Irregular income detection
 
-![Income Sources](images/income-sources.png)
-
 ## Specialized Analyzers
 
 ### Subscription Tracker
@@ -92,8 +84,8 @@ python main.py
 Automatically detects and analyzes recurring subscription charges.
 
 ```bash
-# Included in main analysis, or analyze separately
-python main.py --subscriptions
+# Included in main analysis
+python main.py
 ```
 
 **Features:**
@@ -101,8 +93,6 @@ python main.py --subscriptions
 - Cost per subscription analysis
 - Subscription growth over time
 - Identifies canceled vs active subscriptions
-
-![Subscriptions Analysis](images/subscriptions-analysis.png)
 
 **Detection Algorithm:**
 - Identifies charges recurring every 28-35 days
@@ -115,7 +105,7 @@ python main.py --subscriptions
 Specialized analyzer for vehicle-related expenses.
 
 ```bash
-python main.py --gas
+python main.py
 ```
 
 **Features:**
@@ -123,8 +113,6 @@ python main.py --gas
 - Cost per fill-up analysis
 - Driving frequency estimation
 - Seasonal usage patterns
-
-![Gas Spending](images/gas-spending.png)
 
 **Use Cases:**
 - Tax deduction calculations
@@ -152,37 +140,6 @@ Monitors recurring utility payments and detects anomalies.
 - Bill increase detection
 - Budget vs actual comparison
 
-## Interactive Dashboard
-
-The HTML dashboard provides comprehensive visualization with multiple tabs.
-
-```bash
-# Generated automatically with main analysis
-python main.py
-# Open output/charts/interactive_dashboard.html
-```
-
-### Dashboard Features
-
-**Overview Tab:**
-- High-level financial summary
-- Key metrics and trends
-- Month-over-month comparisons
-
-**Category Tabs:**
-- Deep-dive analysis for each major category
-- Monthly trends per category
-- Merchant breakdown within categories
-- Day-of-week spending patterns
-
-![Dashboard Overview](images/dashboard-overview.png)
-
-**Interactive Elements:**
-- Hover for detailed tooltips
-- Zoom and pan capabilities
-- Responsive design for mobile/desktop
-- Export chart functionality
-
 ## Pattern Analysis
 
 ### Daily Spending Patterns
@@ -194,8 +151,6 @@ Analyzes spending behavior by day of week.
 - Peak spending days
 - Regular schedule detection
 - Impulse spending identification
-
-![Daily Patterns](images/daily-patterns.png)
 
 ### Seasonal Analysis
 
@@ -226,7 +181,6 @@ Text-based reports with key insights and recommendations.
 ```bash
 # Generated automatically
 python main.py
-# Check output/reports/budget_report_YYYYMMDD_HHMMSS.txt
 ```
 
 **Report Sections:**
@@ -238,16 +192,10 @@ python main.py
 
 ### Custom Analysis
 
-For specific analysis needs:
+For specific analysis needs, run the main script with different configurations.
 
 ```bash
-# Analyze specific categories
-python main.py --other       # Review "Other" category items
-python main.py --housing     # Housing transaction review
-python main.py --mitll       # Workplace cafeteria spending
-
-# Data quality checks
-python main.py --validate    # Data validation report
+python main.py
 ```
 
 ## Advanced Features
@@ -266,9 +214,9 @@ Automatically identifies and flags potential duplicate transactions.
 Cleans and standardizes merchant names for better analysis.
 
 **Examples:**
-- "AMAZON.COM*123456" → "Amazon"
-- "SQ *COFFEE SHOP NYC" → "Coffee Shop"
-- "TST* RESTAURANT NAME" → "Restaurant Name"
+- "AMAZON.COM*123456" becomes "Amazon"
+- "SQ *COFFEE SHOP NYC" becomes "Coffee Shop"
+- "TST* RESTAURANT NAME" becomes "Restaurant Name"
 
 ### Category Learning
 
@@ -298,9 +246,7 @@ For datasets with 10,000+ transactions:
 
 ```bash
 # Run components separately for faster iteration
-python main.py --import    # Once
-python main.py --clean     # When categories change
-python main.py --analyze   # Multiple times for different views
+python main.py
 ```
 
 ### Memory Optimization

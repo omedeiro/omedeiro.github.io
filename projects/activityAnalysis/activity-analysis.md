@@ -1,3 +1,7 @@
+---
+title: Activity Analysis
+---
+
 # Activity Analysis
 
 A comprehensive GPS-based activity analysis tool that processes and visualizes fitness data to provide insights into running patterns, performance trends, and geographical activity mapping.

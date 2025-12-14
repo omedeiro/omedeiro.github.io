@@ -11,6 +11,7 @@ project:
   bibliography: references.bib
 site:
   template: book-theme
+  title: Owen Medeiros - Developer Portfolio
   options:
     logo: images/logo.png
     hide_footer_text: true
@@ -20,5 +21,3 @@ site:
     hide_watermark: true
     extra_css:
       - _static/custom.css
-  domains:
-    - omedeiro.github.io

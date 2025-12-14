@@ -1,3 +1,7 @@
+---
+title: VR Arm System
+---
+
 # VR Arm System
 
 A comprehensive senior design project that develops an immersive virtual reality system with advanced haptic feedback for realistic arm and hand interactions in virtual environments.
