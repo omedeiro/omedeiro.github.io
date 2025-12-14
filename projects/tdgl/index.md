@@ -102,7 +102,7 @@ Where:
 ### Installation
 
 ```bash
-git clone https://github.com/omedeiro/tdgl.git
+git clone https://github.com/omedeiro/nanowire_tdgl.git
 cd tdgl
 pip install -r requirements.txt
 ```
@@ -165,7 +165,7 @@ Analyze the motion of magnetic flux in superconductors:
 
 ## GitHub Repository
 
-[![GitHub](https://img.shields.io/badge/GitHub-View_Source-black?style=for-the-badge&logo=github)](https://github.com/omedeiro/tdgl)
+[![GitHub](https://img.shields.io/badge/GitHub-View_Source-black?style=for-the-badge&logo=github)](https://github.com/omedeiro/nanowire_tdgl)
 
 ## Key Technical Achievements
 

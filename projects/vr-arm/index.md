@@ -175,7 +175,7 @@ The complete technical documentation is available in the [Senior Design Final Re
 
 ### Setup Process
 ```bash
-git clone https://github.com/omedeiro/vr-arm.git
+# Installation and setup instructions would go here
 cd vr-arm
 
 # Install Unity packages
@@ -186,9 +186,7 @@ cd vr-arm
 ./setup/calibrate_system.exe
 ```
 
-## GitHub Repository
-
-[![GitHub](https://img.shields.io/badge/GitHub-View_Source-black?style=for-the-badge&logo=github)](https://github.com/omedeiro/vr-arm)
+## Project Documentation
 
 [![PDF](https://img.shields.io/badge/PDF-Final_Report-red?style=for-the-badge&logo=adobe)](SeniorDesignFinalReport.pdf)
 
