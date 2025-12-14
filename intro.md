@@ -12,8 +12,8 @@ Electrical engineer working on superconducting electronics. Projects here are re
 
 ::::{grid} 2
 
-:::{grid-item-card} Personal Finance Dashboard
-:link: projects/test-project/index
+:::{grid-item-card} Budget Dashboard
+:link: projects/budget-dashboard/index
 
 A comprehensive personal finance dashboard with data visualization, budget tracking, and financial analysis capabilities.
 
