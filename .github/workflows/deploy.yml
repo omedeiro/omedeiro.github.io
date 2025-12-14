@@ -39,6 +39,8 @@ jobs:
         pip install -r requirements.txt
         
     - name: Build MyST Site
+      env:
+        BASE_URL: /
       run: |
         myst build --html
         # Check if build was successful

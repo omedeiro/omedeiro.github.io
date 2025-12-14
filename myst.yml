@@ -11,6 +11,8 @@ project:
   bibliography: references.bib
 site:
   template: book-theme
+  title: Owen Medeiros - Developer Portfolio
+  url: https://omedeiro.github.io
   options:
     logo: images/logo.png
     hide_footer_text: true
