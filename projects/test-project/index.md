@@ -13,6 +13,20 @@ Automated data import, cleaning, and visualization for financial analysis.
 - Category analysis
 - Monthly spending trends
 
+## Sample Visualizations
+
+### Dashboard Overview
+![Dashboard Overview](images/dashboard-overview.png)
+
+### Monthly Trends
+![Monthly Trends](images/monthly-trends.png)
+
+### Category Breakdown
+![Category Breakdown](images/category-breakdown.png)
+
+### Top Merchants
+![Top Merchants](images/top-merchants.png)
+
 ## Technologies
 
 - Python
