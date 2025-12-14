@@ -1,6 +1,6 @@
 # Publications
 
-My research and publications in superconducting electronics, data analysis, and computational physics.
+This page lists research and publications on superconducting detectors and electronics produced while working as a Research Associate in the Quantum Nanostructures and Nanofabrication Group at MIT.
 
 ## Publications by Year
 
