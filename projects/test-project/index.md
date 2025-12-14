@@ -9,7 +9,7 @@ Automated data import, cleaning, and visualization for financial analysis.
 ## Features
 
 - Multi-bank CSV import
-- Automated data cleaning
+- Automated data cleaning  
 - Category analysis
 - Monthly spending trends
 
@@ -19,7 +19,7 @@ Automated data import, cleaning, and visualization for financial analysis.
 - Pandas
 - Matplotlib
 
-## Usage
+## Quick Start
 
 ```bash
 git clone https://github.com/yourusername/budget-dashboard.git
@@ -30,4 +30,4 @@ python main.py
 
 ## Status
 
-Functional analysis tool.
+Functional analysis tool for personal financial data.
