@@ -33,13 +33,25 @@ Automated data import, cleaning, and visualization for financial analysis.
 - Pandas
 - Matplotlib
 
-## Quick Start
+## Implementation
+
+This project demonstrates automated financial data analysis using Python data science libraries.
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_spending(data):
+    monthly_summary = data.groupby('month').sum()
+    return monthly_summary
+```
+
+## Installation
 
 ```bash
-git clone https://github.com/yourusername/budget-dashboard.git
-cd budget-dashboard
-pip install -r requirements.txt
-python main.py
+# Clone repository (if available)
+# pip install pandas matplotlib seaborn
+# python main.py
 ```
 
 ## Status
