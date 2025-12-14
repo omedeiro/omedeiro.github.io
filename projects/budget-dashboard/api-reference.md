@@ -131,7 +131,7 @@ Generate all standard charts and save to output directory.
 
 **Side effects:**
 - Saves PNG files to `output/charts/`
-- Creates interactive dashboard HTML
+- Creates financial analysis reports
 
 ```python
 analyzer.create_visualizations()

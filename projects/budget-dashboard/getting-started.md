@@ -123,21 +123,14 @@ output/
 │   ├── monthly_trends.png
 │   ├── category_breakdown.png
 │   ├── income_vs_expenses.png
-│   ├── interactive_dashboard.html
 │   └── ...
 └── reports/
     └── budget_report_20241129_143022.txt
 ```
 
-### Interactive Dashboard
+### Generated Charts
 
-Open `output/charts/interactive_dashboard.html` in your web browser to explore:
-
-![Interactive Dashboard](images/interactive-dashboard-preview.png)
-
-- **Overview Tab**: Monthly trends and category summaries
-- **Category Tabs**: Deep-dive analysis for major spending categories
-- **Interactive Charts**: Hover, zoom, and filter capabilities
+Review the generated charts in the `output/charts/` folder for visual analysis of your financial data.
 
 ### Key Insights Report
 
