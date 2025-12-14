@@ -74,3 +74,4 @@ node_modules/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+_build/
