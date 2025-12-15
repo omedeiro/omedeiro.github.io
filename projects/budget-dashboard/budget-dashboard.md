@@ -1,8 +1,8 @@
 ---
-title: Personal Finance Dashboard
+title: Budget Dashboard
 ---
 
-# Personal Finance Dashboard
+# Budget Dashboard
 
 Python-based tool for analyzing personal financial data.
 
