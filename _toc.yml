@@ -8,6 +8,7 @@ parts:
   chapters:
   - file: publications
   - file: thesis
+  - file: qnn-blog
 - caption: Projects
   chapters:
   - file: projects/budget-dashboard/budget-dashboard
