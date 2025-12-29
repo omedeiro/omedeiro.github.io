@@ -13,28 +13,28 @@ Electrical engineer working on superconducting electronics. Projects here are re
 ::::{grid} 2
 
 :::{grid-item-card} Budget Dashboard
-:link: projects/budget-dashboard/budget-dashboard
+:link: /budget-dashboard
 
 A comprehensive personal finance dashboard with data visualization, budget tracking, and financial analysis capabilities.
 
 :::
 
 :::{grid-item-card} Activity Analysis  
-:link: projects/activityAnalysis/activity-analysis
+:link: /activity-analysis
 
 GPS-based activity analysis tool for visualizing running routes, performance metrics, and geographical activity patterns.
 
 :::
 
 :::{grid-item-card} TDGL Simulation
-:link: projects/tdgl/tdgl-simulation
+:link: /tdgl-simulation
 
 Time-Dependent Ginzburg-Landau simulation for superconducting vortex dynamics.
 
 :::
 
 :::{grid-item-card} VR Arm System
-:link: projects/vr-arm/vr-arm-system
+:link: /vr-arm-system
 
 Virtual reality system with haptic feedback for immersive arm interaction experiences.
 
