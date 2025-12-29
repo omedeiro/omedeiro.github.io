@@ -1,8 +1,8 @@
-# Copilot Instructions for MyST Portfolio Site
+# Copilot Instructions for MyST Technical Profile Site
 
 ## Architecture Overview
 
-This is a **MyST Markdown-based portfolio site** built for academic/research professionals, deployed via GitHub Actions to GitHub Pages. Key components:
+This is a **MyST Markdown-based technical profile site** built for academic/research professionals, deployed via GitHub Actions to GitHub Pages. Key components:
 
 - **MyST Build System**: Uses `myst.yml` config with book-theme template
 - **Jupyter Book Structure**: `_toc.yml` defines navigation hierarchy

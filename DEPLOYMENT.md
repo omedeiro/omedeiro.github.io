@@ -1,6 +1,6 @@
 # GitHub Pages Deployment Guide
 
-This guide will help you deploy your portfolio website to GitHub Pages.
+This guide will help you deploy your technical profile website to GitHub Pages.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ git init
 git add .
 
 # Make your first commit
-git commit -m "Initial portfolio website commit"
+git commit -m "Initial technical profile website commit"
 
 # Add GitHub repository as remote origin
 git remote add origin https://github.com/omedeiro/omedeiro.github.io.git
@@ -63,13 +63,13 @@ https://omedeiro.github.io
 
 ## Updating Your Website
 
-Whenever you want to update your portfolio:
+Whenever you want to update your technical profile:
 
 1. Make changes to your local files
 2. Commit and push the changes:
    ```bash
    git add .
-   git commit -m "Update portfolio content"
+   git commit -m "Update technical profile content"
    git push
    ```
 3. GitHub Pages will automatically redeploy your site within a few minutes
@@ -117,7 +117,7 @@ Once your site is live:
 
 1. **Update your project content** with real projects and information
 2. **Add your website URL** to your GitHub profile
-3. **Share your portfolio** on LinkedIn and other professional networks
+3. **Share your technical profile** on LinkedIn and other professional networks
 4. **Consider SEO optimization** by adding meta tags and structured data
 5. **Set up analytics** with Google Analytics or similar tools
 

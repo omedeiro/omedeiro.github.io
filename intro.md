@@ -1,4 +1,4 @@
-# Owen Medeiros - Developer Portfolio
+# Owen Medeiros - Technical Profile
 
 Electrical engineer working on superconducting electronics. Projects here are related to data analysis, VR development, and financial tracking.
 

@@ -1,6 +1,6 @@
-# Owen Medeiros - Portfolio Website
+# Owen Medeiros - Technical Profile Website
 
-A modern, responsive portfolio website built with HTML, CSS, and JavaScript, designed for deployment on GitHub Pages.
+A modern, responsive technical profile website built with MyST Markdown, designed for deployment on GitHub Pages.
 
 ## 🚀 Live Site
 
@@ -66,7 +66,7 @@ omedeiro.github.io/
 2. Push this code to the main branch:
    ```bash
    git add .
-   git commit -m "Initial portfolio website"
+   git commit -m "Initial technical profile website"
    git remote add origin https://github.com/omedeiro/omedeiro.github.io.git
    git push -u origin main
    ```
