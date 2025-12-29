@@ -15,9 +15,9 @@ Focused on superconducting electroincs, single-photon detection, superconducting
 
 ## Education
 
-- **PhD, Electrical Engineering** - MIT (2025) - [Thesis: "Superconducting Nanowire Integrated Circuits for Scalable Cryogenic Memory"](https://hdl.handle.net/1721.1/164062)
-- **MS, Electrical Engineering** - MIT (2022) - [Thesis: "Investigation of Thin Film Supercurrent and Photodetection in Wide Niobium Nitride Wires"](https://hdl.handle.net/1721.1/144564)
-- **BS, Engineering** - Wentworth Institute of Technology (2019)
+- **PhD, Electrical Engineering and Computer Science** - MIT (2025) - [Thesis: "Superconducting Nanowire Integrated Circuits for Scalable Cryogenic Memory"](https://hdl.handle.net/1721.1/164062)
+- **MS, Electrical Engineering and Computer Science** - MIT (2022) - [Thesis: "Investigation of Thin Film Supercurrent and Photodetection in Wide Niobium Nitride Wires"](https://hdl.handle.net/1721.1/144564)
+- **BS, Electromechanical Engineering** - Wentworth Institute of Technology (2019)
 
 ## Early Career & Motivation
 
