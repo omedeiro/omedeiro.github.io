@@ -22,6 +22,6 @@ I'm always open to discussing new opportunities, interesting projects, or just h
 
 ## Areas of Interest
 
-Superconducting electronics, single photon detection, quantum compujting, microwave design, photonics
+Superconducting electronics, single photon detection, quantum computing, microwave design, photonics
 
 

@@ -9,7 +9,7 @@ parts:
   - file: publications
 - caption: Projects
   chapters:
-  - file: projects/test-project/finance-dashboard
+  - file: projects/budget-dashboard/budget-dashboard
   - file: projects/activityAnalysis/activity-analysis
   - file: projects/tdgl/tdgl-simulation
   - file: projects/vr-arm/vr-arm-system

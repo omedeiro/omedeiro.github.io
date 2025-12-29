@@ -2,8 +2,8 @@
 version: 1
 project:
   id: 13657fbb-7d8f-45dd-b745-898388cbda95
-  title: Owen Medeiros - Developer Portfolio
-  description: Portfolio 
+  title: Owen Medeiros - Technical Profile
+  description: Technical Profile 
   keywords: [python, superconducting electronics, vr-development]
   authors: 
     - name: Owen Medeiros
@@ -11,7 +11,7 @@ project:
   bibliography: references.bib
 site:
   template: book-theme
-  title: Owen Medeiros - Developer Portfolio
+  title: Owen Medeiros - Technical Profile
   options:
     logo: images/logo.png
     hide_footer_text: true
