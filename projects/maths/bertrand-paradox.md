@@ -132,13 +132,4 @@ The simulation generates three subplots showing each method, with chords colored
 Visual comparison of the three different interpretations of Bertrand's Paradox. Each panel shows 100 sample chords colored by their length relative to an inscribed equilateral triangle.
 ```
 
-## Mathematical Insight
-
-This paradox illustrates a fundamental principle in probability theory: the importance of precisely defining what we mean by "random." Without specifying the probability distribution, problems can be ambiguous and lead to different valid answers.
-
-The paradox has implications for:
-- **Geometric probability**: How we define uniform distributions over geometric objects
-- **Principle of indifference**: The dangers of assuming equal probability without justification  
-- **Information theory**: How prior assumptions affect probabilistic reasoning
-
 **[Download MATLAB Code](bertrand_paradox/bertrand_paradox.m)**

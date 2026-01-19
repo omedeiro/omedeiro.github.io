@@ -78,15 +78,6 @@ end
 The Euler spiral showing the characteristic inward spiraling pattern with linearly increasing curvature. The curve starts straight and gradually curves more tightly as it progresses.
 ```
 
-## Mathematical Beauty
-
-The Euler spiral exemplifies the connection between simple mathematical rules and complex emergent behavior. Despite the simple relationship κ = s, the resulting curve exhibits rich geometric properties and finds applications across multiple engineering disciplines.
-
-The spiral demonstrates how:
-- **Local properties** (curvature at each point) determine **global behavior** (overall shape)
-- **Continuous change** can create **discrete transitions** (straight to curved)
-- **Mathematical abstraction** leads to **practical solutions** in engineering
-
 ## Variations
 
 The parameter θ in the simulation controls the tightness of the spiral:
