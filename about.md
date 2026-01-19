@@ -19,14 +19,14 @@ Focused on superconducting electroincs, single-photon detection, superconducting
 - **MS, Electrical Engineering and Computer Science** - MIT (2022)
 - **BS, Electromechanical Engineering** - Wentworth Institute of Technology (2019)
 
-## Early Career & Motivation
+<!-- ## Early Career & Motivation
 
-My path to engineering began with influence from my electrician father and librarian mother, who encouraged technical problem-solving and research. After vocational high school studying engineering, I worked as a manufacturing engineer developing medical devices, which provided hands-on experience with precision systems and quality control.
+My path to engineering began with influence from my electrician father and librarian mother, who encouraged technical problem-solving and research. After vocational high school studying engineering, I worked as a manufacturing engineer developing medical devices, which provided hands-on experience with precision systems and quality control. -->
 
 **Industry Experience:**
 - **Systems Engineer** - Jacobs Engineering
 - **Electronics and Controls Intern** - Pratt and Miller
-- **Manufacturing Engineer** - Medical device development
+- **Manufacturing Engineer** - Five Star Companies
 
 This industrial foundation informed my transition to academic research, bringing practical engineering perspectives to nanofabrication and quantum device development.
 
@@ -35,5 +35,4 @@ This industrial foundation informed my transition to academic research, bringing
 **Superconducting Electronics**: Device physics, fabrication processes, characterization methods  
 **Computational Modeling**: Time-dependent Ginzburg-Landau simulations, vortex dynamics  
 **Nanofabrication**: Electron beam lithography, reactive ion etching, thin film deposition  
-**Data Analysis**: Scientific computing, visualization, statistical analysis
 

@@ -16,9 +16,9 @@ parts:
   - file: projects/vr-arm/vr-arm-system
 - caption: Maths
   chapters:
-  - file: projects/maths/index
-  - file: projects/maths/bertrand-paradox
-  - file: projects/maths/euler-spiral
+  - file: maths/index
+  - file: maths/bertrand-paradox
+  - file: maths/euler-spiral
 - caption: Contact
   chapters:
   - file: contact
