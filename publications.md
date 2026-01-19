@@ -4,6 +4,11 @@ This page lists research and publications on superconducting detectors and elect
 
 ## Publications by Year
 
+### 2026
+
+1. **A scalable superconducting nanowire memory array with row–column addressing** {cite}`medeiros2026scalable`  
+   *Nature Electronics*, 1-9 (2026)
+
 ### 2025
 
 1. **A superconducting full-wave bridge rectifier** {cite}`castellani2025superconducting`  
@@ -15,22 +20,19 @@ This page lists research and publications on superconducting detectors and elect
 3. **High-Fidelity Control of a Strongly Coupled Electro-Nuclear Spin-Photon Interface** {cite}`harris2025high`  
    *arXiv preprint arXiv:2505.09267* (2025)
 
-4. **Scalable Superconducting Nanowire Memory Array with Row-Column Addressing** {cite}`medeiros2025scalable`  
-   *arXiv preprint arXiv:2503.22897* (2025)
-
-5. **Superconducting Nanowire Integrated Circuits for Scalable Cryogenic Memory** {cite}`medeiros2025superconducting`  
+4. **Superconducting Nanowire Integrated Circuits for Scalable Cryogenic Memory** {cite}`medeiros2025superconducting`  
    *PhD Thesis*, Massachusetts Institute of Technology (2025)
 
-6. **Parameter extraction for a SPICE model of an hTron superconducting thermal switch** {cite}`karam2025parameter`  
+5. **Parameter extraction for a SPICE model of an hTron superconducting thermal switch** {cite}`karam2025parameter`  
    *Physical Review Applied*, 24(2), 024020 (2025)
 
-7. **Ab initio modeling of nonequilibrium dynamics in superconducting detectors and qubits** {cite}`simon2025ab`  
+6. **Ab initio modeling of nonequilibrium dynamics in superconducting detectors and qubits** {cite}`simon2025ab`  
    *Physical Review B*, 112(17), 174512 (2025)
 
-8. **Single-photon detectors on arbitrary photonic substrates** {cite}`tao2025single`  
+7. **Single-photon detectors on arbitrary photonic substrates** {cite}`tao2025single`  
    *ACS Photonics*, 12(5), 2325-2330 (2025)
 
-9. **Building blocks for quantum information processing with color centers in silicon** {cite}`saggio2025building`  
+8. **Building blocks for quantum information processing with color centers in silicon** {cite}`saggio2025building`  
    *CLEO: Science and Innovations*, SS193_1 (2025)
 
 ### 2024

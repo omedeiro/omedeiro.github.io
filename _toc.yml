@@ -14,7 +14,7 @@ parts:
   - file: projects/activityAnalysis/activity-analysis
   - file: projects/tdgl/tdgl-simulation
   - file: projects/vr-arm/vr-arm-system
-- caption: Mathematics
+- caption: Maths
   chapters:
   - file: projects/maths/index
   - file: projects/maths/bertrand-paradox

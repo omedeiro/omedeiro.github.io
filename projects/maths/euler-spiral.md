@@ -71,7 +71,7 @@ end
 
 ## Visualization
 
-```{figure} euler_spiral/euler.pdf
+```{figure} /projects/maths/euler_spiral/euler.pdf
 :name: euler-spiral-plot
 :width: 80%
 

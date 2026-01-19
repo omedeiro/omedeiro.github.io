@@ -125,7 +125,7 @@ The simulation generates three subplots showing each method, with chords colored
 - **Brown**: Chords shorter than the triangle side
 - **Orange**: Chords longer than the triangle side
 
-```{figure} bertrand_paradox/bertrand.pdf
+```{figure} /projects/maths/bertrand_paradox/bertrand.pdf
 :name: bertrand-simulation
 :width: 100%
 
