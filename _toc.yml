@@ -14,6 +14,11 @@ parts:
   - file: projects/activityAnalysis/activity-analysis
   - file: projects/tdgl/tdgl-simulation
   - file: projects/vr-arm/vr-arm-system
+- caption: Mathematics
+  chapters:
+  - file: projects/maths/index
+  - file: projects/maths/bertrand-paradox
+  - file: projects/maths/euler-spiral
 - caption: Contact
   chapters:
   - file: contact
