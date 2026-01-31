@@ -66,15 +66,12 @@ A senior design project that develops an immersive virtual reality system with k
 
 ```{admonition} Senior Design Report
 :class: tip
-The complete technical documentation is available in the [Senior Design Final Report](SeniorDesignFinalReport.pdf), which includes:
+The complete technical documentation is available in the Senior Design Final Report, which includes:
 - Detailed system design specifications
 - Complete user study methodology and results
 - Technical implementation details
 - Future development recommendations
 ```
-## GitHub Repository
 
-[![GitHub](https://img.shields.io/badge/GitHub-View_Source-black?style=for-the-badge&logo=github)](https://github.com/omedeiro/vr-arm)
-
-[![PDF](https://img.shields.io/badge/PDF-Final_Report-red?style=for-the-badge&logo=adobe)](SeniorDesignFinalReport.pdf)
+**[Download Final Report (PDF, 12MB)](SeniorDesignFinalReport.pdf)**
 
