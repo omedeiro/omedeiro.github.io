@@ -19,9 +19,6 @@ Automated data import, cleaning, and visualization for financial analysis.
 
 ## Sample Visualizations
 
-### Dashboard Overview
-![Dashboard Overview](images/dashboard-overview.png)
-
 ### Monthly Trends
 ![Monthly Trends](images/monthly-trends.png)
 
