@@ -19,5 +19,8 @@ site:
     show_source_button: false
     hide_myst_branding: true
     hide_watermark: true
+    show_footer_edit: false
+    show_footer_github: false
+    show_myst_footer: false
     extra_css:
       - _static/custom.css
