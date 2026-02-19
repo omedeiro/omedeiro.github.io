@@ -21,7 +21,7 @@ parts:
   - file: maths/euler-spiral
 - caption: Philosophy
   chapters:
-  - file: philosophy/index
+  - file: philosophy/philosophy-index
   - file: philosophy/work
   - file: philosophy/life
   - file: philosophy/politics
