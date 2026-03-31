@@ -53,6 +53,6 @@ solver.animate_vortex_dynamics()
 ```
 ## GitHub Repository
 
-[![GitHub](https://img.shields.io/badge/GitHub-View_Source-black?style=for-the-badge&logo=github)](https://github.com/omedeiro/tdgl)
+[![GitHub](https://img.shields.io/badge/GitHub-View_Source-black?style=for-the-badge&logo=github)](https://github.com/omedeiro/simulation6336)
 
 
