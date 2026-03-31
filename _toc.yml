@@ -19,12 +19,12 @@ parts:
   - file: maths/maths-index
   - file: maths/bertrand-paradox
   - file: maths/euler-spiral
-- caption: Philosophy
-  chapters:
-  - file: philosophy/philosophy-index
-  - file: philosophy/work
-  - file: philosophy/life
-  - file: philosophy/politics
+# - caption: Philosophy
+#   chapters:
+#   - file: philosophy/philosophy-index
+#   - file: philosophy/work
+#   - file: philosophy/life
+#   - file: philosophy/politics
 - caption: Contact
   chapters:
   - file: contact
