@@ -12,6 +12,12 @@ A sophisticated physics simulation tool implementing the Time-Dependent Ginzburg
 :align: center
 ```
 
+```{image} trapGif20211206T190735.gif
+:alt: TDGL Vortex Dynamics Simulation
+:width: 100%
+:align: center
+```
+
 ## Overview
 
 This project implements a comprehensive numerical solver for the Time-Dependent Ginzburg-Landau equations, enabling detailed study of superconducting vortex dynamics, flux penetration, and magnetic field effects. The simulation provides insights into the fundamental physics of superconductivity and practical applications in superconducting device design.
