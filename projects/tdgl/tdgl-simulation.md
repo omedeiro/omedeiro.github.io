@@ -13,10 +13,11 @@ A sophisticated physics simulation tool implementing the Time-Dependent Ginzburg
 ```
 
 ```{image} trapGif20211206T190735.gif
-:alt: TDGL Vortex Dynamics Simulation
-:width: 100%
+:alt: TDGL order parameter and magnetic field time evolution
+:width: 50%
 :align: center
 ```
+*Time evolution of a type-II superconductor under a 0.6 mT applied field in the z-direction, turned off at t=65. Top: 2D color map of the order parameter. Bottom: 2D color map of the z-component of the magnetic field.*
 
 ## Overview
 
