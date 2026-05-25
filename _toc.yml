@@ -10,6 +10,7 @@ parts:
   - file: thesis
 - caption: Projects
   chapters:
+  - file: projects/soil-moisture/soil-moisture
   - file: projects/budget-dashboard/budget-dashboard
   - file: projects/activityAnalysis/activity-analysis
   - file: projects/tdgl/tdgl-simulation
