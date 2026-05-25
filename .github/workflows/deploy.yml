@@ -58,6 +58,8 @@ jobs:
         path: './_build/html'
 
   deploy:
+    # Only deploy on push to main/update-main, not on PRs
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/update-main')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
