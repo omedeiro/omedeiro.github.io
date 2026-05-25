@@ -6,7 +6,7 @@ title: Soil Moisture Monitoring System
 
 A production-grade, multi-sensor soil moisture monitoring system with real-time visualization and cloud access.
 
-```{image} https://grafana.owenmedeiros.com/public-dashboards/soil-moisture-preview.png
+```{image} images/soil-moisture-dashboard.png
 :alt: Soil Moisture Dashboard
 :width: 100%
 :align: center
