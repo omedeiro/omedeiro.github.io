@@ -166,7 +166,7 @@ Sensor AOUT ──► ESP8266 A0
 **OTA Updates**
 - Remote firmware updates via WiFi
 - No USB cable required after initial flash
-- Password-protected (soilmon2026)
+- Password-protected for security
 
 ## Software Implementation
 
@@ -348,7 +348,7 @@ sudo systemctl restart influxdb grafana-server
 ```bash
 cd firmware
 pio run --target upload --upload-port 192.168.1.50
-# Password: soilmon2026
+# Enter OTA password when prompted
 ```
 
 ### Troubleshooting
