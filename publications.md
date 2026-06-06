@@ -9,6 +9,9 @@ This page lists research and publications on superconducting detectors and elect
 1. **A scalable superconducting nanowire memory array with row–column addressing** {cite}`medeiros2026scalable`  
    *Nature Electronics*, 1-9 (2026)
 
+2. **Reconfigurable Superconducting Logic for On-Chip Photon Coincidence Detection** {cite}`guay2026reconfigurable`  
+   *arXiv preprint arXiv:2604.22101* (2026)
+
 ### 2025
 
 1. **A superconducting full-wave bridge rectifier** {cite}`castellani2025superconducting`  
