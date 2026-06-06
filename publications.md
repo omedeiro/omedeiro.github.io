@@ -12,10 +12,10 @@ This page lists research and publications on superconducting detectors and elect
 ### 2025
 
 1. **A superconducting full-wave bridge rectifier** {cite}`castellani2025superconducting`  
-   *Nature Electronics*, 1-9 (2025)
+   *Nature Electronics*, 8(5), 417-425 (2025)
 
 2. **Time-tagging data acquisition system for testing superconducting electronics based on an RFSoC and custom analog frontend** {cite}`foster2025time`  
-   *arXiv preprint arXiv:2505.21714* (2025)
+   *Journal of Instrumentation*, 20(09), P09018 (2025)
 
 3. **High-Fidelity Control of a Strongly Coupled Electro-Nuclear Spin-Photon Interface** {cite}`harris2025high`  
    *arXiv preprint arXiv:2505.09267* (2025)
@@ -26,7 +26,7 @@ This page lists research and publications on superconducting detectors and elect
 5. **Parameter extraction for a SPICE model of an hTron superconducting thermal switch** {cite}`karam2025parameter`  
    *Physical Review Applied*, 24(2), 024020 (2025)
 
-6. **Ab initio modeling of nonequilibrium dynamics in superconducting detectors and qubits** {cite}`simon2025ab`  
+6. **Ab initio modeling of nonequilibrium dynamics in superconducting detectors and qubits** {cite}`simon2025abb`  
    *Physical Review B*, 112(17), 174512 (2025)
 
 7. **Single-photon detectors on arbitrary photonic substrates** {cite}`tao2025single`  
@@ -47,7 +47,7 @@ This page lists research and publications on superconducting detectors and elect
    *Free-Space Laser Communications XXXVI*, 12877, 526-544 (2024)
 
 4. **Characterizing and modeling the influence of geometry on the performance of superconducting nanowire cryotrons** {cite}`simon2024characterizing`  
-   *IEEE Transactions on Applied Superconductivity* (2024)
+   *IEEE Transactions on Applied Superconductivity*, 35(5), 1-5 (2024)
 
 ### 2023
 
