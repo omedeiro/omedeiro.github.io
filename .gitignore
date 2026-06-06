@@ -43,6 +43,10 @@ venv.bak/
 _build/
 .jupyter_cache/
 
+# Generated bib artifacts (regenerate via scripts/fetch_scholar.py)
+references_scholar.bib
+references_merged.bib
+
 # IDEs
 .vscode/
 .idea/
