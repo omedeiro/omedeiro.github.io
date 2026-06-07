@@ -15,6 +15,7 @@ parts:
   - file: projects/activityAnalysis/activity-analysis
   - file: projects/tdgl/tdgl-simulation
   - file: projects/vr-arm/vr-arm-system
+  - file: projects/qnn-blog/qnn-blog
 - caption: Maths
   chapters:
   - file: maths/maths-index
