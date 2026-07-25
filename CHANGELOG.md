@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1 — 2026-07-25
+
+### Removed
+
+- budget.owenmedeiros.com and wedding.owenmedeiros.com links from the homepage "Live apps" section
+
 ## 2.0.0 — 2026-07-25
 
 Complete rebuild: migrated from MyST/Jupyter Book on GitHub Pages to Astro on Cloudflare Workers.

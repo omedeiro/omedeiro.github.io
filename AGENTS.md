@@ -54,6 +54,20 @@ Deploys run automatically via Cloudflare Workers Builds on push to `main` (build
 
 `src/pages/research.md` holds a static publications list. `references.bib` and `scripts/fetch_scholar.py` are kept for regenerating entries; update the markdown manually when new papers appear.
 
+## Release / PR workflow (agent-driven changes)
+
+All non-trivial changes (content edits, new pages, config changes) follow this process:
+
+1. **Branch** — never commit directly to `main`. Create `feature/<short-slug>` from an up-to-date `main`.
+2. **Version bump** — update `"version"` in `package.json` (semver). **Default to a patch bump** for most changes (content tweaks, link/copy edits, asset updates). Use minor for new pages/features, major only for site-wide redesigns or migrations.
+3. **Changelog** — add a `## x.y.z — YYYY-MM-DD` entry at the top of `CHANGELOG.md` with `### Added` / `### Changed` / `### Removed` subsections as applicable.
+4. **Verify** — run `npm run build` and confirm it succeeds.
+5. **Commit** — one commit including the change, version bump, and changelog. Concise imperative subject line.
+6. **PR** — push the branch and open a PR with `gh pr create` (summary of what/why).
+7. **Merge** — use a **merge commit** (`gh pr merge --merge --delete-branch`), matching repo history. Then `git checkout main && git pull`.
+
+Deploys to production happen automatically on merge to `main` via Cloudflare Workers Builds.
+
 ## Git LFS
 
 PDFs tracked via LFS (`.gitattributes`). If pushing fails with "git-lfs not found":
