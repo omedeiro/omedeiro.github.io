@@ -1,64 +1,58 @@
-# Agent Instructions — Portfolio Site
+# Agent Instructions — owenmedeiros.com
 
-## Build Commands
+Personal site built with Astro, deployed to Cloudflare Workers (static assets) at https://owenmedeiros.com.
+
+## Commands
 
 ```bash
-# Local build/preview
-myst build --html    # creates _build/html/
-myst start           # serves on localhost
-
-# CI automatically runs on push to main or PRs
-# Uses GitHub Actions → deploys to GitHub Pages
+npm install
+npm run dev       # local dev server
+npm run build     # outputs to dist/
+npm run preview   # preview production build
 ```
 
-**Build requires:**
-- Node.js 18+ (for MyST CLI)
-- Python 3.11+ (`pip install -r requirements.txt`)
+Deploys run automatically via Cloudflare Workers Builds on push to `main` (build command: `npm run build`; wrangler serves `dist/` as static assets).
 
-## Critical Files
+## Structure
 
-- `_toc.yml` — navigation structure; defines all pages shown in sidebar
-- `myst.yml` — site config (title, logo, theme options)
-- `intro.md` — landing page (root in _toc.yml)
-- `references.bib` — bibliography for publications
+- `src/layouts/Base.astro` — site shell: nav, footer, all global CSS (single-column, minimal design)
+- `src/layouts/Md.astro` — wrapper for markdown pages (renders `title` frontmatter as `<h1>`)
+- `src/pages/` — all pages; markdown files use `layout: ../layouts/Md.astro` frontmatter
+- `public/` — static assets (images, PDFs, `.m` files) served at root paths
+- `wrangler.jsonc` — Cloudflare Worker config; custom domain `owenmedeiros.com`
+- `astro.config.mjs` — redirects (`/contact`→`/about`, `/publications`→`/research`, `/thesis`→`/research`), math rendering (remark-math + rehype-katex)
 
-## Adding Project Pages
+## Adding pages
 
-1. Create directory: `projects/project-name/`
-2. Add markdown file: `projects/project-name/project-name.md`
-3. **Add to `_toc.yml`** under Projects caption:
+1. Create `src/pages/section/page-name.md` with frontmatter:
    ```yaml
-   - file: projects/project-name/project-name
+   ---
+   layout: ../../layouts/Md.astro   # depth-relative path
+   title: Page Title
+   ---
    ```
-4. Images go in `projects/project-name/images/`
+2. Images go in `public/section/` and are referenced with absolute paths (`/section/file.png`).
+3. Add a link from the relevant index page (`src/pages/projects/index.md` etc.) — there is no auto-generated nav for content pages.
 
-**Common mistake:** Forgetting to add new pages to `_toc.yml` — they won't appear in navigation.
+## Design rules
 
-## MyST Syntax Quirks
+- Match darioamodei.com aesthetic: single ~42rem column, serif body, small sans-serif nav, no cards/grids/sidebars, no client-side JS.
+- All styling lives in `Base.astro`; do not add per-page CSS files.
+- LaTeX math works in markdown via `$...$` / `$$...$$` (KaTeX CSS loaded from CDN).
 
-**Use grids, not panels** (panels deprecated):
-```markdown
-::::{grid} 3
+## Content guidelines
 
-:::{grid-item-card} Title
-Content here
-:::
+**Never invent personal details:**
+- No biographical filler ("passionate developer...")
+- No assumed career history or education
+- Stick to documented projects and technical facts
+- If personal content is needed, ask the user
 
-::::
-```
+**Prefer concise technical content:** direct statements, specific tech details, real implementation notes.
 
-**Image syntax:**
-```markdown
-```{image} images/file.png
-:alt: Description
-:width: 100%
-:align: center
-```
-```
+## Publications
 
-**Remove these deprecated options** (cause warnings):
-- `:gutter:` in grids
-- `:link-type:` in cards
+`src/pages/research.md` holds a static publications list. `references.bib` and `scripts/fetch_scholar.py` are kept for regenerating entries; update the markdown manually when new papers appear.
 
 ## Git LFS
 
@@ -67,26 +61,3 @@ PDFs tracked via LFS (`.gitattributes`). If pushing fails with "git-lfs not foun
 git lfs install
 git push
 ```
-
-## Content Guidelines
-
-**Never invent personal details:**
-- No biographical filler ("passionate developer...")
-- No assumed career history or education
-- Stick to documented projects and technical facts
-- If personal content needed, ask user for specific info
-
-**Prefer concise technical content:**
-- Direct statements over marketing language
-- Specific tech details over generic features
-- Real implementation notes over tutorials
-
-## Deployment
-
-Push to `main` → GitHub Actions builds → deploys to GitHub Pages automatically.
-
-**Live site:** https://omedeiro.github.io
-
-CI runs `myst build --html` and checks for `_build/html/index.html`. Build artifact uploaded to GitHub Pages.
-
-Builds also run on PRs to verify changes before merge.
