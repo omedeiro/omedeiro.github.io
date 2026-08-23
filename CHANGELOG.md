@@ -11,7 +11,8 @@
 - `scripts/import_health.py` — stretching (from the Bend app) and sleep, in one pass over an Apple Health `export.zip`
 - `scripts/backfill_stretching.py` and `scripts/bend-history.csv` — hand-recorded Bend sessions predating the Apple Health connection, which does not backfill
 - `scripts/habits_common.py` — shared env parsing and merge-on-write habit file handling
-- `.github/workflows/habits.yml` — nightly refresh of the Strava and GitHub habits, committing to `main` to trigger a deploy
+- `.github/workflows/habits.yml` — nightly refresh of the Strava and GitHub habits, committing to `main` to trigger a deploy; warns and skips rather than failing when credentials are not yet configured
+- Two years of running (227 days) and GitHub commit (273 days) history, plus three weeks of backfilled Bend sessions
 
 ### Changed
 

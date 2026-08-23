@@ -79,7 +79,7 @@ def graphql(login: str, start: dt.date, end: dt.date, tok: str) -> dict:
         },
     )
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
+        with urllib.request.urlopen(req, timeout=30, context=hc.ssl_context()) as resp:
             body = json.load(resp)
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", "replace")[:400]

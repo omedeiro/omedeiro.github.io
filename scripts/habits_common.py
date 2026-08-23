@@ -29,6 +29,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import os
+import ssl
 import sys
 import tempfile
 from typing import Any, Iterable
@@ -40,6 +41,22 @@ ENV_PATH = os.path.join(REPO_ROOT, "scripts", ".env")
 
 def log(msg: str) -> None:
     print(msg, file=sys.stderr)
+
+
+def ssl_context() -> ssl.SSLContext:
+    """A TLS context that works on a Python with no CA bundle wired up.
+
+    python.org builds on macOS ship without the system trust store connected
+    until ``Install Certificates.command`` is run, so every HTTPS call fails
+    with CERTIFICATE_VERIFY_FAILED. Where certifi is installed we fall back to
+    its bundle; otherwise this is just the default context. certifi stays
+    optional — nothing here requires a pip install.
+    """
+    try:
+        import certifi
+    except ImportError:
+        return ssl.create_default_context()
+    return ssl.create_default_context(cafile=certifi.where())
 
 
 # --------------------------------------------------------------------------

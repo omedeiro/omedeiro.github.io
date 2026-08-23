@@ -32,7 +32,29 @@ jobs:
       # No pip install: the fetch scripts deliberately use only the standard
       # library so this job stays fast and can't break on a dependency release.
 
+      - name: Check which credentials are configured
+        id: creds
+        env:
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+          GH_CONTRIB_TOKEN: ${{ secrets.GH_CONTRIB_TOKEN }}
+        run: |
+          # Warn and skip rather than fail, so the schedule stays green until
+          # the secrets are added instead of mailing a failure every night.
+          if [ -n "$STRAVA_REFRESH_TOKEN" ]; then
+            echo "strava=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::STRAVA_REFRESH_TOKEN is not set — skipping the running refresh. See the Habits section of AGENTS.md."
+            echo "strava=false" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -n "$GH_CONTRIB_TOKEN" ]; then
+            echo "github=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::GH_CONTRIB_TOKEN is not set — skipping the commits refresh. See the Habits section of AGENTS.md."
+            echo "github=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Fetch Strava activities
+        if: steps.creds.outputs.strava == 'true'
         env:
           STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
           STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
@@ -41,6 +63,7 @@ jobs:
         run: python scripts/fetch_strava.py
 
       - name: Persist rotated Strava refresh token
+        if: steps.creds.outputs.strava == 'true'
         env:
           GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
           SINK: ${{ runner.temp }}/strava-refresh-token
@@ -60,6 +83,7 @@ jobs:
           echo "Rotated refresh token stored."
 
       - name: Fetch GitHub contributions
+        if: steps.creds.outputs.github == 'true'
         env:
           GH_CONTRIB_TOKEN: ${{ secrets.GH_CONTRIB_TOKEN }}
         run: python scripts/fetch_github.py
