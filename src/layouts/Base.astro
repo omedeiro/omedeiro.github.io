@@ -2,14 +2,17 @@
 export interface Props {
   title: string;
   description?: string;
+  /** Widen the column past the usual 42rem. Only /habits needs this. */
+  wide?: boolean;
 }
-const { title, description = "Owen Medeiros — electrical engineer working on superconducting electronics." } = Astro.props;
+const { title, description = "Owen Medeiros — electrical engineer working on superconducting electronics.", wide = false } = Astro.props;
 const nav = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/research", label: "Research" },
   { href: "/projects", label: "Projects" },
   { href: "/maths", label: "Maths" },
+  { href: "/habits", label: "Habits" },
 ];
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
@@ -58,6 +61,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
         margin: 0 auto;
         padding: 2.5rem 1.25rem 4rem;
       }
+      .wrap.wide { max-width: 52rem; }
       header.site {
         margin-bottom: 3rem;
       }
@@ -149,6 +153,50 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       li { margin: 0.25rem 0; }
       .pub-list li { margin: 0.8rem 0; }
       .pub-venue { color: var(--muted); font-style: italic; }
+      /* Habits heatmap. Scoped to /habits, which is also the one page that
+         loads client-side JS (for the tooltip). */
+      .habits-chart { position: relative; margin: 2rem 0 1rem; }
+      .habits-scroll { overflow-x: auto; overflow-y: visible; }
+      .habits-chart svg { display: block; }
+      .habits-cell { shape-rendering: crispEdges; }
+      .habits-cell:hover { stroke: var(--fg); stroke-width: 1px; }
+      .habits-chart text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      .habits-name { font-size: 11px; fill: var(--fg); }
+      .habits-note, .habits-month { font-size: 9px; fill: var(--muted); }
+      .habits-month { text-anchor: end; }
+      .habits-tip {
+        position: absolute;
+        z-index: 5;
+        transform: translate(-50%, -100%);
+        pointer-events: none;
+        background: var(--fg);
+        color: var(--bg);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        font-size: 0.72rem;
+        line-height: 1.4;
+        padding: 0.35rem 0.5rem;
+        border-radius: 4px;
+        white-space: nowrap;
+        box-shadow: 0 1px 6px rgb(0 0 0 / 0.18);
+      }
+      .habits-tip b { display: block; font-weight: 600; }
+      .habits-legend { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+      .habits-ramp {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        white-space: nowrap;
+      }
+      .habits-swatch {
+        display: inline-block;
+        width: 11px;
+        height: 11px;
+        border-radius: 2px;
+      }
+      .habits-source { color: var(--muted); font-size: 0.85em; }
+      .habits-empty { border-left: 2px solid var(--border); padding-left: 0.75rem; }
       footer.site {
         margin-top: 4rem;
         padding-top: 1.25rem;
@@ -162,7 +210,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     </style>
   </head>
   <body>
-    <div class="wrap">
+    <div class={wide ? "wrap wide" : "wrap"}>
       <header class="site">
         <a class="name" href="/">Owen Medeiros</a>
         <nav class="site">

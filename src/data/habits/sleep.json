@@ -1,0 +1,8 @@
+{
+  "id": "sleep",
+  "label": "Sleep",
+  "source": "Apple Health",
+  "unit": "h",
+  "updated_at": null,
+  "days": {}
+}

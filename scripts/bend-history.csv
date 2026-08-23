@@ -1,0 +1,33 @@
+# Bend sessions transcribed by hand from the app's Recent History screen.
+#
+# Bend's Apple Health connection only writes sessions from the day it was
+# switched on, so anything earlier never reaches export.xml. This file is the
+# only record of it. Once Health sync has been running a while,
+# import_health.py takes over and this file just holds the tail.
+#
+# Columns: date (YYYY-MM-DD), routine. One row per session; two rows with the
+# same date count as two sessions that day.
+#
+# Source: screenshots of Recent History taken 2026-08-23.
+date,routine
+2026-08-22,Pre-Run 1
+2026-08-21,Wake Up
+2026-08-20,Tech Neck
+2026-08-19,Post-Run 1
+2026-08-18,Neck 1
+2026-08-17,Pre-Run 1
+2026-08-16,Hamstrings 1
+# 2026-08-15 — no session; the app's list skips from 8/16 to 8/14.
+2026-08-14,Feet & Ankles 1
+2026-08-13,Posture Power
+2026-08-12,Shoulders 1
+# 2026-08-11 — no session.
+2026-08-10,Post-Run 1
+2026-08-09,Hamstrings 1
+2026-08-08,Posture Reset
+2026-08-07,Shoulders 1
+2026-08-06,Tech Neck
+2026-08-05,Hamstrings 1
+2026-08-04,Tech Neck
+2026-08-03,Post-Run 1
+2026-08-02,Hamstrings 1

@@ -1,5 +1,34 @@
 # Changelog
 
+## 2.1.0 — 2026-08-23
+
+### Added
+
+- `/habits` page: five GitHub-style heatmaps (running, stretching, screen time, commits, sleep) as side-by-side vertical columns, newest week at the top, with a hover/tap tooltip showing that day's numbers and a summary table of totals and streaks
+- `scripts/fetch_strava.py` — OAuth fetch for the running habit
+- `scripts/fetch_github.py` — contribution calendar via the GitHub GraphQL API
+- `scripts/fetch_screentime.py` — Mac and iPhone screen time from local `knowledgeC.db` and Biome data (Apple exposes no web API)
+- `scripts/import_health.py` — stretching (from the Bend app) and sleep, in one pass over an Apple Health `export.zip`
+- `scripts/backfill_stretching.py` and `scripts/bend-history.csv` — hand-recorded Bend sessions predating the Apple Health connection, which does not backfill
+- `scripts/habits_common.py` — shared env parsing and merge-on-write habit file handling
+- `.github/workflows/habits.yml` — nightly refresh of the Strava and GitHub habits, committing to `main` to trigger a deploy; warns and skips rather than failing when credentials are not yet configured
+- Two years of running (227 days) and GitHub commit (273 days) history, plus three weeks of backfilled Bend sessions
+
+### Changed
+
+- `Base.astro` gains a `Habits` nav entry and an opt-in `wide` prop (52rem) used only by `/habits`
+- `/habits` is the one page carrying client-side JS, for the heatmap tooltip
+
+### Removed
+
+- `habits-wip.md`, superseded by the implemented page
+
+## 2.0.1 — 2026-07-25
+
+### Removed
+
+- budget.owenmedeiros.com and wedding.owenmedeiros.com links from the homepage "Live apps" section
+
 ## 2.0.0 — 2026-07-25
 
 Complete rebuild: migrated from MyST/Jupyter Book on GitHub Pages to Astro on Cloudflare Workers.
