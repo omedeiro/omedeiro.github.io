@@ -17,6 +17,7 @@ skill covers what is expensive to rediscover.
 | Running | `fetch_strava.py` | CI, nightly |
 | Commits | `fetch_github.py` | CI, nightly |
 | Screen time | `fetch_screentime.py` | **Mac only** — LaunchAgent, daily 23:00 |
+| Sleep | `import_shortcut_sleep.py` | **Mac only** — LaunchAgent, from an iCloud Drive drop |
 | Stretching, Sleep | `import_health.py` | **Mac only** — manual, after a Health export |
 
 The three local ones read Apple data no CI runner can reach. Do not try to move
@@ -100,6 +101,31 @@ until the numbers look reasonable.
   was last checked) — two unrelated formats, one answer.
 - A synthetic `SEGB` segment with known contents round-trips.
 
+## Apple Health: there is no local store
+
+Health does **not** sync to the Mac. It moves between devices through CloudKit's private
+database — app-private, end-to-end encrypted — not as files. Verified: 58 containers under
+`~/Library/Mobile Documents/`, none health-related; no `~/Library/Health`, no Health
+container, no Health app on macOS. HealthKit has no server-side API either, so there is
+nothing for a connector to authenticate against. Do not search for this again.
+
+Health therefore only arrives if something on the phone pushes it:
+
+- a scheduled iOS Shortcut writing into `iCloud Drive/habits/sleep/`, merged by
+  `import_shortcut_sleep.py`
+- a full Health export, parsed by `import_health.py` (also backfills stretching)
+
+**iCloud Drive is readable without Full Disk Access** — it lives at
+`~/Library/Mobile Documents/com~apple~CloudDocs/` and is not TCC-protected. That is what
+makes the Shortcut route work where a Health store never could.
+
+The Shortcut path reuses `import_health.sleep_days` and `union` on purpose: a night
+imported from a drop file and the same night from a Health export must produce the same
+number, not two subtly different ones. Both file a night under the **wake** date. The drop
+folder is re-read in full each run and recomputed, so it is idempotent — and `README*` is
+excluded from the scan, because worked examples in prose are one edit away from being
+imported as real data.
+
 ## Full Disk Access
 
 Granted **per application**, to the binary that opens the file. Consequences:
@@ -115,11 +141,12 @@ Granted **per application**, to the binary that opens the file. Consequences:
 
 ## Daily automation
 
-`scripts/screentime_daily.py`, run by
-`~/Library/LaunchAgents/com.owenmedeiros.screentime.plist` at 23:00, logging to
-`~/Library/Logs/screentime-daily.log`. It collects on any branch (a skipped day
-is lost for good) but commits only on `main`, only `screentime.json`, via a
-path-limited commit, and never mid-rebase or mid-merge.
+`scripts/habits_daily.py`, run by
+`~/Library/LaunchAgents/com.owenmedeiros.habits.plist` at 23:00, logging to
+`~/Library/Logs/habits-daily.log`. It runs screen time and sleep independently — one
+failing does not stop the other — collects on any branch (a skipped day is lost for good),
+and commits only on `main`, only the habit JSON files that changed, via a path-limited
+commit, never mid-rebase or mid-merge.
 
 Test it without waiting:
-`launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.screentime`
+`launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.habits`

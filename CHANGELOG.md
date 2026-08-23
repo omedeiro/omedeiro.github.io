@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.2 — 2026-08-23
+
+### Added
+
+- `scripts/import_shortcut_sleep.py` — merges sleep dropped into `iCloud Drive/habits/sleep/` by a scheduled iOS Shortcut. Apple Health has no API and no local store on the Mac (it syncs through CloudKit's private database, not as files), so the only route is a phone-side push; iCloud Drive is the one such surface readable without Full Disk Access. Reuses `import_health.sleep_days` and `union` so a night from a drop file and the same night from a Health export cannot disagree
+
+### Changed
+
+- `screentime_daily.py` becomes `habits_daily.py` and now collects screen time *and* sleep, independently — one failing does not stop the other — committing whichever habit files changed. The LaunchAgent is relabelled `com.owenmedeiros.habits`, logging to `~/Library/Logs/habits-daily.log`
+
 ## 2.1.1 — 2026-08-23
 
 ### Fixed

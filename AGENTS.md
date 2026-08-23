@@ -66,7 +66,8 @@ three arrive by periodic local export.
 |---|---|---|
 | Running | `scripts/fetch_strava.py` | nightly, automatic |
 | Commits | `scripts/fetch_github.py` | nightly, automatic |
-| Screen time | `scripts/fetch_screentime.py` | manual, on the Mac (Mac + iPhone) |
+| Screen time | `scripts/fetch_screentime.py` | LaunchAgent, daily on the Mac |
+| Sleep | `scripts/import_shortcut_sleep.py` | LaunchAgent, daily from an iCloud Drive drop |
 | Stretching, Sleep | `scripts/import_health.py` | manual, after a Health export |
 
 Stretching is matched on the workout's **source name** (`Bend`), not its activity type,
@@ -105,6 +106,27 @@ Screen Time's own cross-device store is **not** on the Mac — there is no
 `RMAdminStore-*.sqlite` and no ScreenTimeAgent container. Turning on "Share Across
 Devices" registers the phone in `knowledgeC.db`'s `ZSYNCPEER`, but no `/app/*` row is ever
 attributed to it; that view is assembled from CloudKit on demand. Don't go looking again.
+
+## Sleep, and why Apple Health needs a phone-side push
+
+Health data does **not** reach the Mac. It syncs between devices through CloudKit's
+private database — app-private and end-to-end encrypted — not as files in iCloud Drive.
+Checked directly: 58 containers under `~/Library/Mobile Documents/`, none health-related,
+and no `~/Library/Health` or Health container on disk. macOS has no Health app either.
+Don't go looking for a local Health store; there isn't one.
+
+So sleep arrives one of two ways, both needing something on the phone:
+
+1. **A scheduled iOS Shortcut** writing into
+   `iCloud Drive/habits/sleep/`, which `import_shortcut_sleep.py` merges nightly. That
+   folder mirrors to `~/Library/Mobile Documents/com~apple~CloudDocs/habits/sleep/` and,
+   unlike Biome or `knowledgeC.db`, needs **no Full Disk Access** to read.
+2. **A full Health export** (`import_health.py`), which also backfills stretching.
+
+Both file a night under the date you *woke up*, and the Shortcut route reuses
+`import_health.sleep_days` and `union` so the two cannot disagree about the same night.
+The drop folder is re-read in full every run and the result recomputed, so a shortcut
+that writes the same night twice cannot double-count it.
 
 Note that Full Disk Access is granted **per application**. Granting it to Terminal does not
 give it to an agent running under another app — check what actually owns the shell before
@@ -149,10 +171,13 @@ only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
    `STRAVA_REFRESH_TOKEN`, and `GH_CONTRIB_TOKEN`. Optionally add `GH_ADMIN_TOKEN`
    (a PAT with `secrets:write`) so the workflow can store rotated Strava tokens itself;
    without it the job warns and you update `STRAVA_REFRESH_TOKEN` by hand.
-4. **Screen time** — grant Full Disk Access to your terminal in System Settings →
-   Privacy & Security, restart it, then run `python scripts/fetch_screentime.py` every
-   week or two and commit the result. Both `knowledgeC.db` and Biome are pruned to
-   roughly four weeks, so running it less often than that loses days permanently.
+4. **Screen time and sleep** — handled by the `com.owenmedeiros.habits` LaunchAgent,
+   which runs `scripts/habits_daily.py` at 23:00 and commits to `main` only. It needs
+   Full Disk Access on `/usr/bin/python3` (System Settings → Privacy & Security → Full
+   Disk Access → **+** → ⌘⇧G → `/usr/bin/python3`). Verify with
+   `launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.habits` and check
+   `~/Library/Logs/habits-daily.log`. Both `knowledgeC.db` and Biome are pruned to
+   roughly four weeks, so a long outage loses days permanently.
 5. **Stretching and sleep** — make sure Bend is syncing to Apple Health (Bend →
    Settings → Apple Health). Then on iPhone: Health → profile → Export All Health
    Data, and `python scripts/import_health.py ~/Downloads/export.zip` and commit.

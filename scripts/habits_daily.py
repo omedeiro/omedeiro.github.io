@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect screen time and commit it, for the daily LaunchAgent.
+"""Collect the local-only habits and commit them, for the daily LaunchAgent.
 
 Run by ``~/Library/LaunchAgents/com.owenmedeiros.screentime.plist``. Logs to
 ``~/Library/Logs/screentime-daily.log``.
@@ -12,9 +12,15 @@ script on the machine with it. Pointing the agent straight at
 to read ``knowledgeC.db`` and Biome, and off the conda Python used for
 day-to-day work.
 
+Two sources, because neither can run in CI: screen time, read off
+``knowledgeC.db`` and Biome by ``fetch_screentime``; and sleep, from whatever
+an iOS Shortcut has dropped into iCloud Drive, via ``import_shortcut_sleep``.
+They are independent — one failing does not stop the other, and whichever
+files changed get committed.
+
 Collection runs on any branch, because ``knowledgeC.db`` and Biome are both
 pruned to roughly four weeks and a skipped day is gone for good. Committing is
-the guarded part: only on ``main``, only this one file, never mid-rebase.
+the guarded part: only on ``main``, only these data files, never mid-rebase.
 ``write_habit`` merges, so days collected while on a feature branch are still
 committed by a later run.
 """
@@ -27,7 +33,11 @@ import subprocess
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA = os.path.join("src", "data", "habits", "screentime.json")
+HABITS = os.path.join("src", "data", "habits")
+DATA = [
+    os.path.join(HABITS, "screentime.json"),
+    os.path.join(HABITS, "sleep.json"),
+]
 GIT = "/usr/bin/git"
 
 
@@ -41,18 +51,21 @@ def git(*args: str) -> str:
     ).stdout.strip()
 
 
-def collect() -> bool:
-    """Run the fetch in-process; returns False if it wrote nothing."""
-    sys.path.insert(0, os.path.join(REPO, "scripts"))
-    import fetch_screentime
+def collect(module: str, label: str) -> bool:
+    """Run one importer in-process; returns False if it wrote nothing.
 
+    Failures are logged and swallowed rather than raised: a screen-time read
+    that trips its sanity check must not stop sleep from being imported, and
+    neither must take the LaunchAgent down.
+    """
+    sys.path.insert(0, os.path.join(REPO, "scripts"))
     try:
-        return fetch_screentime.main([]) == 0
-    except SystemExit as exc:          # the script exits this way on a bad read
-        log(f"fetch exited: {exc}")
+        return __import__(module).main([]) == 0
+    except SystemExit as exc:          # importers exit this way on a bad read
+        log(f"{label} exited: {exc}")
         return False
     except Exception as exc:           # noqa: BLE001 - a crash must not kill the agent
-        log(f"fetch crashed: {exc!r}")
+        log(f"{label} crashed: {exc!r}")
         return False
 
 
@@ -68,14 +81,20 @@ def busy() -> str | None:
 
 
 def main() -> int:
-    log("=== daily screen-time collection ===")
-    if not collect():
+    log("=== daily habit collection ===")
+    wrote = [
+        collect("fetch_screentime", "screen time"),
+        collect("import_shortcut_sleep", "sleep"),
+    ]
+    if not any(wrote):
         log("nothing written")
         return 1
 
-    if not git("status", "--porcelain", "--", DATA):
+    changed = [d for d in DATA if git("status", "--porcelain", "--", d)]
+    if not changed:
         log("no change to commit")
         return 0
+    log("changed: " + ", ".join(os.path.basename(c) for c in changed))
 
     branch = git("rev-parse", "--abbrev-ref", "HEAD")
     if branch != "main":
@@ -90,7 +109,7 @@ def main() -> int:
     # Path-limited commit: whatever else is in the working tree stays untouched
     # and unstaged, so this can never sweep up work in progress.
     done = subprocess.run(
-        [GIT, "commit", "-q", "-m", "Update screen time data", "--", DATA],
+        [GIT, "commit", "-q", "-m", "Update local habit data", "--", *changed],
         cwd=REPO, capture_output=True, text=True, check=False,
     )
     if done.returncode:
