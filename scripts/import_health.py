@@ -11,7 +11,7 @@ That produces ``export.zip``. Point this script at it and one pass over the
 XML fills in both habits:
 
 * ``sleep.json``      — hours asleep per night, from sleep analysis records
-* ``stretching.json`` — minutes per day, from Bend's workout records
+* ``stretching.json`` — sessions per day, from Bend's workout records
 
 Usage:
     python scripts/import_health.py ~/Downloads/export.zip
@@ -160,19 +160,25 @@ def sleep_days(spans: list[tuple[float, float]], since: dt.date) -> dict[str, di
 
 
 def stretch_days(spans: list[tuple[float, float]], since: dt.date) -> dict[str, dict]:
-    """Total each session onto its local start date, in minutes."""
-    minutes: dict[str, float] = {}
+    """Count sessions per local start date.
+
+    The habit is measured in sessions rather than minutes so that days
+    backfilled from Bend's own history — which does not show session length —
+    are directly comparable with days measured through HealthKit. Where the
+    duration *is* known it rides along in ``extra`` for the tooltip.
+    """
     counts: dict[str, int] = {}
+    minutes: dict[str, float] = {}
     for start, end in spans:
         began = dt.datetime.fromtimestamp(start)
         if began.date() < since:
             continue
         key = hc.day_key(began)
-        minutes[key] = minutes.get(key, 0.0) + (end - start) / 60.0
         counts[key] = counts.get(key, 0) + 1
+        minutes[key] = minutes.get(key, 0.0) + (end - start) / 60.0
     return {
-        k: hc.day(v, moving_time_s=int(v * 60), count=counts[k])
-        for k, v in sorted(minutes.items())
+        k: hc.day(count, minutes=round(minutes[k], 1))
+        for k, count in sorted(counts.items())
     }
 
 
@@ -216,7 +222,7 @@ def main(argv: list[str]) -> int:
 
     stretching = stretch_days(union(stretch_spans), since)
     if stretching:
-        hc.write_habit("stretching", "Stretching", args.stretch_source, "min", stretching,
+        hc.write_habit("stretching", "Stretching", args.stretch_source, "sessions", stretching,
                        merge=merge, data_dir=args.out_dir)
         wrote += 1
     else:

@@ -75,6 +75,20 @@ because Bend has filed sessions as Flexibility, Yoga, and Mind & Body across ver
 
 Do not source stretching from Strava: its "Workout" activities are strength sessions.
 
+Stretching is counted in **sessions per day**, not minutes. Bend's own history screen
+does not show session length, so counting sessions lets days backfilled from that screen
+sit on the same scale as days measured through HealthKit, with nothing estimated.
+
+`scripts/backfill_stretching.py` merges `scripts/bend-history.csv` — sessions transcribed
+by hand from Bend's Recent History — into the same habit file. Bend's Health connection
+only writes sessions from the day it was enabled onward and never backfills, so that CSV
+is the only record of anything earlier. Backfilled days are tagged `"backfilled": true`.
+
+The page maps a habit onto its five-step ramp by quartile, but switches to a direct
+mapping when there are four or fewer distinct values. Stretching is almost always exactly
+one session a day, and quartiles over a constant would paint every active day the palest
+step — a column that looks empty when the habit is perfect.
+
 All scripts are standard-library only (no pip install) and **merge** into the existing
 JSON rather than overwriting it. That is load-bearing for screen time: macOS prunes
 `knowledgeC.db` to roughly four weeks, so an overwriting write would destroy history.
@@ -103,6 +117,9 @@ only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
    Settings → Apple Health). Then on iPhone: Health → profile → Export All Health
    Data, and `python scripts/import_health.py ~/Downloads/export.zip` and commit.
    One pass fills in both habits.
+6. **Stretching before the sync date** — add rows to `scripts/bend-history.csv` from
+   Bend's Recent History screen and run `python scripts/backfill_stretching.py`.
+   Only needed for sessions predating step 5.
 
 ## Publications
 

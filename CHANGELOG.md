@@ -9,6 +9,7 @@
 - `scripts/fetch_github.py` — contribution calendar via the GitHub GraphQL API
 - `scripts/fetch_screentime.py` — Mac and iPhone screen time from local `knowledgeC.db` and Biome data (Apple exposes no web API)
 - `scripts/import_health.py` — stretching (from the Bend app) and sleep, in one pass over an Apple Health `export.zip`
+- `scripts/backfill_stretching.py` and `scripts/bend-history.csv` — hand-recorded Bend sessions predating the Apple Health connection, which does not backfill
 - `scripts/habits_common.py` — shared env parsing and merge-on-write habit file handling
 - `.github/workflows/habits.yml` — nightly refresh of the Strava and GitHub habits, committing to `main` to trigger a deploy
 

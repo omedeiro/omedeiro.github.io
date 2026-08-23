@@ -17,7 +17,7 @@ const BLOCK_GAP = 26;
 const GUTTER = 46;
 const HEAD_H = 34;
 
-type Day = { value: number; extra?: Record<string, number> };
+type Day = { value: number; extra?: Record<string, number | string | boolean> };
 type Habit = { label: string; source: string; unit: string; days: Record<string, Day> };
 
 const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -36,17 +36,24 @@ const HABITS = [
     empty: "no run",
     format: (d: Day) => {
       const km = `${d.value.toFixed(1)} km`;
-      const secs = d.extra?.moving_time_s;
+      const secs = Number(d.extra?.moving_time_s) || 0;
       return secs ? `${km} · ${Math.round(secs / 60)} min` : km;
     },
     summary: (total: number) => `${total.toFixed(0)} km total`,
   },
   {
     data: stretching as Habit,
-    caption: "darker = longer",
+    caption: "darker = more",
     empty: "none",
-    format: (d: Day) => `${Math.round(d.value)} min`,
-    summary: (total: number) => `${hm(total / 60)} total`,
+    format: (d: Day) => {
+      const parts = [`${d.value} session${d.value === 1 ? "" : "s"}`];
+      // Days backfilled from Bend's history name the routine; days measured
+      // through HealthKit know the duration instead.
+      if (d.extra?.routines) parts.push(String(d.extra.routines));
+      else if (d.extra?.minutes) parts.push(`${Math.round(Number(d.extra.minutes))} min`);
+      return parts.join(" · ");
+    },
+    summary: (total: number) => `${total.toFixed(0)} sessions`,
   },
   {
     data: screentime as Habit,
@@ -55,7 +62,7 @@ const HABITS = [
     format: (d: Day) => {
       const parts = [hm(d.value)];
       if (d.extra && (d.extra.mac_h || d.extra.iphone_h)) {
-        parts.push(`Mac ${hm(d.extra.mac_h || 0)}`, `iPhone ${hm(d.extra.iphone_h || 0)}`);
+        parts.push(`Mac ${hm(Number(d.extra.mac_h) || 0)}`, `iPhone ${hm(Number(d.extra.iphone_h) || 0)}`);
       }
       return parts.join(" · ");
     },
@@ -81,24 +88,43 @@ const HABITS = [
 const dayKey = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
+type Scale =
+  | { kind: "discrete"; steps: number[] }
+  | { kind: "quantile"; cuts: number[] };
+
 /**
- * Quartile cut points over the habit's non-zero days.
+ * Work out how one habit's values map onto the five-step ramp.
  *
- * Bucketing per habit rather than globally is what lets one column read a
- * 10 km run and another a 7-hour night on the same five-step ramp.
+ * Scaling per habit rather than globally is what lets one column read a 10 km
+ * run and another a 7-hour night on the same ramp.
+ *
+ * Habits with only a handful of distinct values get mapped directly onto the
+ * steps instead of by quartile. Stretching is nearly always exactly one
+ * session a day, and quartiles over a constant would put every active day on
+ * the palest step — a column that looks empty when the habit is perfect.
  */
-function thresholds(days: Record<string, Day>): number[] | null {
+function scaleFor(days: Record<string, Day>): Scale | null {
   const values = Object.values(days).map((d) => d.value).filter((v) => v > 0).sort((a, b) => a - b);
   if (!values.length) return null;
+
+  const distinct = [...new Set(values)];
+  if (distinct.length <= 4) return { kind: "discrete", steps: distinct };
+
   const at = (p: number) => values[Math.min(values.length - 1, Math.floor(p * values.length))];
-  return [at(0.25), at(0.5), at(0.75)];
+  return { kind: "quantile", cuts: [at(0.25), at(0.5), at(0.75)] };
 }
 
-function level(value: number, cuts: number[] | null): number {
-  if (!value || !cuts) return 0;
-  if (value <= cuts[0]) return 1;
-  if (value <= cuts[1]) return 2;
-  if (value <= cuts[2]) return 3;
+function level(value: number, scale: Scale | null): number {
+  if (!value || !scale) return 0;
+  if (scale.kind === "discrete") {
+    const found = scale.steps.indexOf(value);
+    const rank = found >= 0 ? found + 1 : scale.steps.length;
+    return Math.max(1, Math.round((rank / scale.steps.length) * 4));
+  }
+  const [q1, q2, q3] = scale.cuts;
+  if (value <= q1) return 1;
+  if (value <= q2) return 2;
+  if (value <= q3) return 3;
   return 4;
 }
 
@@ -160,7 +186,7 @@ const rows = Array.from({ length: WEEKS }, (_, week) => {
 
 const columns = HABITS.map((habit, index) => {
   const days = habit.data.days || {};
-  const cuts = thresholds(days);
+  const scale = scaleFor(days);
   const values = Object.values(days).map((d) => d.value).filter((v) => v > 0);
   const total = values.reduce((a, b) => a + b, 0);
   const { current, longest } = streaks(days, today);
@@ -171,7 +197,7 @@ const columns = HABITS.map((habit, index) => {
     source: habit.data.source,
     caption: habit.caption,
     hasData: values.length > 0,
-    cuts,
+    scale,
     days,
     format: habit.format,
     empty: habit.empty,
@@ -238,7 +264,7 @@ const updated = [running, stretching, screentime, commits, sleep]
               row.cells.map((cell, weekday) => {
                 if (cell.future) return null;
                 const record = column.days[cell.key];
-                const step = level(record?.value ?? 0, column.cuts);
+                const step = level(record?.value ?? 0, column.scale);
                 const detail = record && record.value > 0 ? column.format(record) : column.empty;
                 return (
                   <rect
