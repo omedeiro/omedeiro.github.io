@@ -66,7 +66,7 @@ three arrive by periodic local export.
 |---|---|---|
 | Running | `scripts/fetch_strava.py` | nightly, automatic |
 | Commits | `scripts/fetch_github.py` | nightly, automatic |
-| Screen time | `scripts/fetch_screentime.py` | manual, on the Mac |
+| Screen time | `scripts/fetch_screentime.py` | manual, on the Mac (Mac usage only) |
 | Stretching, Sleep | `scripts/import_health.py` | manual, after a Health export |
 
 Stretching is matched on the workout's **source name** (`Bend`), not its activity type,
@@ -78,6 +78,17 @@ Do not source stretching from Strava: its "Workout" activities are strength sess
 Stretching is counted in **sessions per day**, not minutes. Bend's own history screen
 does not show session length, so counting sessions lets days backfilled from that screen
 sit on the same scale as days measured through HealthKit, with nothing estimated.
+
+`fetch_screentime.py` records **Mac usage only**. iPhone usage syncs into
+`~/Library/Biome/` but the format is undocumented, and the byte-scanning heuristic in
+`read_biome` pairs unrelated timestamps into spurious intervals — on real data it produced
+a median of 18 h/day, days over 24 h, and usage dated to 2033. It is off by default behind
+`--iphone`, and `implausible()` refuses to write results that fail a sanity check. Making
+it work needs the SEGB/protobuf record structure parsed properly rather than guessed at.
+
+Note that Full Disk Access is granted **per application**. Granting it to Terminal does not
+give it to an agent running under another app — check what actually owns the shell before
+concluding the grant failed.
 
 `scripts/backfill_stretching.py` merges `scripts/bend-history.csv` — sessions transcribed
 by hand from Bend's Recent History — into the same habit file. Bend's Health connection

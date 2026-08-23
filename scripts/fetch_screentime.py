@@ -8,14 +8,19 @@ your Mac's disk, in two places:
 * **Mac usage** — ``~/Library/Application Support/Knowledge/knowledgeC.db``,
   a SQLite database whose ``ZOBJECT`` table holds ``/app/usage`` sessions.
 * **iPhone usage** — synced through iCloud into ``~/Library/Biome/``, as
-  binary ``App.InFocus`` streams.
+  binary ``App.InFocus`` streams. **Not currently working**, and off by default:
+  the format is undocumented, and the byte-scanning heuristic here pairs
+  unrelated timestamps into spurious intervals. On real data it reported a
+  median of 18 hours a day, days exceeding 24 hours, and usage dated to 2033.
+  ``--iphone`` re-enables it for anyone wanting to improve it; the sanity check
+  before writing refuses results like those.
 
 Because this reads local files it cannot run in CI. Run it on your Mac every
 week or two and commit the result; the nightly workflow leaves this file alone.
 
 Usage:
-    python scripts/fetch_screentime.py
-    python scripts/fetch_screentime.py --no-iphone      # Mac only
+    python scripts/fetch_screentime.py                  # Mac usage (default)
+    python scripts/fetch_screentime.py --iphone         # + experimental iPhone
     python scripts/fetch_screentime.py --dump-biome 40  # inspect the parser
 
 **Full Disk Access is required.** Grant it to your terminal in
@@ -53,10 +58,17 @@ KNOWLEDGE_DB = os.path.expanduser(
 BIOME_ROOT = os.path.expanduser("~/Library/Biome")
 
 # Plausible Mac-epoch range for a timestamp, used to sift real timestamps out
-# of arbitrary bytes when scanning the undocumented Biome streams:
-# 2019-01-01 through 2035-01-01.
+# of arbitrary bytes when scanning the undocumented Biome streams. The floor is
+# 2019-01-01; the ceiling has to stay 2035-01-01 because the byte prefilter
+# below depends on the whole range sitting inside one binary octave.
 TS_MIN = 568_080_000
 TS_MAX = 1_072_915_200
+
+# Recorded usage cannot lie in the future, so anything past now is noise that
+# happened to decode as a valid double. Applied after the range filter, which
+# cannot express this without breaking the octave assumption.
+def _now_mac_epoch() -> float:
+    return dt.datetime.now().timestamp() - MAC_EPOCH
 
 # In-focus sessions longer than this are treated as parse noise rather than
 # real usage (a genuine uninterrupted session rarely runs longer).
@@ -229,7 +241,8 @@ def read_biome(since: dt.date, dump: int = 0) -> list[tuple[float, float]]:
         except OSError:
             continue
 
-        stamps = sorted(ts + MAC_EPOCH for ts in scan_timestamps(blob))
+        horizon = _now_mac_epoch()
+        stamps = sorted(ts + MAC_EPOCH for ts in scan_timestamps(blob) if ts <= horizon)
         # Consecutive timestamps a plausible session apart are read as one
         # in-focus interval.
         for start, end in zip(stamps, stamps[1:]):
@@ -251,10 +264,44 @@ def read_biome(since: dt.date, dump: int = 0) -> list[tuple[float, float]]:
 
 # --------------------------------------------------------------------------
 
+def implausible(days: dict[str, dict]) -> list[str]:
+    """Report ways the data cannot be describing real usage.
+
+    A guard rather than a filter: the failures this catches mean the parse is
+    wrong, and silently trimming them would bury that behind numbers that merely
+    look reasonable.
+    """
+    today = hc.day_key(dt.date.today())
+    problems: list[str] = []
+
+    ahead = sorted(k for k in days if k > today)
+    if ahead:
+        problems.append(f"{len(ahead)} day(s) in the future, e.g. {ahead[:3]}")
+
+    long_days = sorted((k, v["value"]) for k, v in days.items() if v["value"] > 24)
+    if long_days:
+        worst = max(long_days, key=lambda kv: kv[1])
+        problems.append(
+            f"{len(long_days)} day(s) over 24h, worst {worst[0]} at {worst[1]:.1f}h"
+        )
+
+    phone = [v.get("extra", {}).get("iphone_h", 0) for v in days.values()]
+    active = [h for h in phone if h]
+    if active and sorted(active)[len(active) // 2] > 12:
+        problems.append(
+            f"median iPhone usage {sorted(active)[len(active)//2]:.1f}h/day, "
+            f"which is not credible"
+        )
+    return problems
+
+
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--days", type=int, default=120, help="how far back to read (default: 120)")
-    ap.add_argument("--no-iphone", action="store_true", help="skip the Biome/iPhone streams")
+    ap.add_argument("--iphone", action="store_true",
+                    help="also scan the Biome streams for iPhone usage (EXPERIMENTAL — "
+                         "the format is undocumented and this currently produces "
+                         "implausible totals; see AGENTS.md)")
     ap.add_argument("--dump-biome", type=int, default=0, metavar="N",
                     help="print the first N timestamps the Biome parser finds, then continue")
     ap.add_argument("--out-dir", default=hc.DATA_DIR, help="habit JSON directory")
@@ -267,7 +314,9 @@ def main(argv: list[str]) -> int:
 
     mac_by_day = split_by_local_day(union(read_knowledge(KNOWLEDGE_DB, since)))
     phone_by_day: dict[str, float] = {}
-    if not args.no_iphone:
+    if args.iphone or args.dump_biome:
+        hc.log("warning: iPhone scanning is experimental and has produced "
+               "implausible totals; the result is checked below before writing")
         phone_by_day = split_by_local_day(union(read_biome(since, args.dump_biome)))
 
     if not mac_by_day and not phone_by_day:
@@ -285,8 +334,20 @@ def main(argv: list[str]) -> int:
             iphone_h=round(phone_s / 3600.0, 3),
         )
 
+    problems = implausible(days)
+    if problems:
+        hc.log("\nRefusing to write — the data failed a sanity check:\n")
+        for line in problems:
+            hc.log(f"  {line}")
+        hc.log(
+            "\n  Nothing was written. Re-run without --iphone to record Mac usage\n"
+            "  only, which is read from a documented schema and is trustworthy."
+        )
+        return 1
+
+    source = "macOS + iPhone" if phone_by_day else "macOS"
     hc.write_habit(
-        "screentime", "Screen time", "macOS + iPhone", "h",
+        "screentime", "Screen time", source, "h",
         days, merge=not args.no_merge, data_dir=args.out_dir,
     )
     return 0
