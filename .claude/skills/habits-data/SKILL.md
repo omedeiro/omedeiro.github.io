@@ -158,8 +158,14 @@ Granted **per application**, to the binary that opens the file. Consequences:
   Terminal's grant. Check what owns the shell before concluding a grant failed.
 - TCC attributes access to the *responsible* parent app, so a `python3` spawned
   by another app is judged by that app, not by `/usr/bin/python3`.
-- The LaunchAgent therefore invokes `/usr/bin/python3` directly rather than via
-  a shell — granting FDA to `/bin/sh` would extend it to every shell script.
+- **`/usr/bin/python3` is not Python.** It is a shared Xcode shim — the same inode as
+  `/usr/bin/git`, 78 hard links — that re-execs the real interpreter. TCC evaluates the
+  executable after the exec, so an FDA grant on the shim never applies and fails with a
+  bare "authorization denied". Point launchd at the resolved binary:
+  `/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9`. Same reasoning rules out a shell wrapper.
+- **A working Terminal run proves nothing about launchd.** Interactive shells have their
+  TCC decisions attributed to the parent app, so anything run from Terminal inherits
+  Terminal's grant. Verify the agent itself with `launchctl kickstart`.
 - A denial raises `sqlite3.DatabaseError` ("authorization denied"), **not**
   `OperationalError`. Catch the parent class or the FDA hint never prints.
 

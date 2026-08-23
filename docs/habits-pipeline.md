@@ -128,10 +128,15 @@ Each of these exists because its absence produced wrong numbers:
    undocumented format Apple changes between releases. It will break silently
    one day, and `implausible()` only catches failures that produce absurd
    numbers, not ones that produce merely wrong numbers.
-3. **The LaunchAgent's success path is unverified** as of writing. Its failure
-   path is tested; a real run has not been observed end to end.
-4. **Full Disk Access on `/usr/bin/python3` is a broad grant.** Narrower than
-   `/bin/sh`, but any script run by that interpreter inherits it.
+3. **The LaunchAgent's success path is unverified.** Its failure path is tested,
+   and the first real run *did* fail — on Full Disk Access, because the plist
+   pointed at `/usr/bin/python3`, which is a shared Xcode shim that re-execs the
+   real interpreter. TCC judges the post-exec binary, so the grant never applied.
+   Now points at the resolved path; still not observed succeeding end to end.
+4. **Full Disk Access on the interpreter is a broad grant.** Narrower than
+   `/bin/sh`, but any script run by that Python inherits it. It is also tied to a
+   Command Line Tools path, so a CLT update could invalidate it — silently, since
+   a stalled agent currently goes unnoticed (risk 1).
 5. **Single machine, single copy.** The habit JSON in git is the only archive
    of screen-time history.
 6. **All-or-nothing sanity gating.** One implausible day blocks the entire
