@@ -3,8 +3,16 @@
   "label": "Running",
   "source": "Strava",
   "unit": "km",
-  "updated_at": "2026-08-23T15:00:16Z",
+  "updated_at": "2026-08-23T16:36:33Z",
   "days": {
+    "2024-08-22": {
+      "value": 11.406,
+      "extra": {
+        "moving_time_s": 3664,
+        "distance_m": 11406,
+        "count": 1
+      }
+    },
     "2024-08-25": {
       "value": 13.1975,
       "extra": {
@@ -49,7 +57,7 @@
       "value": 3.278,
       "extra": {
         "moving_time_s": 1098,
-        "distance_m": 3277,
+        "distance_m": 3278,
         "count": 1
       }
     },
@@ -158,7 +166,7 @@
       }
     },
     "2024-09-30": {
-      "value": 8.1282,
+      "value": 8.1283,
       "extra": {
         "moving_time_s": 2394,
         "distance_m": 8128,
@@ -470,7 +478,7 @@
       }
     },
     "2025-01-03": {
-      "value": 3.4728,
+      "value": 3.4729,
       "extra": {
         "moving_time_s": 1059,
         "distance_m": 3472,
@@ -646,7 +654,7 @@
       }
     },
     "2025-07-12": {
-      "value": 8.1038,
+      "value": 8.1039,
       "extra": {
         "moving_time_s": 2619,
         "distance_m": 8103,
@@ -766,7 +774,7 @@
       }
     },
     "2025-08-11": {
-      "value": 8.0826,
+      "value": 8.0827,
       "extra": {
         "moving_time_s": 2658,
         "distance_m": 8082,
@@ -1006,7 +1014,7 @@
       }
     },
     "2025-10-20": {
-      "value": 5.8864,
+      "value": 5.8865,
       "extra": {
         "moving_time_s": 1909,
         "distance_m": 5886,
@@ -1070,7 +1078,7 @@
       }
     },
     "2025-11-11": {
-      "value": 5.9201,
+      "value": 5.9202,
       "extra": {
         "moving_time_s": 1829,
         "distance_m": 5920,
@@ -1118,7 +1126,7 @@
       }
     },
     "2025-12-08": {
-      "value": 5.7637,
+      "value": 5.7638,
       "extra": {
         "moving_time_s": 1914,
         "distance_m": 5763,
@@ -1129,7 +1137,7 @@
       "value": 5.521,
       "extra": {
         "moving_time_s": 1882,
-        "distance_m": 5520,
+        "distance_m": 5521,
         "count": 1
       }
     },
@@ -1270,7 +1278,7 @@
       }
     },
     "2026-02-02": {
-      "value": 5.9966,
+      "value": 5.9967,
       "extra": {
         "moving_time_s": 2114,
         "distance_m": 5996,
@@ -1414,7 +1422,7 @@
       }
     },
     "2026-04-07": {
-      "value": 8.0748,
+      "value": 8.0749,
       "extra": {
         "moving_time_s": 2668,
         "distance_m": 8074,
@@ -1470,7 +1478,7 @@
       }
     },
     "2026-04-25": {
-      "value": 3.6374,
+      "value": 3.6375,
       "extra": {
         "moving_time_s": 1137,
         "distance_m": 3637,
@@ -1518,7 +1526,7 @@
       }
     },
     "2026-05-17": {
-      "value": 5.8101,
+      "value": 5.8102,
       "extra": {
         "moving_time_s": 1877,
         "distance_m": 5810,
@@ -1625,7 +1633,7 @@
       "value": 3.774,
       "extra": {
         "moving_time_s": 1278,
-        "distance_m": 3773,
+        "distance_m": 3774,
         "count": 1
       }
     },
@@ -1665,7 +1673,7 @@
       "value": 6.002,
       "extra": {
         "moving_time_s": 1975,
-        "distance_m": 6001,
+        "distance_m": 6002,
         "count": 1
       }
     },
@@ -1798,7 +1806,7 @@
       }
     },
     "2026-08-19": {
-      "value": 5.6822,
+      "value": 5.6823,
       "extra": {
         "moving_time_s": 1847,
         "distance_m": 5682,
