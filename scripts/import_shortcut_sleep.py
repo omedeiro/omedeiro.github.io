@@ -69,6 +69,23 @@ def parse_stamp(raw: str) -> dt.datetime | None:
     return None
 
 
+# Substrings marking a sample as time in bed rather than asleep. Checked
+# before the asleep markers because "AsleepUnspecified" and "InBed" can both
+# appear in a single export and only one of them is sleep.
+NOT_ASLEEP = ("inbed", "in bed", "awake")
+ASLEEP = ("asleep", "core", "deep", "rem")
+
+
+def is_asleep(category: str) -> bool:
+    """Whether a sample category counts as sleep. Unlabelled spans are kept."""
+    tag = category.strip().lower().replace("hkcategoryvaluesleepanalysis", "")
+    if not tag:
+        return True
+    if any(m in tag for m in NOT_ASLEEP):
+        return False
+    return any(m in tag for m in ASLEEP)
+
+
 def parse_line(line: str) -> tuple[str, object] | None:
     """Classify one line as a span or a finished night, or reject it."""
     line = line.strip().lstrip("﻿")
@@ -92,6 +109,9 @@ def parse_line(line: str) -> tuple[str, object] | None:
             return ("night", (parts[0], hours))
         return None
 
+    if len(parts) > 2 and not is_asleep(parts[2]):
+        return ("skip", None)
+
     start, end = parse_stamp(parts[0]), parse_stamp(parts[1])
     if start is None or end is None or end <= start:
         return None
@@ -114,7 +134,7 @@ def read_drop(drop_dir: str) -> tuple[list[tuple[float, float]], dict[str, float
     if not files:
         return spans, nights
 
-    skipped = 0
+    skipped = in_bed = 0
     for path in files:
         try:
             with open(path, encoding="utf-8-sig", errors="replace") as fh:
@@ -130,6 +150,8 @@ def read_drop(drop_dir: str) -> tuple[list[tuple[float, float]], dict[str, float
             got = parse_line(line)
             if got is None:
                 skipped += 1 if line.strip() else 0
+            elif got[0] == "skip":
+                in_bed += 1
             elif got[0] == "span":
                 spans.append(got[1])
             else:
@@ -138,7 +160,9 @@ def read_drop(drop_dir: str) -> tuple[list[tuple[float, float]], dict[str, float
 
     hc.log(
         f"  {len(files)} file(s): {len(spans)} span(s), {len(nights)} "
-        f"pre-totalled night(s)" + (f", {skipped} line(s) unparsed" if skipped else "")
+        f"pre-totalled night(s)"
+        + (f", {in_bed} in-bed/awake dropped" if in_bed else "")
+        + (f", {skipped} line(s) unparsed" if skipped else "")
     )
     return spans, nights
 

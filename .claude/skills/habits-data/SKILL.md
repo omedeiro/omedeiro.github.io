@@ -115,6 +115,11 @@ Health therefore only arrives if something on the phone pushes it:
   `import_shortcut_sleep.py`
 - a full Health export, parsed by `import_health.py` (also backfills stretching)
 
+Apple files `InBed` and `Awake` under the same sleep type as the asleep stages. Counting
+them overstates a night — the same trap StandBy sets for screen time — so a tagged
+category is filtered by `is_asleep()`. An untagged span cannot be told apart from a real
+one, so the shortcut must send asleep samples only.
+
 **iCloud Drive is readable without Full Disk Access** — it lives at
 `~/Library/Mobile Documents/com~apple~CloudDocs/` and is not TCC-protected. That is what
 makes the Shortcut route work where a Health store never could.
