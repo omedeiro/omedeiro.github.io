@@ -70,6 +70,23 @@ def api_get(url: str, token: str, params: dict[str, str]) -> list[dict]:
         detail = exc.read().decode("utf-8", "replace")[:400]
         if exc.code == 429:
             raise SystemExit("Strava rate limit hit (200/15min). Try again shortly.") from exc
+        if exc.code == 401 and "activity:read_permission" in detail:
+            # The token refreshed fine but cannot read activities. Nearly always
+            # means the refresh token was copied off the Strava API settings
+            # page, which issues one scoped to `read` only.
+            raise SystemExit(
+                "Strava rejected the token for lacking activity:read permission.\n"
+                "\n"
+                "  The refresh token shown on strava.com/settings/api only carries the\n"
+                "  `read` scope, which cannot list activities. You need one from the\n"
+                "  OAuth flow:\n"
+                "\n"
+                "      python scripts/fetch_strava.py --auth\n"
+                "\n"
+                "  On Strava's authorization screen, leave the private-activity box\n"
+                "  ticked — unticking it drops the scope this needs. Then copy the new\n"
+                "  token out of scripts/.env into the STRAVA_REFRESH_TOKEN secret."
+            ) from exc
         raise SystemExit(f"Strava {exc.code} from {url}: {detail}") from exc
 
 

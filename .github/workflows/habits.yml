@@ -54,7 +54,9 @@ jobs:
           fi
 
       - name: Fetch Strava activities
+        id: strava
         if: steps.creds.outputs.strava == 'true'
+        continue-on-error: true
         env:
           STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
           STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
@@ -63,7 +65,7 @@ jobs:
         run: python scripts/fetch_strava.py
 
       - name: Persist rotated Strava refresh token
-        if: steps.creds.outputs.strava == 'true'
+        if: steps.creds.outputs.strava == 'true' && steps.strava.outcome == 'success'
         env:
           GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
           SINK: ${{ runner.temp }}/strava-refresh-token
@@ -83,7 +85,9 @@ jobs:
           echo "Rotated refresh token stored."
 
       - name: Fetch GitHub contributions
+        id: github
         if: steps.creds.outputs.github == 'true'
+        continue-on-error: true
         env:
           GH_CONTRIB_TOKEN: ${{ secrets.GH_CONTRIB_TOKEN }}
         run: python scripts/fetch_github.py
@@ -110,3 +114,12 @@ jobs:
 
           git commit -m "Refresh habit data"
           git push
+
+      # Runs last so a partial failure still commits what did work, but the run
+      # is still reported red rather than passing silently.
+      - name: Report source failures
+        if: steps.strava.outcome == 'failure' || steps.github.outcome == 'failure'
+        run: |
+          [ "${{ steps.strava.outcome }}" = "failure" ] && echo "::error::Strava refresh failed — see the 'Fetch Strava activities' step."
+          [ "${{ steps.github.outcome }}" = "failure" ] && echo "::error::GitHub refresh failed — see the 'Fetch GitHub contributions' step."
+          exit 1
