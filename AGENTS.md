@@ -66,7 +66,7 @@ three arrive by periodic local export.
 |---|---|---|
 | Running | `scripts/fetch_strava.py` | nightly, automatic |
 | Commits | `scripts/fetch_github.py` | nightly, automatic |
-| Screen time | `scripts/fetch_screentime.py` | manual, on the Mac |
+| Screen time | `scripts/fetch_screentime.py` | manual, on the Mac (Mac + iPhone) |
 | Stretching, Sleep | `scripts/import_health.py` | manual, after a Health export |
 
 Stretching is matched on the workout's **source name** (`Bend`), not its activity type,
@@ -78,6 +78,37 @@ Do not source stretching from Strava: its "Workout" activities are strength sess
 Stretching is counted in **sessions per day**, not minutes. Bend's own history screen
 does not show session length, so counting sessions lets days backfilled from that screen
 sit on the same scale as days measured through HealthKit, with nothing estimated.
+
+`fetch_screentime.py` records **Mac usage from `knowledgeC.db` and iPhone usage from
+Biome**. The iPhone half parses the `SEGB` segments under
+`~/Library/Biome/streams/restricted/App.InFocus/remote/<uuid>/` as protobuf records —
+a 32-byte file header, then `[4-byte CRC][4-byte state][protobuf][pad to 4]`. Records are
+located by scanning for the state marker, not by walking lengths: a payload ending on a
+4-byte boundary has no padding, so a length-walker runs into the next CRC and loses about
+80% of the records. The header's record count at offset 4 is a free check on the parse.
+
+Three things that are easy to get wrong here, all of which produced garbage before:
+
+- **`tombstone/` directories hold sync bookkeeping, not usage.** The old byte-scanning
+  version matched every path containing `InFocus`, so it was pairing deletion-record
+  timestamps into sessions. That is where the 2033 dates and 26-hour days came from.
+- **StandBy is not screen time.** The charging clock face is logged as an in-focus app and
+  is a third of the raw total; it single-handedly turned ordinary days into 10-hour ones.
+  See `AMBIENT`.
+- **A synced Apple Watch looks exactly like a synced iPhone** — both are `remote/<uuid>/`
+  and the UUID says nothing. `WATCH_MARKERS` separates them by bundle id.
+
+`implausible()` still gates every write, and intervals come only from explicit
+enter/leave pairs, so an unclosed session is dropped rather than guessed at.
+
+Screen Time's own cross-device store is **not** on the Mac — there is no
+`RMAdminStore-*.sqlite` and no ScreenTimeAgent container. Turning on "Share Across
+Devices" registers the phone in `knowledgeC.db`'s `ZSYNCPEER`, but no `/app/*` row is ever
+attributed to it; that view is assembled from CloudKit on demand. Don't go looking again.
+
+Note that Full Disk Access is granted **per application**. Granting it to Terminal does not
+give it to an agent running under another app — check what actually owns the shell before
+concluding the grant failed.
 
 `scripts/backfill_stretching.py` merges `scripts/bend-history.csv` — sessions transcribed
 by hand from Bend's Recent History — into the same habit file. Bend's Health connection
@@ -120,7 +151,8 @@ only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
    without it the job warns and you update `STRAVA_REFRESH_TOKEN` by hand.
 4. **Screen time** — grant Full Disk Access to your terminal in System Settings →
    Privacy & Security, restart it, then run `python scripts/fetch_screentime.py` every
-   week or two and commit the result.
+   week or two and commit the result. Both `knowledgeC.db` and Biome are pruned to
+   roughly four weeks, so running it less often than that loses days permanently.
 5. **Stretching and sleep** — make sure Bend is syncing to Apple Health (Bend →
    Settings → Apple Health). Then on iPhone: Health → profile → Export All Health
    Data, and `python scripts/import_health.py ~/Downloads/export.zip` and commit.
