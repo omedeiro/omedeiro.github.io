@@ -37,6 +37,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import os
+import re
 import sqlite3
 import struct
 import sys
@@ -172,6 +173,15 @@ def biome_files() -> list[str]:
     return found
 
 
+# Every timestamp we care about is an IEEE-754 double in [2^29, 2^30), because
+# TS_MIN and TS_MAX both sit inside that octave. That fixes the biased exponent
+# at 1052, so the top two bytes of the little-endian encoding are always
+# 0x41 followed by a high nibble of 0xC — i.e. bytes 6 and 7 match this pattern.
+# Prefiltering on it turns a per-byte unpack into a C-speed scan that only
+# unpacks genuine candidates.
+_DOUBLE_PREFIX = re.compile(rb"[\xc0-\xcf]\x41")
+
+
 def scan_timestamps(blob: bytes) -> list[float]:
     """Pull plausible Mac-epoch timestamps out of a binary stream segment.
 
@@ -179,9 +189,16 @@ def scan_timestamps(blob: bytes) -> list[float]:
     releases, so rather than assume a record layout this sweeps the bytes for
     little-endian doubles landing in a sane date range. Crude, but it degrades
     gracefully instead of breaking outright when the format shifts.
+
+    Candidates are found by byte pattern first — see _DOUBLE_PREFIX. Scanning
+    every offset instead means millions of Python-level unpacks per segment,
+    which took minutes across a real Biome directory.
     """
     stamps: list[float] = []
-    for offset in range(0, len(blob) - 8):
+    for match in _DOUBLE_PREFIX.finditer(blob):
+        offset = match.start() - 6  # the matched bytes are the double's top two
+        if offset < 0 or offset + 8 > len(blob):
+            continue
         (value,) = struct.unpack_from("<d", blob, offset)
         if TS_MIN < value < TS_MAX:
             stamps.append(value)
