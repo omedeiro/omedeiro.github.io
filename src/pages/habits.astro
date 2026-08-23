@@ -202,10 +202,10 @@ const updated = [running, stretching, screentime, commits, sleep]
     further into the past. Hover or tap a cell for that day's numbers.
   </p>
   <p class="caption">
-    Running and stretching come from Strava, commits from the GitHub
-    contributions API — those refresh nightly. Screen time is pulled off my Mac
-    and iPhone locally, and sleep from an Apple Health export, since Apple
-    offers no API for either.
+    Running comes from Strava and commits from the GitHub contributions API —
+    those refresh nightly. Screen time is pulled off my Mac and iPhone locally,
+    and stretching and sleep come from an Apple Health export, since neither
+    Apple nor the Bend app offers a web API.
     {updated && <> Last updated {String(updated).slice(0, 10)}.</>}
   </p>
 

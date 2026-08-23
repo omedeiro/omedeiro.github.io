@@ -3,9 +3,9 @@ name: Refresh habit data
 # Pulls the two habits that have real web APIs and commits the result, which
 # in turn triggers a Cloudflare Workers Build and deploy.
 #
-# Screen time and sleep are deliberately absent: both come off local Apple
-# data that no runner can reach. Run scripts/fetch_screentime.py and
-# scripts/import_health.py on the Mac and commit those separately.
+# Screen time, stretching, and sleep are deliberately absent: all three come
+# off local Apple data that no runner can reach. Run scripts/fetch_screentime.py
+# and scripts/import_health.py on the Mac and commit those separately.
 
 on:
   schedule:

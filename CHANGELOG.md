@@ -5,10 +5,10 @@
 ### Added
 
 - `/habits` page: five GitHub-style heatmaps (running, stretching, screen time, commits, sleep) as side-by-side vertical columns, newest week at the top, with a hover/tap tooltip showing that day's numbers and a summary table of totals and streaks
-- `scripts/fetch_strava.py` — OAuth fetch producing both the running and stretching habit files
+- `scripts/fetch_strava.py` — OAuth fetch for the running habit
 - `scripts/fetch_github.py` — contribution calendar via the GitHub GraphQL API
 - `scripts/fetch_screentime.py` — Mac and iPhone screen time from local `knowledgeC.db` and Biome data (Apple exposes no web API)
-- `scripts/import_health.py` — sleep from an Apple Health `export.zip`
+- `scripts/import_health.py` — stretching (from the Bend app) and sleep, in one pass over an Apple Health `export.zip`
 - `scripts/habits_common.py` — shared env parsing and merge-on-write habit file handling
 - `.github/workflows/habits.yml` — nightly refresh of the Strava and GitHub habits, committing to `main` to trigger a deploy
 

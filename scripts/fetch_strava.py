@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Fetch Strava activities and emit the running + stretching habit files.
+"""Fetch Strava activities and emit the running habit file.
 
-One pass over the activity list produces two habits, because both come from
-the same account and the same OAuth token:
+Produces ``running.json`` — kilometres per day from Run / TrailRun /
+VirtualRun activities.
 
-* ``running.json``    — kilometres per day from Run / TrailRun / VirtualRun
-* ``stretching.json`` — minutes per day from Yoga / Workout / Crosstraining
+Stretching deliberately does *not* come from here. Strava's "Workout" entries
+are strength sessions, not stretching; the stretching habit is sourced from
+the Bend app via ``import_health.py`` instead.
 
 Usage:
     python scripts/fetch_strava.py --auth      # one-time: authorize the app
@@ -44,7 +45,6 @@ REDIRECT_URI = "http://localhost/exchange_token"
 SCOPE = "activity:read_all"
 
 RUN_TYPES = {"Run", "TrailRun", "VirtualRun"}
-STRETCH_TYPES = {"Yoga", "Workout", "Crosstraining"}
 
 PER_PAGE = 200
 
@@ -175,7 +175,7 @@ def activity_day(act: dict) -> str:
     return stamp[:10]
 
 
-def build_days(acts: list[dict], types: set[str], metric: str) -> dict[str, dict]:
+def build_days(acts: list[dict], types: set[str]) -> dict[str, dict]:
     """Aggregate matching activities into per-day habit records."""
     buckets: dict[str, dict[str, float]] = {}
     for act in acts:
@@ -191,12 +191,8 @@ def build_days(acts: list[dict], types: set[str], metric: str) -> dict[str, dict
 
     days: dict[str, dict] = {}
     for key, acc in buckets.items():
-        if metric == "km":
-            value = acc["distance_m"] / 1000.0
-        else:
-            value = acc["moving_time_s"] / 60.0
         days[key] = hc.day(
-            value,
+            acc["distance_m"] / 1000.0,
             moving_time_s=int(acc["moving_time_s"]),
             distance_m=int(acc["distance_m"]),
             count=int(acc["count"]),
@@ -212,7 +208,6 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--out-dir", default=hc.DATA_DIR, help="habit JSON directory")
     ap.add_argument("--no-merge", action="store_true", help="rebuild the files instead of merging")
     ap.add_argument("--run-types", default=",".join(sorted(RUN_TYPES)))
-    ap.add_argument("--stretch-types", default=",".join(sorted(STRETCH_TYPES)))
     args = ap.parse_args(argv)
 
     if args.auth:
@@ -224,19 +219,11 @@ def main(argv: list[str]) -> int:
     acts = fetch_activities(access_token(), after, args.limit)
     hc.log(f"fetched {len(acts)} activities")
 
-    merge = not args.no_merge
     run_types = {t.strip() for t in args.run_types.split(",") if t.strip()}
-    stretch_types = {t.strip() for t in args.stretch_types.split(",") if t.strip()}
-
     hc.write_habit(
         "running", "Running", "Strava", "km",
-        build_days(acts, run_types, "km"),
-        merge=merge, data_dir=args.out_dir,
-    )
-    hc.write_habit(
-        "stretching", "Stretching", "Strava", "min",
-        build_days(acts, stretch_types, "min"),
-        merge=merge, data_dir=args.out_dir,
+        build_days(acts, run_types),
+        merge=not args.no_merge, data_dir=args.out_dir,
     )
     return 0
 

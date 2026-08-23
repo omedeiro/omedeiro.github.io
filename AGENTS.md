@@ -59,14 +59,21 @@ each habit against **its own** quartiles, so unlike metrics share one five-step 
 
 Only two sources have web APIs. Apple has none for either Screen Time or Health —
 `DeviceActivity` is sandboxed so usage data never leaves the device, and HealthKit is
-on-device only — so those two arrive by periodic local export.
+on-device only — and neither does the Bend app, which syncs into Apple Health. Those
+three arrive by periodic local export.
 
 | Habit | Script | Refresh |
 |---|---|---|
-| Running, Stretching | `scripts/fetch_strava.py` | nightly, automatic |
+| Running | `scripts/fetch_strava.py` | nightly, automatic |
 | Commits | `scripts/fetch_github.py` | nightly, automatic |
 | Screen time | `scripts/fetch_screentime.py` | manual, on the Mac |
-| Sleep | `scripts/import_health.py` | manual, after a Health export |
+| Stretching, Sleep | `scripts/import_health.py` | manual, after a Health export |
+
+Stretching is matched on the workout's **source name** (`Bend`), not its activity type,
+because Bend has filed sessions as Flexibility, Yoga, and Mind & Body across versions.
+`import_health.py --list-sources` prints what an export actually contains.
+
+Do not source stretching from Strava: its "Workout" activities are strength sessions.
 
 All scripts are standard-library only (no pip install) and **merge** into the existing
 JSON rather than overwriting it. That is load-bearing for screen time: macOS prunes
@@ -92,8 +99,10 @@ only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
 4. **Screen time** — grant Full Disk Access to your terminal in System Settings →
    Privacy & Security, restart it, then run `python scripts/fetch_screentime.py` every
    week or two and commit the result.
-5. **Sleep** — on iPhone: Health → profile → Export All Health Data, then
-   `python scripts/import_health.py ~/Downloads/export.zip` and commit.
+5. **Stretching and sleep** — make sure Bend is syncing to Apple Health (Bend →
+   Settings → Apple Health). Then on iPhone: Health → profile → Export All Health
+   Data, and `python scripts/import_health.py ~/Downloads/export.zip` and commit.
+   One pass fills in both habits.
 
 ## Publications
 
