@@ -76,6 +76,10 @@ because Bend has filed sessions as Flexibility, Yoga, and Mind & Body across ver
 
 Do not source stretching from Strava: its "Workout" activities are strength sessions.
 
+`docs/habits-pipeline.md` reviews these pipelines end to end — the shared JSON contract,
+what each source can and cannot provide, known risks, and what is worth doing next. This
+section stays the operational detail.
+
 Stretching is counted in **sessions per day**, not minutes. Bend's own history screen
 does not show session length, so counting sessions lets days backfilled from that screen
 sit on the same scale as days measured through HealthKit, with nothing estimated.
