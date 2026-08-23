@@ -30,3 +30,4 @@ npx wrangler deploy
 - `src/layouts/` — `Base.astro` (shell + all CSS), `Md.astro` (markdown wrapper)
 - `public/` — images, PDFs, and downloadable files
 - `references.bib`, `scripts/` — bibliography sources for the publications list
+- `docs/habits-pipeline.md` — how `/habits` collects its data, and what is fragile about it
