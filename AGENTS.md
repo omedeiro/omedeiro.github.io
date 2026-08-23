@@ -38,6 +38,7 @@ Deploys run automatically via Cloudflare Workers Builds on push to `main` (build
 
 - Match darioamodei.com aesthetic: single ~42rem column, serif body, small sans-serif nav, no cards/grids/sidebars, no client-side JS.
 - All styling lives in `Base.astro`; do not add per-page CSS files.
+- **`/habits` is the sole exception**, deliberately and narrowly: it passes `wide` to `Base` for a 52rem column (five heatmaps do not fit in 42rem) and carries an `is:inline` script for the heatmap tooltip. Every other page stays 42rem and JS-free. Do not generalise either exception without asking.
 - LaTeX math works in markdown via `$...$` / `$$...$$` (KaTeX CSS loaded from CDN).
 
 ## Content guidelines
@@ -49,6 +50,50 @@ Deploys run automatically via Cloudflare Workers Builds on push to `main` (build
 - If personal content is needed, ask the user
 
 **Prefer concise technical content:** direct statements, specific tech details, real implementation notes.
+
+## Habits
+
+`/habits` renders five heatmaps from one JSON file per habit in `src/data/habits/`,
+all sharing the same shape (`days: {"YYYY-MM-DD": {value, extra?}}`). The page buckets
+each habit against **its own** quartiles, so unlike metrics share one five-step ramp.
+
+Only two sources have web APIs. Apple has none for either Screen Time or Health —
+`DeviceActivity` is sandboxed so usage data never leaves the device, and HealthKit is
+on-device only — so those two arrive by periodic local export.
+
+| Habit | Script | Refresh |
+|---|---|---|
+| Running, Stretching | `scripts/fetch_strava.py` | nightly, automatic |
+| Commits | `scripts/fetch_github.py` | nightly, automatic |
+| Screen time | `scripts/fetch_screentime.py` | manual, on the Mac |
+| Sleep | `scripts/import_health.py` | manual, after a Health export |
+
+All scripts are standard-library only (no pip install) and **merge** into the existing
+JSON rather than overwriting it. That is load-bearing for screen time: macOS prunes
+`knowledgeC.db` to roughly four weeks, so an overwriting write would destroy history.
+
+`.github/workflows/habits.yml` runs the two API scripts nightly and commits
+`src/data/habits/` straight to `main`, which triggers the usual Cloudflare deploy. This
+is a deliberate, path-scoped exception to the never-commit-to-`main` rule below — it
+applies to automated data commits only, never to code. The job skips the commit when
+only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
+
+### One-time setup
+
+1. **Strava** — create an app at <https://www.strava.com/settings/api>, then
+   `python scripts/fetch_strava.py --auth` and follow the prompts. Tokens land in
+   `scripts/.env` (gitignored).
+2. **GitHub** — create a classic PAT with `read:user`. For private contributions also
+   add `repo` and enable Settings → Profile → "Include private contributions".
+3. **Repository secrets** — add `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`,
+   `STRAVA_REFRESH_TOKEN`, and `GH_CONTRIB_TOKEN`. Optionally add `GH_ADMIN_TOKEN`
+   (a PAT with `secrets:write`) so the workflow can store rotated Strava tokens itself;
+   without it the job warns and you update `STRAVA_REFRESH_TOKEN` by hand.
+4. **Screen time** — grant Full Disk Access to your terminal in System Settings →
+   Privacy & Security, restart it, then run `python scripts/fetch_screentime.py` every
+   week or two and commit the result.
+5. **Sleep** — on iPhone: Health → profile → Export All Health Data, then
+   `python scripts/import_health.py ~/Downloads/export.zip` and commit.
 
 ## Publications
 

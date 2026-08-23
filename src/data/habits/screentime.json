@@ -1,0 +1,8 @@
+{
+  "id": "screentime",
+  "label": "Screen time",
+  "source": "macOS + iPhone",
+  "unit": "h",
+  "updated_at": null,
+  "days": {}
+}

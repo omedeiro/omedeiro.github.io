@@ -1,0 +1,347 @@
+---
+import Base from "../layouts/Base.astro";
+import running from "../data/habits/running.json";
+import stretching from "../data/habits/stretching.json";
+import screentime from "../data/habits/screentime.json";
+import commits from "../data/habits/commits.json";
+import sleep from "../data/habits/sleep.json";
+
+// Geometry. One SVG holds the month gutter and every habit block so the rows
+// stay locked together in a single scroll container.
+const WEEKS = 104;
+const CELL = 11;
+const GAP = 3;
+const PITCH = CELL + GAP;
+const BLOCK_W = 7 * CELL + 6 * GAP;
+const BLOCK_GAP = 26;
+const GUTTER = 46;
+const HEAD_H = 34;
+
+type Day = { value: number; extra?: Record<string, number> };
+type Habit = { label: string; source: string; unit: string; days: Record<string, Day> };
+
+const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** Format a fractional hour count as `6h 50m`. */
+const hm = (hours: number) => {
+  const mins = Math.round(hours * 60);
+  return `${Math.floor(mins / 60)}h ${String(mins % 60).padStart(2, "0")}m`;
+};
+
+const HABITS = [
+  {
+    data: running as Habit,
+    caption: "darker = further",
+    empty: "no run",
+    format: (d: Day) => {
+      const km = `${d.value.toFixed(1)} km`;
+      const secs = d.extra?.moving_time_s;
+      return secs ? `${km} · ${Math.round(secs / 60)} min` : km;
+    },
+    summary: (total: number) => `${total.toFixed(0)} km total`,
+  },
+  {
+    data: stretching as Habit,
+    caption: "darker = longer",
+    empty: "none",
+    format: (d: Day) => `${Math.round(d.value)} min`,
+    summary: (total: number) => `${hm(total / 60)} total`,
+  },
+  {
+    data: screentime as Habit,
+    caption: "darker = more",
+    empty: "none logged",
+    format: (d: Day) => {
+      const parts = [hm(d.value)];
+      if (d.extra && (d.extra.mac_h || d.extra.iphone_h)) {
+        parts.push(`Mac ${hm(d.extra.mac_h || 0)}`, `iPhone ${hm(d.extra.iphone_h || 0)}`);
+      }
+      return parts.join(" · ");
+    },
+    summary: (total: number, active: number) => `${hm(total / Math.max(active, 1))} a day`,
+  },
+  {
+    data: commits as Habit,
+    caption: "darker = more",
+    empty: "none",
+    format: (d: Day) => `${d.value} commit${d.value === 1 ? "" : "s"}`,
+    summary: (total: number) => `${total.toFixed(0)} total`,
+  },
+  {
+    data: sleep as Habit,
+    caption: "darker = longer",
+    empty: "not recorded",
+    format: (d: Day) => hm(d.value),
+    summary: (total: number, active: number) => `${hm(total / Math.max(active, 1))} a night`,
+  },
+];
+
+/** Local `YYYY-MM-DD`; `toISOString` would shift the date across UTC midnight. */
+const dayKey = (d: Date) =>
+  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+/**
+ * Quartile cut points over the habit's non-zero days.
+ *
+ * Bucketing per habit rather than globally is what lets one column read a
+ * 10 km run and another a 7-hour night on the same five-step ramp.
+ */
+function thresholds(days: Record<string, Day>): number[] | null {
+  const values = Object.values(days).map((d) => d.value).filter((v) => v > 0).sort((a, b) => a - b);
+  if (!values.length) return null;
+  const at = (p: number) => values[Math.min(values.length - 1, Math.floor(p * values.length))];
+  return [at(0.25), at(0.5), at(0.75)];
+}
+
+function level(value: number, cuts: number[] | null): number {
+  if (!value || !cuts) return 0;
+  if (value <= cuts[0]) return 1;
+  if (value <= cuts[1]) return 2;
+  if (value <= cuts[2]) return 3;
+  return 4;
+}
+
+const LEVEL_OPACITY = [0, 0.22, 0.44, 0.68, 1];
+
+/** Consecutive-day streaks, walking the calendar from first record to today. */
+function streaks(days: Record<string, Day>, today: Date) {
+  const active = new Set(Object.keys(days).filter((k) => days[k].value > 0));
+  if (!active.size) return { current: 0, longest: 0 };
+
+  const first = new Date([...active].sort()[0] + "T00:00:00");
+  let longest = 0;
+  let run = 0;
+  for (const cursor = new Date(first); cursor <= today; cursor.setDate(cursor.getDate() + 1)) {
+    run = active.has(dayKey(cursor)) ? run + 1 : 0;
+    longest = Math.max(longest, run);
+  }
+
+  // Today may simply not have synced yet, so a streak ending yesterday still counts.
+  let current = 0;
+  const cursor = new Date(today);
+  if (!active.has(dayKey(cursor))) cursor.setDate(cursor.getDate() - 1);
+  while (active.has(dayKey(cursor))) {
+    current += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return { current, longest };
+}
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+// Row 0 is the current week, so scrolling down walks backwards through time.
+const mondayOffset = (today.getDay() + 6) % 7;
+const weekStart = new Date(today);
+weekStart.setDate(today.getDate() - mondayOffset);
+
+const rows = Array.from({ length: WEEKS }, (_, week) => {
+  const cells = Array.from({ length: 7 }, (_, weekday) => {
+    const date = new Date(weekStart);
+    date.setDate(weekStart.getDate() - week * 7 + weekday);
+    return {
+      key: dayKey(date),
+      future: date > today,
+      label: `${DAY_NAMES[date.getDay()]} ${date.getDate()} ${MONTHS[date.getMonth()]} ${date.getFullYear()}`,
+      startsMonth: date.getDate() === 1,
+      month: date.getMonth(),
+      year: date.getFullYear(),
+    };
+  });
+  // A week is labelled by whichever day in it opens a new month.
+  const opener = cells.find((c) => c.startsMonth);
+  return {
+    y: HEAD_H + week * PITCH,
+    cells,
+    monthLabel: opener ? (opener.month === 0 ? `${MONTHS[0]} ${String(opener.year).slice(2)}` : MONTHS[opener.month]) : null,
+  };
+});
+
+const columns = HABITS.map((habit, index) => {
+  const days = habit.data.days || {};
+  const cuts = thresholds(days);
+  const values = Object.values(days).map((d) => d.value).filter((v) => v > 0);
+  const total = values.reduce((a, b) => a + b, 0);
+  const { current, longest } = streaks(days, today);
+
+  return {
+    x: GUTTER + index * (BLOCK_W + BLOCK_GAP),
+    label: habit.data.label,
+    source: habit.data.source,
+    caption: habit.caption,
+    hasData: values.length > 0,
+    cuts,
+    days,
+    format: habit.format,
+    empty: habit.empty,
+    stats: {
+      summary: values.length ? habit.summary(total, values.length) : "—",
+      active: values.length,
+      current,
+      longest,
+    },
+  };
+});
+
+const width = GUTTER + columns.length * BLOCK_W + (columns.length - 1) * BLOCK_GAP;
+const height = HEAD_H + WEEKS * PITCH;
+const anyData = columns.some((c) => c.hasData);
+const updated = [running, stretching, screentime, commits, sleep]
+  .map((h) => h.updated_at)
+  .filter(Boolean)
+  .sort()
+  .pop();
+---
+
+<Base title="Habits — Owen Medeiros" description="Daily habit tracking: running, stretching, screen time, commits, and sleep." wide>
+  <h1>Habits</h1>
+  <p>
+    Five things I track, two years deep. Each block is one habit; the seven
+    cells across a row are Monday through Sunday, and each row down is a week
+    further into the past. Hover or tap a cell for that day's numbers.
+  </p>
+  <p class="caption">
+    Running and stretching come from Strava, commits from the GitHub
+    contributions API — those refresh nightly. Screen time is pulled off my Mac
+    and iPhone locally, and sleep from an Apple Health export, since Apple
+    offers no API for either.
+    {updated && <> Last updated {String(updated).slice(0, 10)}.</>}
+  </p>
+
+  {!anyData && (
+    <p class="caption habits-empty">
+      No data yet — run the fetch scripts in <code>scripts/</code> to populate
+      <code>src/data/habits/</code>.
+    </p>
+  )}
+
+  <div class="habits-chart">
+    <div class="habits-scroll">
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img"
+           aria-label="Heatmaps of running, stretching, screen time, commits, and sleep over the past two years">
+        {columns.map((column) => (
+          <g>
+            <text class="habits-name" x={column.x} y={12}>{column.label}</text>
+            <text class="habits-note" x={column.x} y={24}>
+              {column.hasData ? column.caption : "no data yet"}
+            </text>
+          </g>
+        ))}
+
+        {rows.map((row) => (
+          <g>
+            {row.monthLabel && (
+              <text class="habits-month" x={GUTTER - 12} y={row.y + CELL - 1}>{row.monthLabel}</text>
+            )}
+            {columns.map((column) =>
+              row.cells.map((cell, weekday) => {
+                if (cell.future) return null;
+                const record = column.days[cell.key];
+                const step = level(record?.value ?? 0, column.cuts);
+                const detail = record && record.value > 0 ? column.format(record) : column.empty;
+                return (
+                  <rect
+                    class="habits-cell"
+                    x={column.x + weekday * PITCH}
+                    y={row.y}
+                    width={CELL}
+                    height={CELL}
+                    rx="2"
+                    fill={step === 0 ? "var(--border)" : "var(--accent)"}
+                    fill-opacity={step === 0 ? 1 : LEVEL_OPACITY[step]}
+                    data-tip={`${cell.label}|${column.label} — ${detail}`}
+                  />
+                );
+              })
+            )}
+          </g>
+        ))}
+      </svg>
+    </div>
+    <div class="habits-tip" hidden></div>
+  </div>
+
+  <p class="habits-legend caption">
+    <span class="habits-ramp">
+      Less
+      <span class="habits-swatch" style="background: var(--border)"></span>
+      <span class="habits-swatch" style="background: var(--accent); opacity: 0.22"></span>
+      <span class="habits-swatch" style="background: var(--accent); opacity: 0.44"></span>
+      <span class="habits-swatch" style="background: var(--accent); opacity: 0.68"></span>
+      <span class="habits-swatch" style="background: var(--accent)"></span>
+      More
+    </span>
+    <span>Shading is relative to each habit's own quartiles.</span>
+  </p>
+
+  <h2>Summary</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Habit</th><th>Source</th><th>Amount</th><th>Days</th><th>Streak</th><th>Best</th>
+      </tr>
+    </thead>
+    <tbody>
+      {columns.map((column) => (
+        <tr>
+          <td>{column.label}</td>
+          <td class="habits-source">{column.source}</td>
+          <td>{column.stats.summary}</td>
+          <td>{column.stats.active || "—"}</td>
+          <td>{column.stats.current || "—"}</td>
+          <td>{column.stats.longest || "—"}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</Base>
+
+<script is:inline>
+  // The only client-side JS on the site. Each cell carries its own preformatted
+  // tooltip text, so this just positions a box — no formatting logic here.
+  (function () {
+    const chart = document.querySelector(".habits-chart");
+    if (!chart) return;
+    const tip = chart.querySelector(".habits-tip");
+
+    function show(cell) {
+      const raw = cell.getAttribute("data-tip") || "";
+      const [when, what] = raw.split("|");
+      tip.innerHTML = "";
+      const head = document.createElement("b");
+      head.textContent = when;
+      tip.append(head, document.createTextNode(what || ""));
+      tip.hidden = false;
+
+      const box = cell.getBoundingClientRect();
+      const frame = chart.getBoundingClientRect();
+
+      // Clamp against the tooltip's real width so the long screen-time
+      // breakdown can't run off either edge of the chart.
+      const half = tip.offsetWidth / 2;
+      const left = box.left - frame.left + box.width / 2;
+      tip.style.left = Math.min(Math.max(left, half), frame.width - half) + "px";
+
+      // Sits above the cell, but flips below for the top rows so it doesn't
+      // cover the column headings.
+      const above = box.top - frame.top - 6;
+      const flip = above - tip.offsetHeight < 0;
+      tip.style.top = (flip ? box.bottom - frame.top + 6 : above) + "px";
+      tip.style.transform = flip ? "translate(-50%, 0)" : "translate(-50%, -100%)";
+    }
+
+    function hide() {
+      tip.hidden = true;
+    }
+
+    chart.addEventListener("pointerover", (e) => {
+      if (e.target.classList.contains("habits-cell")) show(e.target);
+    });
+    chart.addEventListener("pointerdown", (e) => {
+      if (e.target.classList.contains("habits-cell")) show(e.target);
+    });
+    chart.addEventListener("pointerleave", hide);
+    window.addEventListener("scroll", hide, { passive: true });
+  })();
+</script>

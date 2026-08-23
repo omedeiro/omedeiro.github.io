@@ -82,3 +82,6 @@ _build/
 
 # Astro
 .astro/
+
+# Habit fetch credentials (Strava / GitHub tokens)
+scripts/.env

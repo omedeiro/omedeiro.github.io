@@ -1,0 +1,88 @@
+name: Refresh habit data
+
+# Pulls the two habits that have real web APIs and commits the result, which
+# in turn triggers a Cloudflare Workers Build and deploy.
+#
+# Screen time and sleep are deliberately absent: both come off local Apple
+# data that no runner can reach. Run scripts/fetch_screentime.py and
+# scripts/import_health.py on the Mac and commit those separately.
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # 02:00 America/New_York (03:00 during standard time)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: habits-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # No pip install: the fetch scripts deliberately use only the standard
+      # library so this job stays fast and can't break on a dependency release.
+
+      - name: Fetch Strava activities
+        env:
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+          STRAVA_TOKEN_SINK: ${{ runner.temp }}/strava-refresh-token
+        run: python scripts/fetch_strava.py
+
+      - name: Persist rotated Strava refresh token
+        env:
+          GH_TOKEN: ${{ secrets.GH_ADMIN_TOKEN }}
+          SINK: ${{ runner.temp }}/strava-refresh-token
+        run: |
+          # Strava may hand back a new refresh token; without writing it back
+          # to the secret store, tomorrow's run fails with an invalid grant.
+          if [ ! -s "$SINK" ]; then
+            echo "Refresh token unchanged."
+            exit 0
+          fi
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::Strava rotated its refresh token, but GH_ADMIN_TOKEN is not configured. Update the STRAVA_REFRESH_TOKEN secret by hand or the next run will fail."
+            exit 0
+          fi
+          gh secret set STRAVA_REFRESH_TOKEN --body "$(cat "$SINK")"
+          rm -f "$SINK"
+          echo "Rotated refresh token stored."
+
+      - name: Fetch GitHub contributions
+        env:
+          GH_CONTRIB_TOKEN: ${{ secrets.GH_CONTRIB_TOKEN }}
+        run: python scripts/fetch_github.py
+
+      - name: Commit changed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A src/data/habits
+
+          # Every run rewrites `updated_at`, so a naive diff check would commit
+          # (and redeploy the site) nightly even when nothing happened. Only
+          # commit when an actual day changed.
+          REAL_CHANGES=$(git diff --cached -U0 -- src/data/habits \
+            | grep -E '^[+-]' \
+            | grep -vE '^(\+\+\+|---)' \
+            | grep -v '"updated_at"' || true)
+
+          if [ -z "$REAL_CHANGES" ]; then
+            echo "No new activity; skipping commit."
+            git reset
+            exit 0
+          fi
+
+          git commit -m "Refresh habit data"
+          git push
