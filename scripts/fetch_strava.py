@@ -26,12 +26,15 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import http.server
 import json
 import os
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import webbrowser
 
 import habits_common as hc
 
@@ -39,10 +42,21 @@ TOKEN_URL = "https://www.strava.com/oauth/token"
 AUTH_URL = "https://www.strava.com/oauth/authorize"
 ACTIVITIES_URL = "https://www.strava.com/api/v3/athlete/activities"
 
-# Strava's OAuth requires a redirect target but never needs it to resolve —
-# the code is read out of the address bar and pasted back in.
-REDIRECT_URI = "http://localhost/exchange_token"
+# The authorization code comes back as a query parameter on this URL, so
+# --auth briefly serves it locally and reads the code directly. Relying on the
+# browser to display an unreachable URL does not work: Safari and Chrome both
+# replace a failed navigation with a search page, discarding the code.
+#
+# The port is arbitrary but must be free and above 1024 (binding 80 needs
+# root). Strava validates only the host of the redirect, so the Authorization
+# Callback Domain stays plain `localhost` regardless of the port.
+CALLBACK_PORT = 8721
+REDIRECT_URI = f"http://localhost:{CALLBACK_PORT}/exchange_token"
 SCOPE = "activity:read_all"
+
+# Without this scope the token can refresh but not list activities, which
+# surfaces later as a confusing 401.
+REQUIRED_SCOPE = "activity:read"
 
 RUN_TYPES = {"Run", "TrailRun", "VirtualRun"}
 
@@ -90,7 +104,61 @@ def api_get(url: str, token: str, params: dict[str, str]) -> list[dict]:
         raise SystemExit(f"Strava {exc.code} from {url}: {detail}") from exc
 
 
-def interactive_auth() -> None:
+class _CallbackHandler(http.server.BaseHTTPRequestHandler):
+    """Catches Strava's one redirect back and stashes the query parameters."""
+
+    params: dict[str, list[str]] = {}
+
+    def do_GET(self) -> None:
+        query = urllib.parse.urlparse(self.path).query
+        found = urllib.parse.parse_qs(query)
+        # Browsers also request /favicon.ico; only the redirect carries these.
+        if "code" in found or "error" in found:
+            _CallbackHandler.params = found
+        ok = "code" in found
+        body = (
+            "<h2>Authorized.</h2><p>You can close this tab and return to the terminal.</p>"
+            if ok else
+            "<h2>Authorization failed.</h2><p>Check the terminal for details.</p>"
+        ).encode()
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def log_message(self, *args) -> None:
+        pass  # keep the server silent; the script does its own reporting
+
+
+def await_callback(timeout: int = 300) -> dict[str, list[str]]:
+    """Serve on the callback port until Strava redirects back."""
+    _CallbackHandler.params = {}
+    try:
+        server = http.server.HTTPServer(("127.0.0.1", CALLBACK_PORT), _CallbackHandler)
+    except OSError as exc:
+        raise SystemExit(
+            f"could not listen on port {CALLBACK_PORT} ({exc}).\n"
+            f"  Something else is using it. Free the port and retry, or use\n"
+            f"  --manual to paste the code by hand."
+        ) from exc
+
+    # Keep serving until the redirect lands or the overall deadline passes.
+    # A single handle_request() is not enough: browsers fetch /favicon.ico
+    # alongside the page, and that request would otherwise consume the one
+    # served request and end the wait before Strava's redirect arrives.
+    deadline = time.monotonic() + timeout
+    with server:
+        while not _CallbackHandler.params:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                break
+            server.timeout = remaining
+            server.handle_request()
+    return _CallbackHandler.params
+
+
+def interactive_auth(manual: bool = False) -> None:
     """Walk the one-time authorization-code exchange and save the tokens."""
     client_id = hc.env("STRAVA_CLIENT_ID")
     client_secret = hc.env("STRAVA_CLIENT_SECRET")
@@ -98,16 +166,61 @@ def interactive_auth() -> None:
         "client_id": client_id,
         "redirect_uri": REDIRECT_URI,
         "response_type": "code",
-        "approval_prompt": "auto",
+        # `force` so re-running always re-prompts; with `auto` Strava silently
+        # reuses a previous grant, which would quietly keep a narrower scope.
+        "approval_prompt": "force",
         "scope": SCOPE,
     })
-    print("1. Open this URL and authorize the app:\n")
-    print(f"   {AUTH_URL}?{query}\n")
-    print("2. The browser will fail to load localhost — that is expected.")
-    print("   Copy the `code=...` value out of the address bar.\n")
-    code = input("Paste the code here: ").strip()
-    if not code:
-        raise SystemExit("no code supplied")
+    url = f"{AUTH_URL}?{query}"
+
+    print("\nAuthorize this app with Strava:\n")
+    print(f"   {url}\n")
+    print("On Strava's screen, leave every box ticked — including")
+    print("\"View data about your private activities\". Unticking that box is")
+    print("what produces an activity:read_permission error later.\n")
+    print("If Strava shows an error instead of its authorization screen, the")
+    print("Authorization Callback Domain on strava.com/settings/api is not set")
+    print(f"to exactly: localhost\n")
+
+    if manual:
+        print("Paste the whole URL you land on (or just the code):\n")
+        raw = input("> ").strip()
+        if not raw:
+            raise SystemExit("nothing supplied")
+        code = raw
+        if "code=" in raw:
+            code = urllib.parse.parse_qs(urllib.parse.urlparse(raw).query).get("code", [""])[0]
+        if not code:
+            raise SystemExit(f"no code found in: {raw[:120]}")
+        granted = ""
+    else:
+        try:
+            webbrowser.open(url)
+        except Exception:
+            pass  # the URL is printed above; opening it is a convenience
+        print(f"Waiting for Strava to redirect back to port {CALLBACK_PORT}...")
+        params = await_callback()
+        if not params:
+            raise SystemExit(
+                "timed out waiting for the redirect.\n"
+                "  If you did authorize, your browser may have blocked the\n"
+                "  localhost callback — rerun with --manual and paste the URL."
+            )
+        if "error" in params:
+            raise SystemExit(
+                f"Strava returned an error: {params['error'][0]}.\n"
+                "  `access_denied` means the authorization was declined or a\n"
+                "  permission box was unticked. Rerun and accept all of them."
+            )
+        code = params["code"][0]
+        granted = ",".join(params.get("scope", []))
+        print(f"Received authorization code. Granted scope: {granted or 'unreported'}")
+
+    if granted and REQUIRED_SCOPE not in granted:
+        raise SystemExit(
+            f"Strava granted only '{granted}', which cannot list activities.\n"
+            f"  Rerun --auth and leave the private-activity box ticked."
+        )
 
     tokens = api_post(TOKEN_URL, {
         "client_id": client_id,
@@ -120,7 +233,9 @@ def interactive_auth() -> None:
         raise SystemExit(f"unexpected token response: {tokens}")
     hc.update_env_file({"STRAVA_REFRESH_TOKEN": refresh})
     print(f"\nSaved STRAVA_REFRESH_TOKEN to {hc.ENV_PATH}.")
-    print("Add the same value as a repository secret to enable the nightly workflow.")
+    print("\nNow store it as a repository secret:\n")
+    print("    gh secret set STRAVA_REFRESH_TOKEN < <(grep STRAVA_REFRESH_TOKEN "
+          "scripts/.env | cut -d= -f2)\n")
 
 
 def access_token() -> str:
@@ -220,6 +335,8 @@ def build_days(acts: list[dict], types: set[str]) -> dict[str, dict]:
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--auth", action="store_true", help="run the one-time OAuth flow and exit")
+    ap.add_argument("--manual", action="store_true",
+                    help="with --auth, paste the redirect URL instead of catching it locally")
     ap.add_argument("--days", type=int, default=730, help="how far back to fetch (default: 730)")
     ap.add_argument("--limit", type=int, help="stop after N activities (for testing)")
     ap.add_argument("--out-dir", default=hc.DATA_DIR, help="habit JSON directory")
@@ -228,7 +345,7 @@ def main(argv: list[str]) -> int:
     args = ap.parse_args(argv)
 
     if args.auth:
-        interactive_auth()
+        interactive_auth(manual=args.manual)
         return 0
 
     after = hc.days_ago(args.days)
