@@ -92,10 +92,31 @@ def load_env(path: str = ENV_PATH) -> dict[str, str]:
     return found
 
 
+# Values from the setup instructions' copy-paste template. Left in place they
+# reach the API as a real-looking credential and come back as an opaque error,
+# so they are treated as missing.
+PLACEHOLDERS = {
+    "your_client_id_here",
+    "your_client_secret_here",
+    "your_token_here",
+    "xxx",
+    "changeme",
+}
+
+
 def env(name: str, required: bool = True) -> str:
     """Read a variable from the environment, falling back to scripts/.env."""
     load_env()
     val = os.environ.get(name, "")
+
+    if val.strip().lower() in PLACEHOLDERS:
+        raise SystemExit(
+            f"{name} is still set to the placeholder '{val}'.\n"
+            f"  Open {ENV_PATH} and replace it with the real value.\n"
+            f"  Strava's Client ID and Client Secret are at the top of\n"
+            f"  https://www.strava.com/settings/api (click Show for the secret)."
+        )
+
     if not val and required:
         raise SystemExit(
             f"missing {name}. Set it in the environment or in scripts/.env "

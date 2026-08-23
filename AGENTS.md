@@ -101,9 +101,17 @@ only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
 
 ### One-time setup
 
-1. **Strava** — create an app at <https://www.strava.com/settings/api>, then
-   `python scripts/fetch_strava.py --auth` and follow the prompts. Tokens land in
-   `scripts/.env` (gitignored).
+1. **Strava** — create an app at <https://www.strava.com/settings/api>. Set
+   **Authorization Callback Domain** to exactly `localhost` (no scheme, port, or path);
+   Website can be anything. Then put `STRAVA_CLIENT_ID` and `STRAVA_CLIENT_SECRET` in
+   `scripts/.env` and run `python scripts/fetch_strava.py --auth`, which opens the
+   browser, catches the redirect on port 8721, and saves the refresh token.
+
+   Do **not** copy the refresh token displayed on the API settings page. That one is
+   permanently scoped to `read` and cannot list activities — it fails later with
+   `401 activity:read_permission missing`. Only the `--auth` flow issues a token with
+   `activity:read_all`, and the private-activity box on Strava's consent screen must
+   stay ticked. `--auth --manual` falls back to pasting the redirect URL by hand.
 2. **GitHub** — create a classic PAT with `read:user`. For private contributions also
    add `repo` and enable Settings → Profile → "Include private contributions".
 3. **Repository secrets** — add `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`,
