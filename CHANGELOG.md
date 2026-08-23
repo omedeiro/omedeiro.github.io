@@ -1,5 +1,24 @@
 # Changelog
 
+## 2.1.3 — 2026-08-23
+
+### Fixed
+
+- Empty `package.json`, committed in 2.1.2 by a version-bump one-liner that opened the file for writing before reading it. `main` could not build until this landed
+
+### Added
+
+- Full history on `/habits`: running back to 2019-01-01 (228 → 851 days) and commits to 2020-06-04 (275 → 418), re-fetched with a wider window. The chart no longer spans a hardcoded 104 weeks — it derives its span from the earliest day any habit holds, so older data stops being clipped as it accumulates
+- `implausible_sleep()` in `import_health.py` — refuses to write when the median night is under three hours, the shape an Apple Watch worn for afternoon naps but not overnight produces. A guard, not a filter, matching `fetch_screentime.implausible()`
+
+### Removed
+
+- The sleep column. There is no night sleep data to show: `InBed` records stop 2024-09-20, sleep staging stops 2023-12-13, and the only two records since May 2026 are afternoon naps. The importers and `sleep.json` stay, so restoring the column is a one-line change once sleep tracking is on
+
+### Changed
+
+- `habits_daily.py` commits a habit file only if its own importer just wrote it. Previously it committed any change to those paths, so a hand-run import would have been auto-committed unreviewed
+
 ## 2.1.2 — 2026-08-23
 
 ### Added

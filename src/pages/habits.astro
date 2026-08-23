@@ -4,11 +4,10 @@ import running from "../data/habits/running.json";
 import stretching from "../data/habits/stretching.json";
 import screentime from "../data/habits/screentime.json";
 import commits from "../data/habits/commits.json";
-import sleep from "../data/habits/sleep.json";
 
 // Geometry. One SVG holds the month gutter and every habit block so the rows
-// stay locked together in a single scroll container.
-const WEEKS = 104;
+// stay locked together in a single scroll container. WEEKS is derived further
+// down, once the data is in scope.
 const CELL = 11;
 const GAP = 3;
 const PITCH = CELL + GAP;
@@ -74,13 +73,6 @@ const HABITS = [
     empty: "none",
     format: (d: Day) => `${d.value} commit${d.value === 1 ? "" : "s"}`,
     summary: (total: number) => `${total.toFixed(0)} total`,
-  },
-  {
-    data: sleep as Habit,
-    caption: "darker = longer",
-    empty: "not recorded",
-    format: (d: Day) => hm(d.value),
-    summary: (total: number, active: number) => `${hm(total / Math.max(active, 1))} a night`,
   },
 ];
 
@@ -162,6 +154,21 @@ const mondayOffset = (today.getDay() + 6) % 7;
 const weekStart = new Date(today);
 weekStart.setDate(today.getDate() - mondayOffset);
 
+// Cover every day any habit has data for rather than a fixed window. Running
+// reaches back years further than screen time does, and a hardcoded span would
+// quietly clip the older end as history accumulates.
+const earliestKey = HABITS
+  .flatMap((habit) => Object.keys(habit.data.days))
+  .reduce((a, b) => (a < b ? a : b), dayKey(today));
+const earliestDate = new Date(`${earliestKey}T00:00:00`);
+const spanDays = Math.max(
+  0,
+  Math.round((weekStart.getTime() - earliestDate.getTime()) / 86_400_000),
+);
+// One extra week so the oldest partial week is not cut off; a 52-week floor
+// keeps the chart a sensible shape before any data arrives.
+const WEEKS = Math.max(52, Math.ceil(spanDays / 7) + 1);
+
 const rows = Array.from({ length: WEEKS }, (_, week) => {
   const cells = Array.from({ length: 7 }, (_, weekday) => {
     const date = new Date(weekStart);
@@ -213,25 +220,25 @@ const columns = HABITS.map((habit, index) => {
 const width = GUTTER + columns.length * BLOCK_W + (columns.length - 1) * BLOCK_GAP;
 const height = HEAD_H + WEEKS * PITCH;
 const anyData = columns.some((c) => c.hasData);
-const updated = [running, stretching, screentime, commits, sleep]
+const updated = [running, stretching, screentime, commits]
   .map((h) => h.updated_at)
   .filter(Boolean)
   .sort()
   .pop();
 ---
 
-<Base title="Habits — Owen Medeiros" description="Daily habit tracking: running, stretching, screen time, commits, and sleep." wide>
+<Base title="Habits — Owen Medeiros" description="Daily habit tracking: running, stretching, screen time, and commits." wide>
   <h1>Habits</h1>
   <p>
-    Five things I track, two years deep. Each block is one habit; the seven
+    Four things I track, back to {earliestKey.slice(0, 4)}. Each block is one habit; the seven
     cells across a row are Monday through Sunday, and each row down is a week
     further into the past. Hover or tap a cell for that day's numbers.
   </p>
   <p class="caption">
     Running comes from Strava and commits from the GitHub contributions API —
-    those refresh nightly. Screen time is pulled off my Mac and iPhone locally,
-    and stretching and sleep come from an Apple Health export, since neither
-    Apple nor the Bend app offers a web API.
+    those refresh nightly. Screen time is read off my Mac and iPhone locally
+    each night. Stretching is recorded by hand from the Bend app, which offers
+    no web API. Each column starts when that source does.
     {updated && <> Last updated {String(updated).slice(0, 10)}.</>}
   </p>
 
@@ -245,7 +252,7 @@ const updated = [running, stretching, screentime, commits, sleep]
   <div class="habits-chart">
     <div class="habits-scroll">
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img"
-           aria-label="Heatmaps of running, stretching, screen time, commits, and sleep over the past two years">
+           aria-label={`Heatmaps of running, stretching, screen time, and commits since ${earliestKey.slice(0, 4)}`}>
         {columns.map((column) => (
           <g>
             <text class="habits-name" x={column.x} y={12}>{column.label}</text>

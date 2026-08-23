@@ -159,6 +159,32 @@ def sleep_days(spans: list[tuple[float, float]], since: dt.date) -> dict[str, di
     return {k: hc.day(v) for k, v in sorted(hours.items())}
 
 
+def implausible_sleep(days: dict[str, dict]) -> list[str]:
+    """Report ways these nights cannot be describing real sleep.
+
+    A guard rather than a filter, matching ``fetch_screentime.implausible``.
+    The failure this exists for is subtle: an Apple Watch worn for an
+    afternoon nap but not overnight files ``AsleepUnspecified`` records like
+    any other, so the importer happily records a 1.3-hour "night". Nothing
+    about the record says which it was — only the shape of the result does.
+    """
+    values = sorted(d["value"] for d in days.values())
+    if not values:
+        return []
+    problems: list[str] = []
+
+    median = values[len(values) // 2]
+    if median < 3:
+        problems.append(
+            f"median night is {median:.1f}h across {len(values)} night(s) — "
+            f"that is nap length, not a night's sleep"
+        )
+    absurd = [v for v in values if v > 16]
+    if absurd:
+        problems.append(f"{len(absurd)} night(s) over 16h, longest {max(absurd):.1f}h")
+    return problems
+
+
 def stretch_days(spans: list[tuple[float, float]], since: dt.date) -> dict[str, dict]:
     """Count sessions per local start date.
 
@@ -213,6 +239,17 @@ def main(argv: list[str]) -> int:
     merge = not args.no_merge
 
     sleep = sleep_days(union(sleep_spans), since)
+    sleep_problems = implausible_sleep(sleep)
+    if sleep_problems:
+        hc.log("\n  Refusing to write sleep — it failed a sanity check:")
+        for line in sleep_problems:
+            hc.log(f"    {line}")
+        hc.log(
+            "    Sleep tracking is probably off. On iPhone: Health → Sleep →\n"
+            "    Sleep Schedule, and wear the Watch to bed with 'Track Sleep with\n"
+            "    Apple Watch' enabled. sleep.json left alone."
+        )
+        sleep = {}
     if sleep:
         hc.write_habit("sleep", "Sleep", "Apple Health", "h", sleep,
                        merge=merge, data_dir=args.out_dir)

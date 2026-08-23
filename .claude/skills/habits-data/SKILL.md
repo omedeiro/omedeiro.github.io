@@ -33,6 +33,14 @@ overwriting write would silently drop every older day. Never pass
 `habits_common.day()` drops falsy extras to keep diffs small, so a day with no
 Mac usage has no `mac_h` key at all. That is not missing data.
 
+`/habits` derives its span from the earliest day any habit holds rather than a fixed
+window, so backfilling an older range widens the chart automatically. Running reaches
+back to 2019, screen time only ~4 weeks; each column simply starts where its source does.
+
+When bumping the version, read `package.json` fully *before* opening it for writing —
+`open(p,'w').write(open(p).read()...)` truncates the file first and silently empties it,
+which broke the build in 2.1.2.
+
 ## Screen time: where the data actually is
 
 **Mac** — `~/Library/Application Support/Knowledge/knowledgeC.db`, `ZOBJECT`
@@ -108,6 +116,17 @@ database — app-private, end-to-end encrypted — not as files. Verified: 58 co
 `~/Library/Mobile Documents/`, none health-related; no `~/Library/Health`, no Health
 container, no Health app on macOS. HealthKit has no server-side API either, so there is
 nothing for a connector to authenticate against. Do not search for this again.
+
+**There is no sleep data on this account and the `/habits` sleep column is removed.**
+`InBed` stops 2024-09-20, staging stops 2023-12-13, and the only records since May 2026
+start mid-afternoon — naps. Importing them yielded a 1.5 h/night median, so
+`implausible_sleep()` refuses a median under 3 h. Do not "fix" this by widening
+`ASLEEP_VALUES` or dropping the guard; the data genuinely is not there until sleep
+tracking is enabled on the phone. `sleep.json` and both importers remain, so restoring
+the column is re-adding one `HABITS` entry in `habits.astro`.
+
+Bend does not sync to Apple Health — a fresh export lists Strava, Apple Watch, and Slopes
+only. Stretching comes from `bend-history.csv` alone.
 
 Health therefore only arrives if something on the phone pushes it:
 

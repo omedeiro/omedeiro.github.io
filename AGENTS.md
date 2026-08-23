@@ -115,6 +115,19 @@ Checked directly: 58 containers under `~/Library/Mobile Documents/`, none health
 and no `~/Library/Health` or Health container on disk. macOS has no Health app either.
 Don't go looking for a local Health store; there isn't one.
 
+**There is currently no sleep data to import, and the `/habits` sleep column is removed.**
+The export tells the story: `InBed` records stop 2024-09-20, `AsleepREM`/`AsleepDeep`
+staging stops 2023-12-13, and the only two `AsleepUnspecified` records since May 2026 both
+start mid-afternoon — naps, not nights. A first import of them produced a 1.5 h/night
+median, so `implausible_sleep()` now refuses anything under a 3 h median rather than
+filing naps as sleep. Turning tracking on (Health → Sleep → Sleep Schedule, plus *Track
+Sleep with Apple Watch*) starts collection; nothing backfills it. Restoring the column
+means re-adding the import and one entry to `HABITS` in `habits.astro`.
+
+Bend is **not** syncing to Apple Health either — `--list-sources` on a fresh export shows
+Strava, Apple Watch, and Slopes, and no Bend at all. Stretching therefore comes only from
+`bend-history.csv` until that is fixed in the Bend app.
+
 So sleep arrives one of two ways, both needing something on the phone:
 
 1. **A scheduled iOS Shortcut** writing into

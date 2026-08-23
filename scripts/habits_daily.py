@@ -34,10 +34,14 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HABITS = os.path.join("src", "data", "habits")
-DATA = [
-    os.path.join(HABITS, "screentime.json"),
-    os.path.join(HABITS, "sleep.json"),
-]
+# Importer module -> the habit file it owns. The agent commits a file only if
+# that importer just wrote it: a hand-run import (import_health.py, say) leaves
+# changes here too, and auto-committing someone else's unreviewed output is how
+# bad data reaches main without anyone looking at it.
+SOURCES = (
+    ("fetch_screentime", "screen time", os.path.join(HABITS, "screentime.json")),
+    ("import_shortcut_sleep", "sleep", os.path.join(HABITS, "sleep.json")),
+)
 GIT = "/usr/bin/git"
 
 
@@ -82,15 +86,12 @@ def busy() -> str | None:
 
 def main() -> int:
     log("=== daily habit collection ===")
-    wrote = [
-        collect("fetch_screentime", "screen time"),
-        collect("import_shortcut_sleep", "sleep"),
-    ]
-    if not any(wrote):
+    written = [path for module, label, path in SOURCES if collect(module, label)]
+    if not written:
         log("nothing written")
         return 1
 
-    changed = [d for d in DATA if git("status", "--porcelain", "--", d)]
+    changed = [d for d in written if git("status", "--porcelain", "--", d)]
     if not changed:
         log("no change to commit")
         return 0
