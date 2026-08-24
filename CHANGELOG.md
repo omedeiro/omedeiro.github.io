@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.4 — 2026-08-24
+
+### Changed
+
+- `/habits` tooltips latch open on tap: tapping a cell keeps it up, tapping it again dismisses it, and tapping another cell moves it there. Previously a tap showed the tooltip only while the finger was down, because a touch pointer is destroyed on release and fires `pointerleave` immediately after `pointerdown`.
+- The tapped cell is outlined while its tooltip is open, since touch has no hover state to show which cell is being read.
+- Dismissing on page scroll is replaced by dismissing on horizontal scroll of the chart, which is the case that actually leaves the tooltip misaligned. Vertical scroll needs no handling — the tooltip travels with the chart.
+
 ## 2.1.3 — 2026-08-23
 
 ### Fixed
