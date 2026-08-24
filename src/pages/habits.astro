@@ -337,6 +337,12 @@ const updated = [running, stretching, screentime, commits]
     const chart = document.querySelector(".habits-chart");
     if (!chart) return;
     const tip = chart.querySelector(".habits-tip");
+    const scroller = chart.querySelector(".habits-scroll");
+
+    // The cell a tap has latched open, or null when nothing is pinned.
+    let pinned = null;
+
+    const isCell = (el) => el instanceof Element && el.classList.contains("habits-cell");
 
     function show(cell) {
       const raw = cell.getAttribute("data-tip") || "";
@@ -366,15 +372,48 @@ const updated = [running, stretching, screentime, commits]
 
     function hide() {
       tip.hidden = true;
+      if (pinned) {
+        pinned.classList.remove("is-pinned");
+        pinned = null;
+      }
     }
 
+    // Mouse and trackpad: plain hover.
     chart.addEventListener("pointerover", (e) => {
-      if (e.target.classList.contains("habits-cell")) show(e.target);
+      if (e.pointerType === "touch") return;
+      if (isCell(e.target)) show(e.target);
     });
+    chart.addEventListener("pointerleave", (e) => {
+      // Touch pointers are destroyed on release, firing pointerleave straight
+      // after pointerdown — which is why a tap used to flash the tooltip and
+      // lose it again. Only a real pointer leaving should dismiss.
+      if (e.pointerType === "touch") return;
+      hide();
+    });
+
+    // Touch: a tap latches the tooltip open, since there is no hover to hold
+    // it. Tapping the same cell closes it; tapping another moves it there.
     chart.addEventListener("pointerdown", (e) => {
-      if (e.target.classList.contains("habits-cell")) show(e.target);
+      if (e.pointerType !== "touch" && e.pointerType !== "pen") return;
+      if (!isCell(e.target)) return;
+      const cell = e.target;
+      const repeat = pinned === cell;
+      hide();
+      if (repeat) return;
+      pinned = cell;
+      cell.classList.add("is-pinned");
+      show(cell);
     });
-    chart.addEventListener("pointerleave", hide);
-    window.addEventListener("scroll", hide, { passive: true });
+
+    // A tap anywhere else — including the gaps between blocks — dismisses it.
+    // This runs after the handler above, so re-tapping a cell is unaffected.
+    document.addEventListener("pointerdown", (e) => {
+      if (pinned && !isCell(e.target)) hide();
+    });
+
+    // Scrolling the chart sideways moves the cells but leaves the tooltip
+    // behind, so drop it. Vertical page scroll needs no handling: the tooltip
+    // is positioned within the chart and travels with it.
+    if (scroller) scroller.addEventListener("scroll", hide, { passive: true });
   })();
 </script>

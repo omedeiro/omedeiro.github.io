@@ -159,7 +159,10 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       .habits-scroll { overflow-x: auto; overflow-y: visible; }
       .habits-chart svg { display: block; }
       .habits-cell { shape-rendering: crispEdges; }
-      .habits-cell:hover { stroke: var(--fg); stroke-width: 1px; }
+      /* `is-pinned` marks the cell a tap has latched open — touch has no
+         hover, so without it there is no sign of which cell is being read. */
+      .habits-cell:hover,
+      .habits-cell.is-pinned { stroke: var(--fg); stroke-width: 1px; }
       .habits-chart text {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       }
