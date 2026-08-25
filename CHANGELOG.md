@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.5 — 2026-08-25
+
+### Fixed
+
+- Missing space before several links on the home page ("work developed<a>", "and some<a>", "publications</a>,<a>"). Astro's HTML compressor drops whitespace-only runs that span a newline, so any link the source starts on its own line lost the space in front of it. `compressHTML` is now off — the pages are small and JS-free, so keeping the authored whitespace costs less than reflowing prose around the compressor
+
 ## 2.1.4 — 2026-08-24
 
 ### Changed
