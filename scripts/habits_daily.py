@@ -41,6 +41,7 @@ HABITS = os.path.join("src", "data", "habits")
 SOURCES = (
     ("fetch_screentime", "screen time", os.path.join(HABITS, "screentime.json")),
     ("import_shortcut_sleep", "sleep", os.path.join(HABITS, "sleep.json")),
+    ("import_shortcut_stretching", "stretching", os.path.join(HABITS, "stretching.json")),
 )
 GIT = "/usr/bin/git"
 

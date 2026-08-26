@@ -1,9 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
 import running from "../data/habits/running.json";
-import stretching from "../data/habits/stretching.json";
-import screentime from "../data/habits/screentime.json";
 import commits from "../data/habits/commits.json";
+import screentime from "../data/habits/screentime.json";
+import stretching from "../data/habits/stretching.json";
 
 // Geometry. One SVG holds the month gutter and every habit block so the rows
 // stay locked together in a single scroll container. WEEKS is derived further
@@ -41,18 +41,11 @@ const HABITS = [
     summary: (total: number) => `${total.toFixed(0)} km total`,
   },
   {
-    data: stretching as Habit,
+    data: commits as Habit,
     caption: "darker = more",
     empty: "none",
-    format: (d: Day) => {
-      const parts = [`${d.value} session${d.value === 1 ? "" : "s"}`];
-      // Days backfilled from Bend's history name the routine; days measured
-      // through HealthKit know the duration instead.
-      if (d.extra?.routines) parts.push(String(d.extra.routines));
-      else if (d.extra?.minutes) parts.push(`${Math.round(Number(d.extra.minutes))} min`);
-      return parts.join(" · ");
-    },
-    summary: (total: number) => `${total.toFixed(0)} sessions`,
+    format: (d: Day) => `${d.value} commit${d.value === 1 ? "" : "s"}`,
+    summary: (total: number) => `${total.toFixed(0)} total`,
   },
   {
     data: screentime as Habit,
@@ -68,11 +61,18 @@ const HABITS = [
     summary: (total: number, active: number) => `${hm(total / Math.max(active, 1))} a day`,
   },
   {
-    data: commits as Habit,
+    data: stretching as Habit,
     caption: "darker = more",
     empty: "none",
-    format: (d: Day) => `${d.value} commit${d.value === 1 ? "" : "s"}`,
-    summary: (total: number) => `${total.toFixed(0)} total`,
+    format: (d: Day) => {
+      const parts = [`${d.value} session${d.value === 1 ? "" : "s"}`];
+      // Days backfilled from Bend's history name the routine; days measured
+      // through HealthKit know the duration instead.
+      if (d.extra?.routines) parts.push(String(d.extra.routines));
+      else if (d.extra?.minutes) parts.push(`${Math.round(Number(d.extra.minutes))} min`);
+      return parts.join(" · ");
+    },
+    summary: (total: number) => `${total.toFixed(0)} sessions`,
   },
 ];
 

@@ -68,6 +68,7 @@ three arrive by periodic local export.
 | Commits | `scripts/fetch_github.py` | nightly, automatic |
 | Screen time | `scripts/fetch_screentime.py` | LaunchAgent, daily on the Mac |
 | Sleep | `scripts/import_shortcut_sleep.py` | LaunchAgent, daily from an iCloud Drive drop |
+| Stretching | `scripts/import_shortcut_stretching.py` | LaunchAgent, daily from an iCloud Drive drop |
 | Stretching, Sleep | `scripts/import_health.py` | manual, after a Health export |
 
 Stretching is matched on the workout's **source name** (`Bend`), not its activity type,
@@ -128,17 +129,30 @@ filing naps as sleep. Turning tracking on (Health → Sleep → Sleep Schedule, 
 Sleep with Apple Watch*) starts collection; nothing backfills it. Restoring the column
 means re-adding the import and one entry to `HABITS` in `habits.astro`.
 
-Bend is **not** syncing to Apple Health either — `--list-sources` on a fresh export shows
-Strava, Apple Watch, and Slopes, and no Bend at all. Stretching therefore comes only from
-`bend-history.csv` until that is fixed in the Bend app.
+Bend has **no public API** — no developer access, no export endpoint, and nothing about
+HealthKit on bend.com. Apple Health is the only way a session leaves the phone, and as of
+the 2026-08-23 export nothing had arrived by that route yet: a full source census shows
+only Apple Watch, iPhone, Strava, Slopes, GymKit, sweetgreen, Blood Oxygen, Health, Sleep
+and Clock. No Bend, no `Flexibility`, no `PreparationAndRecovery`.
 
-So sleep arrives one of two ways, both needing something on the phone:
+That is a data problem, not a plumbing one — the drop-folder route below is wired and
+tested, so sessions flow the moment Bend actually writes them. Until then
+`bend-history.csv` remains the only record.
 
-1. **A scheduled iOS Shortcut** writing into
-   `iCloud Drive/habits/sleep/`, which `import_shortcut_sleep.py` merges nightly. That
-   folder mirrors to `~/Library/Mobile Documents/com~apple~CloudDocs/habits/sleep/` and,
-   unlike Biome or `knowledgeC.db`, needs **no Full Disk Access** to read.
+So Health data arrives one of two ways, both needing something on the phone:
+
+1. **A scheduled iOS Shortcut** writing into `iCloud Drive/habits/sleep/` or
+   `iCloud Drive/habits/stretching/`, merged nightly by `import_shortcut_sleep.py` and
+   `import_shortcut_stretching.py`. Those folders mirror to
+   `~/Library/Mobile Documents/com~apple~CloudDocs/habits/` and, unlike Biome or
+   `knowledgeC.db`, need **no Full Disk Access** to read. Each folder's `README.txt`
+   documents its own accepted line formats.
 2. **A full Health export** (`import_health.py`), which also backfills stretching.
+
+The stretching shortcut may need to read either workouts or mindful sessions, depending on
+what Bend writes — it normalises to text lines on the phone, so the Mac side does not care
+which. Overlapping shortcut windows are safe: identical spans are deduped by exact
+`(start, end)`, so a 7-day window run daily cannot count a session twice.
 
 Both file a night under the date you *woke up*, and the Shortcut route reuses
 `import_health.sleep_days` and `union` so the two cannot disagree about the same night.
