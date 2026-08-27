@@ -4,8 +4,10 @@ export interface Props {
   description?: string;
   /** Widen the column past the usual 42rem. Only /habits needs this. */
   wide?: boolean;
+  /** Keep the page out of search results. For drafts that are live but unlisted. */
+  noindex?: boolean;
 }
-const { title, description = "Owen Medeiros — electrical engineer working on superconducting electronics.", wide = false } = Astro.props;
+const { title, description = "Owen Medeiros — electrical engineer working on superconducting electronics.", wide = false, noindex = false } = Astro.props;
 const nav = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -23,6 +25,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/logo.png" />
     <link
       rel="stylesheet"

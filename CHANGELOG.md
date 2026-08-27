@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.3.0 — 2026-08-27
+
+### Added
+
+- `/philosophy` — quotes collected from my journal, sorted into Work, Life and Politics. Carried over from the old MyST `philosophy/` markdown, where most of them sat commented out. The page is a **draft**: it builds and is reachable at its URL, but it is not in the nav and carries `noindex, nofollow`
+- A `noindex` prop on `Base.astro`, settable from markdown frontmatter through `Md.astro`. Emits `<meta name="robots" content="noindex, nofollow">` so an unlisted draft stays out of search results
+
 ## 2.1.5 — 2026-08-25
 
 ### Fixed
