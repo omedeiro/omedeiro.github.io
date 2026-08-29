@@ -8,7 +8,7 @@ noindex: true
 *Draft — unlisted, and not in the nav yet.*
 
 Over the years I copied quotes and passages into my journal when they landed.
-This is that collection, lightly sorted.
+This is that collection.
 
 > It's amazing what you see when you look.
 >
@@ -22,26 +22,13 @@ This is that collection, lightly sorted.
 >
 > — PM
 
-## Work
+> Two wrongs don't make a right.
+>
+> — PM
 
 > Excellence is not a skill, it's an attitude.
 >
 > — Ralph Marston
-
-> An investment in knowledge pays the best interest.
->
-> — Benjamin Franklin
-
-> The capacity to learn is a gift; the ability to learn is a skill; the
-> willingness to learn is a choice.
->
-> — Brian Herbert
-
-## Life
-
-> Two wrongs don't make a right.
->
-> — PM
 
 > Tiger got to hunt, bird got to fly;\
 > Man got to sit and wonder ‘why, why, why?’\
@@ -50,26 +37,12 @@ This is that collection, lightly sorted.
 >
 > — Kurt Vonnegut, *Cat's Cradle*
 
-> The most beautiful people I've known are those who have known trials, have
-> known struggles, have known loss, and have found their way out of the depths.
->
-> — Elisabeth Kübler-Ross
-
-> Fall seven times, stand up eight.
->
-> — Japanese proverb
-
-## Politics
-
 > For the good of all, first the poor.
 >
 > — Andrés Manuel López Obrador
 
-> Democracy is the worst form of government, except for all the others.
+> Let every nation know, whether it wishes us well or ill, that we shall pay
+> any price, bear any burden, meet any hardship, support any friend, oppose any
+> foe to assure the survival and the success of liberty.
 >
-> — Winston Churchill
-
-> The best argument against democracy is a five-minute conversation with the
-> average voter.
->
-> — Winston Churchill
+> — John F. Kennedy, inaugural address, 1961

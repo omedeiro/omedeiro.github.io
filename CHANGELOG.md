@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.3.1 — 2026-08-29
+
+### Changed
+
+- `/philosophy` is one flat list instead of Work / Life / Politics sections
+
+### Added
+
+- The JFK line the old `politics.md` only left a `<!-- jfk let every nation know -->` note for. Wording follows the JFK Library and American Rhetoric transcripts, which read "oppose any foe to assure the survival" — some secondary sources insert "in order"
+
+### Removed
+
+- Both Churchill quotes, the Japanese proverb, Elisabeth Kübler-Ross, Brian Herbert and Benjamin Franklin
+
 ## 2.3.0 — 2026-08-27
 
 ### Added
