@@ -5,12 +5,13 @@
 ### Added
 
 - Bend → `/habits` now updates on its own, without the Mac. A scheduled iOS Shortcut reads the last seven days of Bend workouts out of Apple Health and POSTs them as a `repository_dispatch`; `.github/workflows/stretching.yml` merges them into `stretching.json`, commits, and the usual Cloudflare deploy follows. HealthKit is on-device only and Health does not reach the Mac, so a push from the phone is the only transport that exists — the previous route had one, but it landed in iCloud Drive and was picked up by a LaunchAgent, so it only ran when the Mac happened to be on. That is why stretching stopped at 2026-08-22
-- `docs/bend-stretching-shortcut.md` — the phone-side build guide that `AGENTS.md` has referred to since 2.2.0 without it existing: token scope, every action in the Shortcut, how to test the route with no phone involved, and what each failure mode looks like
+- `docs/bend-stretching-shortcut.md` — the phone-side build guide that `AGENTS.md` has referred to since 2.2.0 without it existing: token scope, every action in the Shortcut, how to test the route with no phone involved, and what each failure mode looks like. Leads with a five-action Shortcut that sends only today's count, since it proves the whole pipe with no loop and no date arithmetic; the seven-day span version is a drop-in replacement, and a span overwrites the day-count for the same date, so upgrading needs no cleanup
 - `--payload-file` on `import_shortcut_stretching.py`, reading the same session lines from a file or stdin instead of the drop folder. The drop folder, the dispatch payload, and a full `export.zip` all reach the same `union()` and `stretch_days()`, so a session counts identically however it arrived and the routes can overlap without disagreeing
 - A staleness warning in the nightly job when `stretching.json` or `screentime.json` has not moved in more than four days. Neither has a schedule CI can check up on, so a deleted Shortcut or a stopped LaunchAgent previously showed up only as a column that quietly stopped growing
 
 ### Fixed
 
+- An explicit zero-session day (`2026-08-29,0`) was rejected as an unparseable line, so the simplest possible Shortcut — one that sends today's count once a day — would have failed its run every rest day, which is exactly the false alarm `--empty-ok` exists to prevent. A zero count is now recognised and dropped; the heatmap already reads an absent day as zero
 - Sessions were counted against the runner's local date, which on a UTC runner files a 22:30 session under the following day. `stretching.yml` pins `TZ: America/New_York`
 - A JSON payload collapsed into one unparseable line. `split_lines` now decodes a JSON object or array properly before falling back to stripping delimiters as noise; it also splits on semicolons, since joining lines with a separator is markedly less fiddly in Shortcuts than building a multi-line text variable
 

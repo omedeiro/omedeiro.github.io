@@ -17,7 +17,12 @@ One line per session, in any of three shapes:
 2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400            # a session
 2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400,Wake Up    # ... named
 2026-08-26,2                                                 # a finished day
+2026-08-26,0                                                 # ... a rest day
 ```
+
+The last form matters more than it looks: a Shortcut that sends one line a day
+has to send *something* on a day you didn't stretch, and an explicit zero is
+understood and dropped rather than treated as a broken payload.
 
 Spans are preferred — they run through the same union-then-count path as a full
 Health export, so a session that arrives this way and the same session pulled
@@ -49,9 +54,29 @@ tokens** → Generate new token:
 Nothing else. This token can write to one repo and do nothing else with the
 account, which is the point of putting it on a phone.
 
-### 2. The Shortcut
+### 2. The Shortcut — start with the five-action version
 
-New Shortcut, named something like *Push Bend to habits*:
+Build this one first. It is five actions with no loop, it proves the whole pipe
+end to end, and the span version below is a drop-in replacement once you trust
+it. New Shortcut, named something like *Push Bend to habits*:
+
+1. **Find Workouts** — Filter: **Source** `is` **Bend**, and **Start Date**
+   `is` **Today**
+2. **Count** — *Items* in the workouts from step 1
+3. **Format Date** — Date: **Current Date**, Format: **Custom**,
+   Format String: `yyyy-MM-dd`
+4. **Text** — `[Formatted Date][,][Count]`, giving one line like `2026-08-29,2`
+5. **Get Contents of URL** — as in *Posting it* below, with the **Text** from
+   step 4 as `sessions`
+
+That is the whole phone side. What you give up is only tooltip detail — no
+routine names, no minutes — and the self-healing window: it sends today, so a
+day the phone is off stays missing. Both come back with the span version.
+
+### 2b. The span version, once the short one works
+
+Same shape, but it sends the last seven days with times and routine names,
+which is what makes a missed run repair itself:
 
 1. **Find Workouts** — *(Health → Find Workouts; some iOS versions call this
    "Find Health Samples" with the type set to Workouts. The filters are what
@@ -77,7 +102,13 @@ New Shortcut, named something like *Push Bend to habits*:
 
 3. **Combine Text** — Input: `lines`, Separator: **New Lines**
 
-4. **Get Contents of URL**
+4. **Get Contents of URL** — as below, with the **Combined Text** as `sessions`
+
+### Posting it
+
+The final action in either version:
+
+- **Get Contents of URL**
    - URL: `https://api.github.com/repos/omedeiro/owenmedeiros.com/dispatches`
    - Method: **POST**
    - Headers:
@@ -89,7 +120,8 @@ New Shortcut, named something like *Push Bend to habits*:
    - Request Body: **JSON**
      - `event_type` — Text — `stretching`
      - `client_payload` — Dictionary, containing:
-       - `sessions` — Text — the **Combined Text** variable
+       - `sessions` — Text — the line(s) you just built: the **Text** from the
+         five-action version, or the **Combined Text** from the span version
 
 **Run it once by hand.** The first run raises the Health permission prompt, and
 a permission prompt inside a scheduled automation just fails. A successful run

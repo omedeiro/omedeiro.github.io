@@ -32,6 +32,7 @@ to produce from whatever Bend actually writes:
     2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400        # one session
     2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400,Wake Up # ... named
     2026-08-26,2                                             # a finished day
+    2026-08-26,0                                             # ... a rest day
 
 Spans are preferred. They go through the same union-then-count path as
 ``import_health.py``, so a session imported from a Shortcut and the same
@@ -97,6 +98,14 @@ def parse_line(line: str) -> tuple[str, object] | None:
             dt.date.fromisoformat(parts[0])
         except ValueError:
             return None
+        if count == 0:
+            # An explicit "nothing today". The simplest useful Shortcut sends
+            # one line a day, and on a rest day that line reads `2026-08-29,0`.
+            # Recognised and dropped rather than rejected: the heatmap already
+            # reads an absent day as zero, and treating it as unparseable would
+            # turn every rest day into a failed run — exactly the false alarm
+            # --empty-ok exists to avoid.
+            return ("skip", None)
         if count.is_integer() and 0 < count <= MAX_SESSIONS_PER_DAY:
             return ("day", (parts[0], int(count)))
         return None
@@ -169,9 +178,12 @@ def collect(
             # overlapping shortcut runs collapses to one entry.
             if label or span not in spans:
                 spans[span] = label or spans.get(span, "")
-        else:
+        elif got[0] == "day":
             key, count = got[1]
             days[key] = max(days.get(key, 0), count)
+        # ("skip", None) is a line we understood and deliberately dropped — an
+        # explicit zero-session day. Not counted as unparsed, so a rest day
+        # still reads as an empty window rather than a broken payload.
     return skipped
 
 
