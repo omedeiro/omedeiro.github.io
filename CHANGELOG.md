@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.2 — 2026-08-29
+
+### Added
+
+- "You can't work unless you're comfortable" (PM) to `/philosophy`, grouped with the other PM quotes
+
 ## 2.3.1 — 2026-08-29
 
 ### Changed

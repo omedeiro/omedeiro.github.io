@@ -26,6 +26,10 @@ This is that collection.
 >
 > — PM
 
+> You can't work unless you're comfortable.
+>
+> — PM
+
 > Excellence is not a skill, it's an attitude.
 >
 > — Ralph Marston
