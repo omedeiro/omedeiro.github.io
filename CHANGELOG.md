@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.3.0 — 2026-08-29
+
+### Added
+
+- `/maths/aperiodic-tiles` — a tiling builder you can pan and zoom on a phone or a desktop. Three tilings, built three different ways: Penrose P3 rhombs by substitution of the two Robinson triangles, Ammann–Beenker by cut and project from `Z^4` through an octagonal window, and the hat from a stored patch. Pointer events cover mouse, trackpad and touch through one code path, so a drag pans, two fingers pinch and a flick glides; the canvas centre is clamped to stay over the patch, since one determined scroll otherwise leaves a blank canvas with no clue which way to come back
+- `public/maths/hat-search.mjs` — the derivation of the hat, as a runnable script. It enumerates all 10,209 8-kite polykites, keeps the 341 whose outline is a simple 13-gon, asks an exact-cover solver which of those can fill discs of radius 5, 12 and 30, and picks out the one that is forced to mix reflections in the ratio `1 : phi^4`. That one is the hat. Runs in about eight seconds, standard library only. The page's hat patch (475 tiles, radius 44) comes from the same solver, and is stored rather than generated because the search grows exponentially — that radius took three random restarts and `8.8e8` nodes, and four restarts at radius 50 each gave up after `2.5e9`
+
+### Changed
+
+- `/maths` index no longer claims every page is MATLAB, which stopped being true with the tiling page
+
 ## 2.1.5 — 2026-08-25
 
 ### Fixed
