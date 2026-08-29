@@ -1,5 +1,35 @@
 # Changelog
 
+## 2.3.0 — 2026-08-29
+
+### Added
+
+- Bend → `/habits` now updates on its own, without the Mac. A scheduled iOS Shortcut reads the last seven days of Bend workouts out of Apple Health and POSTs them as a `repository_dispatch`; `.github/workflows/stretching.yml` merges them into `stretching.json`, commits, and the usual Cloudflare deploy follows. HealthKit is on-device only and Health does not reach the Mac, so a push from the phone is the only transport that exists — the previous route had one, but it landed in iCloud Drive and was picked up by a LaunchAgent, so it only ran when the Mac happened to be on. That is why stretching stopped at 2026-08-22
+- `docs/bend-stretching-shortcut.md` — the phone-side build guide that `AGENTS.md` has referred to since 2.2.0 without it existing: token scope, every action in the Shortcut, how to test the route with no phone involved, and what each failure mode looks like
+- `--payload-file` on `import_shortcut_stretching.py`, reading the same session lines from a file or stdin instead of the drop folder. The drop folder, the dispatch payload, and a full `export.zip` all reach the same `union()` and `stretch_days()`, so a session counts identically however it arrived and the routes can overlap without disagreeing
+- A staleness warning in the nightly job when `stretching.json` or `screentime.json` has not moved in more than four days. Neither has a schedule CI can check up on, so a deleted Shortcut or a stopped LaunchAgent previously showed up only as a column that quietly stopped growing
+
+### Fixed
+
+- Sessions were counted against the runner's local date, which on a UTC runner files a 22:30 session under the following day. `stretching.yml` pins `TZ: America/New_York`
+- A JSON payload collapsed into one unparseable line. `split_lines` now decodes a JSON object or array properly before falling back to stripping delimiters as noise; it also splits on semicolons, since joining lines with a separator is markedly less fiddly in Shortcuts than building a multi-line text variable
+
+### Changed
+
+- `AGENTS.md`, `docs/habits-pipeline.md`, and the `habits-data` skill all recorded that Bend does not sync to Apple Health. That described the 2026-08-23 export, taken before the connection was on, and it is no longer true — all three now point at `import_health.py --list-sources` as the way to settle it for a given export rather than asserting either answer
+
+## 2.2.0 — 2026-08-26
+
+Released without a changelog entry; recorded here after the fact.
+
+### Added
+
+- `scripts/import_shortcut_stretching.py` — merges Bend sessions dropped into `iCloud Drive/habits/stretching/` by a scheduled iOS Shortcut, wired into the nightly LaunchAgent. Reuses `import_health`'s `union()` and `stretch_days()` so a session imported from a Shortcut and the same session from a full Health export produce the same number. Spans dedupe on the exact `(start, end)` pair, so a 7-day window run daily cannot double-count
+
+### Changed
+
+- `/habits` column order: running, commits, screen time, stretching
+
 ## 2.1.5 — 2026-08-25
 
 ### Fixed

@@ -18,10 +18,14 @@ skill covers what is expensive to rediscover.
 | Commits | `fetch_github.py` | CI, nightly |
 | Screen time | `fetch_screentime.py` | **Mac only** — LaunchAgent, daily 23:00 |
 | Sleep | `import_shortcut_sleep.py` | **Mac only** — LaunchAgent, from an iCloud Drive drop |
+| Stretching | `import_shortcut_stretching.py --payload-file` | **CI**, on a `repository_dispatch` from the phone |
+| Stretching | `import_shortcut_stretching.py` | **Mac only** — LaunchAgent fallback, from an iCloud Drive drop |
 | Stretching, Sleep | `import_health.py` | **Mac only** — manual, after a Health export |
 
-The three local ones read Apple data no CI runner can reach. Do not try to move
-them into `.github/workflows/habits.yml`.
+The Mac-only ones read Apple data no CI runner can reach. Do not try to move
+them into `.github/workflows/habits.yml`. Stretching is the exception that
+proves the rule: it is not *read* in CI, it is *pushed* to CI by an iOS
+Shortcut, which is the only way data that lives in HealthKit can get anywhere.
 
 ## The JSON contract
 
@@ -125,14 +129,29 @@ start mid-afternoon — naps. Importing them yielded a 1.5 h/night median, so
 tracking is enabled on the phone. `sleep.json` and both importers remain, so restoring
 the column is re-adding one `HABITS` entry in `habits.astro`.
 
-Bend does not sync to Apple Health — a fresh export lists Strava, Apple Watch, and Slopes
-only. Stretching comes from `bend-history.csv` alone.
+Bend **does** sync into Apple Health. (An older note here said it did not; that described
+the 2026-08-23 export, before the connection was on. `import_health.py --list-sources`
+settles it for any given export — don't trust either claim from memory.) Health being
+on-device only is what the plumbing works around, not a reason stretching is stuck.
 
-Health therefore only arrives if something on the phone pushes it:
+Health only arrives if something on the phone pushes it:
 
-- a scheduled iOS Shortcut writing into `iCloud Drive/habits/sleep/`, merged by
-  `import_shortcut_sleep.py`
+- a scheduled iOS Shortcut POSTing a `repository_dispatch` of type `stretching`, merged in
+  CI by `.github/workflows/stretching.yml`. **This is the daily route** — nothing but the
+  phone has to be awake. `docs/bend-stretching-shortcut.md` builds it.
+- a scheduled iOS Shortcut writing into `iCloud Drive/habits/sleep/` or
+  `iCloud Drive/habits/stretching/`, merged by `import_shortcut_sleep.py` and
+  `import_shortcut_stretching.py`. Token-free, but only runs when the Mac does.
 - a full Health export, parsed by `import_health.py` (also backfills stretching)
+
+All three land in the same `union()` and `stretch_days()`, so a session counts the same
+however it arrived and the routes can overlap freely. Spans dedupe on the exact
+`(start, end)` pair and every affected day is recounted, which is what makes a rolling
+7-day window safe to send daily — and a missed day self-healing.
+
+**The CI route needs `TZ` pinned.** A session is filed under the local date it started, so
+`stretching.yml` sets `TZ: America/New_York`; on a bare UTC runner a 22:30 session lands
+on the following day. This is tested and real, not theoretical.
 
 Apple files `InBed` and `Awake` under the same sleep type as the asleep stages. Counting
 them overstates a night — the same trap StandBy sets for screen time — so a tagged
@@ -171,7 +190,12 @@ Granted **per application**, to the binary that opens the file. Consequences:
 
 ## Daily automation
 
-`scripts/habits_daily.py`, run by
+Two schedules now. In CI, `.github/workflows/habits.yml` runs nightly (Strava, GitHub,
+plus a staleness warning when `stretching.json` or `screentime.json` has not moved in more
+than four days) and `.github/workflows/stretching.yml` runs whenever the phone dispatches.
+Both share the `habits-refresh` concurrency group so they cannot race to push.
+
+On the Mac, `scripts/habits_daily.py`, run by
 `~/Library/LaunchAgents/com.owenmedeiros.habits.plist` at 23:00, logging to
 `~/Library/Logs/habits-daily.log`. It runs screen time and sleep independently — one
 failing does not stop the other — collects on any branch (a skipped day is lost for good),

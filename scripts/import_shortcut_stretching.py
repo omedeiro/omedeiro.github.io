@@ -1,21 +1,32 @@
 #!/usr/bin/env python3
-"""Merge Bend sessions dropped into iCloud Drive by an iOS Shortcut.
+"""Merge Bend sessions pushed off the phone by an iOS Shortcut.
 
-Bend has no public API — no developer access, no export endpoint, nothing
-documented on bend.com — so the only way a session leaves the phone is through
-Apple Health. Health in turn does not sync to the Mac: it moves between devices
-through CloudKit's private database, not as files. A scheduled Shortcut writing
-into iCloud Drive bridges the two, exactly as ``import_shortcut_sleep.py`` does
-for sleep, because iCloud Drive *is* mirrored to
-``~/Library/Mobile Documents/com~apple~CloudDocs/`` and needs no Full Disk
-Access to read.
+Bend syncs its sessions into Apple Health, and Apple Health is where the trail
+goes cold: HealthKit is on-device only, there is no web API, and Health does
+not reach the Mac either — it moves between devices through CloudKit's private
+database, not as files. So a session can only leave the phone if something on
+the phone pushes it. A scheduled Shortcut is that something, and it has two
+places to push to:
 
-The shortcut writes one file per run into ``habits/stretching/`` (see AGENTS.md
-for how to build it). Every file in the folder is re-read on every run and the
-result recomputed, so re-running is idempotent and a shortcut whose window
-overlaps the previous run's cannot double-count a session.
+* **GitHub** — the Shortcut POSTs a ``repository_dispatch`` and
+  ``.github/workflows/stretching.yml`` runs this script with ``--payload-file``.
+  Nothing else has to be awake, so this is the route that actually updates
+  every day.
+* **iCloud Drive** — the Shortcut writes a file into ``habits/stretching/``,
+  which mirrors to ``~/Library/Mobile Documents/com~apple~CloudDocs/`` and
+  needs no Full Disk Access to read. The nightly LaunchAgent picks it up, so it
+  only runs when the Mac is on. Kept as a fallback, exactly as
+  ``import_shortcut_sleep.py`` does for sleep.
 
-Three line formats are accepted, so the shortcut can use whichever is easiest
+Both routes land in the same parser, so a session is counted identically
+whichever way it arrived. Everything is recomputed from scratch on every run —
+the whole drop folder is re-read, and spans are deduped on their exact
+``(start, end)`` pair — so re-running is idempotent and a Shortcut whose window
+overlaps the previous run's cannot double-count a session. That is what makes a
+rolling 7-day window safe to send daily, which in turn is what makes a missed
+day self-healing.
+
+Three line formats are accepted, so the Shortcut can use whichever is easiest
 to produce from whatever Bend actually writes:
 
     2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400        # one session
@@ -30,6 +41,12 @@ subtly different ones.
 Usage:
     python scripts/import_shortcut_stretching.py
     python scripts/import_shortcut_stretching.py --drop-dir ~/some/other/folder
+    python scripts/import_shortcut_stretching.py --payload-file payload.json
+    ... | python scripts/import_shortcut_stretching.py --payload-file -
+
+Timezone matters here. A session is filed under the local date it started, so
+whatever runs this must agree with the phone about what "local" means — see the
+``TZ`` setting in ``.github/workflows/stretching.yml``.
 """
 
 from __future__ import annotations
@@ -37,6 +54,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import glob
+import json
 import os
 import sys
 
@@ -92,8 +110,96 @@ def parse_line(line: str) -> tuple[str, object] | None:
     return ("span", ((start.timestamp(), end.timestamp()), label))
 
 
+def _lines_from_json(decoded: object) -> list[str] | None:
+    """Pull session lines out of a decoded JSON payload, or None if it isn't one.
+
+    A ``repository_dispatch`` arrives as ``{"sessions": "...\\n..."}``, and a
+    Shortcut's "Get Contents of URL" body builder is happiest producing exactly
+    that. Decoding it properly matters: the fallback below strips quotes and
+    brackets as noise, which would leave a JSON payload's ``\\n`` escapes as
+    literal backslash-n and collapse every session onto one unparseable line.
+    """
+    if isinstance(decoded, dict):
+        decoded = decoded.get("sessions")
+    if isinstance(decoded, str):
+        return decoded.splitlines()
+    if isinstance(decoded, list):
+        return [str(item) for item in decoded]
+    return None
+
+
+def split_lines(body: str) -> list[str]:
+    """Break a drop file or a dispatch payload into candidate lines.
+
+    Semicolons split as well as newlines. Shortcuts can build a multi-line text
+    variable, but joining with a separator is markedly less fiddly, and a
+    routine name never contains one.
+    """
+    stripped = body.strip()
+    if stripped[:1] in "[{":
+        try:
+            decoded = json.loads(stripped)
+        except ValueError:
+            decoded = None
+        lines = _lines_from_json(decoded) if decoded is not None else None
+        if lines is not None:
+            return [part for line in lines for part in line.split(";")]
+
+    # Not JSON, or JSON in a shape we don't recognise: tolerate a shortcut that
+    # emits something JSON-ish by treating the delimiters as noise.
+    for ch in "[]{}\"'":
+        body = body.replace(ch, "")
+    return [part for line in body.splitlines() for part in line.split(";")]
+
+
+def collect(
+    body: str,
+    spans: dict[tuple[float, float], str],
+    days: dict[str, int],
+) -> int:
+    """Fold one file or payload into ``spans``/``days``; returns lines skipped."""
+    skipped = 0
+    for line in split_lines(body):
+        got = parse_line(line)
+        if got is None:
+            skipped += 1 if line.strip() else 0
+        elif got[0] == "span":
+            span, label = got[1]
+            # Keyed on the exact span, so the same session arriving in two
+            # overlapping shortcut runs collapses to one entry.
+            if label or span not in spans:
+                spans[span] = label or spans.get(span, "")
+        else:
+            key, count = got[1]
+            days[key] = max(days.get(key, 0), count)
+    return skipped
+
+
+def read_payload(path: str):
+    """Return deduped spans, per-day counts, and unparsed line count.
+
+    The unparsed count is what lets ``--empty-ok`` tell a rest week (a payload
+    with nothing in it) apart from a Shortcut sending the wrong date format (a
+    payload full of lines none of which parsed).
+    """
+    spans: dict[tuple[float, float], str] = {}
+    days: dict[str, int] = {}
+    if path == "-":
+        body = sys.stdin.read()
+    else:
+        with open(os.path.expanduser(path), encoding="utf-8-sig", errors="replace") as fh:
+            body = fh.read()
+
+    skipped = collect(body, spans, days)
+    hc.log(
+        f"  payload: {len(spans)} session(s), {len(days)} pre-counted day(s)"
+        + (f", {skipped} line(s) unparsed" if skipped else "")
+    )
+    return spans, days, skipped
+
+
 def read_drop(drop_dir: str):
-    """Return deduped session spans, their labels by day, and per-day counts."""
+    """Return deduped spans, per-day counts, and unparsed line count."""
     spans: dict[tuple[float, float], str] = {}
     days: dict[str, int] = {}
     # README files are excluded deliberately: the folder documents its own
@@ -105,7 +211,7 @@ def read_drop(drop_dir: str):
         if not os.path.basename(p).lower().startswith(("readme", "."))
     )
     if not files:
-        return spans, days
+        return spans, days, 0
 
     skipped = 0
     for path in files:
@@ -115,53 +221,24 @@ def read_drop(drop_dir: str):
         except OSError as exc:
             hc.log(f"  cannot read {os.path.basename(path)} ({exc})")
             continue
-        # Tolerate a shortcut that emits a JSON-ish array: the delimiters are
-        # noise once the lines are parsed individually.
-        for ch in "[]{}\"'":
-            body = body.replace(ch, "")
-        for line in body.splitlines():
-            got = parse_line(line)
-            if got is None:
-                skipped += 1 if line.strip() else 0
-            elif got[0] == "span":
-                span, label = got[1]
-                # Keyed on the exact span, so the same session arriving in two
-                # overlapping shortcut runs collapses to one entry.
-                if label or span not in spans:
-                    spans[span] = label or spans.get(span, "")
-            else:
-                key, count = got[1]
-                days[key] = max(days.get(key, 0), count)
+        skipped += collect(body, spans, days)
 
     hc.log(
         f"  {len(files)} file(s): {len(spans)} session(s), "
         f"{len(days)} pre-counted day(s)"
         + (f", {skipped} line(s) unparsed" if skipped else "")
     )
-    return spans, days
+    return spans, days, skipped
 
 
-def main(argv: list[str]) -> int:
-    ap = argparse.ArgumentParser(
-        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    ap.add_argument("--drop-dir", default=DROP_DIR, help="iCloud Drive folder to read")
-    ap.add_argument("--days", type=int, default=120, help="how far back to keep")
-    ap.add_argument("--out-dir", default=hc.DATA_DIR, help="habit JSON directory")
-    args = ap.parse_args(argv)
-
-    drop_dir = os.path.expanduser(args.drop_dir)
-    if not os.path.isdir(drop_dir):
-        hc.log(f"note: {drop_dir} not found — no shortcut drop to import")
-        return 1
-
-    hc.log(f"reading stretching drops from {drop_dir}")
-    spans, counted = read_drop(drop_dir)
-    if not spans and not counted:
-        hc.log("nothing to import")
-        return 1
-
-    since = hc.days_ago(args.days)
+def merge_and_write(
+    spans: dict[tuple[float, float], str],
+    counted: dict[str, int],
+    days_back: int,
+    out_dir: str,
+) -> dict[str, dict]:
+    """Count the sessions into days and write them, merging into the habit file."""
+    since = hc.days_ago(days_back)
     # union() before counting, matching import_health.py: it collapses the
     # duplicate records two devices write for one session without merging
     # genuinely separate routines, which never overlap.
@@ -189,13 +266,61 @@ def main(argv: list[str]) -> int:
             days[key] = hc.day(count)
 
     if not days:
-        hc.log("no sessions in range — stretching.json left alone")
-        return 1
+        return days
 
     hc.write_habit(
         "stretching", "Stretching", "Bend", "sessions",
-        days, merge=True, data_dir=args.out_dir,
+        days, merge=True, data_dir=out_dir,
     )
+    return days
+
+
+def main(argv: list[str]) -> int:
+    ap = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    ap.add_argument("--drop-dir", default=DROP_DIR, help="iCloud Drive folder to read")
+    ap.add_argument("--payload-file", help="read session lines from this file "
+                                           "('-' for stdin) instead of the drop folder")
+    ap.add_argument("--days", type=int, default=120, help="how far back to keep")
+    ap.add_argument("--empty-ok", action="store_true",
+                    help="succeed when the payload holds no sessions at all "
+                         "(a rest week), while still failing on one that holds "
+                         "lines none of which parsed")
+    ap.add_argument("--out-dir", default=hc.DATA_DIR, help="habit JSON directory")
+    args = ap.parse_args(argv)
+
+    if args.payload_file:
+        source = "stdin" if args.payload_file == "-" else args.payload_file
+        hc.log(f"reading stretching payload from {source}")
+        try:
+            spans, counted, skipped = read_payload(args.payload_file)
+        except OSError as exc:
+            hc.log(f"cannot read payload ({exc})")
+            return 1
+    else:
+        drop_dir = os.path.expanduser(args.drop_dir)
+        if not os.path.isdir(drop_dir):
+            hc.log(f"note: {drop_dir} not found — no shortcut drop to import")
+            return 1
+        hc.log(f"reading stretching drops from {drop_dir}")
+        spans, counted, skipped = read_drop(drop_dir)
+
+    if not spans and not counted:
+        # An empty window and a misconfigured Shortcut both produce no sessions,
+        # and only one of them is worth a red run every night. They are told
+        # apart by whether anything was there to fail: no lines at all is a week
+        # off, lines that all failed to parse is a bug.
+        if args.empty_ok and not skipped:
+            hc.log("no sessions in this window — nothing to import")
+            return 0
+        hc.log("nothing to import")
+        return 1
+
+    days = merge_and_write(spans, counted, args.days, args.out_dir)
+    if not days:
+        hc.log("no sessions in range — stretching.json left alone")
+        return 1
     return 0
 
 

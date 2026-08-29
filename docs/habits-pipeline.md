@@ -14,11 +14,12 @@ details of the Apple data sources. This is the architectural view.
 | Running | Strava | OAuth web API | CI, nightly | full history | 851 days, from 2019-01-01 |
 | Commits | GitHub | GraphQL contributions API | CI, nightly | full history | 418 days, from 2020-06-04 |
 | Screen time | `knowledgeC.db` + Biome | local files on the Mac | LaunchAgent, daily | **~28 days** | 29 days |
-| Stretching | Bend | hand-entered CSV | manual | n/a | 19 days |
+| Stretching | Bend → Apple Health | Shortcut → `repository_dispatch` | CI, on each push from the phone | ~unlimited | 19 days + whatever the phone has sent |
 | Sleep | Apple Health | export, or Shortcut drop | manual / LaunchAgent | ~unlimited | **none — column removed** |
 
-Three transports, in descending order of reliability: a web API anyone can
-call, a local file only this Mac can read, and a human moving data by hand.
+Four transports, in descending order of reliability: a web API anyone can call,
+a push from a device that holds data nothing else can reach, a local file only
+this Mac can read, and a human moving data by hand.
 
 ## The shared contract
 
@@ -83,15 +84,40 @@ timestamp and reported an 18 h/day median with dates in 2033. The rewrite is
 not just more careful; it fails differently. That distinction is the whole
 design.
 
-### Stretching — manual, and currently stalled
+### Stretching — pushed from the phone
 
 Counted in sessions per day rather than minutes, so days backfilled from Bend's
 history screen sit on the same scale as days measured through HealthKit, with
 nothing estimated.
 
-Bend is **not** currently syncing to Apple Health — a fresh export lists Strava,
-Apple Watch, and Slopes, and no Bend at all. So stretching comes only from
-`bend-history.csv`, which is why it stops at 2026-08-22.
+Bend syncs into Apple Health, and Health goes no further on its own. The phone
+therefore pushes: a scheduled Shortcut reads the last seven days of Bend
+workouts, POSTs them as a `repository_dispatch`, and
+`.github/workflows/stretching.yml` merges and commits them. Nothing but the
+phone has to be awake, which is what separates this from the Mac-bound habits.
+`docs/bend-stretching-shortcut.md` is the build guide.
+
+Two properties make the daily schedule safe rather than merely convenient:
+
+- **A rolling window, recomputed.** Spans are deduped on their exact
+  `(start, end)` pair and every affected day is recounted from scratch, so
+  re-sending a day cannot double-count it. A run the phone misses is repaired
+  by the next one instead of leaving a permanent hole — the opposite of screen
+  time, where a missed day is gone.
+- **One parser, three transports.** The dispatch payload, the iCloud Drive drop
+  file, and a full `export.zip` all reach the same `union()` and
+  `stretch_days()`. A session counts the same however it arrived, so the routes
+  can overlap without disagreeing.
+
+The one thing the CI route needs that the local routes do not is a timezone.
+Sessions are filed under the local date they started, so `stretching.yml` pins
+`TZ: America/New_York`; on a UTC runner a 22:30 session would land on the next
+day.
+
+The earlier note here — that Bend was not syncing to Health at all, so
+`bend-history.csv` was the only record — described the 2026-08-23 export and is
+no longer true. `import_health.py --list-sources` settles it for any given
+export.
 
 ### Sleep — no data, column removed
 
@@ -122,8 +148,12 @@ Each of these exists because its absence produced wrong numbers:
 
 1. **A lapse loses data permanently.** Screen time retains ~28 days at source.
    If the LaunchAgent stops — Mac off, Full Disk Access revoked by an OS
-   update, repo moved — nothing notices, and those days cannot be recovered
-   afterward from anywhere.
+   update, repo moved — those days cannot be recovered afterward from
+   anywhere. The nightly job now warns when `screentime.json` or
+   `stretching.json` has not moved in more than four days, so the *stopping*
+   is visible even though the loss is still irreversible. Stretching itself is
+   no longer exposed to this: Health keeps its history indefinitely, so a gap
+   there is filled by the next Shortcut run or by a full export.
 2. **No tests.** The `SEGB` parser is hand-reverse-engineered against an
    undocumented format Apple changes between releases. It will break silently
    one day, and `implausible()` only catches failures that produce absurd
@@ -139,7 +169,7 @@ Each of these exists because its absence produced wrong numbers:
    a stalled agent currently goes unnoticed (risk 1).
 5. **Single machine, single copy.** The habit JSON in git is the only archive
    of screen-time history.
-6. **All-or-nothing sanity gating.** One implausible day blocks the entire
+4. **All-or-nothing sanity gating.** One implausible day blocks the entire
    write, including the good days alongside it.
 
 ## Worth doing next
@@ -150,21 +180,18 @@ Roughly in order of value per effort.
    contents, asserting session lengths and that StandBy and unclosed sessions
    are dropped. This was written and run by hand during the rewrite but never
    committed; it is the single highest-value gap given risk 2.
-2. **A staleness check.** Have the page — or the nightly workflow — flag when
-   `screentime.json`'s newest day is more than a few days old. Cheap, and it
-   converts risk 1 from silent to visible.
-3. **Report which days failed the sanity check**, rather than only that some
+2. **Report which days failed the sanity check**, rather than only that some
    did. Keeps the refuse-don't-trim principle while making a single bad day
    diagnosable.
-4. **Fix Bend → Apple Health sync**, which unblocks stretching without hand
-   entry.
-5. **Enable sleep tracking**, then restore the column. The pipeline is already
-   built and tested on synthetic input.
-6. **Surface the app breakdown.** The parser already reads bundle IDs, app
+3. **Enable sleep tracking**, then restore the column. The pipeline is already
+   built and tested on synthetic input — and now that stretching has a working
+   phone-side push, sleep can reuse the same `repository_dispatch` route rather
+   than waiting on the Mac.
+4. **Surface the app breakdown.** The parser already reads bundle IDs, app
    versions, and build numbers, and throws all of it away. "3h 12m, mostly
    Safari" is a better tooltip than "3h 12m", at no parsing cost.
-7. **Narrow the Full Disk Access grant** to a dedicated helper rather than the
+5. **Narrow the Full Disk Access grant** to a dedicated helper rather than the
    system Python.
-8. **Reconsider the CI/local split.** Strava now has a connector available
+6. **Reconsider the CI/local split.** Strava now has a connector available
    outside this repo; if habit collection ever moves off this Mac, the local
    Apple sources are the only genuinely machine-bound ones.

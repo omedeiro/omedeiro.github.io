@@ -60,20 +60,23 @@ each habit against **its own** quartiles, so unlike metrics share one five-step 
 Only two sources have web APIs. Apple has none for either Screen Time or Health —
 `DeviceActivity` is sandboxed so usage data never leaves the device, and HealthKit is
 on-device only — and neither does the Bend app, which syncs into Apple Health. Those
-three arrive by periodic local export.
+habits only move if the phone or the Mac pushes them.
 
 | Habit | Script | Refresh |
 |---|---|---|
 | Running | `scripts/fetch_strava.py` | nightly, automatic |
 | Commits | `scripts/fetch_github.py` | nightly, automatic |
+| Stretching | `scripts/import_shortcut_stretching.py --payload-file` | daily, automatic — the phone POSTs a `repository_dispatch` |
 | Screen time | `scripts/fetch_screentime.py` | LaunchAgent, daily on the Mac |
 | Sleep | `scripts/import_shortcut_sleep.py` | LaunchAgent, daily from an iCloud Drive drop |
-| Stretching | `scripts/import_shortcut_stretching.py` | LaunchAgent, daily from an iCloud Drive drop |
+| Stretching | `scripts/import_shortcut_stretching.py` | LaunchAgent fallback, from the same kind of drop |
 | Stretching, Sleep | `scripts/import_health.py` | manual, after a Health export |
 
 Stretching is matched on the workout's **source name** (`Bend`), not its activity type,
 because Bend has filed sessions as Flexibility, Yoga, and Mind & Body across versions.
-`import_health.py --list-sources` prints what an export actually contains.
+`import_health.py --list-sources` prints what an export actually contains. The Shortcut
+that pushes sessions off the phone should filter the same way, for the same reason —
+`docs/bend-stretching-shortcut.md` builds it step by step.
 
 Do not source stretching from Strava: its "Workout" activities are strength sessions.
 
@@ -112,7 +115,7 @@ Screen Time's own cross-device store is **not** on the Mac — there is no
 Devices" registers the phone in `knowledgeC.db`'s `ZSYNCPEER`, but no `/app/*` row is ever
 attributed to it; that view is assembled from CloudKit on demand. Don't go looking again.
 
-## Sleep, and why Apple Health needs a phone-side push
+## Apple Health, and why it needs a phone-side push
 
 Health data does **not** reach the Mac. It syncs between devices through CloudKit's
 private database — app-private and end-to-end encrypted — not as files in iCloud Drive.
@@ -129,30 +132,43 @@ filing naps as sleep. Turning tracking on (Health → Sleep → Sleep Schedule, 
 Sleep with Apple Watch*) starts collection; nothing backfills it. Restoring the column
 means re-adding the import and one entry to `HABITS` in `habits.astro`.
 
-Bend has **no public API** — no developer access, no export endpoint, and nothing about
-HealthKit on bend.com. Apple Health is the only way a session leaves the phone, and as of
-the 2026-08-23 export nothing had arrived by that route yet: a full source census shows
-only Apple Watch, iPhone, Strava, Slopes, GymKit, sweetgreen, Blood Oxygen, Health, Sleep
-and Clock. No Bend, no `Flexibility`, no `PreparationAndRecovery`.
+Bend has **no public API** — no developer access, no export endpoint, nothing about
+HealthKit on bend.com — so Apple Health is the only way a session leaves the phone. The
+2026-08-23 export contained no Bend records at all; it does now, so the census in that
+commit message is stale. `import_health.py --list-sources` prints what any given export
+actually holds, and is the thing to run before believing either claim.
 
-That is a data problem, not a plumbing one — the drop-folder route below is wired and
-tested, so sessions flow the moment Bend actually writes them. Until then
-`bend-history.csv` remains the only record.
+Health data therefore arrives one of three ways, all needing something on the phone:
 
-So Health data arrives one of two ways, both needing something on the phone:
-
-1. **A scheduled iOS Shortcut** writing into `iCloud Drive/habits/sleep/` or
-   `iCloud Drive/habits/stretching/`, merged nightly by `import_shortcut_sleep.py` and
+1. **A scheduled iOS Shortcut POSTing to GitHub** — a `repository_dispatch` of type
+   `stretching`, merged by `.github/workflows/stretching.yml` running
+   `import_shortcut_stretching.py --payload-file`. This is the route that actually updates
+   daily: nothing but the phone has to be awake. **`docs/bend-stretching-shortcut.md` is
+   the build guide** — token scope, every action in the Shortcut, and what to check when
+   nothing shows up.
+2. **A scheduled iOS Shortcut writing to iCloud Drive** — into `habits/sleep/` or
+   `habits/stretching/`, merged nightly by `import_shortcut_sleep.py` and
    `import_shortcut_stretching.py`. Those folders mirror to
    `~/Library/Mobile Documents/com~apple~CloudDocs/habits/` and, unlike Biome or
    `knowledgeC.db`, need **no Full Disk Access** to read. Each folder's `README.txt`
-   documents its own accepted line formats.
-2. **A full Health export** (`import_health.py`), which also backfills stretching.
+   documents its own accepted line formats. Kept as the token-free fallback; it only runs
+   when the Mac does.
+3. **A full Health export** (`import_health.py`), which also backfills stretching.
+
+Routes 1 and 2 share every line of parsing and counting, so a session is counted
+identically whichever way it arrived, and sending it both ways is harmless.
 
 The stretching shortcut may need to read either workouts or mindful sessions, depending on
-what Bend writes — it normalises to text lines on the phone, so the Mac side does not care
-which. Overlapping shortcut windows are safe: identical spans are deduped by exact
-`(start, end)`, so a 7-day window run daily cannot count a session twice.
+what Bend writes — it normalises to text lines on the phone, so neither the Mac nor the
+runner cares which. Overlapping windows are safe: identical spans are deduped by exact
+`(start, end)` and every affected day is recounted, so a 7-day window sent daily cannot
+count a session twice — and a day the phone misses is repaired by the next run rather than
+lost.
+
+One thing the GitHub route needs that the Mac route does not: **a timezone**. Sessions are
+filed under the local date they started, so the runner has to agree with the phone about
+what "local" means. `TZ: America/New_York` in `stretching.yml` is what does that; without
+it a 22:30 session lands on the following day.
 
 Both file a night under the date you *woke up*, and the Shortcut route reuses
 `import_health.sleep_days` and `union` so the two cannot disagree about the same night.
@@ -178,10 +194,18 @@ JSON rather than overwriting it. That is load-bearing for screen time: macOS pru
 `knowledgeC.db` to roughly four weeks, so an overwriting write would destroy history.
 
 `.github/workflows/habits.yml` runs the two API scripts nightly and commits
-`src/data/habits/` straight to `main`, which triggers the usual Cloudflare deploy. This
-is a deliberate, path-scoped exception to the never-commit-to-`main` rule below — it
-applies to automated data commits only, never to code. The job skips the commit when
-only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
+`src/data/habits/` straight to `main`, which triggers the usual Cloudflare deploy.
+`.github/workflows/stretching.yml` does the same on a `repository_dispatch` from the
+phone, whenever that arrives. Both are a deliberate, path-scoped exception to the
+never-commit-to-`main` rule below — they apply to automated data commits only, never to
+code. Both skip the commit when only `updated_at` changed, so a quiet day does not
+trigger a pointless redeploy, and they share a `habits-refresh` concurrency group so the
+two cannot race to push.
+
+The nightly job also warns when `stretching.json` or `screentime.json` has not moved in
+more than four days. Neither has a schedule CI can check up on, so without it a deleted
+Shortcut or a stopped LaunchAgent shows up only as a column that quietly stops growing —
+which is exactly how stretching stalled for a week in August 2026.
 
 ### One-time setup
 
@@ -209,13 +233,17 @@ only `updated_at` changed, so a quiet day does not trigger a pointless redeploy.
    `launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.habits` and check
    `~/Library/Logs/habits-daily.log`. Both `knowledgeC.db` and Biome are pruned to
    roughly four weeks, so a long outage loses days permanently.
-5. **Stretching and sleep** — make sure Bend is syncing to Apple Health (Bend →
-   Settings → Apple Health). Then on iPhone: Health → profile → Export All Health
-   Data, and `python scripts/import_health.py ~/Downloads/export.zip` and commit.
-   One pass fills in both habits.
-6. **Stretching before the sync date** — add rows to `scripts/bend-history.csv` from
+5. **Stretching, daily** — build the iOS Shortcut in
+   `docs/bend-stretching-shortcut.md` and schedule it. That is the whole pipeline:
+   Bend → Apple Health → Shortcut → `repository_dispatch` → `stretching.yml` → deploy.
+   Check Bend → Settings → Apple Health is granted first, or the Shortcut finds nothing.
+6. **Stretching and sleep, in bulk** — on iPhone: Health → profile → Export All Health
+   Data, then `python scripts/import_health.py ~/Downloads/export.zip` and commit.
+   One pass fills in both habits, and is the way to catch up a long gap.
+7. **Stretching before the sync date** — add rows to `scripts/bend-history.csv` from
    Bend's Recent History screen and run `python scripts/backfill_stretching.py`.
-   Only needed for sessions predating step 5.
+   Only needed for sessions predating step 5; Bend's Health connection writes from the
+   day it was enabled onward and never backfills.
 
 ## Publications
 
