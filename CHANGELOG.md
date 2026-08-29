@@ -1,9 +1,8 @@
 # Changelog
 
-## 2.3.0 — 2026-08-29
+## 2.4.0 — 2026-08-29
 
 ### Added
-
 - Bend → `/habits` now updates on its own, without the Mac. A scheduled iOS Shortcut reads the last seven days of Bend workouts out of Apple Health and POSTs them as a `repository_dispatch`; `.github/workflows/stretching.yml` merges them into `stretching.json`, commits, and the usual Cloudflare deploy follows. HealthKit is on-device only and Health does not reach the Mac, so a push from the phone is the only transport that exists — the previous route had one, but it landed in iCloud Drive and was picked up by a LaunchAgent, so it only ran when the Mac happened to be on. That is why stretching stopped at 2026-08-22
 - `docs/bend-stretching-shortcut.md` — the phone-side build guide that `AGENTS.md` has referred to since 2.2.0 without it existing: token scope, every action in the Shortcut, how to test the route with no phone involved, and what each failure mode looks like. Leads with a five-action Shortcut that sends only today's count, since it proves the whole pipe with no loop and no date arithmetic; the seven-day span version is a drop-in replacement, and a span overwrites the day-count for the same date, so upgrading needs no cleanup
 - `--payload-file` on `import_shortcut_stretching.py`, reading the same session lines from a file or stdin instead of the drop folder. The drop folder, the dispatch payload, and a full `export.zip` all reach the same `union()` and `stretch_days()`, so a session counts identically however it arrived and the routes can overlap without disagreeing
@@ -18,6 +17,16 @@
 ### Changed
 
 - `AGENTS.md`, `docs/habits-pipeline.md`, and the `habits-data` skill all recorded that Bend does not sync to Apple Health. That described the 2026-08-23 export, taken before the connection was on, and it is no longer true — all three now point at `import_health.py --list-sources` as the way to settle it for a given export rather than asserting either answer
+
+## 2.3.0 — 2026-08-29
+
+### Added
+- `/maths/aperiodic-tiles` — a tiling builder you can pan and zoom on a phone or a desktop. Three tilings, built three different ways: Penrose P3 rhombs by substitution of the two Robinson triangles, Ammann–Beenker by cut and project from `Z^4` through an octagonal window, and the hat from a stored patch. Pointer events cover mouse, trackpad and touch through one code path, so a drag pans, two fingers pinch and a flick glides; the canvas centre is clamped to stay over the patch, since one determined scroll otherwise leaves a blank canvas with no clue which way to come back
+- `public/maths/hat-search.mjs` — the derivation of the hat, as a runnable script. It enumerates all 10,209 8-kite polykites, keeps the 341 whose outline is a simple 13-gon, asks an exact-cover solver which of those can fill discs of radius 5, 12 and 30, and picks out the one that is forced to mix reflections in the ratio `1 : phi^4`. That one is the hat. Runs in about eight seconds, standard library only. The page's hat patch (475 tiles, radius 44) comes from the same solver, and is stored rather than generated because the search grows exponentially — that radius took three random restarts and `8.8e8` nodes, and four restarts at radius 50 each gave up after `2.5e9`
+
+### Changed
+
+- `/maths` index no longer claims every page is MATLAB, which stopped being true with the tiling page
 
 ## 2.2.0 — 2026-08-26
 
