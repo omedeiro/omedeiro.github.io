@@ -10,6 +10,8 @@ noindex: true
 Over the years I copied quotes and passages into my journal when they landed.
 This is that collection.
 
+## Primary
+
 > It's amazing what you see when you look.
 >
 > — PM
@@ -29,6 +31,8 @@ This is that collection.
 > You can't work unless you're comfortable.
 >
 > — PM
+
+## Secondary
 
 > Excellence is not a skill, it's an attitude.
 >

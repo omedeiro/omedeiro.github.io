@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.3.3 — 2026-08-29
+
+### Changed
+
+- `/philosophy` is split under Primary and Secondary headings: the five PM and Sae Woo Nam quotes sit under Primary, the four attributed to public figures under Secondary
+
 ## 2.3.2 — 2026-08-29
 
 ### Added
