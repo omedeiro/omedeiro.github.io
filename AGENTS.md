@@ -38,8 +38,11 @@ Deploys run automatically via Cloudflare Workers Builds on push to `main` (build
 
 - Match darioamodei.com aesthetic: single ~42rem column, serif body, small sans-serif nav, no cards/grids/sidebars, no client-side JS.
 - All styling lives in `Base.astro`; do not add per-page CSS files.
-- **`/habits` is the sole exception**, deliberately and narrowly: it passes `wide` to `Base` for a 52rem column (five heatmaps do not fit in 42rem) and carries an `is:inline` script for the heatmap tooltip. Every other page stays 42rem and JS-free. Do not generalise either exception without asking.
-- LaTeX math works in markdown via `$...$` / `$$...$$` (KaTeX CSS loaded from CDN).
+- **Two pages carry JS**, deliberately and narrowly. `/habits` passes `wide` to `Base` for a 52rem column (five heatmaps do not fit in 42rem) and carries an `is:inline` script for the heatmap tooltip. `/maths/euler-spiral` loads `public/maths/euler-spiral.js` for the curve viewer, which cannot be done without a canvas; it stays at 42rem. The `wide` column remains `/habits` alone. Every other page stays 42rem and JS-free — do not generalise either exception without asking.
+- Both exceptions keep their CSS in `Base.astro`, scoped by a class prefix (`.habits-*`, `.euler*`), rather than adding a per-page stylesheet.
+- LaTeX math works in markdown via `$...$` / `$$...$$` (KaTeX CSS loaded from CDN). It does **not** work in `.astro` pages: remark-math only runs on markdown, and Astro reads `{` in an `.astro` template as a JSX expression, so `\frac{a}{b}` is a compile error. A page needing both math and a script should be `.md` with the script tag inline — raw HTML and `<script src>` pass through untouched.
+- **Display-math fences go on their own lines** — `$$`, newline, the expression, newline, `$$`. Opening with `$$x = 1` on one line parses as inline math instead, and the KaTeX error that follows swallows the whole rest of the document into one red `<span>`: prose stops being formatted and a trailing `<script src>` is escaped into text. `astro build` still exits 0, so grep the built HTML for `katex-error` rather than trusting the exit code.
+- A display equation wider than the column scrolls in its own box (`.katex-display { overflow-x: auto }` in `Base.astro`) instead of pushing the whole page sideways on a phone.
 
 ## Content guidelines
 

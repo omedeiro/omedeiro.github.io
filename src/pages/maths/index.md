@@ -3,9 +3,9 @@ layout: ../../layouts/Md.astro
 title: Maths
 ---
 
-Computational explorations of mathematical concepts using MATLAB simulations and visualizations.
+Computational explorations of mathematical concepts, with the source behind each one.
 
 - **[Bertrand's Paradox](/maths/bertrand-paradox)** — a geometric probability problem demonstrating how different interpretations of "random" can yield different results for the same question.
-- **[Euler Spiral](/maths/euler-spiral)** — a mathematical curve where curvature changes linearly with arc length, also known as a clothoid or Cornu spiral.
+- **[Euler Spiral](/maths/euler-spiral)** — the curve whose curvature grows in proportion to the distance along it, built three ways in the browser: the Fresnel integrals, the same spiral walked out a step at a time, and the transition curve roads and railways are made from.
 
-Each page includes the complete MATLAB source code and resulting visualizations.
+Bertrand is a MATLAB simulation with the complete source and its figure; the Euler spiral page runs live.
