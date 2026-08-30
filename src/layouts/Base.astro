@@ -316,7 +316,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       /* A display equation too wide for the column scrolls in its own box
          rather than pushing the whole page sideways on a phone. */
       .katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
-      /* Euler spiral viewer. Scoped to /maths/euler-spiral, the second page
+      /* Euler spiral viewer. Scoped to /maths/euler-spiral, the third page
          that loads client-side JS: a curve you can pan, zoom and trace needs a
          canvas. The --euler-* variables are read back out by the script, so the
          drawing follows the light and dark palettes without repeating them in
@@ -432,6 +432,97 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       .euler.is-expanded canvas { height: 100%; }
       .euler.is-expanded figcaption { margin: 0; }
       body.euler-locked { overflow: hidden; }
+      /* Bertrand's paradox sampler. Scoped to /maths/bertrand-paradox, the
+         fourth page that loads client-side JS: thousands of chords redrawn as a
+         slider moves needs a canvas. Same arrangement as the two above — the
+         --bert-* variables are read back out by the script, so the drawing
+         follows the light and dark palettes without repeating them in JS. */
+      .bertrand {
+        --bert-long: #8a4b2d;
+        --bert-short: #6b6b66;
+        --bert-rim: rgba(28, 28, 26, 0.45);
+        --bert-grid: rgba(28, 28, 26, 0.12);
+        --bert-bg: #fbfaf8;
+        margin: 1.75rem 0 1.5rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        .bertrand {
+          --bert-long: #d99a72;
+          --bert-short: #9a988f;
+          --bert-rim: rgba(232, 230, 225, 0.42);
+          --bert-grid: rgba(232, 230, 225, 0.12);
+          --bert-bg: #121211;
+        }
+      }
+      .bertrand canvas {
+        display: block;
+        width: 100%;
+        height: min(60vh, 31rem);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--bert-bg);
+      }
+      .bertrand-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem 1.1rem;
+        margin-top: 0.65rem;
+      }
+      .bertrand-controls,
+      .bertrand figcaption {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      .bertrand-field {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .bertrand-field select,
+      .bertrand button {
+        font: inherit;
+        color: var(--fg);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+      }
+      .bertrand button { cursor: pointer; }
+      .bertrand button:hover { border-color: var(--accent); color: var(--accent); }
+      .bertrand-buttons { gap: 0.4rem; }
+      .bertrand-field input[type="range"] {
+        width: 8.5rem;
+        accent-color: var(--accent);
+      }
+      .bertrand-field output {
+        min-width: 2.6rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--fg);
+      }
+      .bertrand-readout { font-variant-numeric: tabular-nums; }
+      .bertrand-legend { display: inline-flex; flex-wrap: wrap; gap: 0.9rem; margin-left: 0.9rem; }
+      .bertrand-key { display: inline-flex; align-items: center; gap: 0.35rem; }
+      .bertrand-key i {
+        width: 11px;
+        height: 3px;
+        border-radius: 2px;
+      }
+      .bertrand.is-expanded {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        margin: 0;
+        padding: 0.75rem;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .bertrand.is-expanded canvas { flex: 1 1 auto; min-height: 0; height: 100%; }
+      .bertrand.is-expanded figcaption { margin: 0; }
+      body.bertrand-locked { overflow: hidden; }
       footer.site {
         margin-top: 4rem;
         padding-top: 1.25rem;
