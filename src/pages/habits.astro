@@ -34,11 +34,11 @@ const HABITS = [
     caption: "darker = further",
     empty: "no run",
     format: (d: Day) => {
-      const km = `${d.value.toFixed(1)} km`;
+      const miles = `${d.value.toFixed(1)} mi`;
       const secs = Number(d.extra?.moving_time_s) || 0;
-      return secs ? `${km} · ${Math.round(secs / 60)} min` : km;
+      return secs ? `${miles} · ${Math.round(secs / 60)} min` : miles;
     },
-    summary: (total: number) => `${total.toFixed(0)} km total`,
+    summary: (total: number) => `${total.toFixed(0)} mi total`,
   },
   {
     data: commits as Habit,
@@ -87,7 +87,7 @@ type Scale =
 /**
  * Work out how one habit's values map onto the five-step ramp.
  *
- * Scaling per habit rather than globally is what lets one column read a 10 km
+ * Scaling per habit rather than globally is what lets one column read a six-mile
  * run and another a 7-hour night on the same ramp.
  *
  * Habits with only a handful of distinct values get mapped directly onto the
