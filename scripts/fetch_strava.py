@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch Strava activities and emit the running habit file.
 
-Produces ``running.json`` — kilometres per day from Run / TrailRun /
+Produces ``running.json`` — miles per day from Run / TrailRun /
 VirtualRun activities.
 
 Stretching deliberately does *not* come from here. Strava's "Workout" entries
@@ -19,7 +19,8 @@ Credentials come from the environment or ``scripts/.env``:
 
 This talks to the REST API over ``urllib`` rather than using ``stravalib`` so
 the nightly GitHub Action needs no pip install and cannot break on an upstream
-release. Strava reports SI units: distance in metres, times in seconds.
+release. Strava reports SI units: distance in metres, times in seconds; the
+habit file records miles, so distances are converted on the way out.
 """
 
 from __future__ import annotations
@@ -59,6 +60,8 @@ SCOPE = "activity:read_all"
 REQUIRED_SCOPE = "activity:read"
 
 RUN_TYPES = {"Run", "TrailRun", "VirtualRun"}
+
+METRES_PER_MILE = 1609.344
 
 PER_PAGE = 200
 
@@ -324,7 +327,7 @@ def build_days(acts: list[dict], types: set[str]) -> dict[str, dict]:
     days: dict[str, dict] = {}
     for key, acc in buckets.items():
         days[key] = hc.day(
-            acc["distance_m"] / 1000.0,
+            acc["distance_m"] / METRES_PER_MILE,
             moving_time_s=int(acc["moving_time_s"]),
             distance_m=int(acc["distance_m"]),
             count=int(acc["count"]),
@@ -355,7 +358,7 @@ def main(argv: list[str]) -> int:
 
     run_types = {t.strip() for t in args.run_types.split(",") if t.strip()}
     hc.write_habit(
-        "running", "Running", "Strava", "km",
+        "running", "Running", "Strava", "mi",
         build_days(acts, run_types),
         merge=not args.no_merge, data_dir=args.out_dir,
     )

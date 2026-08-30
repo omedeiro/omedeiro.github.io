@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.4.1 — 2026-08-30
+## 2.4.2 — 2026-08-30
 
 ### Changed
 
@@ -12,6 +12,12 @@
 
 - `public/projects/tdgl/` gains six PNGs and two gifs. Every figure links to its full-resolution file, since the four- and six-panel ones are not legible at 42rem, and every image is `loading="lazy"` — the page is 8 MB of figures and only the first one is above the fold
 - `nb-hole-array-trapped.gif` is requantised to a 64-colour palette with dithering off: 8.4 MB to 3.1 MB with no visible change to the physics panel, since dithering adds exactly the per-pixel noise GIF's run-length coding cannot compress
+
+## 2.4.1 — 2026-08-30
+
+### Changed
+
+- The running habit is measured in miles rather than kilometres. `fetch_strava.py` divides Strava's metres by 1609.344 on the way out and writes `"unit": "mi"`, and the existing 853 days in `running.json` were converted in place — `extra.distance_m` still carries the raw metres, so the conversion is reversible
 
 ## 2.4.0 — 2026-08-30
 
