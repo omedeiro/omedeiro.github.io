@@ -2,11 +2,11 @@
   "id": "running",
   "label": "Running",
   "source": "Strava",
-  "unit": "km",
+  "unit": "mi",
   "updated_at": "2026-08-28T09:00:15Z",
   "days": {
     "2019-01-01": {
-      "value": 2.5824,
+      "value": 1.6046,
       "extra": {
         "moving_time_s": 738,
         "distance_m": 2582,
@@ -14,7 +14,7 @@
       }
     },
     "2019-11-16": {
-      "value": 3.2767,
+      "value": 2.036,
       "extra": {
         "moving_time_s": 1088,
         "distance_m": 3276,
@@ -22,7 +22,7 @@
       }
     },
     "2020-01-13": {
-      "value": 6.4877,
+      "value": 4.0313,
       "extra": {
         "moving_time_s": 2234,
         "distance_m": 6487,
@@ -30,7 +30,7 @@
       }
     },
     "2020-01-22": {
-      "value": 3.3295,
+      "value": 2.0689,
       "extra": {
         "moving_time_s": 1071,
         "distance_m": 3329,
@@ -38,7 +38,7 @@
       }
     },
     "2020-02-01": {
-      "value": 3.0421,
+      "value": 1.8903,
       "extra": {
         "moving_time_s": 1016,
         "distance_m": 3042,
@@ -46,7 +46,7 @@
       }
     },
     "2020-03-05": {
-      "value": 2.8995,
+      "value": 1.8017,
       "extra": {
         "moving_time_s": 994,
         "distance_m": 2899,
@@ -54,7 +54,7 @@
       }
     },
     "2020-03-18": {
-      "value": 5.1609,
+      "value": 3.2068,
       "extra": {
         "moving_time_s": 1554,
         "distance_m": 5160,
@@ -62,7 +62,7 @@
       }
     },
     "2020-03-27": {
-      "value": 4.8124,
+      "value": 2.9903,
       "extra": {
         "moving_time_s": 1351,
         "distance_m": 4812,
@@ -70,7 +70,7 @@
       }
     },
     "2020-04-09": {
-      "value": 5.235,
+      "value": 3.2529,
       "extra": {
         "moving_time_s": 1548,
         "distance_m": 5235,
@@ -78,7 +78,7 @@
       }
     },
     "2020-04-14": {
-      "value": 5.2348,
+      "value": 3.2528,
       "extra": {
         "moving_time_s": 1524,
         "distance_m": 5234,
@@ -86,7 +86,7 @@
       }
     },
     "2020-04-21": {
-      "value": 5.3113,
+      "value": 3.3003,
       "extra": {
         "moving_time_s": 1571,
         "distance_m": 5311,
@@ -94,7 +94,7 @@
       }
     },
     "2020-05-12": {
-      "value": 5.2373,
+      "value": 3.2543,
       "extra": {
         "moving_time_s": 1526,
         "distance_m": 5237,
@@ -102,7 +102,7 @@
       }
     },
     "2020-05-18": {
-      "value": 5.3248,
+      "value": 3.3087,
       "extra": {
         "moving_time_s": 1672,
         "distance_m": 5324,
@@ -110,7 +110,7 @@
       }
     },
     "2020-06-14": {
-      "value": 5.1672,
+      "value": 3.2107,
       "extra": {
         "moving_time_s": 1418,
         "distance_m": 5167,
@@ -118,7 +118,7 @@
       }
     },
     "2020-09-07": {
-      "value": 5.0204,
+      "value": 3.1195,
       "extra": {
         "moving_time_s": 1466,
         "distance_m": 5020,
@@ -126,7 +126,7 @@
       }
     },
     "2020-09-09": {
-      "value": 6.3413,
+      "value": 3.9403,
       "extra": {
         "moving_time_s": 2123,
         "distance_m": 6341,
@@ -134,7 +134,7 @@
       }
     },
     "2020-09-11": {
-      "value": 5.2993,
+      "value": 3.2928,
       "extra": {
         "moving_time_s": 1695,
         "distance_m": 5299,
@@ -142,7 +142,7 @@
       }
     },
     "2020-09-13": {
-      "value": 5.4846,
+      "value": 3.408,
       "extra": {
         "moving_time_s": 1753,
         "distance_m": 5484,
@@ -150,7 +150,7 @@
       }
     },
     "2020-09-15": {
-      "value": 5.2535,
+      "value": 3.2644,
       "extra": {
         "moving_time_s": 1695,
         "distance_m": 5253,
@@ -158,7 +158,7 @@
       }
     },
     "2020-09-17": {
-      "value": 6.8392,
+      "value": 4.2497,
       "extra": {
         "moving_time_s": 2250,
         "distance_m": 6839,
@@ -166,7 +166,7 @@
       }
     },
     "2020-09-19": {
-      "value": 7.0738,
+      "value": 4.3955,
       "extra": {
         "moving_time_s": 2243,
         "distance_m": 7073,
@@ -174,7 +174,7 @@
       }
     },
     "2020-09-21": {
-      "value": 4.867,
+      "value": 3.0242,
       "extra": {
         "moving_time_s": 1662,
         "distance_m": 4867,
@@ -182,7 +182,7 @@
       }
     },
     "2020-09-23": {
-      "value": 6.9901,
+      "value": 4.3434,
       "extra": {
         "moving_time_s": 2380,
         "distance_m": 6990,
@@ -190,7 +190,7 @@
       }
     },
     "2020-09-25": {
-      "value": 5.4005,
+      "value": 3.3557,
       "extra": {
         "moving_time_s": 1754,
         "distance_m": 5400,
@@ -198,7 +198,7 @@
       }
     },
     "2020-09-27": {
-      "value": 7.1225,
+      "value": 4.4257,
       "extra": {
         "moving_time_s": 2360,
         "distance_m": 7122,
@@ -206,7 +206,7 @@
       }
     },
     "2020-10-01": {
-      "value": 5.2955,
+      "value": 3.2905,
       "extra": {
         "moving_time_s": 1614,
         "distance_m": 5295,
@@ -214,7 +214,7 @@
       }
     },
     "2020-10-03": {
-      "value": 5.1983,
+      "value": 3.2301,
       "extra": {
         "moving_time_s": 1597,
         "distance_m": 5198,
@@ -222,7 +222,7 @@
       }
     },
     "2020-10-05": {
-      "value": 7.0609,
+      "value": 4.3874,
       "extra": {
         "moving_time_s": 2464,
         "distance_m": 7060,
@@ -230,7 +230,7 @@
       }
     },
     "2020-10-08": {
-      "value": 5.3863,
+      "value": 3.3469,
       "extra": {
         "moving_time_s": 1742,
         "distance_m": 5386,
@@ -238,7 +238,7 @@
       }
     },
     "2020-10-10": {
-      "value": 7.1656,
+      "value": 4.4525,
       "extra": {
         "moving_time_s": 2425,
         "distance_m": 7165,
@@ -246,7 +246,7 @@
       }
     },
     "2020-10-12": {
-      "value": 7.1201,
+      "value": 4.4242,
       "extra": {
         "moving_time_s": 2214,
         "distance_m": 7120,
@@ -254,7 +254,7 @@
       }
     },
     "2020-10-14": {
-      "value": 5.3031,
+      "value": 3.2952,
       "extra": {
         "moving_time_s": 1635,
         "distance_m": 5303,
@@ -262,7 +262,7 @@
       }
     },
     "2020-10-16": {
-      "value": 5.4099,
+      "value": 3.3616,
       "extra": {
         "moving_time_s": 1660,
         "distance_m": 5409,
@@ -270,7 +270,7 @@
       }
     },
     "2020-10-18": {
-      "value": 5.4254,
+      "value": 3.3712,
       "extra": {
         "moving_time_s": 1592,
         "distance_m": 5425,
@@ -278,7 +278,7 @@
       }
     },
     "2020-10-20": {
-      "value": 8.2915,
+      "value": 5.1521,
       "extra": {
         "moving_time_s": 2571,
         "distance_m": 8291,
@@ -286,7 +286,7 @@
       }
     },
     "2020-10-22": {
-      "value": 8.2922,
+      "value": 5.1525,
       "extra": {
         "moving_time_s": 2507,
         "distance_m": 8292,
@@ -294,7 +294,7 @@
       }
     },
     "2020-10-24": {
-      "value": 5.4566,
+      "value": 3.3906,
       "extra": {
         "moving_time_s": 1577,
         "distance_m": 5456,
@@ -302,7 +302,7 @@
       }
     },
     "2020-10-26": {
-      "value": 5.3565,
+      "value": 3.3284,
       "extra": {
         "moving_time_s": 1713,
         "distance_m": 5356,
@@ -310,7 +310,7 @@
       }
     },
     "2020-10-28": {
-      "value": 8.2505,
+      "value": 5.1266,
       "extra": {
         "moving_time_s": 2586,
         "distance_m": 8250,
@@ -318,7 +318,7 @@
       }
     },
     "2020-10-30": {
-      "value": 7.1098,
+      "value": 4.4178,
       "extra": {
         "moving_time_s": 2253,
         "distance_m": 7109,
@@ -326,7 +326,7 @@
       }
     },
     "2020-11-01": {
-      "value": 7.072,
+      "value": 4.3943,
       "extra": {
         "moving_time_s": 2027,
         "distance_m": 7072,
@@ -334,7 +334,7 @@
       }
     },
     "2020-11-03": {
-      "value": 7.0918,
+      "value": 4.4066,
       "extra": {
         "moving_time_s": 2165,
         "distance_m": 7091,
@@ -342,7 +342,7 @@
       }
     },
     "2020-11-05": {
-      "value": 7.065,
+      "value": 4.39,
       "extra": {
         "moving_time_s": 2237,
         "distance_m": 7065,
@@ -350,7 +350,7 @@
       }
     },
     "2020-11-08": {
-      "value": 6.7118,
+      "value": 4.1705,
       "extra": {
         "moving_time_s": 2059,
         "distance_m": 6711,
@@ -358,7 +358,7 @@
       }
     },
     "2020-11-10": {
-      "value": 5.3917,
+      "value": 3.3502,
       "extra": {
         "moving_time_s": 1703,
         "distance_m": 5391,
@@ -366,7 +366,7 @@
       }
     },
     "2020-11-12": {
-      "value": 7.1109,
+      "value": 4.4185,
       "extra": {
         "moving_time_s": 2088,
         "distance_m": 7110,
@@ -374,7 +374,7 @@
       }
     },
     "2020-11-14": {
-      "value": 7.1901,
+      "value": 4.4677,
       "extra": {
         "moving_time_s": 2308,
         "distance_m": 7190,
@@ -382,7 +382,7 @@
       }
     },
     "2020-11-16": {
-      "value": 5.4497,
+      "value": 3.3863,
       "extra": {
         "moving_time_s": 1642,
         "distance_m": 5449,
@@ -390,7 +390,7 @@
       }
     },
     "2020-11-18": {
-      "value": 7.0998,
+      "value": 4.4116,
       "extra": {
         "moving_time_s": 2162,
         "distance_m": 7099,
@@ -398,7 +398,7 @@
       }
     },
     "2020-11-20": {
-      "value": 7.0329,
+      "value": 4.37,
       "extra": {
         "moving_time_s": 2237,
         "distance_m": 7032,
@@ -406,7 +406,7 @@
       }
     },
     "2020-11-22": {
-      "value": 7.0898,
+      "value": 4.4054,
       "extra": {
         "moving_time_s": 2329,
         "distance_m": 7089,
@@ -414,7 +414,7 @@
       }
     },
     "2020-11-24": {
-      "value": 5.423,
+      "value": 3.3697,
       "extra": {
         "moving_time_s": 1723,
         "distance_m": 5423,
@@ -422,7 +422,7 @@
       }
     },
     "2020-11-27": {
-      "value": 7.1714,
+      "value": 4.4561,
       "extra": {
         "moving_time_s": 2184,
         "distance_m": 7171,
@@ -430,7 +430,7 @@
       }
     },
     "2020-11-29": {
-      "value": 7.0937,
+      "value": 4.4078,
       "extra": {
         "moving_time_s": 2125,
         "distance_m": 7093,
@@ -438,7 +438,7 @@
       }
     },
     "2020-12-01": {
-      "value": 5.4349,
+      "value": 3.3771,
       "extra": {
         "moving_time_s": 1647,
         "distance_m": 5434,
@@ -446,7 +446,7 @@
       }
     },
     "2020-12-03": {
-      "value": 5.4696,
+      "value": 3.3987,
       "extra": {
         "moving_time_s": 1631,
         "distance_m": 5469,
@@ -454,7 +454,7 @@
       }
     },
     "2020-12-06": {
-      "value": 5.4058,
+      "value": 3.359,
       "extra": {
         "moving_time_s": 1574,
         "distance_m": 5405,
@@ -462,7 +462,7 @@
       }
     },
     "2020-12-08": {
-      "value": 5.4197,
+      "value": 3.3676,
       "extra": {
         "moving_time_s": 1710,
         "distance_m": 5419,
@@ -470,7 +470,7 @@
       }
     },
     "2020-12-10": {
-      "value": 7.1102,
+      "value": 4.4181,
       "extra": {
         "moving_time_s": 2130,
         "distance_m": 7110,
@@ -478,7 +478,7 @@
       }
     },
     "2020-12-12": {
-      "value": 5.4305,
+      "value": 3.3744,
       "extra": {
         "moving_time_s": 1749,
         "distance_m": 5430,
@@ -486,7 +486,7 @@
       }
     },
     "2020-12-14": {
-      "value": 5.4583,
+      "value": 3.3916,
       "extra": {
         "moving_time_s": 1700,
         "distance_m": 5458,
@@ -494,7 +494,7 @@
       }
     },
     "2020-12-15": {
-      "value": 1.3972,
+      "value": 0.8682,
       "extra": {
         "moving_time_s": 712,
         "distance_m": 1397,
@@ -502,7 +502,7 @@
       }
     },
     "2020-12-16": {
-      "value": 7.0919,
+      "value": 4.4067,
       "extra": {
         "moving_time_s": 2390,
         "distance_m": 7091,
@@ -510,7 +510,7 @@
       }
     },
     "2020-12-18": {
-      "value": 7.0511,
+      "value": 4.3814,
       "extra": {
         "moving_time_s": 2459,
         "distance_m": 7051,
@@ -518,7 +518,7 @@
       }
     },
     "2020-12-21": {
-      "value": 7.1268,
+      "value": 4.4284,
       "extra": {
         "moving_time_s": 2347,
         "distance_m": 7126,
@@ -526,7 +526,7 @@
       }
     },
     "2020-12-24": {
-      "value": 5.211,
+      "value": 3.238,
       "extra": {
         "moving_time_s": 1458,
         "distance_m": 5211,
@@ -534,7 +534,7 @@
       }
     },
     "2020-12-26": {
-      "value": 6.4978,
+      "value": 4.0375,
       "extra": {
         "moving_time_s": 1898,
         "distance_m": 6497,
@@ -542,7 +542,7 @@
       }
     },
     "2020-12-28": {
-      "value": 7.0844,
+      "value": 4.402,
       "extra": {
         "moving_time_s": 2171,
         "distance_m": 7084,
@@ -550,7 +550,7 @@
       }
     },
     "2020-12-30": {
-      "value": 5.4247,
+      "value": 3.3708,
       "extra": {
         "moving_time_s": 1708,
         "distance_m": 5424,
@@ -558,7 +558,7 @@
       }
     },
     "2021-01-01": {
-      "value": 7.1548,
+      "value": 4.4458,
       "extra": {
         "moving_time_s": 2211,
         "distance_m": 7154,
@@ -566,7 +566,7 @@
       }
     },
     "2021-01-03": {
-      "value": 8.3588,
+      "value": 5.1939,
       "extra": {
         "moving_time_s": 2797,
         "distance_m": 8358,
@@ -574,7 +574,7 @@
       }
     },
     "2021-01-05": {
-      "value": 8.1537,
+      "value": 5.0665,
       "extra": {
         "moving_time_s": 2698,
         "distance_m": 8153,
@@ -582,7 +582,7 @@
       }
     },
     "2021-01-07": {
-      "value": 8.0897,
+      "value": 5.0267,
       "extra": {
         "moving_time_s": 2591,
         "distance_m": 8089,
@@ -590,7 +590,7 @@
       }
     },
     "2021-01-09": {
-      "value": 5.485,
+      "value": 3.4082,
       "extra": {
         "moving_time_s": 1772,
         "distance_m": 5485,
@@ -598,7 +598,7 @@
       }
     },
     "2021-01-11": {
-      "value": 7.075,
+      "value": 4.3962,
       "extra": {
         "moving_time_s": 2093,
         "distance_m": 7075,
@@ -606,7 +606,7 @@
       }
     },
     "2021-01-13": {
-      "value": 7.1816,
+      "value": 4.4624,
       "extra": {
         "moving_time_s": 2209,
         "distance_m": 7181,
@@ -614,7 +614,7 @@
       }
     },
     "2021-01-15": {
-      "value": 5.3533,
+      "value": 3.3264,
       "extra": {
         "moving_time_s": 1511,
         "distance_m": 5353,
@@ -622,7 +622,7 @@
       }
     },
     "2021-01-17": {
-      "value": 7.1075,
+      "value": 4.4164,
       "extra": {
         "moving_time_s": 2247,
         "distance_m": 7107,
@@ -630,7 +630,7 @@
       }
     },
     "2021-01-19": {
-      "value": 7.1263,
+      "value": 4.4281,
       "extra": {
         "moving_time_s": 2169,
         "distance_m": 7126,
@@ -638,7 +638,7 @@
       }
     },
     "2021-01-21": {
-      "value": 8.6227,
+      "value": 5.3579,
       "extra": {
         "moving_time_s": 2779,
         "distance_m": 8622,
@@ -646,7 +646,7 @@
       }
     },
     "2021-01-23": {
-      "value": 7.1119,
+      "value": 4.4191,
       "extra": {
         "moving_time_s": 2169,
         "distance_m": 7111,
@@ -654,7 +654,7 @@
       }
     },
     "2021-01-25": {
-      "value": 8.1228,
+      "value": 5.0473,
       "extra": {
         "moving_time_s": 2561,
         "distance_m": 8122,
@@ -662,7 +662,7 @@
       }
     },
     "2021-01-27": {
-      "value": 7.0392,
+      "value": 4.374,
       "extra": {
         "moving_time_s": 2255,
         "distance_m": 7039,
@@ -670,7 +670,7 @@
       }
     },
     "2021-02-03": {
-      "value": 7.1324,
+      "value": 4.4319,
       "extra": {
         "moving_time_s": 2315,
         "distance_m": 7132,
@@ -678,7 +678,7 @@
       }
     },
     "2021-02-05": {
-      "value": 7.0188,
+      "value": 4.3613,
       "extra": {
         "moving_time_s": 2199,
         "distance_m": 7018,
@@ -686,7 +686,7 @@
       }
     },
     "2021-02-08": {
-      "value": 7.1065,
+      "value": 4.4158,
       "extra": {
         "moving_time_s": 2336,
         "distance_m": 7106,
@@ -694,7 +694,7 @@
       }
     },
     "2021-02-11": {
-      "value": 7.1096,
+      "value": 4.4177,
       "extra": {
         "moving_time_s": 2093,
         "distance_m": 7109,
@@ -702,7 +702,7 @@
       }
     },
     "2021-02-13": {
-      "value": 7.0852,
+      "value": 4.4025,
       "extra": {
         "moving_time_s": 2063,
         "distance_m": 7085,
@@ -710,7 +710,7 @@
       }
     },
     "2021-02-15": {
-      "value": 5.4496,
+      "value": 3.3862,
       "extra": {
         "moving_time_s": 1717,
         "distance_m": 5449,
@@ -718,7 +718,7 @@
       }
     },
     "2021-02-17": {
-      "value": 7.1136,
+      "value": 4.4202,
       "extra": {
         "moving_time_s": 2154,
         "distance_m": 7113,
@@ -726,7 +726,7 @@
       }
     },
     "2021-02-21": {
-      "value": 7.0474,
+      "value": 4.3791,
       "extra": {
         "moving_time_s": 2107,
         "distance_m": 7047,
@@ -734,7 +734,7 @@
       }
     },
     "2021-02-23": {
-      "value": 10.3881,
+      "value": 6.4549,
       "extra": {
         "moving_time_s": 3323,
         "distance_m": 10388,
@@ -742,7 +742,7 @@
       }
     },
     "2021-02-25": {
-      "value": 9.6326,
+      "value": 5.9854,
       "extra": {
         "moving_time_s": 3042,
         "distance_m": 9632,
@@ -750,7 +750,7 @@
       }
     },
     "2021-02-28": {
-      "value": 6.9425,
+      "value": 4.3139,
       "extra": {
         "moving_time_s": 1979,
         "distance_m": 6942,
@@ -758,7 +758,7 @@
       }
     },
     "2021-03-02": {
-      "value": 4.9236,
+      "value": 3.0594,
       "extra": {
         "moving_time_s": 1530,
         "distance_m": 4923,
@@ -766,7 +766,7 @@
       }
     },
     "2021-03-04": {
-      "value": 7.1745,
+      "value": 4.458,
       "extra": {
         "moving_time_s": 2228,
         "distance_m": 7174,
@@ -774,7 +774,7 @@
       }
     },
     "2021-03-06": {
-      "value": 7.1439,
+      "value": 4.439,
       "extra": {
         "moving_time_s": 2182,
         "distance_m": 7143,
@@ -782,7 +782,7 @@
       }
     },
     "2021-03-08": {
-      "value": 12.7292,
+      "value": 7.9096,
       "extra": {
         "moving_time_s": 4136,
         "distance_m": 12729,
@@ -790,7 +790,7 @@
       }
     },
     "2021-03-10": {
-      "value": 5.4169,
+      "value": 3.3659,
       "extra": {
         "moving_time_s": 1749,
         "distance_m": 5416,
@@ -798,7 +798,7 @@
       }
     },
     "2021-03-12": {
-      "value": 7.0985,
+      "value": 4.4108,
       "extra": {
         "moving_time_s": 2321,
         "distance_m": 7098,
@@ -806,7 +806,7 @@
       }
     },
     "2021-03-14": {
-      "value": 10.1247,
+      "value": 6.2912,
       "extra": {
         "moving_time_s": 3317,
         "distance_m": 10124,
@@ -814,7 +814,7 @@
       }
     },
     "2021-03-16": {
-      "value": 5.3048,
+      "value": 3.2962,
       "extra": {
         "moving_time_s": 1713,
         "distance_m": 5304,
@@ -822,7 +822,7 @@
       }
     },
     "2021-03-18": {
-      "value": 11.3095,
+      "value": 7.0274,
       "extra": {
         "moving_time_s": 3892,
         "distance_m": 11309,
@@ -830,7 +830,7 @@
       }
     },
     "2021-03-20": {
-      "value": 6.899,
+      "value": 4.2868,
       "extra": {
         "moving_time_s": 2076,
         "distance_m": 6899,
@@ -838,7 +838,7 @@
       }
     },
     "2021-03-22": {
-      "value": 7.0808,
+      "value": 4.3998,
       "extra": {
         "moving_time_s": 2203,
         "distance_m": 7080,
@@ -846,7 +846,7 @@
       }
     },
     "2021-03-24": {
-      "value": 7.129,
+      "value": 4.4298,
       "extra": {
         "moving_time_s": 2292,
         "distance_m": 7129,
@@ -854,7 +854,7 @@
       }
     },
     "2021-03-28": {
-      "value": 11.7761,
+      "value": 7.3173,
       "extra": {
         "moving_time_s": 3804,
         "distance_m": 11776,
@@ -862,7 +862,7 @@
       }
     },
     "2021-03-30": {
-      "value": 7.052,
+      "value": 4.3819,
       "extra": {
         "moving_time_s": 2134,
         "distance_m": 7052,
@@ -870,7 +870,7 @@
       }
     },
     "2021-04-01": {
-      "value": 6.9733,
+      "value": 4.333,
       "extra": {
         "moving_time_s": 2198,
         "distance_m": 6973,
@@ -878,7 +878,7 @@
       }
     },
     "2021-04-03": {
-      "value": 8.7011,
+      "value": 5.4066,
       "extra": {
         "moving_time_s": 2844,
         "distance_m": 8701,
@@ -886,7 +886,7 @@
       }
     },
     "2021-04-05": {
-      "value": 7.0326,
+      "value": 4.3699,
       "extra": {
         "moving_time_s": 2182,
         "distance_m": 7032,
@@ -894,7 +894,7 @@
       }
     },
     "2021-04-09": {
-      "value": 7.0546,
+      "value": 4.3835,
       "extra": {
         "moving_time_s": 2111,
         "distance_m": 7054,
@@ -902,7 +902,7 @@
       }
     },
     "2021-04-11": {
-      "value": 7.0489,
+      "value": 4.38,
       "extra": {
         "moving_time_s": 2088,
         "distance_m": 7048,
@@ -910,7 +910,7 @@
       }
     },
     "2021-04-12": {
-      "value": 7.6996,
+      "value": 4.7843,
       "extra": {
         "moving_time_s": 2262,
         "distance_m": 7699,
@@ -918,7 +918,7 @@
       }
     },
     "2021-04-14": {
-      "value": 9.4025,
+      "value": 5.8424,
       "extra": {
         "moving_time_s": 2974,
         "distance_m": 9402,
@@ -926,7 +926,7 @@
       }
     },
     "2021-04-17": {
-      "value": 7.0726,
+      "value": 4.3947,
       "extra": {
         "moving_time_s": 2213,
         "distance_m": 7072,
@@ -934,7 +934,7 @@
       }
     },
     "2021-04-19": {
-      "value": 10.965,
+      "value": 6.8133,
       "extra": {
         "moving_time_s": 3414,
         "distance_m": 10965,
@@ -942,7 +942,7 @@
       }
     },
     "2021-04-21": {
-      "value": 9.6953,
+      "value": 6.0244,
       "extra": {
         "moving_time_s": 3014,
         "distance_m": 9695,
@@ -950,7 +950,7 @@
       }
     },
     "2021-04-23": {
-      "value": 12.6522,
+      "value": 7.8617,
       "extra": {
         "moving_time_s": 3861,
         "distance_m": 12652,
@@ -958,7 +958,7 @@
       }
     },
     "2021-04-25": {
-      "value": 14.736,
+      "value": 9.1565,
       "extra": {
         "moving_time_s": 4589,
         "distance_m": 14736,
@@ -966,7 +966,7 @@
       }
     },
     "2021-04-27": {
-      "value": 12.5948,
+      "value": 7.826,
       "extra": {
         "moving_time_s": 3886,
         "distance_m": 12594,
@@ -974,7 +974,7 @@
       }
     },
     "2021-04-30": {
-      "value": 20.9158,
+      "value": 12.9965,
       "extra": {
         "moving_time_s": 6739,
         "distance_m": 20915,
@@ -982,7 +982,7 @@
       }
     },
     "2021-05-02": {
-      "value": 7.0526,
+      "value": 4.3823,
       "extra": {
         "moving_time_s": 2110,
         "distance_m": 7052,
@@ -990,7 +990,7 @@
       }
     },
     "2021-05-04": {
-      "value": 8.371,
+      "value": 5.2015,
       "extra": {
         "moving_time_s": 2348,
         "distance_m": 8371,
@@ -998,7 +998,7 @@
       }
     },
     "2021-05-06": {
-      "value": 8.8462,
+      "value": 5.4968,
       "extra": {
         "moving_time_s": 2622,
         "distance_m": 8846,
@@ -1006,7 +1006,7 @@
       }
     },
     "2021-05-09": {
-      "value": 8.4645,
+      "value": 5.2596,
       "extra": {
         "moving_time_s": 2521,
         "distance_m": 8464,
@@ -1014,7 +1014,7 @@
       }
     },
     "2021-05-10": {
-      "value": 7.058,
+      "value": 4.3856,
       "extra": {
         "moving_time_s": 2052,
         "distance_m": 7058,
@@ -1022,7 +1022,7 @@
       }
     },
     "2021-05-12": {
-      "value": 15.2356,
+      "value": 9.467,
       "extra": {
         "moving_time_s": 4633,
         "distance_m": 15235,
@@ -1030,7 +1030,7 @@
       }
     },
     "2021-05-15": {
-      "value": 7.0265,
+      "value": 4.3661,
       "extra": {
         "moving_time_s": 2052,
         "distance_m": 7026,
@@ -1038,7 +1038,7 @@
       }
     },
     "2021-05-17": {
-      "value": 8.654,
+      "value": 5.3773,
       "extra": {
         "moving_time_s": 2550,
         "distance_m": 8654,
@@ -1046,7 +1046,7 @@
       }
     },
     "2021-05-18": {
-      "value": 11.1538,
+      "value": 6.9307,
       "extra": {
         "moving_time_s": 3295,
         "distance_m": 11153,
@@ -1054,7 +1054,7 @@
       }
     },
     "2021-05-21": {
-      "value": 13.0459,
+      "value": 8.1063,
       "extra": {
         "moving_time_s": 3730,
         "distance_m": 13045,
@@ -1062,7 +1062,7 @@
       }
     },
     "2021-05-24": {
-      "value": 10.6424,
+      "value": 6.6129,
       "extra": {
         "moving_time_s": 2975,
         "distance_m": 10642,
@@ -1070,7 +1070,7 @@
       }
     },
     "2021-05-26": {
-      "value": 11.2977,
+      "value": 7.0201,
       "extra": {
         "moving_time_s": 3276,
         "distance_m": 11297,
@@ -1078,7 +1078,7 @@
       }
     },
     "2021-05-28": {
-      "value": 10.9205,
+      "value": 6.7857,
       "extra": {
         "moving_time_s": 3072,
         "distance_m": 10920,
@@ -1086,7 +1086,7 @@
       }
     },
     "2021-05-31": {
-      "value": 7.1081,
+      "value": 4.4168,
       "extra": {
         "moving_time_s": 2082,
         "distance_m": 7108,
@@ -1094,7 +1094,7 @@
       }
     },
     "2021-06-02": {
-      "value": 7.9874,
+      "value": 4.9631,
       "extra": {
         "moving_time_s": 2264,
         "distance_m": 7987,
@@ -1102,7 +1102,7 @@
       }
     },
     "2021-06-04": {
-      "value": 15.7282,
+      "value": 9.7731,
       "extra": {
         "moving_time_s": 4875,
         "distance_m": 15728,
@@ -1110,7 +1110,7 @@
       }
     },
     "2021-06-08": {
-      "value": 8.7338,
+      "value": 5.4269,
       "extra": {
         "moving_time_s": 2617,
         "distance_m": 8733,
@@ -1118,7 +1118,7 @@
       }
     },
     "2021-06-09": {
-      "value": 8.057,
+      "value": 5.0064,
       "extra": {
         "moving_time_s": 2321,
         "distance_m": 8057,
@@ -1126,7 +1126,7 @@
       }
     },
     "2021-06-11": {
-      "value": 16.9579,
+      "value": 10.5372,
       "extra": {
         "moving_time_s": 5067,
         "distance_m": 16957,
@@ -1134,7 +1134,7 @@
       }
     },
     "2021-06-13": {
-      "value": 8.5056,
+      "value": 5.2851,
       "extra": {
         "moving_time_s": 2319,
         "distance_m": 8505,
@@ -1142,7 +1142,7 @@
       }
     },
     "2021-06-15": {
-      "value": 12.052,
+      "value": 7.4888,
       "extra": {
         "moving_time_s": 3397,
         "distance_m": 12052,
@@ -1150,7 +1150,7 @@
       }
     },
     "2021-06-17": {
-      "value": 9.6372,
+      "value": 5.9883,
       "extra": {
         "moving_time_s": 2637,
         "distance_m": 9637,
@@ -1158,7 +1158,7 @@
       }
     },
     "2021-06-18": {
-      "value": 15.4677,
+      "value": 9.6112,
       "extra": {
         "moving_time_s": 4321,
         "distance_m": 15467,
@@ -1166,7 +1166,7 @@
       }
     },
     "2021-06-21": {
-      "value": 21.1375,
+      "value": 13.1342,
       "extra": {
         "moving_time_s": 6223,
         "distance_m": 21137,
@@ -1174,7 +1174,7 @@
       }
     },
     "2021-06-24": {
-      "value": 12.5476,
+      "value": 7.7967,
       "extra": {
         "moving_time_s": 3529,
         "distance_m": 12547,
@@ -1182,7 +1182,7 @@
       }
     },
     "2021-06-25": {
-      "value": 11.2327,
+      "value": 6.9797,
       "extra": {
         "moving_time_s": 2987,
         "distance_m": 11232,
@@ -1190,7 +1190,7 @@
       }
     },
     "2021-06-27": {
-      "value": 11.5032,
+      "value": 7.1478,
       "extra": {
         "moving_time_s": 3367,
         "distance_m": 11503,
@@ -1198,7 +1198,7 @@
       }
     },
     "2021-06-28": {
-      "value": 14.3843,
+      "value": 8.938,
       "extra": {
         "moving_time_s": 4354,
         "distance_m": 14384,
@@ -1206,7 +1206,7 @@
       }
     },
     "2021-06-30": {
-      "value": 8.4455,
+      "value": 5.2478,
       "extra": {
         "moving_time_s": 2502,
         "distance_m": 8445,
@@ -1214,7 +1214,7 @@
       }
     },
     "2021-07-01": {
-      "value": 9.1091,
+      "value": 5.6601,
       "extra": {
         "moving_time_s": 2583,
         "distance_m": 9109,
@@ -1222,7 +1222,7 @@
       }
     },
     "2021-07-02": {
-      "value": 13.2424,
+      "value": 8.2284,
       "extra": {
         "moving_time_s": 3833,
         "distance_m": 13242,
@@ -1230,7 +1230,7 @@
       }
     },
     "2021-07-03": {
-      "value": 9.6918,
+      "value": 6.0222,
       "extra": {
         "moving_time_s": 2778,
         "distance_m": 9691,
@@ -1238,7 +1238,7 @@
       }
     },
     "2021-07-05": {
-      "value": 15.4059,
+      "value": 9.5728,
       "extra": {
         "moving_time_s": 4441,
         "distance_m": 15405,
@@ -1246,7 +1246,7 @@
       }
     },
     "2021-07-07": {
-      "value": 8.3118,
+      "value": 5.1647,
       "extra": {
         "moving_time_s": 2521,
         "distance_m": 8311,
@@ -1254,7 +1254,7 @@
       }
     },
     "2021-07-08": {
-      "value": 8.8462,
+      "value": 5.4968,
       "extra": {
         "moving_time_s": 2405,
         "distance_m": 8846,
@@ -1262,7 +1262,7 @@
       }
     },
     "2021-07-09": {
-      "value": 16.2156,
+      "value": 10.0759,
       "extra": {
         "moving_time_s": 4639,
         "distance_m": 16215,
@@ -1270,7 +1270,7 @@
       }
     },
     "2021-07-12": {
-      "value": 13.9935,
+      "value": 8.6952,
       "extra": {
         "moving_time_s": 3903,
         "distance_m": 13993,
@@ -1278,7 +1278,7 @@
       }
     },
     "2021-07-13": {
-      "value": 13.5502,
+      "value": 8.4197,
       "extra": {
         "moving_time_s": 3824,
         "distance_m": 13550,
@@ -1286,7 +1286,7 @@
       }
     },
     "2021-07-14": {
-      "value": 8.4057,
+      "value": 5.2231,
       "extra": {
         "moving_time_s": 2249,
         "distance_m": 8405,
@@ -1294,7 +1294,7 @@
       }
     },
     "2021-07-16": {
-      "value": 21.5876,
+      "value": 13.4139,
       "extra": {
         "moving_time_s": 6624,
         "distance_m": 21587,
@@ -1302,7 +1302,7 @@
       }
     },
     "2021-07-18": {
-      "value": 8.3686,
+      "value": 5.2,
       "extra": {
         "moving_time_s": 2298,
         "distance_m": 8368,
@@ -1310,7 +1310,7 @@
       }
     },
     "2021-07-19": {
-      "value": 14.8429,
+      "value": 9.223,
       "extra": {
         "moving_time_s": 4239,
         "distance_m": 14842,
@@ -1318,7 +1318,7 @@
       }
     },
     "2021-07-21": {
-      "value": 17.2799,
+      "value": 10.7372,
       "extra": {
         "moving_time_s": 4887,
         "distance_m": 17279,
@@ -1326,7 +1326,7 @@
       }
     },
     "2021-07-23": {
-      "value": 11.0585,
+      "value": 6.8714,
       "extra": {
         "moving_time_s": 3160,
         "distance_m": 11058,
@@ -1334,7 +1334,7 @@
       }
     },
     "2021-07-24": {
-      "value": 7.0829,
+      "value": 4.4011,
       "extra": {
         "moving_time_s": 1916,
         "distance_m": 7082,
@@ -1342,7 +1342,7 @@
       }
     },
     "2021-07-26": {
-      "value": 16.5015,
+      "value": 10.2536,
       "extra": {
         "moving_time_s": 4789,
         "distance_m": 16501,
@@ -1350,7 +1350,7 @@
       }
     },
     "2021-07-27": {
-      "value": 7.1454,
+      "value": 4.4399,
       "extra": {
         "moving_time_s": 2078,
         "distance_m": 7145,
@@ -1358,7 +1358,7 @@
       }
     },
     "2021-07-29": {
-      "value": 13.5688,
+      "value": 8.4313,
       "extra": {
         "moving_time_s": 3828,
         "distance_m": 13568,
@@ -1366,7 +1366,7 @@
       }
     },
     "2021-08-01": {
-      "value": 11.8032,
+      "value": 7.3342,
       "extra": {
         "moving_time_s": 3543,
         "distance_m": 11803,
@@ -1374,7 +1374,7 @@
       }
     },
     "2021-08-03": {
-      "value": 13.5713,
+      "value": 8.4328,
       "extra": {
         "moving_time_s": 4039,
         "distance_m": 13571,
@@ -1382,7 +1382,7 @@
       }
     },
     "2021-08-07": {
-      "value": 10.4241,
+      "value": 6.4772,
       "extra": {
         "moving_time_s": 3022,
         "distance_m": 10424,
@@ -1390,7 +1390,7 @@
       }
     },
     "2021-08-08": {
-      "value": 7.1477,
+      "value": 4.4414,
       "extra": {
         "moving_time_s": 1955,
         "distance_m": 7147,
@@ -1398,7 +1398,7 @@
       }
     },
     "2021-08-09": {
-      "value": 13.2735,
+      "value": 8.2478,
       "extra": {
         "moving_time_s": 3666,
         "distance_m": 13273,
@@ -1406,7 +1406,7 @@
       }
     },
     "2021-08-11": {
-      "value": 9.5029,
+      "value": 5.9048,
       "extra": {
         "moving_time_s": 2575,
         "distance_m": 9502,
@@ -1414,7 +1414,7 @@
       }
     },
     "2021-08-13": {
-      "value": 12.3194,
+      "value": 7.6549,
       "extra": {
         "moving_time_s": 3609,
         "distance_m": 12319,
@@ -1422,7 +1422,7 @@
       }
     },
     "2021-08-14": {
-      "value": 12.828,
+      "value": 7.9709,
       "extra": {
         "moving_time_s": 3918,
         "distance_m": 12828,
@@ -1430,7 +1430,7 @@
       }
     },
     "2021-08-15": {
-      "value": 4.8812,
+      "value": 3.033,
       "extra": {
         "moving_time_s": 1386,
         "distance_m": 4881,
@@ -1438,7 +1438,7 @@
       }
     },
     "2021-08-17": {
-      "value": 21.7547,
+      "value": 13.5177,
       "extra": {
         "moving_time_s": 6743,
         "distance_m": 21754,
@@ -1446,7 +1446,7 @@
       }
     },
     "2021-08-19": {
-      "value": 9.0626,
+      "value": 5.6312,
       "extra": {
         "moving_time_s": 2423,
         "distance_m": 9062,
@@ -1454,7 +1454,7 @@
       }
     },
     "2021-08-23": {
-      "value": 8.2253,
+      "value": 5.111,
       "extra": {
         "moving_time_s": 2214,
         "distance_m": 8225,
@@ -1462,7 +1462,7 @@
       }
     },
     "2021-08-25": {
-      "value": 12.0973,
+      "value": 7.5169,
       "extra": {
         "moving_time_s": 3511,
         "distance_m": 12097,
@@ -1470,7 +1470,7 @@
       }
     },
     "2021-08-27": {
-      "value": 11.3303,
+      "value": 7.0403,
       "extra": {
         "moving_time_s": 3221,
         "distance_m": 11330,
@@ -1478,7 +1478,7 @@
       }
     },
     "2021-08-28": {
-      "value": 11.3156,
+      "value": 7.0312,
       "extra": {
         "moving_time_s": 3129,
         "distance_m": 11315,
@@ -1486,7 +1486,7 @@
       }
     },
     "2021-08-29": {
-      "value": 7.1383,
+      "value": 4.4355,
       "extra": {
         "moving_time_s": 1853,
         "distance_m": 7138,
@@ -1494,7 +1494,7 @@
       }
     },
     "2021-08-30": {
-      "value": 8.9691,
+      "value": 5.5731,
       "extra": {
         "moving_time_s": 2559,
         "distance_m": 8969,
@@ -1502,7 +1502,7 @@
       }
     },
     "2021-09-01": {
-      "value": 12.3207,
+      "value": 7.6557,
       "extra": {
         "moving_time_s": 3697,
         "distance_m": 12320,
@@ -1510,7 +1510,7 @@
       }
     },
     "2021-09-03": {
-      "value": 11.9469,
+      "value": 7.4235,
       "extra": {
         "moving_time_s": 3443,
         "distance_m": 11946,
@@ -1518,7 +1518,7 @@
       }
     },
     "2021-09-04": {
-      "value": 14.8314,
+      "value": 9.2158,
       "extra": {
         "moving_time_s": 4066,
         "distance_m": 14831,
@@ -1526,7 +1526,7 @@
       }
     },
     "2021-09-05": {
-      "value": 5.6327,
+      "value": 3.5,
       "extra": {
         "moving_time_s": 1519,
         "distance_m": 5632,
@@ -1534,7 +1534,7 @@
       }
     },
     "2021-09-07": {
-      "value": 7.1471,
+      "value": 4.441,
       "extra": {
         "moving_time_s": 1886,
         "distance_m": 7147,
@@ -1542,7 +1542,7 @@
       }
     },
     "2021-09-08": {
-      "value": 8.7408,
+      "value": 5.4313,
       "extra": {
         "moving_time_s": 2531,
         "distance_m": 8740,
@@ -1550,7 +1550,7 @@
       }
     },
     "2021-09-10": {
-      "value": 8.2898,
+      "value": 5.151,
       "extra": {
         "moving_time_s": 2227,
         "distance_m": 8289,
@@ -1558,7 +1558,7 @@
       }
     },
     "2021-09-11": {
-      "value": 16.4056,
+      "value": 10.194,
       "extra": {
         "moving_time_s": 4800,
         "distance_m": 16405,
@@ -1566,7 +1566,7 @@
       }
     },
     "2021-09-13": {
-      "value": 21.1074,
+      "value": 13.1155,
       "extra": {
         "moving_time_s": 6080,
         "distance_m": 21107,
@@ -1574,7 +1574,7 @@
       }
     },
     "2021-09-14": {
-      "value": 7.1933,
+      "value": 4.4697,
       "extra": {
         "moving_time_s": 1981,
         "distance_m": 7193,
@@ -1582,7 +1582,7 @@
       }
     },
     "2021-09-16": {
-      "value": 7.2456,
+      "value": 4.5022,
       "extra": {
         "moving_time_s": 2037,
         "distance_m": 7245,
@@ -1590,7 +1590,7 @@
       }
     },
     "2021-09-17": {
-      "value": 15.1386,
+      "value": 9.4067,
       "extra": {
         "moving_time_s": 4429,
         "distance_m": 15138,
@@ -1598,7 +1598,7 @@
       }
     },
     "2021-09-21": {
-      "value": 9.6967,
+      "value": 6.0253,
       "extra": {
         "moving_time_s": 2798,
         "distance_m": 9696,
@@ -1606,7 +1606,7 @@
       }
     },
     "2021-09-22": {
-      "value": 8.0365,
+      "value": 4.9936,
       "extra": {
         "moving_time_s": 2254,
         "distance_m": 8036,
@@ -1614,7 +1614,7 @@
       }
     },
     "2021-09-23": {
-      "value": 7.1877,
+      "value": 4.4662,
       "extra": {
         "moving_time_s": 2034,
         "distance_m": 7187,
@@ -1622,7 +1622,7 @@
       }
     },
     "2021-09-25": {
-      "value": 12.236,
+      "value": 7.6031,
       "extra": {
         "moving_time_s": 3325,
         "distance_m": 12236,
@@ -1630,7 +1630,7 @@
       }
     },
     "2021-09-27": {
-      "value": 8.6974,
+      "value": 5.4043,
       "extra": {
         "moving_time_s": 2442,
         "distance_m": 8697,
@@ -1638,7 +1638,7 @@
       }
     },
     "2021-09-28": {
-      "value": 9.7596,
+      "value": 6.0643,
       "extra": {
         "moving_time_s": 2744,
         "distance_m": 9759,
@@ -1646,7 +1646,7 @@
       }
     },
     "2021-09-29": {
-      "value": 10.6169,
+      "value": 6.597,
       "extra": {
         "moving_time_s": 2817,
         "distance_m": 10616,
@@ -1654,7 +1654,7 @@
       }
     },
     "2021-10-01": {
-      "value": 8.3134,
+      "value": 5.1657,
       "extra": {
         "moving_time_s": 2387,
         "distance_m": 8313,
@@ -1662,7 +1662,7 @@
       }
     },
     "2021-10-06": {
-      "value": 7.0551,
+      "value": 4.3838,
       "extra": {
         "moving_time_s": 1991,
         "distance_m": 7055,
@@ -1670,7 +1670,7 @@
       }
     },
     "2021-10-07": {
-      "value": 6.4656,
+      "value": 4.0175,
       "extra": {
         "moving_time_s": 1978,
         "distance_m": 6465,
@@ -1678,7 +1678,7 @@
       }
     },
     "2021-10-09": {
-      "value": 6.4712,
+      "value": 4.021,
       "extra": {
         "moving_time_s": 1886,
         "distance_m": 6471,
@@ -1686,7 +1686,7 @@
       }
     },
     "2021-10-11": {
-      "value": 7.206,
+      "value": 4.4776,
       "extra": {
         "moving_time_s": 2126,
         "distance_m": 7206,
@@ -1694,7 +1694,7 @@
       }
     },
     "2021-10-15": {
-      "value": 10.2534,
+      "value": 6.3712,
       "extra": {
         "moving_time_s": 2876,
         "distance_m": 10253,
@@ -1702,7 +1702,7 @@
       }
     },
     "2021-10-16": {
-      "value": 8.381,
+      "value": 5.2077,
       "extra": {
         "moving_time_s": 2397,
         "distance_m": 8381,
@@ -1710,7 +1710,7 @@
       }
     },
     "2021-10-18": {
-      "value": 8.301,
+      "value": 5.158,
       "extra": {
         "moving_time_s": 2387,
         "distance_m": 8301,
@@ -1718,7 +1718,7 @@
       }
     },
     "2021-10-20": {
-      "value": 13.1382,
+      "value": 8.1637,
       "extra": {
         "moving_time_s": 3809,
         "distance_m": 13138,
@@ -1726,7 +1726,7 @@
       }
     },
     "2021-10-22": {
-      "value": 14.7962,
+      "value": 9.1939,
       "extra": {
         "moving_time_s": 4326,
         "distance_m": 14796,
@@ -1734,7 +1734,7 @@
       }
     },
     "2021-10-25": {
-      "value": 4.8822,
+      "value": 3.0337,
       "extra": {
         "moving_time_s": 1535,
         "distance_m": 4882,
@@ -1742,7 +1742,7 @@
       }
     },
     "2021-10-27": {
-      "value": 7.0518,
+      "value": 4.3818,
       "extra": {
         "moving_time_s": 1982,
         "distance_m": 7051,
@@ -1750,7 +1750,7 @@
       }
     },
     "2021-10-31": {
-      "value": 9.8635,
+      "value": 6.1289,
       "extra": {
         "moving_time_s": 2839,
         "distance_m": 9863,
@@ -1758,7 +1758,7 @@
       }
     },
     "2021-11-03": {
-      "value": 6.4935,
+      "value": 4.0349,
       "extra": {
         "moving_time_s": 1746,
         "distance_m": 6493,
@@ -1766,7 +1766,7 @@
       }
     },
     "2021-11-07": {
-      "value": 20.8523,
+      "value": 12.957,
       "extra": {
         "moving_time_s": 5626,
         "distance_m": 20852,
@@ -1774,7 +1774,7 @@
       }
     },
     "2021-11-09": {
-      "value": 4.843,
+      "value": 3.0093,
       "extra": {
         "moving_time_s": 1383,
         "distance_m": 4843,
@@ -1782,7 +1782,7 @@
       }
     },
     "2021-11-11": {
-      "value": 13.4641,
+      "value": 8.3662,
       "extra": {
         "moving_time_s": 3803,
         "distance_m": 13464,
@@ -1790,7 +1790,7 @@
       }
     },
     "2021-11-13": {
-      "value": 12.2486,
+      "value": 7.6109,
       "extra": {
         "moving_time_s": 3556,
         "distance_m": 12248,
@@ -1798,7 +1798,7 @@
       }
     },
     "2021-11-15": {
-      "value": 8.3573,
+      "value": 5.193,
       "extra": {
         "moving_time_s": 2410,
         "distance_m": 8357,
@@ -1806,7 +1806,7 @@
       }
     },
     "2021-11-17": {
-      "value": 5.3131,
+      "value": 3.3014,
       "extra": {
         "moving_time_s": 1449,
         "distance_m": 5313,
@@ -1814,7 +1814,7 @@
       }
     },
     "2021-11-21": {
-      "value": 6.6678,
+      "value": 4.1432,
       "extra": {
         "moving_time_s": 1829,
         "distance_m": 6667,
@@ -1822,7 +1822,7 @@
       }
     },
     "2021-11-23": {
-      "value": 6.9198,
+      "value": 4.2998,
       "extra": {
         "moving_time_s": 1950,
         "distance_m": 6919,
@@ -1830,7 +1830,7 @@
       }
     },
     "2021-11-27": {
-      "value": 8.4596,
+      "value": 5.2566,
       "extra": {
         "moving_time_s": 2435,
         "distance_m": 8459,
@@ -1838,7 +1838,7 @@
       }
     },
     "2021-11-30": {
-      "value": 9.1368,
+      "value": 5.6773,
       "extra": {
         "moving_time_s": 2618,
         "distance_m": 9136,
@@ -1846,7 +1846,7 @@
       }
     },
     "2021-12-02": {
-      "value": 5.5097,
+      "value": 3.4236,
       "extra": {
         "moving_time_s": 1484,
         "distance_m": 5509,
@@ -1854,7 +1854,7 @@
       }
     },
     "2021-12-04": {
-      "value": 8.3658,
+      "value": 5.1983,
       "extra": {
         "moving_time_s": 2325,
         "distance_m": 8365,
@@ -1862,7 +1862,7 @@
       }
     },
     "2021-12-07": {
-      "value": 8.6454,
+      "value": 5.372,
       "extra": {
         "moving_time_s": 2431,
         "distance_m": 8645,
@@ -1870,7 +1870,7 @@
       }
     },
     "2021-12-10": {
-      "value": 9.5625,
+      "value": 5.9419,
       "extra": {
         "moving_time_s": 2695,
         "distance_m": 9562,
@@ -1878,7 +1878,7 @@
       }
     },
     "2021-12-13": {
-      "value": 6.3559,
+      "value": 3.9494,
       "extra": {
         "moving_time_s": 1856,
         "distance_m": 6355,
@@ -1886,7 +1886,7 @@
       }
     },
     "2021-12-16": {
-      "value": 11.2871,
+      "value": 7.0135,
       "extra": {
         "moving_time_s": 3193,
         "distance_m": 11287,
@@ -1894,7 +1894,7 @@
       }
     },
     "2021-12-19": {
-      "value": 8.268,
+      "value": 5.1375,
       "extra": {
         "moving_time_s": 2410,
         "distance_m": 8268,
@@ -1902,7 +1902,7 @@
       }
     },
     "2021-12-26": {
-      "value": 7.1649,
+      "value": 4.4521,
       "extra": {
         "moving_time_s": 1974,
         "distance_m": 7164,
@@ -1910,7 +1910,7 @@
       }
     },
     "2021-12-28": {
-      "value": 9.4458,
+      "value": 5.8693,
       "extra": {
         "moving_time_s": 2745,
         "distance_m": 9445,
@@ -1918,7 +1918,7 @@
       }
     },
     "2021-12-30": {
-      "value": 6.6768,
+      "value": 4.1488,
       "extra": {
         "moving_time_s": 1892,
         "distance_m": 6676,
@@ -1926,7 +1926,7 @@
       }
     },
     "2022-01-03": {
-      "value": 11.3277,
+      "value": 7.0387,
       "extra": {
         "moving_time_s": 3387,
         "distance_m": 11327,
@@ -1934,7 +1934,7 @@
       }
     },
     "2022-01-05": {
-      "value": 6.2387,
+      "value": 3.8765,
       "extra": {
         "moving_time_s": 1779,
         "distance_m": 6238,
@@ -1942,7 +1942,7 @@
       }
     },
     "2022-01-10": {
-      "value": 9.062,
+      "value": 5.6309,
       "extra": {
         "moving_time_s": 2877,
         "distance_m": 9062,
@@ -1950,7 +1950,7 @@
       }
     },
     "2022-01-12": {
-      "value": 9.957,
+      "value": 6.187,
       "extra": {
         "moving_time_s": 2783,
         "distance_m": 9957,
@@ -1958,7 +1958,7 @@
       }
     },
     "2022-01-15": {
-      "value": 4.8933,
+      "value": 3.0406,
       "extra": {
         "moving_time_s": 1390,
         "distance_m": 4893,
@@ -1966,7 +1966,7 @@
       }
     },
     "2022-01-18": {
-      "value": 4.9058,
+      "value": 3.0483,
       "extra": {
         "moving_time_s": 1374,
         "distance_m": 4905,
@@ -1974,7 +1974,7 @@
       }
     },
     "2022-01-20": {
-      "value": 6.6826,
+      "value": 4.1524,
       "extra": {
         "moving_time_s": 2158,
         "distance_m": 6682,
@@ -1989,7 +1989,7 @@
       }
     },
     "2022-01-25": {
-      "value": 7.903,
+      "value": 4.9107,
       "extra": {
         "moving_time_s": 2210,
         "distance_m": 7903,
@@ -1997,7 +1997,7 @@
       }
     },
     "2022-01-31": {
-      "value": 5.4891,
+      "value": 3.4108,
       "extra": {
         "moving_time_s": 1656,
         "distance_m": 5489,
@@ -2005,7 +2005,7 @@
       }
     },
     "2022-02-02": {
-      "value": 5.5227,
+      "value": 3.4316,
       "extra": {
         "moving_time_s": 1545,
         "distance_m": 5522,
@@ -2013,7 +2013,7 @@
       }
     },
     "2022-02-07": {
-      "value": 7.7214,
+      "value": 4.7979,
       "extra": {
         "moving_time_s": 2234,
         "distance_m": 7721,
@@ -2021,7 +2021,7 @@
       }
     },
     "2022-02-09": {
-      "value": 7.1581,
+      "value": 4.4478,
       "extra": {
         "moving_time_s": 2054,
         "distance_m": 7158,
@@ -2029,7 +2029,7 @@
       }
     },
     "2022-02-14": {
-      "value": 4.6782,
+      "value": 2.9069,
       "extra": {
         "moving_time_s": 1275,
         "distance_m": 4678,
@@ -2037,7 +2037,7 @@
       }
     },
     "2022-02-16": {
-      "value": 7.7027,
+      "value": 4.7862,
       "extra": {
         "moving_time_s": 2269,
         "distance_m": 7702,
@@ -2045,7 +2045,7 @@
       }
     },
     "2022-03-01": {
-      "value": 4.9734,
+      "value": 3.0903,
       "extra": {
         "moving_time_s": 1450,
         "distance_m": 4973,
@@ -2053,7 +2053,7 @@
       }
     },
     "2022-03-09": {
-      "value": 8.2138,
+      "value": 5.1038,
       "extra": {
         "moving_time_s": 2728,
         "distance_m": 8213,
@@ -2061,7 +2061,7 @@
       }
     },
     "2022-03-11": {
-      "value": 3.5291,
+      "value": 2.1929,
       "extra": {
         "moving_time_s": 946,
         "distance_m": 3529,
@@ -2069,7 +2069,7 @@
       }
     },
     "2022-03-15": {
-      "value": 8.0988,
+      "value": 5.0324,
       "extra": {
         "moving_time_s": 2444,
         "distance_m": 8098,
@@ -2077,7 +2077,7 @@
       }
     },
     "2022-03-18": {
-      "value": 7.2883,
+      "value": 4.5287,
       "extra": {
         "moving_time_s": 2177,
         "distance_m": 7288,
@@ -2085,7 +2085,7 @@
       }
     },
     "2022-03-21": {
-      "value": 5.0365,
+      "value": 3.1295,
       "extra": {
         "moving_time_s": 1445,
         "distance_m": 5036,
@@ -2093,7 +2093,7 @@
       }
     },
     "2022-03-31": {
-      "value": 5.6501,
+      "value": 3.5108,
       "extra": {
         "moving_time_s": 1667,
         "distance_m": 5650,
@@ -2101,7 +2101,7 @@
       }
     },
     "2022-04-11": {
-      "value": 7.3626,
+      "value": 4.5749,
       "extra": {
         "moving_time_s": 2163,
         "distance_m": 7362,
@@ -2109,7 +2109,7 @@
       }
     },
     "2022-04-13": {
-      "value": 4.8588,
+      "value": 3.0191,
       "extra": {
         "moving_time_s": 1543,
         "distance_m": 4858,
@@ -2117,7 +2117,7 @@
       }
     },
     "2022-04-18": {
-      "value": 8.1146,
+      "value": 5.0422,
       "extra": {
         "moving_time_s": 2446,
         "distance_m": 8114,
@@ -2125,7 +2125,7 @@
       }
     },
     "2022-04-25": {
-      "value": 4.8527,
+      "value": 3.0153,
       "extra": {
         "moving_time_s": 1464,
         "distance_m": 4852,
@@ -2133,7 +2133,7 @@
       }
     },
     "2022-05-17": {
-      "value": 5.0683,
+      "value": 3.1493,
       "extra": {
         "moving_time_s": 1432,
         "distance_m": 5068,
@@ -2141,7 +2141,7 @@
       }
     },
     "2022-05-20": {
-      "value": 5.0373,
+      "value": 3.13,
       "extra": {
         "moving_time_s": 1399,
         "distance_m": 5037,
@@ -2149,7 +2149,7 @@
       }
     },
     "2022-05-22": {
-      "value": 7.2472,
+      "value": 4.5032,
       "extra": {
         "moving_time_s": 2103,
         "distance_m": 7247,
@@ -2157,7 +2157,7 @@
       }
     },
     "2022-05-24": {
-      "value": 5.8508,
+      "value": 3.6355,
       "extra": {
         "moving_time_s": 1690,
         "distance_m": 5850,
@@ -2165,7 +2165,7 @@
       }
     },
     "2022-05-29": {
-      "value": 5.2315,
+      "value": 3.2507,
       "extra": {
         "moving_time_s": 1620,
         "distance_m": 5231,
@@ -2173,7 +2173,7 @@
       }
     },
     "2022-06-01": {
-      "value": 3.3952,
+      "value": 2.1097,
       "extra": {
         "moving_time_s": 1035,
         "distance_m": 3395,
@@ -2181,7 +2181,7 @@
       }
     },
     "2022-06-15": {
-      "value": 10.7441,
+      "value": 6.6761,
       "extra": {
         "moving_time_s": 3346,
         "distance_m": 10744,
@@ -2189,7 +2189,7 @@
       }
     },
     "2022-06-18": {
-      "value": 7.2071,
+      "value": 4.4783,
       "extra": {
         "moving_time_s": 2243,
         "distance_m": 7207,
@@ -2197,7 +2197,7 @@
       }
     },
     "2022-06-20": {
-      "value": 7.1936,
+      "value": 4.4699,
       "extra": {
         "moving_time_s": 2253,
         "distance_m": 7193,
@@ -2205,7 +2205,7 @@
       }
     },
     "2022-06-22": {
-      "value": 3.7037,
+      "value": 2.3014,
       "extra": {
         "moving_time_s": 1007,
         "distance_m": 3703,
@@ -2213,7 +2213,7 @@
       }
     },
     "2022-06-24": {
-      "value": 7.1694,
+      "value": 4.4549,
       "extra": {
         "moving_time_s": 2144,
         "distance_m": 7169,
@@ -2221,7 +2221,7 @@
       }
     },
     "2022-06-27": {
-      "value": 8.061,
+      "value": 5.0089,
       "extra": {
         "moving_time_s": 2455,
         "distance_m": 8061,
@@ -2229,7 +2229,7 @@
       }
     },
     "2022-07-01": {
-      "value": 5.862,
+      "value": 3.6425,
       "extra": {
         "moving_time_s": 1717,
         "distance_m": 5862,
@@ -2237,7 +2237,7 @@
       }
     },
     "2022-07-03": {
-      "value": 5.2051,
+      "value": 3.2343,
       "extra": {
         "moving_time_s": 1515,
         "distance_m": 5205,
@@ -2245,7 +2245,7 @@
       }
     },
     "2022-07-05": {
-      "value": 5.4943,
+      "value": 3.414,
       "extra": {
         "moving_time_s": 1504,
         "distance_m": 5494,
@@ -2253,7 +2253,7 @@
       }
     },
     "2022-07-07": {
-      "value": 10.1211,
+      "value": 6.289,
       "extra": {
         "moving_time_s": 3008,
         "distance_m": 10121,
@@ -2261,7 +2261,7 @@
       }
     },
     "2022-07-10": {
-      "value": 11.6132,
+      "value": 7.2161,
       "extra": {
         "moving_time_s": 3641,
         "distance_m": 11613,
@@ -2269,7 +2269,7 @@
       }
     },
     "2022-07-12": {
-      "value": 5.4344,
+      "value": 3.3768,
       "extra": {
         "moving_time_s": 1629,
         "distance_m": 5434,
@@ -2277,7 +2277,7 @@
       }
     },
     "2022-07-13": {
-      "value": 7.0515,
+      "value": 4.3816,
       "extra": {
         "moving_time_s": 2111,
         "distance_m": 7051,
@@ -2285,7 +2285,7 @@
       }
     },
     "2022-07-17": {
-      "value": 6.4676,
+      "value": 4.0188,
       "extra": {
         "moving_time_s": 1944,
         "distance_m": 6467,
@@ -2293,7 +2293,7 @@
       }
     },
     "2022-07-18": {
-      "value": 6.9894,
+      "value": 4.343,
       "extra": {
         "moving_time_s": 2108,
         "distance_m": 6989,
@@ -2301,7 +2301,7 @@
       }
     },
     "2022-07-20": {
-      "value": 9.68,
+      "value": 6.0149,
       "extra": {
         "moving_time_s": 3025,
         "distance_m": 9680,
@@ -2309,7 +2309,7 @@
       }
     },
     "2022-07-22": {
-      "value": 6.4416,
+      "value": 4.0026,
       "extra": {
         "moving_time_s": 1980,
         "distance_m": 6441,
@@ -2317,7 +2317,7 @@
       }
     },
     "2022-07-24": {
-      "value": 9.7885,
+      "value": 6.0823,
       "extra": {
         "moving_time_s": 3025,
         "distance_m": 9788,
@@ -2325,7 +2325,7 @@
       }
     },
     "2022-07-25": {
-      "value": 14.2818,
+      "value": 8.8743,
       "extra": {
         "moving_time_s": 4604,
         "distance_m": 14281,
@@ -2333,7 +2333,7 @@
       }
     },
     "2022-07-27": {
-      "value": 8.8133,
+      "value": 5.4763,
       "extra": {
         "moving_time_s": 2624,
         "distance_m": 8813,
@@ -2341,7 +2341,7 @@
       }
     },
     "2022-07-31": {
-      "value": 9.9095,
+      "value": 6.1575,
       "extra": {
         "moving_time_s": 2965,
         "distance_m": 9909,
@@ -2349,7 +2349,7 @@
       }
     },
     "2022-08-02": {
-      "value": 6.3261,
+      "value": 3.9309,
       "extra": {
         "moving_time_s": 2119,
         "distance_m": 6326,
@@ -2357,7 +2357,7 @@
       }
     },
     "2022-08-03": {
-      "value": 14.8172,
+      "value": 9.207,
       "extra": {
         "moving_time_s": 4467,
         "distance_m": 14817,
@@ -2365,7 +2365,7 @@
       }
     },
     "2022-08-05": {
-      "value": 7.209,
+      "value": 4.4795,
       "extra": {
         "moving_time_s": 2123,
         "distance_m": 7209,
@@ -2373,7 +2373,7 @@
       }
     },
     "2022-08-07": {
-      "value": 8.4494,
+      "value": 5.2502,
       "extra": {
         "moving_time_s": 2455,
         "distance_m": 8449,
@@ -2381,7 +2381,7 @@
       }
     },
     "2022-08-09": {
-      "value": 11.6882,
+      "value": 7.2627,
       "extra": {
         "moving_time_s": 3442,
         "distance_m": 11688,
@@ -2389,7 +2389,7 @@
       }
     },
     "2022-08-10": {
-      "value": 8.7988,
+      "value": 5.4673,
       "extra": {
         "moving_time_s": 2516,
         "distance_m": 8798,
@@ -2397,7 +2397,7 @@
       }
     },
     "2022-08-13": {
-      "value": 7.6557,
+      "value": 4.757,
       "extra": {
         "moving_time_s": 2342,
         "distance_m": 7655,
@@ -2405,7 +2405,7 @@
       }
     },
     "2022-08-14": {
-      "value": 21.1076,
+      "value": 13.1157,
       "extra": {
         "moving_time_s": 6627,
         "distance_m": 21107,
@@ -2413,7 +2413,7 @@
       }
     },
     "2022-08-16": {
-      "value": 6.9439,
+      "value": 4.3147,
       "extra": {
         "moving_time_s": 2043,
         "distance_m": 6943,
@@ -2421,7 +2421,7 @@
       }
     },
     "2022-08-18": {
-      "value": 8.431,
+      "value": 5.2388,
       "extra": {
         "moving_time_s": 2334,
         "distance_m": 8431,
@@ -2429,7 +2429,7 @@
       }
     },
     "2022-08-19": {
-      "value": 11.9609,
+      "value": 7.4322,
       "extra": {
         "moving_time_s": 3644,
         "distance_m": 11960,
@@ -2437,7 +2437,7 @@
       }
     },
     "2022-08-20": {
-      "value": 5.5972,
+      "value": 3.4779,
       "extra": {
         "moving_time_s": 1675,
         "distance_m": 5597,
@@ -2445,7 +2445,7 @@
       }
     },
     "2022-08-22": {
-      "value": 1.7666,
+      "value": 1.0977,
       "extra": {
         "moving_time_s": 482,
         "distance_m": 1766,
@@ -2453,7 +2453,7 @@
       }
     },
     "2022-08-23": {
-      "value": 11.523,
+      "value": 7.1601,
       "extra": {
         "moving_time_s": 3497,
         "distance_m": 11523,
@@ -2461,7 +2461,7 @@
       }
     },
     "2022-08-28": {
-      "value": 4.877,
+      "value": 3.0304,
       "extra": {
         "moving_time_s": 1322,
         "distance_m": 4877,
@@ -2469,7 +2469,7 @@
       }
     },
     "2022-08-30": {
-      "value": 5.3542,
+      "value": 3.3269,
       "extra": {
         "moving_time_s": 1592,
         "distance_m": 5354,
@@ -2477,7 +2477,7 @@
       }
     },
     "2022-09-04": {
-      "value": 7.1527,
+      "value": 4.4445,
       "extra": {
         "moving_time_s": 2240,
         "distance_m": 7152,
@@ -2485,7 +2485,7 @@
       }
     },
     "2022-09-06": {
-      "value": 9.9463,
+      "value": 6.1803,
       "extra": {
         "moving_time_s": 2952,
         "distance_m": 9946,
@@ -2493,7 +2493,7 @@
       }
     },
     "2022-09-10": {
-      "value": 21.003,
+      "value": 13.0507,
       "extra": {
         "moving_time_s": 5881,
         "distance_m": 21003,
@@ -2501,7 +2501,7 @@
       }
     },
     "2022-10-26": {
-      "value": 3.9549,
+      "value": 2.4575,
       "extra": {
         "moving_time_s": 1026,
         "distance_m": 3954,
@@ -2509,7 +2509,7 @@
       }
     },
     "2022-12-05": {
-      "value": 5.6138,
+      "value": 3.4883,
       "extra": {
         "moving_time_s": 1761,
         "distance_m": 5613,
@@ -2517,7 +2517,7 @@
       }
     },
     "2022-12-08": {
-      "value": 5.6819,
+      "value": 3.5306,
       "extra": {
         "moving_time_s": 1889,
         "distance_m": 5681,
@@ -2525,7 +2525,7 @@
       }
     },
     "2022-12-11": {
-      "value": 5.613,
+      "value": 3.4878,
       "extra": {
         "moving_time_s": 2026,
         "distance_m": 5613,
@@ -2533,7 +2533,7 @@
       }
     },
     "2022-12-13": {
-      "value": 6.4813,
+      "value": 4.0273,
       "extra": {
         "moving_time_s": 2426,
         "distance_m": 6481,
@@ -2541,7 +2541,7 @@
       }
     },
     "2022-12-15": {
-      "value": 5.8942,
+      "value": 3.6625,
       "extra": {
         "moving_time_s": 1879,
         "distance_m": 5894,
@@ -2549,7 +2549,7 @@
       }
     },
     "2022-12-18": {
-      "value": 5.5496,
+      "value": 3.4484,
       "extra": {
         "moving_time_s": 1708,
         "distance_m": 5549,
@@ -2557,7 +2557,7 @@
       }
     },
     "2022-12-20": {
-      "value": 7.2577,
+      "value": 4.5097,
       "extra": {
         "moving_time_s": 2246,
         "distance_m": 7257,
@@ -2565,7 +2565,7 @@
       }
     },
     "2022-12-22": {
-      "value": 7.6307,
+      "value": 4.7415,
       "extra": {
         "moving_time_s": 2331,
         "distance_m": 7630,
@@ -2573,7 +2573,7 @@
       }
     },
     "2022-12-26": {
-      "value": 7.3616,
+      "value": 4.5743,
       "extra": {
         "moving_time_s": 2235,
         "distance_m": 7361,
@@ -2581,7 +2581,7 @@
       }
     },
     "2022-12-28": {
-      "value": 7.2822,
+      "value": 4.5249,
       "extra": {
         "moving_time_s": 2220,
         "distance_m": 7282,
@@ -2589,7 +2589,7 @@
       }
     },
     "2022-12-30": {
-      "value": 5.6515,
+      "value": 3.5117,
       "extra": {
         "moving_time_s": 1765,
         "distance_m": 5651,
@@ -2597,7 +2597,7 @@
       }
     },
     "2023-01-04": {
-      "value": 8.9739,
+      "value": 5.5761,
       "extra": {
         "moving_time_s": 2878,
         "distance_m": 8973,
@@ -2605,7 +2605,7 @@
       }
     },
     "2023-01-06": {
-      "value": 7.2654,
+      "value": 4.5145,
       "extra": {
         "moving_time_s": 2285,
         "distance_m": 7265,
@@ -2613,7 +2613,7 @@
       }
     },
     "2023-01-07": {
-      "value": 6.037,
+      "value": 3.7512,
       "extra": {
         "moving_time_s": 1922,
         "distance_m": 6037,
@@ -2621,7 +2621,7 @@
       }
     },
     "2023-01-09": {
-      "value": 9.8261,
+      "value": 6.1057,
       "extra": {
         "moving_time_s": 3075,
         "distance_m": 9826,
@@ -2629,7 +2629,7 @@
       }
     },
     "2023-01-12": {
-      "value": 3.1485,
+      "value": 1.9564,
       "extra": {
         "moving_time_s": 1201,
         "distance_m": 3148,
@@ -2637,7 +2637,7 @@
       }
     },
     "2023-01-14": {
-      "value": 10.0586,
+      "value": 6.2501,
       "extra": {
         "moving_time_s": 3183,
         "distance_m": 10058,
@@ -2645,7 +2645,7 @@
       }
     },
     "2023-01-16": {
-      "value": 7.9053,
+      "value": 4.9121,
       "extra": {
         "moving_time_s": 2353,
         "distance_m": 7905,
@@ -2653,7 +2653,7 @@
       }
     },
     "2023-01-18": {
-      "value": 10.5558,
+      "value": 6.5591,
       "extra": {
         "moving_time_s": 3343,
         "distance_m": 10555,
@@ -2661,7 +2661,7 @@
       }
     },
     "2023-01-20": {
-      "value": 8.2651,
+      "value": 5.1357,
       "extra": {
         "moving_time_s": 2585,
         "distance_m": 8265,
@@ -2669,7 +2669,7 @@
       }
     },
     "2023-01-22": {
-      "value": 8.3937,
+      "value": 5.2156,
       "extra": {
         "moving_time_s": 2551,
         "distance_m": 8393,
@@ -2677,7 +2677,7 @@
       }
     },
     "2023-01-23": {
-      "value": 7.4877,
+      "value": 4.6526,
       "extra": {
         "moving_time_s": 2461,
         "distance_m": 7487,
@@ -2685,7 +2685,7 @@
       }
     },
     "2023-01-25": {
-      "value": 10.2762,
+      "value": 6.3853,
       "extra": {
         "moving_time_s": 3184,
         "distance_m": 10276,
@@ -2693,7 +2693,7 @@
       }
     },
     "2023-01-27": {
-      "value": 7.2827,
+      "value": 4.5253,
       "extra": {
         "moving_time_s": 2131,
         "distance_m": 7282,
@@ -2701,7 +2701,7 @@
       }
     },
     "2023-01-29": {
-      "value": 10.9689,
+      "value": 6.8158,
       "extra": {
         "moving_time_s": 3619,
         "distance_m": 10968,
@@ -2709,7 +2709,7 @@
       }
     },
     "2023-01-31": {
-      "value": 7.2294,
+      "value": 4.4921,
       "extra": {
         "moving_time_s": 2259,
         "distance_m": 7229,
@@ -2717,7 +2717,7 @@
       }
     },
     "2023-02-01": {
-      "value": 8.483,
+      "value": 5.2711,
       "extra": {
         "moving_time_s": 2600,
         "distance_m": 8483,
@@ -2725,7 +2725,7 @@
       }
     },
     "2023-02-02": {
-      "value": 8.0814,
+      "value": 5.0215,
       "extra": {
         "moving_time_s": 2154,
         "distance_m": 8081,
@@ -2733,7 +2733,7 @@
       }
     },
     "2023-02-05": {
-      "value": 10.1899,
+      "value": 6.3317,
       "extra": {
         "moving_time_s": 3023,
         "distance_m": 10189,
@@ -2741,7 +2741,7 @@
       }
     },
     "2023-02-06": {
-      "value": 8.2883,
+      "value": 5.1501,
       "extra": {
         "moving_time_s": 2577,
         "distance_m": 8288,
@@ -2749,7 +2749,7 @@
       }
     },
     "2023-02-08": {
-      "value": 8.2439,
+      "value": 5.1225,
       "extra": {
         "moving_time_s": 2489,
         "distance_m": 8243,
@@ -2757,7 +2757,7 @@
       }
     },
     "2023-02-11": {
-      "value": 4.5971,
+      "value": 2.8565,
       "extra": {
         "moving_time_s": 1691,
         "distance_m": 4597,
@@ -2765,7 +2765,7 @@
       }
     },
     "2023-02-14": {
-      "value": 8.3711,
+      "value": 5.2016,
       "extra": {
         "moving_time_s": 2490,
         "distance_m": 8371,
@@ -2773,7 +2773,7 @@
       }
     },
     "2023-02-15": {
-      "value": 12.9567,
+      "value": 8.0509,
       "extra": {
         "moving_time_s": 4060,
         "distance_m": 12956,
@@ -2781,7 +2781,7 @@
       }
     },
     "2023-02-16": {
-      "value": 8.4664,
+      "value": 5.2608,
       "extra": {
         "moving_time_s": 2549,
         "distance_m": 8466,
@@ -2789,7 +2789,7 @@
       }
     },
     "2023-02-18": {
-      "value": 7.1008,
+      "value": 4.4122,
       "extra": {
         "moving_time_s": 2274,
         "distance_m": 7100,
@@ -2797,7 +2797,7 @@
       }
     },
     "2023-02-20": {
-      "value": 12.2662,
+      "value": 7.6219,
       "extra": {
         "moving_time_s": 3662,
         "distance_m": 12266,
@@ -2805,7 +2805,7 @@
       }
     },
     "2023-02-21": {
-      "value": 7.2518,
+      "value": 4.5061,
       "extra": {
         "moving_time_s": 2143,
         "distance_m": 7251,
@@ -2813,7 +2813,7 @@
       }
     },
     "2023-02-23": {
-      "value": 9.8529,
+      "value": 6.1223,
       "extra": {
         "moving_time_s": 2966,
         "distance_m": 9852,
@@ -2821,7 +2821,7 @@
       }
     },
     "2023-02-25": {
-      "value": 8.2448,
+      "value": 5.1231,
       "extra": {
         "moving_time_s": 2652,
         "distance_m": 8244,
@@ -2829,7 +2829,7 @@
       }
     },
     "2023-02-27": {
-      "value": 8.9039,
+      "value": 5.5326,
       "extra": {
         "moving_time_s": 2700,
         "distance_m": 8903,
@@ -2837,7 +2837,7 @@
       }
     },
     "2023-02-28": {
-      "value": 8.1456,
+      "value": 5.0614,
       "extra": {
         "moving_time_s": 2631,
         "distance_m": 8145,
@@ -2845,7 +2845,7 @@
       }
     },
     "2023-03-06": {
-      "value": 10.2455,
+      "value": 6.3663,
       "extra": {
         "moving_time_s": 3223,
         "distance_m": 10245,
@@ -2853,7 +2853,7 @@
       }
     },
     "2023-03-07": {
-      "value": 8.6761,
+      "value": 5.3911,
       "extra": {
         "moving_time_s": 2538,
         "distance_m": 8676,
@@ -2861,7 +2861,7 @@
       }
     },
     "2023-03-09": {
-      "value": 10.2978,
+      "value": 6.3988,
       "extra": {
         "moving_time_s": 3184,
         "distance_m": 10297,
@@ -2869,7 +2869,7 @@
       }
     },
     "2023-03-11": {
-      "value": 21.1488,
+      "value": 13.1413,
       "extra": {
         "moving_time_s": 6558,
         "distance_m": 21148,
@@ -2877,7 +2877,7 @@
       }
     },
     "2023-03-13": {
-      "value": 9.6708,
+      "value": 6.0092,
       "extra": {
         "moving_time_s": 2863,
         "distance_m": 9670,
@@ -2885,7 +2885,7 @@
       }
     },
     "2023-03-15": {
-      "value": 9.8134,
+      "value": 6.0978,
       "extra": {
         "moving_time_s": 2868,
         "distance_m": 9813,
@@ -2893,7 +2893,7 @@
       }
     },
     "2023-03-16": {
-      "value": 9.7449,
+      "value": 6.0552,
       "extra": {
         "moving_time_s": 2945,
         "distance_m": 9744,
@@ -2901,7 +2901,7 @@
       }
     },
     "2023-03-17": {
-      "value": 8.4151,
+      "value": 5.2289,
       "extra": {
         "moving_time_s": 2464,
         "distance_m": 8415,
@@ -2909,7 +2909,7 @@
       }
     },
     "2023-03-18": {
-      "value": 14.9721,
+      "value": 9.3032,
       "extra": {
         "moving_time_s": 4304,
         "distance_m": 14972,
@@ -2917,7 +2917,7 @@
       }
     },
     "2023-03-20": {
-      "value": 10.4991,
+      "value": 6.5238,
       "extra": {
         "moving_time_s": 2960,
         "distance_m": 10499,
@@ -2925,7 +2925,7 @@
       }
     },
     "2023-03-21": {
-      "value": 7.1765,
+      "value": 4.4593,
       "extra": {
         "moving_time_s": 2221,
         "distance_m": 7176,
@@ -2933,7 +2933,7 @@
       }
     },
     "2023-03-22": {
-      "value": 11.3023,
+      "value": 7.0229,
       "extra": {
         "moving_time_s": 3436,
         "distance_m": 11302,
@@ -2941,7 +2941,7 @@
       }
     },
     "2023-03-24": {
-      "value": 10.2655,
+      "value": 6.3787,
       "extra": {
         "moving_time_s": 2814,
         "distance_m": 10265,
@@ -2949,7 +2949,7 @@
       }
     },
     "2023-03-26": {
-      "value": 9.7289,
+      "value": 6.0453,
       "extra": {
         "moving_time_s": 2793,
         "distance_m": 9728,
@@ -2957,7 +2957,7 @@
       }
     },
     "2023-03-27": {
-      "value": 10.3702,
+      "value": 6.4437,
       "extra": {
         "moving_time_s": 3018,
         "distance_m": 10370,
@@ -2965,7 +2965,7 @@
       }
     },
     "2023-03-29": {
-      "value": 16.196,
+      "value": 10.0637,
       "extra": {
         "moving_time_s": 4748,
         "distance_m": 16196,
@@ -2973,7 +2973,7 @@
       }
     },
     "2023-03-31": {
-      "value": 14.5335,
+      "value": 9.0307,
       "extra": {
         "moving_time_s": 4492,
         "distance_m": 14533,
@@ -2981,7 +2981,7 @@
       }
     },
     "2023-04-02": {
-      "value": 9.7651,
+      "value": 6.0678,
       "extra": {
         "moving_time_s": 3097,
         "distance_m": 9765,
@@ -2989,7 +2989,7 @@
       }
     },
     "2023-04-04": {
-      "value": 12.6095,
+      "value": 7.8352,
       "extra": {
         "moving_time_s": 3701,
         "distance_m": 12609,
@@ -2997,7 +2997,7 @@
       }
     },
     "2023-04-05": {
-      "value": 7.2638,
+      "value": 4.5135,
       "extra": {
         "moving_time_s": 2211,
         "distance_m": 7263,
@@ -3005,7 +3005,7 @@
       }
     },
     "2023-04-06": {
-      "value": 22.6172,
+      "value": 14.0537,
       "extra": {
         "moving_time_s": 6859,
         "distance_m": 22617,
@@ -3013,7 +3013,7 @@
       }
     },
     "2023-04-08": {
-      "value": 7.1562,
+      "value": 4.4467,
       "extra": {
         "moving_time_s": 1980,
         "distance_m": 7156,
@@ -3021,7 +3021,7 @@
       }
     },
     "2023-04-10": {
-      "value": 13.0773,
+      "value": 8.1259,
       "extra": {
         "moving_time_s": 3876,
         "distance_m": 13077,
@@ -3029,7 +3029,7 @@
       }
     },
     "2023-04-12": {
-      "value": 16.18,
+      "value": 10.0538,
       "extra": {
         "moving_time_s": 4820,
         "distance_m": 16180,
@@ -3037,7 +3037,7 @@
       }
     },
     "2023-04-15": {
-      "value": 25.8918,
+      "value": 16.0884,
       "extra": {
         "moving_time_s": 7817,
         "distance_m": 25891,
@@ -3045,7 +3045,7 @@
       }
     },
     "2023-04-17": {
-      "value": 7.3181,
+      "value": 4.5473,
       "extra": {
         "moving_time_s": 2209,
         "distance_m": 7318,
@@ -3053,7 +3053,7 @@
       }
     },
     "2023-04-19": {
-      "value": 12.8957,
+      "value": 8.013,
       "extra": {
         "moving_time_s": 3690,
         "distance_m": 12895,
@@ -3061,7 +3061,7 @@
       }
     },
     "2023-04-21": {
-      "value": 16.9321,
+      "value": 10.5211,
       "extra": {
         "moving_time_s": 5129,
         "distance_m": 16932,
@@ -3069,7 +3069,7 @@
       }
     },
     "2023-04-23": {
-      "value": 25.7877,
+      "value": 16.0237,
       "extra": {
         "moving_time_s": 8354,
         "distance_m": 25787,
@@ -3077,7 +3077,7 @@
       }
     },
     "2023-04-25": {
-      "value": 12.3082,
+      "value": 7.648,
       "extra": {
         "moving_time_s": 3493,
         "distance_m": 12308,
@@ -3085,7 +3085,7 @@
       }
     },
     "2023-04-27": {
-      "value": 8.1408,
+      "value": 5.0585,
       "extra": {
         "moving_time_s": 2521,
         "distance_m": 8140,
@@ -3093,7 +3093,7 @@
       }
     },
     "2023-04-30": {
-      "value": 29.0535,
+      "value": 18.053,
       "extra": {
         "moving_time_s": 9269,
         "distance_m": 29053,
@@ -3101,7 +3101,7 @@
       }
     },
     "2023-05-02": {
-      "value": 7.1227,
+      "value": 4.4258,
       "extra": {
         "moving_time_s": 2074,
         "distance_m": 7122,
@@ -3109,7 +3109,7 @@
       }
     },
     "2023-05-04": {
-      "value": 13.142,
+      "value": 8.1661,
       "extra": {
         "moving_time_s": 3961,
         "distance_m": 13142,
@@ -3117,7 +3117,7 @@
       }
     },
     "2023-05-07": {
-      "value": 32.2234,
+      "value": 20.0227,
       "extra": {
         "moving_time_s": 10180,
         "distance_m": 32223,
@@ -3125,7 +3125,7 @@
       }
     },
     "2023-05-10": {
-      "value": 7.2053,
+      "value": 4.4772,
       "extra": {
         "moving_time_s": 2052,
         "distance_m": 7205,
@@ -3133,7 +3133,7 @@
       }
     },
     "2023-05-12": {
-      "value": 8.226,
+      "value": 5.1114,
       "extra": {
         "moving_time_s": 2521,
         "distance_m": 8226,
@@ -3141,7 +3141,7 @@
       }
     },
     "2023-05-14": {
-      "value": 12.306,
+      "value": 7.6466,
       "extra": {
         "moving_time_s": 3612,
         "distance_m": 12306,
@@ -3149,7 +3149,7 @@
       }
     },
     "2023-05-16": {
-      "value": 7.2432,
+      "value": 4.5007,
       "extra": {
         "moving_time_s": 2168,
         "distance_m": 7243,
@@ -3157,7 +3157,7 @@
       }
     },
     "2023-05-18": {
-      "value": 12.4752,
+      "value": 7.7517,
       "extra": {
         "moving_time_s": 3639,
         "distance_m": 12475,
@@ -3165,7 +3165,7 @@
       }
     },
     "2023-05-21": {
-      "value": 5.3681,
+      "value": 3.3356,
       "extra": {
         "moving_time_s": 1773,
         "distance_m": 5368,
@@ -3173,7 +3173,7 @@
       }
     },
     "2023-05-23": {
-      "value": 7.3512,
+      "value": 4.5678,
       "extra": {
         "moving_time_s": 2125,
         "distance_m": 7351,
@@ -3181,7 +3181,7 @@
       }
     },
     "2023-05-25": {
-      "value": 7.1576,
+      "value": 4.4475,
       "extra": {
         "moving_time_s": 2052,
         "distance_m": 7157,
@@ -3189,7 +3189,7 @@
       }
     },
     "2023-05-27": {
-      "value": 3.2784,
+      "value": 2.0371,
       "extra": {
         "moving_time_s": 1051,
         "distance_m": 3278,
@@ -3197,7 +3197,7 @@
       }
     },
     "2023-05-28": {
-      "value": 42.0619,
+      "value": 26.1361,
       "extra": {
         "moving_time_s": 13079,
         "distance_m": 42061,
@@ -3205,7 +3205,7 @@
       }
     },
     "2023-06-27": {
-      "value": 5.4152,
+      "value": 3.3648,
       "extra": {
         "moving_time_s": 1652,
         "distance_m": 5415,
@@ -3213,7 +3213,7 @@
       }
     },
     "2023-07-11": {
-      "value": 2.0028,
+      "value": 1.2445,
       "extra": {
         "moving_time_s": 717,
         "distance_m": 2002,
@@ -3221,7 +3221,7 @@
       }
     },
     "2023-07-23": {
-      "value": 2.7174,
+      "value": 1.6885,
       "extra": {
         "moving_time_s": 860,
         "distance_m": 2717,
@@ -3229,7 +3229,7 @@
       }
     },
     "2023-07-25": {
-      "value": 2.4953,
+      "value": 1.5505,
       "extra": {
         "moving_time_s": 1016,
         "distance_m": 2495,
@@ -3237,7 +3237,7 @@
       }
     },
     "2023-07-30": {
-      "value": 3.4437,
+      "value": 2.1398,
       "extra": {
         "moving_time_s": 1172,
         "distance_m": 3443,
@@ -3245,7 +3245,7 @@
       }
     },
     "2023-07-31": {
-      "value": 3.2479,
+      "value": 2.0182,
       "extra": {
         "moving_time_s": 1033,
         "distance_m": 3247,
@@ -3253,7 +3253,7 @@
       }
     },
     "2023-08-01": {
-      "value": 4.3258,
+      "value": 2.6879,
       "extra": {
         "moving_time_s": 1458,
         "distance_m": 4325,
@@ -3261,7 +3261,7 @@
       }
     },
     "2023-08-04": {
-      "value": 5.5887,
+      "value": 3.4727,
       "extra": {
         "moving_time_s": 1742,
         "distance_m": 5588,
@@ -3269,7 +3269,7 @@
       }
     },
     "2023-08-06": {
-      "value": 5.6356,
+      "value": 3.5018,
       "extra": {
         "moving_time_s": 1825,
         "distance_m": 5635,
@@ -3277,7 +3277,7 @@
       }
     },
     "2023-08-07": {
-      "value": 5.5319,
+      "value": 3.4374,
       "extra": {
         "moving_time_s": 1754,
         "distance_m": 5531,
@@ -3285,7 +3285,7 @@
       }
     },
     "2023-08-09": {
-      "value": 5.8879,
+      "value": 3.6586,
       "extra": {
         "moving_time_s": 1880,
         "distance_m": 5887,
@@ -3293,7 +3293,7 @@
       }
     },
     "2023-08-11": {
-      "value": 5.4826,
+      "value": 3.4067,
       "extra": {
         "moving_time_s": 1645,
         "distance_m": 5482,
@@ -3301,7 +3301,7 @@
       }
     },
     "2023-08-13": {
-      "value": 7.536,
+      "value": 4.6827,
       "extra": {
         "moving_time_s": 2463,
         "distance_m": 7536,
@@ -3309,7 +3309,7 @@
       }
     },
     "2023-08-15": {
-      "value": 5.7475,
+      "value": 3.5713,
       "extra": {
         "moving_time_s": 1730,
         "distance_m": 5747,
@@ -3317,7 +3317,7 @@
       }
     },
     "2023-08-16": {
-      "value": 5.5239,
+      "value": 3.4324,
       "extra": {
         "moving_time_s": 1733,
         "distance_m": 5523,
@@ -3325,7 +3325,7 @@
       }
     },
     "2023-08-18": {
-      "value": 5.677,
+      "value": 3.5275,
       "extra": {
         "moving_time_s": 1796,
         "distance_m": 5677,
@@ -3333,7 +3333,7 @@
       }
     },
     "2023-08-21": {
-      "value": 5.9128,
+      "value": 3.674,
       "extra": {
         "moving_time_s": 1843,
         "distance_m": 5912,
@@ -3341,7 +3341,7 @@
       }
     },
     "2023-08-22": {
-      "value": 5.4035,
+      "value": 3.3576,
       "extra": {
         "moving_time_s": 1606,
         "distance_m": 5403,
@@ -3349,7 +3349,7 @@
       }
     },
     "2023-08-23": {
-      "value": 2.3637,
+      "value": 1.4687,
       "extra": {
         "moving_time_s": 890,
         "distance_m": 2363,
@@ -3357,7 +3357,7 @@
       }
     },
     "2023-08-25": {
-      "value": 5.8192,
+      "value": 3.6159,
       "extra": {
         "moving_time_s": 1829,
         "distance_m": 5819,
@@ -3365,7 +3365,7 @@
       }
     },
     "2023-08-26": {
-      "value": 4.8726,
+      "value": 3.0277,
       "extra": {
         "moving_time_s": 1699,
         "distance_m": 4872,
@@ -3373,7 +3373,7 @@
       }
     },
     "2023-08-28": {
-      "value": 5.6159,
+      "value": 3.4896,
       "extra": {
         "moving_time_s": 1770,
         "distance_m": 5615,
@@ -3381,7 +3381,7 @@
       }
     },
     "2023-08-30": {
-      "value": 7.1115,
+      "value": 4.4189,
       "extra": {
         "moving_time_s": 2197,
         "distance_m": 7111,
@@ -3389,7 +3389,7 @@
       }
     },
     "2023-08-31": {
-      "value": 5.4681,
+      "value": 3.3977,
       "extra": {
         "moving_time_s": 1605,
         "distance_m": 5468,
@@ -3397,7 +3397,7 @@
       }
     },
     "2023-09-03": {
-      "value": 5.3774,
+      "value": 3.3414,
       "extra": {
         "moving_time_s": 1718,
         "distance_m": 5377,
@@ -3405,7 +3405,7 @@
       }
     },
     "2023-09-05": {
-      "value": 5.3425,
+      "value": 3.3197,
       "extra": {
         "moving_time_s": 1764,
         "distance_m": 5342,
@@ -3413,7 +3413,7 @@
       }
     },
     "2023-09-06": {
-      "value": 6.5318,
+      "value": 4.0587,
       "extra": {
         "moving_time_s": 2239,
         "distance_m": 6531,
@@ -3421,7 +3421,7 @@
       }
     },
     "2023-09-07": {
-      "value": 5.8347,
+      "value": 3.6255,
       "extra": {
         "moving_time_s": 1809,
         "distance_m": 5834,
@@ -3429,7 +3429,7 @@
       }
     },
     "2023-09-10": {
-      "value": 8.1416,
+      "value": 5.059,
       "extra": {
         "moving_time_s": 2596,
         "distance_m": 8141,
@@ -3437,7 +3437,7 @@
       }
     },
     "2023-09-11": {
-      "value": 7.2615,
+      "value": 4.5121,
       "extra": {
         "moving_time_s": 2273,
         "distance_m": 7261,
@@ -3445,7 +3445,7 @@
       }
     },
     "2023-09-13": {
-      "value": 7.3049,
+      "value": 4.5391,
       "extra": {
         "moving_time_s": 2347,
         "distance_m": 7304,
@@ -3453,7 +3453,7 @@
       }
     },
     "2023-09-14": {
-      "value": 9.41,
+      "value": 5.8471,
       "extra": {
         "moving_time_s": 2988,
         "distance_m": 9410,
@@ -3461,7 +3461,7 @@
       }
     },
     "2023-09-16": {
-      "value": 8.448,
+      "value": 5.2493,
       "extra": {
         "moving_time_s": 2463,
         "distance_m": 8448,
@@ -3469,7 +3469,7 @@
       }
     },
     "2023-09-18": {
-      "value": 7.2697,
+      "value": 4.5172,
       "extra": {
         "moving_time_s": 2284,
         "distance_m": 7269,
@@ -3477,7 +3477,7 @@
       }
     },
     "2023-09-20": {
-      "value": 8.3736,
+      "value": 5.2031,
       "extra": {
         "moving_time_s": 2553,
         "distance_m": 8373,
@@ -3485,7 +3485,7 @@
       }
     },
     "2023-09-21": {
-      "value": 8.8327,
+      "value": 5.4884,
       "extra": {
         "moving_time_s": 2601,
         "distance_m": 8832,
@@ -3493,7 +3493,7 @@
       }
     },
     "2023-09-22": {
-      "value": 7.1586,
+      "value": 4.4481,
       "extra": {
         "moving_time_s": 2192,
         "distance_m": 7158,
@@ -3501,7 +3501,7 @@
       }
     },
     "2023-09-24": {
-      "value": 7.0408,
+      "value": 4.375,
       "extra": {
         "moving_time_s": 2072,
         "distance_m": 7040,
@@ -3509,7 +3509,7 @@
       }
     },
     "2023-09-25": {
-      "value": 7.5929,
+      "value": 4.718,
       "extra": {
         "moving_time_s": 2297,
         "distance_m": 7592,
@@ -3517,7 +3517,7 @@
       }
     },
     "2023-09-27": {
-      "value": 8.4447,
+      "value": 5.2473,
       "extra": {
         "moving_time_s": 2660,
         "distance_m": 8444,
@@ -3525,7 +3525,7 @@
       }
     },
     "2023-09-28": {
-      "value": 7.2673,
+      "value": 4.5157,
       "extra": {
         "moving_time_s": 2139,
         "distance_m": 7267,
@@ -3533,7 +3533,7 @@
       }
     },
     "2023-10-01": {
-      "value": 10.1947,
+      "value": 6.3347,
       "extra": {
         "moving_time_s": 2977,
         "distance_m": 10194,
@@ -3541,7 +3541,7 @@
       }
     },
     "2023-10-02": {
-      "value": 10.4013,
+      "value": 6.4631,
       "extra": {
         "moving_time_s": 3149,
         "distance_m": 10401,
@@ -3549,7 +3549,7 @@
       }
     },
     "2023-10-03": {
-      "value": 7.2985,
+      "value": 4.5351,
       "extra": {
         "moving_time_s": 2145,
         "distance_m": 7298,
@@ -3557,7 +3557,7 @@
       }
     },
     "2023-10-04": {
-      "value": 3.2943,
+      "value": 2.047,
       "extra": {
         "moving_time_s": 1240,
         "distance_m": 3294,
@@ -3565,7 +3565,7 @@
       }
     },
     "2023-10-05": {
-      "value": 10.6396,
+      "value": 6.6111,
       "extra": {
         "moving_time_s": 3382,
         "distance_m": 10639,
@@ -3573,7 +3573,7 @@
       }
     },
     "2023-10-07": {
-      "value": 7.17,
+      "value": 4.4552,
       "extra": {
         "moving_time_s": 2265,
         "distance_m": 7170,
@@ -3581,7 +3581,7 @@
       }
     },
     "2023-10-08": {
-      "value": 7.2546,
+      "value": 4.5078,
       "extra": {
         "moving_time_s": 2237,
         "distance_m": 7254,
@@ -3589,7 +3589,7 @@
       }
     },
     "2023-10-09": {
-      "value": 10.2361,
+      "value": 6.3604,
       "extra": {
         "moving_time_s": 3102,
         "distance_m": 10236,
@@ -3597,7 +3597,7 @@
       }
     },
     "2023-10-12": {
-      "value": 5.8401,
+      "value": 3.6289,
       "extra": {
         "moving_time_s": 1842,
         "distance_m": 5840,
@@ -3605,7 +3605,7 @@
       }
     },
     "2023-10-15": {
-      "value": 8.1318,
+      "value": 5.0529,
       "extra": {
         "moving_time_s": 2549,
         "distance_m": 8131,
@@ -3613,7 +3613,7 @@
       }
     },
     "2023-10-18": {
-      "value": 7.3038,
+      "value": 4.5384,
       "extra": {
         "moving_time_s": 2198,
         "distance_m": 7303,
@@ -3621,7 +3621,7 @@
       }
     },
     "2023-10-19": {
-      "value": 8.0994,
+      "value": 5.0327,
       "extra": {
         "moving_time_s": 2617,
         "distance_m": 8099,
@@ -3629,7 +3629,7 @@
       }
     },
     "2023-10-20": {
-      "value": 7.4286,
+      "value": 4.6159,
       "extra": {
         "moving_time_s": 2316,
         "distance_m": 7428,
@@ -3637,7 +3637,7 @@
       }
     },
     "2023-10-21": {
-      "value": 8.0775,
+      "value": 5.0191,
       "extra": {
         "moving_time_s": 2781,
         "distance_m": 8077,
@@ -3645,7 +3645,7 @@
       }
     },
     "2023-10-23": {
-      "value": 9.046,
+      "value": 5.6209,
       "extra": {
         "moving_time_s": 2898,
         "distance_m": 9046,
@@ -3653,7 +3653,7 @@
       }
     },
     "2023-10-24": {
-      "value": 5.8878,
+      "value": 3.6585,
       "extra": {
         "moving_time_s": 1889,
         "distance_m": 5887,
@@ -3661,7 +3661,7 @@
       }
     },
     "2023-10-26": {
-      "value": 5.7832,
+      "value": 3.5935,
       "extra": {
         "moving_time_s": 1772,
         "distance_m": 5783,
@@ -3669,7 +3669,7 @@
       }
     },
     "2023-10-27": {
-      "value": 5.7621,
+      "value": 3.5804,
       "extra": {
         "moving_time_s": 1698,
         "distance_m": 5762,
@@ -3677,7 +3677,7 @@
       }
     },
     "2023-10-28": {
-      "value": 6.0393,
+      "value": 3.7526,
       "extra": {
         "moving_time_s": 1763,
         "distance_m": 6039,
@@ -3685,7 +3685,7 @@
       }
     },
     "2023-10-29": {
-      "value": 7.2245,
+      "value": 4.4891,
       "extra": {
         "moving_time_s": 2315,
         "distance_m": 7224,
@@ -3693,7 +3693,7 @@
       }
     },
     "2023-10-30": {
-      "value": 7.3785,
+      "value": 4.5848,
       "extra": {
         "moving_time_s": 2344,
         "distance_m": 7378,
@@ -3701,7 +3701,7 @@
       }
     },
     "2023-10-31": {
-      "value": 7.2666,
+      "value": 4.5153,
       "extra": {
         "moving_time_s": 2297,
         "distance_m": 7266,
@@ -3709,7 +3709,7 @@
       }
     },
     "2023-11-02": {
-      "value": 5.7651,
+      "value": 3.5823,
       "extra": {
         "moving_time_s": 1706,
         "distance_m": 5765,
@@ -3717,7 +3717,7 @@
       }
     },
     "2023-11-05": {
-      "value": 21.0992,
+      "value": 13.1104,
       "extra": {
         "moving_time_s": 6113,
         "distance_m": 21099,
@@ -3725,7 +3725,7 @@
       }
     },
     "2023-11-07": {
-      "value": 5.5387,
+      "value": 3.4416,
       "extra": {
         "moving_time_s": 1682,
         "distance_m": 5538,
@@ -3733,7 +3733,7 @@
       }
     },
     "2023-11-09": {
-      "value": 5.5834,
+      "value": 3.4694,
       "extra": {
         "moving_time_s": 1747,
         "distance_m": 5583,
@@ -3741,7 +3741,7 @@
       }
     },
     "2023-11-11": {
-      "value": 5.5533,
+      "value": 3.4507,
       "extra": {
         "moving_time_s": 1756,
         "distance_m": 5553,
@@ -3749,7 +3749,7 @@
       }
     },
     "2023-11-13": {
-      "value": 5.605,
+      "value": 3.4828,
       "extra": {
         "moving_time_s": 1803,
         "distance_m": 5605,
@@ -3757,7 +3757,7 @@
       }
     },
     "2023-11-15": {
-      "value": 5.048,
+      "value": 3.1367,
       "extra": {
         "moving_time_s": 1659,
         "distance_m": 5048,
@@ -3765,7 +3765,7 @@
       }
     },
     "2023-11-19": {
-      "value": 10.4245,
+      "value": 6.4775,
       "extra": {
         "moving_time_s": 3420,
         "distance_m": 10424,
@@ -3773,7 +3773,7 @@
       }
     },
     "2023-11-21": {
-      "value": 5.7608,
+      "value": 3.5796,
       "extra": {
         "moving_time_s": 1883,
         "distance_m": 5760,
@@ -3781,7 +3781,7 @@
       }
     },
     "2023-11-24": {
-      "value": 7.4744,
+      "value": 4.6444,
       "extra": {
         "moving_time_s": 2324,
         "distance_m": 7474,
@@ -3789,7 +3789,7 @@
       }
     },
     "2023-11-26": {
-      "value": 5.4702,
+      "value": 3.399,
       "extra": {
         "moving_time_s": 1620,
         "distance_m": 5470,
@@ -3797,7 +3797,7 @@
       }
     },
     "2023-11-28": {
-      "value": 5.5083,
+      "value": 3.4227,
       "extra": {
         "moving_time_s": 1720,
         "distance_m": 5508,
@@ -3805,7 +3805,7 @@
       }
     },
     "2023-11-30": {
-      "value": 7.1711,
+      "value": 4.4559,
       "extra": {
         "moving_time_s": 2235,
         "distance_m": 7171,
@@ -3813,7 +3813,7 @@
       }
     },
     "2023-12-02": {
-      "value": 7.7681,
+      "value": 4.8269,
       "extra": {
         "moving_time_s": 2530,
         "distance_m": 7768,
@@ -3821,7 +3821,7 @@
       }
     },
     "2023-12-04": {
-      "value": 5.6617,
+      "value": 3.518,
       "extra": {
         "moving_time_s": 1746,
         "distance_m": 5661,
@@ -3829,7 +3829,7 @@
       }
     },
     "2023-12-06": {
-      "value": 5.6527,
+      "value": 3.5124,
       "extra": {
         "moving_time_s": 1828,
         "distance_m": 5652,
@@ -3837,7 +3837,7 @@
       }
     },
     "2023-12-08": {
-      "value": 7.1346,
+      "value": 4.4332,
       "extra": {
         "moving_time_s": 2351,
         "distance_m": 7134,
@@ -3845,7 +3845,7 @@
       }
     },
     "2023-12-10": {
-      "value": 5.7953,
+      "value": 3.601,
       "extra": {
         "moving_time_s": 1835,
         "distance_m": 5795,
@@ -3853,7 +3853,7 @@
       }
     },
     "2023-12-12": {
-      "value": 5.4536,
+      "value": 3.3887,
       "extra": {
         "moving_time_s": 1771,
         "distance_m": 5453,
@@ -3861,7 +3861,7 @@
       }
     },
     "2023-12-14": {
-      "value": 5.4856,
+      "value": 3.4086,
       "extra": {
         "moving_time_s": 1832,
         "distance_m": 5485,
@@ -3869,7 +3869,7 @@
       }
     },
     "2023-12-17": {
-      "value": 5.573,
+      "value": 3.4629,
       "extra": {
         "moving_time_s": 1709,
         "distance_m": 5573,
@@ -3877,7 +3877,7 @@
       }
     },
     "2023-12-19": {
-      "value": 7.1874,
+      "value": 4.466,
       "extra": {
         "moving_time_s": 2297,
         "distance_m": 7187,
@@ -3885,7 +3885,7 @@
       }
     },
     "2023-12-21": {
-      "value": 7.1849,
+      "value": 4.4645,
       "extra": {
         "moving_time_s": 2448,
         "distance_m": 7184,
@@ -3893,7 +3893,7 @@
       }
     },
     "2023-12-27": {
-      "value": 7.3879,
+      "value": 4.5906,
       "extra": {
         "moving_time_s": 2413,
         "distance_m": 7387,
@@ -3901,7 +3901,7 @@
       }
     },
     "2024-01-01": {
-      "value": 5.7871,
+      "value": 3.5959,
       "extra": {
         "moving_time_s": 1747,
         "distance_m": 5787,
@@ -3909,7 +3909,7 @@
       }
     },
     "2024-01-03": {
-      "value": 7.2866,
+      "value": 4.5277,
       "extra": {
         "moving_time_s": 2288,
         "distance_m": 7286,
@@ -3917,7 +3917,7 @@
       }
     },
     "2024-01-05": {
-      "value": 7.2005,
+      "value": 4.4742,
       "extra": {
         "moving_time_s": 2282,
         "distance_m": 7200,
@@ -3925,7 +3925,7 @@
       }
     },
     "2024-01-06": {
-      "value": 5.6572,
+      "value": 3.5152,
       "extra": {
         "moving_time_s": 1766,
         "distance_m": 5657,
@@ -3933,7 +3933,7 @@
       }
     },
     "2024-01-08": {
-      "value": 7.1915,
+      "value": 4.4686,
       "extra": {
         "moving_time_s": 2258,
         "distance_m": 7191,
@@ -3941,7 +3941,7 @@
       }
     },
     "2024-01-10": {
-      "value": 5.7121,
+      "value": 3.5493,
       "extra": {
         "moving_time_s": 1810,
         "distance_m": 5712,
@@ -3949,7 +3949,7 @@
       }
     },
     "2024-01-12": {
-      "value": 8.8745,
+      "value": 5.5144,
       "extra": {
         "moving_time_s": 2965,
         "distance_m": 8874,
@@ -3957,7 +3957,7 @@
       }
     },
     "2024-01-14": {
-      "value": 4.3149,
+      "value": 2.6812,
       "extra": {
         "moving_time_s": 1493,
         "distance_m": 4314,
@@ -3965,7 +3965,7 @@
       }
     },
     "2024-01-15": {
-      "value": 7.1736,
+      "value": 4.4575,
       "extra": {
         "moving_time_s": 2316,
         "distance_m": 7173,
@@ -3973,7 +3973,7 @@
       }
     },
     "2024-01-17": {
-      "value": 5.4978,
+      "value": 3.4162,
       "extra": {
         "moving_time_s": 1750,
         "distance_m": 5497,
@@ -3981,7 +3981,7 @@
       }
     },
     "2024-01-20": {
-      "value": 7.2359,
+      "value": 4.4962,
       "extra": {
         "moving_time_s": 2300,
         "distance_m": 7235,
@@ -3989,7 +3989,7 @@
       }
     },
     "2024-01-22": {
-      "value": 7.258,
+      "value": 4.5099,
       "extra": {
         "moving_time_s": 2411,
         "distance_m": 7258,
@@ -3997,7 +3997,7 @@
       }
     },
     "2024-01-24": {
-      "value": 7.9364,
+      "value": 4.9315,
       "extra": {
         "moving_time_s": 2751,
         "distance_m": 7936,
@@ -4005,7 +4005,7 @@
       }
     },
     "2024-01-26": {
-      "value": 5.5833,
+      "value": 3.4693,
       "extra": {
         "moving_time_s": 1876,
         "distance_m": 5583,
@@ -4013,7 +4013,7 @@
       }
     },
     "2024-01-28": {
-      "value": 7.1502,
+      "value": 4.4429,
       "extra": {
         "moving_time_s": 2292,
         "distance_m": 7150,
@@ -4021,7 +4021,7 @@
       }
     },
     "2024-01-29": {
-      "value": 7.2723,
+      "value": 4.5188,
       "extra": {
         "moving_time_s": 2349,
         "distance_m": 7272,
@@ -4029,7 +4029,7 @@
       }
     },
     "2024-01-31": {
-      "value": 7.4321,
+      "value": 4.6181,
       "extra": {
         "moving_time_s": 2493,
         "distance_m": 7432,
@@ -4037,7 +4037,7 @@
       }
     },
     "2024-02-02": {
-      "value": 7.2665,
+      "value": 4.5152,
       "extra": {
         "moving_time_s": 2302,
         "distance_m": 7266,
@@ -4045,7 +4045,7 @@
       }
     },
     "2024-02-03": {
-      "value": 5.5121,
+      "value": 3.4251,
       "extra": {
         "moving_time_s": 1708,
         "distance_m": 5512,
@@ -4053,7 +4053,7 @@
       }
     },
     "2024-02-05": {
-      "value": 5.7907,
+      "value": 3.5982,
       "extra": {
         "moving_time_s": 1985,
         "distance_m": 5790,
@@ -4061,7 +4061,7 @@
       }
     },
     "2024-02-07": {
-      "value": 5.5532,
+      "value": 3.4506,
       "extra": {
         "moving_time_s": 1769,
         "distance_m": 5553,
@@ -4069,7 +4069,7 @@
       }
     },
     "2024-02-08": {
-      "value": 7.2041,
+      "value": 4.4764,
       "extra": {
         "moving_time_s": 2304,
         "distance_m": 7204,
@@ -4077,7 +4077,7 @@
       }
     },
     "2024-02-11": {
-      "value": 5.7173,
+      "value": 3.5526,
       "extra": {
         "moving_time_s": 1751,
         "distance_m": 5717,
@@ -4085,7 +4085,7 @@
       }
     },
     "2024-02-13": {
-      "value": 5.6491,
+      "value": 3.5102,
       "extra": {
         "moving_time_s": 1723,
         "distance_m": 5649,
@@ -4093,7 +4093,7 @@
       }
     },
     "2024-02-15": {
-      "value": 7.3737,
+      "value": 4.5818,
       "extra": {
         "moving_time_s": 2396,
         "distance_m": 7373,
@@ -4101,7 +4101,7 @@
       }
     },
     "2024-02-16": {
-      "value": 7.5797,
+      "value": 4.7098,
       "extra": {
         "moving_time_s": 2380,
         "distance_m": 7579,
@@ -4109,7 +4109,7 @@
       }
     },
     "2024-02-17": {
-      "value": 7.2681,
+      "value": 4.5162,
       "extra": {
         "moving_time_s": 2275,
         "distance_m": 7268,
@@ -4117,7 +4117,7 @@
       }
     },
     "2024-02-18": {
-      "value": 4.8858,
+      "value": 3.0359,
       "extra": {
         "moving_time_s": 1656,
         "distance_m": 4885,
@@ -4125,7 +4125,7 @@
       }
     },
     "2024-02-19": {
-      "value": 5.5626,
+      "value": 3.4564,
       "extra": {
         "moving_time_s": 1736,
         "distance_m": 5562,
@@ -4133,7 +4133,7 @@
       }
     },
     "2024-02-20": {
-      "value": 5.7976,
+      "value": 3.6025,
       "extra": {
         "moving_time_s": 1873,
         "distance_m": 5797,
@@ -4141,7 +4141,7 @@
       }
     },
     "2024-02-22": {
-      "value": 9.0475,
+      "value": 5.6219,
       "extra": {
         "moving_time_s": 2930,
         "distance_m": 9047,
@@ -4149,7 +4149,7 @@
       }
     },
     "2024-02-24": {
-      "value": 5.9593,
+      "value": 3.7029,
       "extra": {
         "moving_time_s": 1856,
         "distance_m": 5959,
@@ -4157,7 +4157,7 @@
       }
     },
     "2024-02-25": {
-      "value": 8.0856,
+      "value": 5.0242,
       "extra": {
         "moving_time_s": 2732,
         "distance_m": 8085,
@@ -4165,7 +4165,7 @@
       }
     },
     "2024-02-27": {
-      "value": 6.9587,
+      "value": 4.3239,
       "extra": {
         "moving_time_s": 2240,
         "distance_m": 6958,
@@ -4173,7 +4173,7 @@
       }
     },
     "2024-02-28": {
-      "value": 5.7756,
+      "value": 3.5888,
       "extra": {
         "moving_time_s": 1827,
         "distance_m": 5775,
@@ -4181,7 +4181,7 @@
       }
     },
     "2024-03-02": {
-      "value": 8.6308,
+      "value": 5.3629,
       "extra": {
         "moving_time_s": 2658,
         "distance_m": 8630,
@@ -4189,7 +4189,7 @@
       }
     },
     "2024-03-03": {
-      "value": 3.4817,
+      "value": 2.1634,
       "extra": {
         "moving_time_s": 1085,
         "distance_m": 3481,
@@ -4197,7 +4197,7 @@
       }
     },
     "2024-03-04": {
-      "value": 5.5809,
+      "value": 3.4678,
       "extra": {
         "moving_time_s": 1711,
         "distance_m": 5580,
@@ -4205,7 +4205,7 @@
       }
     },
     "2024-03-05": {
-      "value": 7.1521,
+      "value": 4.4441,
       "extra": {
         "moving_time_s": 2313,
         "distance_m": 7152,
@@ -4213,7 +4213,7 @@
       }
     },
     "2024-03-07": {
-      "value": 8.0696,
+      "value": 5.0142,
       "extra": {
         "moving_time_s": 2523,
         "distance_m": 8069,
@@ -4221,7 +4221,7 @@
       }
     },
     "2024-03-08": {
-      "value": 5.4871,
+      "value": 3.4095,
       "extra": {
         "moving_time_s": 1729,
         "distance_m": 5487,
@@ -4229,7 +4229,7 @@
       }
     },
     "2024-03-12": {
-      "value": 5.66,
+      "value": 3.517,
       "extra": {
         "moving_time_s": 1755,
         "distance_m": 5660,
@@ -4237,7 +4237,7 @@
       }
     },
     "2024-03-13": {
-      "value": 5.696,
+      "value": 3.5393,
       "extra": {
         "moving_time_s": 1875,
         "distance_m": 5696,
@@ -4245,7 +4245,7 @@
       }
     },
     "2024-03-14": {
-      "value": 7.2796,
+      "value": 4.5233,
       "extra": {
         "moving_time_s": 2260,
         "distance_m": 7279,
@@ -4253,7 +4253,7 @@
       }
     },
     "2024-03-16": {
-      "value": 7.2657,
+      "value": 4.5147,
       "extra": {
         "moving_time_s": 2202,
         "distance_m": 7265,
@@ -4261,7 +4261,7 @@
       }
     },
     "2024-03-17": {
-      "value": 8.1346,
+      "value": 5.0546,
       "extra": {
         "moving_time_s": 2568,
         "distance_m": 8134,
@@ -4269,7 +4269,7 @@
       }
     },
     "2024-03-19": {
-      "value": 7.2851,
+      "value": 4.5268,
       "extra": {
         "moving_time_s": 2298,
         "distance_m": 7285,
@@ -4277,7 +4277,7 @@
       }
     },
     "2024-03-20": {
-      "value": 5.6086,
+      "value": 3.485,
       "extra": {
         "moving_time_s": 1953,
         "distance_m": 5608,
@@ -4285,7 +4285,7 @@
       }
     },
     "2024-03-22": {
-      "value": 8.1604,
+      "value": 5.0706,
       "extra": {
         "moving_time_s": 2292,
         "distance_m": 8160,
@@ -4293,7 +4293,7 @@
       }
     },
     "2024-03-24": {
-      "value": 4.842,
+      "value": 3.0087,
       "extra": {
         "moving_time_s": 1454,
         "distance_m": 4842,
@@ -4301,7 +4301,7 @@
       }
     },
     "2024-03-25": {
-      "value": 5.3338,
+      "value": 3.3143,
       "extra": {
         "moving_time_s": 1694,
         "distance_m": 5333,
@@ -4309,7 +4309,7 @@
       }
     },
     "2024-03-27": {
-      "value": 7.1447,
+      "value": 4.4395,
       "extra": {
         "moving_time_s": 2189,
         "distance_m": 7144,
@@ -4317,7 +4317,7 @@
       }
     },
     "2024-03-28": {
-      "value": 9.6806,
+      "value": 6.0152,
       "extra": {
         "moving_time_s": 3200,
         "distance_m": 9680,
@@ -4325,7 +4325,7 @@
       }
     },
     "2024-03-30": {
-      "value": 11.5331,
+      "value": 7.1663,
       "extra": {
         "moving_time_s": 3460,
         "distance_m": 11533,
@@ -4333,7 +4333,7 @@
       }
     },
     "2024-04-01": {
-      "value": 5.597,
+      "value": 3.4778,
       "extra": {
         "moving_time_s": 1570,
         "distance_m": 5597,
@@ -4341,7 +4341,7 @@
       }
     },
     "2024-04-02": {
-      "value": 7.2664,
+      "value": 4.5151,
       "extra": {
         "moving_time_s": 2130,
         "distance_m": 7266,
@@ -4349,7 +4349,7 @@
       }
     },
     "2024-04-04": {
-      "value": 5.5037,
+      "value": 3.4198,
       "extra": {
         "moving_time_s": 1749,
         "distance_m": 5503,
@@ -4357,7 +4357,7 @@
       }
     },
     "2024-04-07": {
-      "value": 10.5153,
+      "value": 6.5339,
       "extra": {
         "moving_time_s": 3257,
         "distance_m": 10515,
@@ -4365,7 +4365,7 @@
       }
     },
     "2024-04-08": {
-      "value": 5.8131,
+      "value": 3.6121,
       "extra": {
         "moving_time_s": 1421,
         "distance_m": 5813,
@@ -4373,7 +4373,7 @@
       }
     },
     "2024-04-10": {
-      "value": 6.4731,
+      "value": 4.0222,
       "extra": {
         "moving_time_s": 1903,
         "distance_m": 6473,
@@ -4381,7 +4381,7 @@
       }
     },
     "2024-04-11": {
-      "value": 7.2446,
+      "value": 4.5016,
       "extra": {
         "moving_time_s": 2208,
         "distance_m": 7244,
@@ -4389,7 +4389,7 @@
       }
     },
     "2024-04-14": {
-      "value": 16.1568,
+      "value": 10.0394,
       "extra": {
         "moving_time_s": 5136,
         "distance_m": 16156,
@@ -4397,7 +4397,7 @@
       }
     },
     "2024-04-16": {
-      "value": 8.1083,
+      "value": 5.0383,
       "extra": {
         "moving_time_s": 2457,
         "distance_m": 8108,
@@ -4405,7 +4405,7 @@
       }
     },
     "2024-04-18": {
-      "value": 5.3807,
+      "value": 3.3434,
       "extra": {
         "moving_time_s": 1722,
         "distance_m": 5380,
@@ -4413,7 +4413,7 @@
       }
     },
     "2024-04-20": {
-      "value": 6.8734,
+      "value": 4.2709,
       "extra": {
         "moving_time_s": 2149,
         "distance_m": 6873,
@@ -4421,7 +4421,7 @@
       }
     },
     "2024-04-21": {
-      "value": 7.2167,
+      "value": 4.4842,
       "extra": {
         "moving_time_s": 2218,
         "distance_m": 7216,
@@ -4429,7 +4429,7 @@
       }
     },
     "2024-04-23": {
-      "value": 5.4783,
+      "value": 3.4041,
       "extra": {
         "moving_time_s": 1716,
         "distance_m": 5478,
@@ -4437,7 +4437,7 @@
       }
     },
     "2024-04-24": {
-      "value": 8.4411,
+      "value": 5.2451,
       "extra": {
         "moving_time_s": 2778,
         "distance_m": 8441,
@@ -4445,7 +4445,7 @@
       }
     },
     "2024-04-26": {
-      "value": 8.8881,
+      "value": 5.5228,
       "extra": {
         "moving_time_s": 2781,
         "distance_m": 8888,
@@ -4453,7 +4453,7 @@
       }
     },
     "2024-04-27": {
-      "value": 6.5739,
+      "value": 4.0848,
       "extra": {
         "moving_time_s": 2044,
         "distance_m": 6573,
@@ -4461,7 +4461,7 @@
       }
     },
     "2024-04-29": {
-      "value": 5.4813,
+      "value": 3.4059,
       "extra": {
         "moving_time_s": 1769,
         "distance_m": 5481,
@@ -4469,7 +4469,7 @@
       }
     },
     "2024-04-30": {
-      "value": 9.2284,
+      "value": 5.7343,
       "extra": {
         "moving_time_s": 2931,
         "distance_m": 9228,
@@ -4477,7 +4477,7 @@
       }
     },
     "2024-05-01": {
-      "value": 7.8405,
+      "value": 4.8719,
       "extra": {
         "moving_time_s": 2511,
         "distance_m": 7840,
@@ -4485,7 +4485,7 @@
       }
     },
     "2024-05-04": {
-      "value": 12.4725,
+      "value": 7.7501,
       "extra": {
         "moving_time_s": 4133,
         "distance_m": 12472,
@@ -4493,7 +4493,7 @@
       }
     },
     "2024-05-06": {
-      "value": 6.8557,
+      "value": 4.2599,
       "extra": {
         "moving_time_s": 2158,
         "distance_m": 6855,
@@ -4501,7 +4501,7 @@
       }
     },
     "2024-05-07": {
-      "value": 9.9639,
+      "value": 6.1913,
       "extra": {
         "moving_time_s": 3170,
         "distance_m": 9963,
@@ -4509,7 +4509,7 @@
       }
     },
     "2024-05-09": {
-      "value": 8.1681,
+      "value": 5.0754,
       "extra": {
         "moving_time_s": 2525,
         "distance_m": 8168,
@@ -4517,7 +4517,7 @@
       }
     },
     "2024-05-12": {
-      "value": 7.4477,
+      "value": 4.6278,
       "extra": {
         "moving_time_s": 2487,
         "distance_m": 7447,
@@ -4525,7 +4525,7 @@
       }
     },
     "2024-05-14": {
-      "value": 8.928,
+      "value": 5.5476,
       "extra": {
         "moving_time_s": 2961,
         "distance_m": 8928,
@@ -4533,7 +4533,7 @@
       }
     },
     "2024-05-15": {
-      "value": 7.1942,
+      "value": 4.4703,
       "extra": {
         "moving_time_s": 2138,
         "distance_m": 7194,
@@ -4541,7 +4541,7 @@
       }
     },
     "2024-05-17": {
-      "value": 8.7428,
+      "value": 5.4325,
       "extra": {
         "moving_time_s": 2681,
         "distance_m": 8742,
@@ -4549,7 +4549,7 @@
       }
     },
     "2024-05-19": {
-      "value": 10.4774,
+      "value": 6.5104,
       "extra": {
         "moving_time_s": 3334,
         "distance_m": 10477,
@@ -4557,7 +4557,7 @@
       }
     },
     "2024-05-21": {
-      "value": 8.1599,
+      "value": 5.0703,
       "extra": {
         "moving_time_s": 2678,
         "distance_m": 8159,
@@ -4565,7 +4565,7 @@
       }
     },
     "2024-05-22": {
-      "value": 6.0258,
+      "value": 3.7443,
       "extra": {
         "moving_time_s": 1966,
         "distance_m": 6025,
@@ -4573,7 +4573,7 @@
       }
     },
     "2024-05-26": {
-      "value": 8.373,
+      "value": 5.2027,
       "extra": {
         "moving_time_s": 2553,
         "distance_m": 8373,
@@ -4581,7 +4581,7 @@
       }
     },
     "2024-06-02": {
-      "value": 8.0733,
+      "value": 5.0165,
       "extra": {
         "moving_time_s": 2517,
         "distance_m": 8073,
@@ -4589,7 +4589,7 @@
       }
     },
     "2024-06-03": {
-      "value": 6.5061,
+      "value": 4.0427,
       "extra": {
         "moving_time_s": 2065,
         "distance_m": 6506,
@@ -4597,7 +4597,7 @@
       }
     },
     "2024-06-05": {
-      "value": 4.8405,
+      "value": 3.0077,
       "extra": {
         "moving_time_s": 1515,
         "distance_m": 4840,
@@ -4605,7 +4605,7 @@
       }
     },
     "2024-06-07": {
-      "value": 8.0994,
+      "value": 5.0327,
       "extra": {
         "moving_time_s": 2523,
         "distance_m": 8099,
@@ -4613,7 +4613,7 @@
       }
     },
     "2024-06-09": {
-      "value": 8.5825,
+      "value": 5.3329,
       "extra": {
         "moving_time_s": 2760,
         "distance_m": 8582,
@@ -4621,7 +4621,7 @@
       }
     },
     "2024-06-10": {
-      "value": 8.0778,
+      "value": 5.0193,
       "extra": {
         "moving_time_s": 2572,
         "distance_m": 8077,
@@ -4629,7 +4629,7 @@
       }
     },
     "2024-06-11": {
-      "value": 3.2285,
+      "value": 2.0061,
       "extra": {
         "moving_time_s": 908,
         "distance_m": 3228,
@@ -4637,7 +4637,7 @@
       }
     },
     "2024-06-13": {
-      "value": 6.8002,
+      "value": 4.2254,
       "extra": {
         "moving_time_s": 2173,
         "distance_m": 6800,
@@ -4645,7 +4645,7 @@
       }
     },
     "2024-06-16": {
-      "value": 7.8866,
+      "value": 4.9005,
       "extra": {
         "moving_time_s": 2386,
         "distance_m": 7886,
@@ -4653,7 +4653,7 @@
       }
     },
     "2024-06-17": {
-      "value": 5.0613,
+      "value": 3.1449,
       "extra": {
         "moving_time_s": 1617,
         "distance_m": 5061,
@@ -4661,7 +4661,7 @@
       }
     },
     "2024-06-18": {
-      "value": 6.4986,
+      "value": 4.038,
       "extra": {
         "moving_time_s": 2160,
         "distance_m": 6498,
@@ -4669,7 +4669,7 @@
       }
     },
     "2024-06-20": {
-      "value": 11.106,
+      "value": 6.9009,
       "extra": {
         "moving_time_s": 3556,
         "distance_m": 11106,
@@ -4677,7 +4677,7 @@
       }
     },
     "2024-06-22": {
-      "value": 11.405,
+      "value": 7.0867,
       "extra": {
         "moving_time_s": 3679,
         "distance_m": 11405,
@@ -4685,7 +4685,7 @@
       }
     },
     "2024-06-24": {
-      "value": 7.2766,
+      "value": 4.5215,
       "extra": {
         "moving_time_s": 2288,
         "distance_m": 7276,
@@ -4693,7 +4693,7 @@
       }
     },
     "2024-06-25": {
-      "value": 8.3403,
+      "value": 5.1824,
       "extra": {
         "moving_time_s": 2552,
         "distance_m": 8340,
@@ -4701,7 +4701,7 @@
       }
     },
     "2024-06-27": {
-      "value": 8.0746,
+      "value": 5.0173,
       "extra": {
         "moving_time_s": 2556,
         "distance_m": 8074,
@@ -4709,7 +4709,7 @@
       }
     },
     "2024-06-29": {
-      "value": 11.3485,
+      "value": 7.0516,
       "extra": {
         "moving_time_s": 3447,
         "distance_m": 11348,
@@ -4717,7 +4717,7 @@
       }
     },
     "2024-07-01": {
-      "value": 11.4798,
+      "value": 7.1332,
       "extra": {
         "moving_time_s": 3496,
         "distance_m": 11479,
@@ -4725,7 +4725,7 @@
       }
     },
     "2024-07-02": {
-      "value": 8.0788,
+      "value": 5.0199,
       "extra": {
         "moving_time_s": 2406,
         "distance_m": 8078,
@@ -4733,7 +4733,7 @@
       }
     },
     "2024-07-03": {
-      "value": 8.328,
+      "value": 5.1748,
       "extra": {
         "moving_time_s": 2710,
         "distance_m": 8328,
@@ -4741,7 +4741,7 @@
       }
     },
     "2024-07-06": {
-      "value": 7.4171,
+      "value": 4.6088,
       "extra": {
         "moving_time_s": 2316,
         "distance_m": 7417,
@@ -4749,7 +4749,7 @@
       }
     },
     "2024-07-08": {
-      "value": 8.4015,
+      "value": 5.2205,
       "extra": {
         "moving_time_s": 2614,
         "distance_m": 8401,
@@ -4757,7 +4757,7 @@
       }
     },
     "2024-07-10": {
-      "value": 11.2689,
+      "value": 7.0022,
       "extra": {
         "moving_time_s": 3619,
         "distance_m": 11268,
@@ -4765,7 +4765,7 @@
       }
     },
     "2024-07-12": {
-      "value": 11.3671,
+      "value": 7.0632,
       "extra": {
         "moving_time_s": 3623,
         "distance_m": 11367,
@@ -4773,7 +4773,7 @@
       }
     },
     "2024-07-13": {
-      "value": 8.0657,
+      "value": 5.0118,
       "extra": {
         "moving_time_s": 2668,
         "distance_m": 8065,
@@ -4781,7 +4781,7 @@
       }
     },
     "2024-07-15": {
-      "value": 8.1729,
+      "value": 5.0784,
       "extra": {
         "moving_time_s": 2666,
         "distance_m": 8172,
@@ -4789,7 +4789,7 @@
       }
     },
     "2024-07-16": {
-      "value": 8.1981,
+      "value": 5.0941,
       "extra": {
         "moving_time_s": 2705,
         "distance_m": 8198,
@@ -4797,7 +4797,7 @@
       }
     },
     "2024-07-18": {
-      "value": 11.3122,
+      "value": 7.0291,
       "extra": {
         "moving_time_s": 3568,
         "distance_m": 11312,
@@ -4805,7 +4805,7 @@
       }
     },
     "2024-07-19": {
-      "value": 8.197,
+      "value": 5.0934,
       "extra": {
         "moving_time_s": 2394,
         "distance_m": 8197,
@@ -4813,7 +4813,7 @@
       }
     },
     "2024-07-21": {
-      "value": 7.617,
+      "value": 4.733,
       "extra": {
         "moving_time_s": 2365,
         "distance_m": 7617,
@@ -4821,7 +4821,7 @@
       }
     },
     "2024-07-22": {
-      "value": 8.2078,
+      "value": 5.1001,
       "extra": {
         "moving_time_s": 2489,
         "distance_m": 8207,
@@ -4829,7 +4829,7 @@
       }
     },
     "2024-07-23": {
-      "value": 8.551,
+      "value": 5.3133,
       "extra": {
         "moving_time_s": 2682,
         "distance_m": 8551,
@@ -4837,7 +4837,7 @@
       }
     },
     "2024-07-24": {
-      "value": 8.2097,
+      "value": 5.1013,
       "extra": {
         "moving_time_s": 2460,
         "distance_m": 8209,
@@ -4845,7 +4845,7 @@
       }
     },
     "2024-07-25": {
-      "value": 8.2657,
+      "value": 5.1361,
       "extra": {
         "moving_time_s": 2545,
         "distance_m": 8265,
@@ -4853,7 +4853,7 @@
       }
     },
     "2024-07-27": {
-      "value": 13.4767,
+      "value": 8.374,
       "extra": {
         "moving_time_s": 4350,
         "distance_m": 13476,
@@ -4861,7 +4861,7 @@
       }
     },
     "2024-07-29": {
-      "value": 8.0957,
+      "value": 5.0304,
       "extra": {
         "moving_time_s": 2410,
         "distance_m": 8095,
@@ -4869,7 +4869,7 @@
       }
     },
     "2024-07-30": {
-      "value": 8.3357,
+      "value": 5.1796,
       "extra": {
         "moving_time_s": 2590,
         "distance_m": 8335,
@@ -4877,7 +4877,7 @@
       }
     },
     "2024-07-31": {
-      "value": 8.1201,
+      "value": 5.0456,
       "extra": {
         "moving_time_s": 2539,
         "distance_m": 8120,
@@ -4885,7 +4885,7 @@
       }
     },
     "2024-08-01": {
-      "value": 8.3979,
+      "value": 5.2182,
       "extra": {
         "moving_time_s": 2639,
         "distance_m": 8397,
@@ -4893,7 +4893,7 @@
       }
     },
     "2024-08-04": {
-      "value": 16.0973,
+      "value": 10.0024,
       "extra": {
         "moving_time_s": 5233,
         "distance_m": 16097,
@@ -4901,7 +4901,7 @@
       }
     },
     "2024-08-05": {
-      "value": 8.429,
+      "value": 5.2375,
       "extra": {
         "moving_time_s": 2686,
         "distance_m": 8429,
@@ -4909,7 +4909,7 @@
       }
     },
     "2024-08-07": {
-      "value": 9.2275,
+      "value": 5.7337,
       "extra": {
         "moving_time_s": 2706,
         "distance_m": 9227,
@@ -4917,7 +4917,7 @@
       }
     },
     "2024-08-08": {
-      "value": 8.2097,
+      "value": 5.1013,
       "extra": {
         "moving_time_s": 2536,
         "distance_m": 8209,
@@ -4925,7 +4925,7 @@
       }
     },
     "2024-08-09": {
-      "value": 8.038,
+      "value": 4.9946,
       "extra": {
         "moving_time_s": 2531,
         "distance_m": 8038,
@@ -4933,7 +4933,7 @@
       }
     },
     "2024-08-11": {
-      "value": 8.2252,
+      "value": 5.1109,
       "extra": {
         "moving_time_s": 2554,
         "distance_m": 8225,
@@ -4941,7 +4941,7 @@
       }
     },
     "2024-08-12": {
-      "value": 8.227,
+      "value": 5.112,
       "extra": {
         "moving_time_s": 2487,
         "distance_m": 8227,
@@ -4949,7 +4949,7 @@
       }
     },
     "2024-08-14": {
-      "value": 8.2235,
+      "value": 5.1098,
       "extra": {
         "moving_time_s": 2426,
         "distance_m": 8223,
@@ -4957,7 +4957,7 @@
       }
     },
     "2024-08-15": {
-      "value": 8.291,
+      "value": 5.1518,
       "extra": {
         "moving_time_s": 2557,
         "distance_m": 8291,
@@ -4965,7 +4965,7 @@
       }
     },
     "2024-08-17": {
-      "value": 11.3374,
+      "value": 7.0447,
       "extra": {
         "moving_time_s": 3488,
         "distance_m": 11337,
@@ -4973,7 +4973,7 @@
       }
     },
     "2024-08-19": {
-      "value": 11.4057,
+      "value": 7.0872,
       "extra": {
         "moving_time_s": 3485,
         "distance_m": 11405,
@@ -4981,7 +4981,7 @@
       }
     },
     "2024-08-20": {
-      "value": 8.2901,
+      "value": 5.1512,
       "extra": {
         "moving_time_s": 2481,
         "distance_m": 8290,
@@ -4989,7 +4989,7 @@
       }
     },
     "2024-08-22": {
-      "value": 11.406,
+      "value": 7.0874,
       "extra": {
         "moving_time_s": 3664,
         "distance_m": 11406,
@@ -4997,7 +4997,7 @@
       }
     },
     "2024-08-25": {
-      "value": 13.1975,
+      "value": 8.2005,
       "extra": {
         "moving_time_s": 4223,
         "distance_m": 13197,
@@ -5005,7 +5005,7 @@
       }
     },
     "2024-08-27": {
-      "value": 8.2794,
+      "value": 5.1446,
       "extra": {
         "moving_time_s": 2503,
         "distance_m": 8279,
@@ -5013,7 +5013,7 @@
       }
     },
     "2024-08-28": {
-      "value": 8.2006,
+      "value": 5.0956,
       "extra": {
         "moving_time_s": 2616,
         "distance_m": 8200,
@@ -5021,7 +5021,7 @@
       }
     },
     "2024-08-30": {
-      "value": 16.1367,
+      "value": 10.0269,
       "extra": {
         "moving_time_s": 5185,
         "distance_m": 16136,
@@ -5029,7 +5029,7 @@
       }
     },
     "2024-09-01": {
-      "value": 8.2288,
+      "value": 5.1131,
       "extra": {
         "moving_time_s": 2501,
         "distance_m": 8228,
@@ -5037,7 +5037,7 @@
       }
     },
     "2024-09-04": {
-      "value": 3.278,
+      "value": 2.0369,
       "extra": {
         "moving_time_s": 1098,
         "distance_m": 3278,
@@ -5045,7 +5045,7 @@
       }
     },
     "2024-09-07": {
-      "value": 8.2948,
+      "value": 5.1541,
       "extra": {
         "moving_time_s": 2552,
         "distance_m": 8294,
@@ -5053,7 +5053,7 @@
       }
     },
     "2024-09-08": {
-      "value": 16.1231,
+      "value": 10.0184,
       "extra": {
         "moving_time_s": 4829,
         "distance_m": 16123,
@@ -5061,7 +5061,7 @@
       }
     },
     "2024-09-09": {
-      "value": 8.4272,
+      "value": 5.2364,
       "extra": {
         "moving_time_s": 2607,
         "distance_m": 8427,
@@ -5069,7 +5069,7 @@
       }
     },
     "2024-09-10": {
-      "value": 8.2397,
+      "value": 5.1199,
       "extra": {
         "moving_time_s": 2480,
         "distance_m": 8239,
@@ -5077,7 +5077,7 @@
       }
     },
     "2024-09-12": {
-      "value": 14.249,
+      "value": 8.8539,
       "extra": {
         "moving_time_s": 4245,
         "distance_m": 14249,
@@ -5085,7 +5085,7 @@
       }
     },
     "2024-09-14": {
-      "value": 8.2955,
+      "value": 5.1546,
       "extra": {
         "moving_time_s": 2553,
         "distance_m": 8295,
@@ -5093,7 +5093,7 @@
       }
     },
     "2024-09-16": {
-      "value": 8.6155,
+      "value": 5.3534,
       "extra": {
         "moving_time_s": 2572,
         "distance_m": 8615,
@@ -5101,7 +5101,7 @@
       }
     },
     "2024-09-17": {
-      "value": 8.2526,
+      "value": 5.1279,
       "extra": {
         "moving_time_s": 2472,
         "distance_m": 8252,
@@ -5109,7 +5109,7 @@
       }
     },
     "2024-09-19": {
-      "value": 8.4147,
+      "value": 5.2287,
       "extra": {
         "moving_time_s": 2495,
         "distance_m": 8414,
@@ -5117,7 +5117,7 @@
       }
     },
     "2024-09-21": {
-      "value": 11.4889,
+      "value": 7.1389,
       "extra": {
         "moving_time_s": 3457,
         "distance_m": 11488,
@@ -5125,7 +5125,7 @@
       }
     },
     "2024-09-23": {
-      "value": 12.1348,
+      "value": 7.5402,
       "extra": {
         "moving_time_s": 3626,
         "distance_m": 12134,
@@ -5133,7 +5133,7 @@
       }
     },
     "2024-09-26": {
-      "value": 8.2662,
+      "value": 5.1364,
       "extra": {
         "moving_time_s": 2599,
         "distance_m": 8266,
@@ -5141,7 +5141,7 @@
       }
     },
     "2024-09-29": {
-      "value": 11.2807,
+      "value": 7.0095,
       "extra": {
         "moving_time_s": 3269,
         "distance_m": 11280,
@@ -5149,7 +5149,7 @@
       }
     },
     "2024-09-30": {
-      "value": 8.1283,
+      "value": 5.0507,
       "extra": {
         "moving_time_s": 2394,
         "distance_m": 8128,
@@ -5157,7 +5157,7 @@
       }
     },
     "2024-10-02": {
-      "value": 8.2365,
+      "value": 5.1179,
       "extra": {
         "moving_time_s": 2415,
         "distance_m": 8236,
@@ -5165,7 +5165,7 @@
       }
     },
     "2024-10-04": {
-      "value": 8.1517,
+      "value": 5.0652,
       "extra": {
         "moving_time_s": 2398,
         "distance_m": 8151,
@@ -5173,7 +5173,7 @@
       }
     },
     "2024-10-06": {
-      "value": 4.8618,
+      "value": 3.021,
       "extra": {
         "moving_time_s": 1483,
         "distance_m": 4861,
@@ -5181,7 +5181,7 @@
       }
     },
     "2024-10-08": {
-      "value": 8.1454,
+      "value": 5.0613,
       "extra": {
         "moving_time_s": 2391,
         "distance_m": 8145,
@@ -5189,7 +5189,7 @@
       }
     },
     "2024-10-10": {
-      "value": 8.2509,
+      "value": 5.1269,
       "extra": {
         "moving_time_s": 2485,
         "distance_m": 8250,
@@ -5197,7 +5197,7 @@
       }
     },
     "2024-10-12": {
-      "value": 13.344,
+      "value": 8.2916,
       "extra": {
         "moving_time_s": 4000,
         "distance_m": 13344,
@@ -5205,7 +5205,7 @@
       }
     },
     "2024-10-13": {
-      "value": 8.1162,
+      "value": 5.0432,
       "extra": {
         "moving_time_s": 2409,
         "distance_m": 8116,
@@ -5213,7 +5213,7 @@
       }
     },
     "2024-10-15": {
-      "value": 8.3221,
+      "value": 5.1711,
       "extra": {
         "moving_time_s": 2418,
         "distance_m": 8322,
@@ -5221,7 +5221,7 @@
       }
     },
     "2024-10-17": {
-      "value": 11.9273,
+      "value": 7.4113,
       "extra": {
         "moving_time_s": 3646,
         "distance_m": 11927,
@@ -5229,7 +5229,7 @@
       }
     },
     "2024-10-19": {
-      "value": 13.3994,
+      "value": 8.326,
       "extra": {
         "moving_time_s": 4155,
         "distance_m": 13399,
@@ -5237,7 +5237,7 @@
       }
     },
     "2024-10-21": {
-      "value": 8.3523,
+      "value": 5.1899,
       "extra": {
         "moving_time_s": 2505,
         "distance_m": 8352,
@@ -5245,7 +5245,7 @@
       }
     },
     "2024-10-23": {
-      "value": 8.1803,
+      "value": 5.083,
       "extra": {
         "moving_time_s": 2443,
         "distance_m": 8180,
@@ -5253,7 +5253,7 @@
       }
     },
     "2024-10-25": {
-      "value": 8.2121,
+      "value": 5.1028,
       "extra": {
         "moving_time_s": 2532,
         "distance_m": 8212,
@@ -5261,7 +5261,7 @@
       }
     },
     "2024-10-27": {
-      "value": 8.3566,
+      "value": 5.1926,
       "extra": {
         "moving_time_s": 2548,
         "distance_m": 8356,
@@ -5269,7 +5269,7 @@
       }
     },
     "2024-10-28": {
-      "value": 8.1826,
+      "value": 5.0844,
       "extra": {
         "moving_time_s": 2546,
         "distance_m": 8182,
@@ -5277,7 +5277,7 @@
       }
     },
     "2024-10-30": {
-      "value": 8.2015,
+      "value": 5.0962,
       "extra": {
         "moving_time_s": 2534,
         "distance_m": 8201,
@@ -5285,7 +5285,7 @@
       }
     },
     "2024-11-03": {
-      "value": 8.3673,
+      "value": 5.1992,
       "extra": {
         "moving_time_s": 2512,
         "distance_m": 8367,
@@ -5293,7 +5293,7 @@
       }
     },
     "2024-11-04": {
-      "value": 8.2857,
+      "value": 5.1485,
       "extra": {
         "moving_time_s": 2624,
         "distance_m": 8285,
@@ -5301,7 +5301,7 @@
       }
     },
     "2024-11-06": {
-      "value": 11.389,
+      "value": 7.0768,
       "extra": {
         "moving_time_s": 3808,
         "distance_m": 11389,
@@ -5309,7 +5309,7 @@
       }
     },
     "2024-11-07": {
-      "value": 8.2857,
+      "value": 5.1485,
       "extra": {
         "moving_time_s": 2655,
         "distance_m": 8285,
@@ -5317,7 +5317,7 @@
       }
     },
     "2024-11-09": {
-      "value": 8.1407,
+      "value": 5.0584,
       "extra": {
         "moving_time_s": 2477,
         "distance_m": 8140,
@@ -5325,7 +5325,7 @@
       }
     },
     "2024-11-12": {
-      "value": 8.3122,
+      "value": 5.165,
       "extra": {
         "moving_time_s": 2545,
         "distance_m": 8312,
@@ -5333,7 +5333,7 @@
       }
     },
     "2024-11-14": {
-      "value": 7.9207,
+      "value": 4.9217,
       "extra": {
         "moving_time_s": 2461,
         "distance_m": 7920,
@@ -5341,7 +5341,7 @@
       }
     },
     "2024-11-16": {
-      "value": 5.1989,
+      "value": 3.2304,
       "extra": {
         "moving_time_s": 1596,
         "distance_m": 5198,
@@ -5349,7 +5349,7 @@
       }
     },
     "2024-11-18": {
-      "value": 8.2217,
+      "value": 5.1087,
       "extra": {
         "moving_time_s": 2579,
         "distance_m": 8221,
@@ -5357,7 +5357,7 @@
       }
     },
     "2024-11-20": {
-      "value": 6.0889,
+      "value": 3.7835,
       "extra": {
         "moving_time_s": 1791,
         "distance_m": 6088,
@@ -5365,7 +5365,7 @@
       }
     },
     "2024-11-22": {
-      "value": 11.477,
+      "value": 7.1315,
       "extra": {
         "moving_time_s": 3533,
         "distance_m": 11477,
@@ -5373,7 +5373,7 @@
       }
     },
     "2024-11-24": {
-      "value": 6.9236,
+      "value": 4.3021,
       "extra": {
         "moving_time_s": 2098,
         "distance_m": 6923,
@@ -5381,7 +5381,7 @@
       }
     },
     "2024-11-25": {
-      "value": 14.7795,
+      "value": 9.1836,
       "extra": {
         "moving_time_s": 4434,
         "distance_m": 14779,
@@ -5389,7 +5389,7 @@
       }
     },
     "2024-11-27": {
-      "value": 8.4366,
+      "value": 5.2423,
       "extra": {
         "moving_time_s": 2500,
         "distance_m": 8436,
@@ -5397,7 +5397,7 @@
       }
     },
     "2024-11-30": {
-      "value": 11.3797,
+      "value": 7.071,
       "extra": {
         "moving_time_s": 3446,
         "distance_m": 11379,
@@ -5405,7 +5405,7 @@
       }
     },
     "2024-12-03": {
-      "value": 9.8644,
+      "value": 6.1295,
       "extra": {
         "moving_time_s": 3052,
         "distance_m": 9864,
@@ -5413,7 +5413,7 @@
       }
     },
     "2024-12-05": {
-      "value": 13.6223,
+      "value": 8.4645,
       "extra": {
         "moving_time_s": 4319,
         "distance_m": 13622,
@@ -5421,7 +5421,7 @@
       }
     },
     "2024-12-08": {
-      "value": 11.3224,
+      "value": 7.0354,
       "extra": {
         "moving_time_s": 3548,
         "distance_m": 11322,
@@ -5429,7 +5429,7 @@
       }
     },
     "2024-12-10": {
-      "value": 8.2791,
+      "value": 5.1444,
       "extra": {
         "moving_time_s": 2596,
         "distance_m": 8279,
@@ -5437,7 +5437,7 @@
       }
     },
     "2024-12-12": {
-      "value": 8.3062,
+      "value": 5.1612,
       "extra": {
         "moving_time_s": 2702,
         "distance_m": 8306,
@@ -5445,7 +5445,7 @@
       }
     },
     "2024-12-15": {
-      "value": 20.537,
+      "value": 12.7611,
       "extra": {
         "moving_time_s": 6429,
         "distance_m": 20537,
@@ -5453,7 +5453,7 @@
       }
     },
     "2024-12-27": {
-      "value": 8.161,
+      "value": 5.071,
       "extra": {
         "moving_time_s": 2570,
         "distance_m": 8161,
@@ -5461,7 +5461,7 @@
       }
     },
     "2025-01-03": {
-      "value": 3.4729,
+      "value": 2.158,
       "extra": {
         "moving_time_s": 1059,
         "distance_m": 3472,
@@ -5469,7 +5469,7 @@
       }
     },
     "2025-05-15": {
-      "value": 3.2499,
+      "value": 2.0194,
       "extra": {
         "moving_time_s": 1130,
         "distance_m": 3249,
@@ -5477,7 +5477,7 @@
       }
     },
     "2025-05-18": {
-      "value": 3.7037,
+      "value": 2.3014,
       "extra": {
         "moving_time_s": 1217,
         "distance_m": 3703,
@@ -5485,7 +5485,7 @@
       }
     },
     "2025-05-20": {
-      "value": 3.6264,
+      "value": 2.2533,
       "extra": {
         "moving_time_s": 1206,
         "distance_m": 3626,
@@ -5493,7 +5493,7 @@
       }
     },
     "2025-05-24": {
-      "value": 3.4789,
+      "value": 2.1617,
       "extra": {
         "moving_time_s": 1119,
         "distance_m": 3478,
@@ -5501,7 +5501,7 @@
       }
     },
     "2025-05-30": {
-      "value": 2.4606,
+      "value": 1.5289,
       "extra": {
         "moving_time_s": 921,
         "distance_m": 2460,
@@ -5509,7 +5509,7 @@
       }
     },
     "2025-06-03": {
-      "value": 3.3553,
+      "value": 2.0849,
       "extra": {
         "moving_time_s": 1123,
         "distance_m": 3355,
@@ -5517,7 +5517,7 @@
       }
     },
     "2025-06-05": {
-      "value": 5.1169,
+      "value": 3.1795,
       "extra": {
         "moving_time_s": 1726,
         "distance_m": 5116,
@@ -5525,7 +5525,7 @@
       }
     },
     "2025-06-08": {
-      "value": 8.1622,
+      "value": 5.0718,
       "extra": {
         "moving_time_s": 2589,
         "distance_m": 8162,
@@ -5533,7 +5533,7 @@
       }
     },
     "2025-06-10": {
-      "value": 5.9306,
+      "value": 3.6851,
       "extra": {
         "moving_time_s": 1930,
         "distance_m": 5930,
@@ -5541,7 +5541,7 @@
       }
     },
     "2025-06-12": {
-      "value": 5.8595,
+      "value": 3.6409,
       "extra": {
         "moving_time_s": 1931,
         "distance_m": 5859,
@@ -5549,7 +5549,7 @@
       }
     },
     "2025-06-15": {
-      "value": 5.9501,
+      "value": 3.6972,
       "extra": {
         "moving_time_s": 1885,
         "distance_m": 5950,
@@ -5557,7 +5557,7 @@
       }
     },
     "2025-06-17": {
-      "value": 7.9971,
+      "value": 4.9692,
       "extra": {
         "moving_time_s": 2604,
         "distance_m": 7997,
@@ -5565,7 +5565,7 @@
       }
     },
     "2025-06-19": {
-      "value": 5.3459,
+      "value": 3.3218,
       "extra": {
         "moving_time_s": 1748,
         "distance_m": 5345,
@@ -5573,7 +5573,7 @@
       }
     },
     "2025-06-21": {
-      "value": 7.0311,
+      "value": 4.3689,
       "extra": {
         "moving_time_s": 2292,
         "distance_m": 7031,
@@ -5581,7 +5581,7 @@
       }
     },
     "2025-06-23": {
-      "value": 7.4498,
+      "value": 4.6291,
       "extra": {
         "moving_time_s": 2522,
         "distance_m": 7449,
@@ -5589,7 +5589,7 @@
       }
     },
     "2025-06-25": {
-      "value": 8.1287,
+      "value": 5.0509,
       "extra": {
         "moving_time_s": 2723,
         "distance_m": 8128,
@@ -5597,7 +5597,7 @@
       }
     },
     "2025-06-27": {
-      "value": 5.7411,
+      "value": 3.5674,
       "extra": {
         "moving_time_s": 1865,
         "distance_m": 5741,
@@ -5605,7 +5605,7 @@
       }
     },
     "2025-07-02": {
-      "value": 5.9006,
+      "value": 3.6665,
       "extra": {
         "moving_time_s": 1928,
         "distance_m": 5900,
@@ -5613,7 +5613,7 @@
       }
     },
     "2025-07-06": {
-      "value": 8.0736,
+      "value": 5.0167,
       "extra": {
         "moving_time_s": 2707,
         "distance_m": 8073,
@@ -5621,7 +5621,7 @@
       }
     },
     "2025-07-08": {
-      "value": 8.0718,
+      "value": 5.0156,
       "extra": {
         "moving_time_s": 2691,
         "distance_m": 8071,
@@ -5629,7 +5629,7 @@
       }
     },
     "2025-07-10": {
-      "value": 8.1019,
+      "value": 5.0343,
       "extra": {
         "moving_time_s": 2686,
         "distance_m": 8101,
@@ -5637,7 +5637,7 @@
       }
     },
     "2025-07-12": {
-      "value": 8.1039,
+      "value": 5.0355,
       "extra": {
         "moving_time_s": 2619,
         "distance_m": 8103,
@@ -5645,7 +5645,7 @@
       }
     },
     "2025-07-14": {
-      "value": 8.0479,
+      "value": 5.0007,
       "extra": {
         "moving_time_s": 2621,
         "distance_m": 8047,
@@ -5653,7 +5653,7 @@
       }
     },
     "2025-07-16": {
-      "value": 8.072,
+      "value": 5.0157,
       "extra": {
         "moving_time_s": 2677,
         "distance_m": 8072,
@@ -5661,7 +5661,7 @@
       }
     },
     "2025-07-18": {
-      "value": 8.0759,
+      "value": 5.0181,
       "extra": {
         "moving_time_s": 2627,
         "distance_m": 8075,
@@ -5669,7 +5669,7 @@
       }
     },
     "2025-07-21": {
-      "value": 6.4773,
+      "value": 4.0248,
       "extra": {
         "moving_time_s": 2054,
         "distance_m": 6477,
@@ -5677,7 +5677,7 @@
       }
     },
     "2025-07-24": {
-      "value": 8.0851,
+      "value": 5.0238,
       "extra": {
         "moving_time_s": 2685,
         "distance_m": 8085,
@@ -5685,7 +5685,7 @@
       }
     },
     "2025-07-27": {
-      "value": 8.0565,
+      "value": 5.0061,
       "extra": {
         "moving_time_s": 2565,
         "distance_m": 8056,
@@ -5693,7 +5693,7 @@
       }
     },
     "2025-07-28": {
-      "value": 7.9195,
+      "value": 4.9209,
       "extra": {
         "moving_time_s": 2604,
         "distance_m": 7919,
@@ -5701,7 +5701,7 @@
       }
     },
     "2025-07-30": {
-      "value": 8.0833,
+      "value": 5.0227,
       "extra": {
         "moving_time_s": 2593,
         "distance_m": 8083,
@@ -5709,7 +5709,7 @@
       }
     },
     "2025-08-01": {
-      "value": 8.0665,
+      "value": 5.0123,
       "extra": {
         "moving_time_s": 2631,
         "distance_m": 8066,
@@ -5717,7 +5717,7 @@
       }
     },
     "2025-08-03": {
-      "value": 8.164,
+      "value": 5.0729,
       "extra": {
         "moving_time_s": 2605,
         "distance_m": 8164,
@@ -5725,7 +5725,7 @@
       }
     },
     "2025-08-04": {
-      "value": 7.9517,
+      "value": 4.941,
       "extra": {
         "moving_time_s": 2560,
         "distance_m": 7951,
@@ -5733,7 +5733,7 @@
       }
     },
     "2025-08-05": {
-      "value": 8.167,
+      "value": 5.0747,
       "extra": {
         "moving_time_s": 2547,
         "distance_m": 8167,
@@ -5741,7 +5741,7 @@
       }
     },
     "2025-08-07": {
-      "value": 8.0735,
+      "value": 5.0166,
       "extra": {
         "moving_time_s": 2496,
         "distance_m": 8073,
@@ -5749,7 +5749,7 @@
       }
     },
     "2025-08-08": {
-      "value": 8.1484,
+      "value": 5.0632,
       "extra": {
         "moving_time_s": 2606,
         "distance_m": 8148,
@@ -5757,7 +5757,7 @@
       }
     },
     "2025-08-11": {
-      "value": 8.0827,
+      "value": 5.0224,
       "extra": {
         "moving_time_s": 2658,
         "distance_m": 8082,
@@ -5765,7 +5765,7 @@
       }
     },
     "2025-08-12": {
-      "value": 8.0731,
+      "value": 5.0164,
       "extra": {
         "moving_time_s": 2646,
         "distance_m": 8073,
@@ -5773,7 +5773,7 @@
       }
     },
     "2025-08-13": {
-      "value": 8.0563,
+      "value": 5.006,
       "extra": {
         "moving_time_s": 2632,
         "distance_m": 8056,
@@ -5781,7 +5781,7 @@
       }
     },
     "2025-08-14": {
-      "value": 8.0625,
+      "value": 5.0098,
       "extra": {
         "moving_time_s": 2596,
         "distance_m": 8062,
@@ -5789,7 +5789,7 @@
       }
     },
     "2025-08-16": {
-      "value": 8.0856,
+      "value": 5.0242,
       "extra": {
         "moving_time_s": 2501,
         "distance_m": 8085,
@@ -5797,7 +5797,7 @@
       }
     },
     "2025-08-18": {
-      "value": 8.0686,
+      "value": 5.0136,
       "extra": {
         "moving_time_s": 2549,
         "distance_m": 8068,
@@ -5805,7 +5805,7 @@
       }
     },
     "2025-08-20": {
-      "value": 8.2213,
+      "value": 5.1085,
       "extra": {
         "moving_time_s": 2614,
         "distance_m": 8221,
@@ -5813,7 +5813,7 @@
       }
     },
     "2025-08-21": {
-      "value": 8.0881,
+      "value": 5.0257,
       "extra": {
         "moving_time_s": 2510,
         "distance_m": 8088,
@@ -5821,7 +5821,7 @@
       }
     },
     "2025-08-25": {
-      "value": 8.0595,
+      "value": 5.0079,
       "extra": {
         "moving_time_s": 2586,
         "distance_m": 8059,
@@ -5829,7 +5829,7 @@
       }
     },
     "2025-08-26": {
-      "value": 5.9364,
+      "value": 3.6887,
       "extra": {
         "moving_time_s": 1885,
         "distance_m": 5936,
@@ -5837,7 +5837,7 @@
       }
     },
     "2025-08-27": {
-      "value": 8.0535,
+      "value": 5.0042,
       "extra": {
         "moving_time_s": 2581,
         "distance_m": 8053,
@@ -5845,7 +5845,7 @@
       }
     },
     "2025-09-01": {
-      "value": 8.0626,
+      "value": 5.0099,
       "extra": {
         "moving_time_s": 2547,
         "distance_m": 8062,
@@ -5853,7 +5853,7 @@
       }
     },
     "2025-09-03": {
-      "value": 5.6521,
+      "value": 3.5121,
       "extra": {
         "moving_time_s": 1780,
         "distance_m": 5652,
@@ -5861,7 +5861,7 @@
       }
     },
     "2025-09-08": {
-      "value": 5.94,
+      "value": 3.6909,
       "extra": {
         "moving_time_s": 1860,
         "distance_m": 5940,
@@ -5869,7 +5869,7 @@
       }
     },
     "2025-09-10": {
-      "value": 8.0967,
+      "value": 5.0311,
       "extra": {
         "moving_time_s": 2576,
         "distance_m": 8096,
@@ -5877,7 +5877,7 @@
       }
     },
     "2025-09-14": {
-      "value": 5.8034,
+      "value": 3.6061,
       "extra": {
         "moving_time_s": 1841,
         "distance_m": 5803,
@@ -5885,7 +5885,7 @@
       }
     },
     "2025-09-16": {
-      "value": 5.7484,
+      "value": 3.5719,
       "extra": {
         "moving_time_s": 1858,
         "distance_m": 5748,
@@ -5893,7 +5893,7 @@
       }
     },
     "2025-09-21": {
-      "value": 5.8874,
+      "value": 3.6583,
       "extra": {
         "moving_time_s": 1790,
         "distance_m": 5887,
@@ -5901,7 +5901,7 @@
       }
     },
     "2025-09-23": {
-      "value": 5.8863,
+      "value": 3.6576,
       "extra": {
         "moving_time_s": 1874,
         "distance_m": 5886,
@@ -5909,7 +5909,7 @@
       }
     },
     "2025-09-25": {
-      "value": 5.7742,
+      "value": 3.5879,
       "extra": {
         "moving_time_s": 1861,
         "distance_m": 5774,
@@ -5917,7 +5917,7 @@
       }
     },
     "2025-09-27": {
-      "value": 5.877,
+      "value": 3.6518,
       "extra": {
         "moving_time_s": 1860,
         "distance_m": 5877,
@@ -5925,7 +5925,7 @@
       }
     },
     "2025-09-29": {
-      "value": 6.0067,
+      "value": 3.7324,
       "extra": {
         "moving_time_s": 1981,
         "distance_m": 6006,
@@ -5933,7 +5933,7 @@
       }
     },
     "2025-10-02": {
-      "value": 5.8744,
+      "value": 3.6502,
       "extra": {
         "moving_time_s": 1920,
         "distance_m": 5874,
@@ -5941,7 +5941,7 @@
       }
     },
     "2025-10-05": {
-      "value": 8.0257,
+      "value": 4.9869,
       "extra": {
         "moving_time_s": 2739,
         "distance_m": 8025,
@@ -5949,7 +5949,7 @@
       }
     },
     "2025-10-07": {
-      "value": 5.7577,
+      "value": 3.5777,
       "extra": {
         "moving_time_s": 1880,
         "distance_m": 5757,
@@ -5957,7 +5957,7 @@
       }
     },
     "2025-10-09": {
-      "value": 5.8679,
+      "value": 3.6461,
       "extra": {
         "moving_time_s": 1902,
         "distance_m": 5867,
@@ -5965,7 +5965,7 @@
       }
     },
     "2025-10-11": {
-      "value": 5.6685,
+      "value": 3.5222,
       "extra": {
         "moving_time_s": 1836,
         "distance_m": 5668,
@@ -5973,7 +5973,7 @@
       }
     },
     "2025-10-13": {
-      "value": 4.3622,
+      "value": 2.7105,
       "extra": {
         "moving_time_s": 1477,
         "distance_m": 4362,
@@ -5981,7 +5981,7 @@
       }
     },
     "2025-10-15": {
-      "value": 5.8255,
+      "value": 3.6198,
       "extra": {
         "moving_time_s": 1929,
         "distance_m": 5825,
@@ -5989,7 +5989,7 @@
       }
     },
     "2025-10-18": {
-      "value": 7.4617,
+      "value": 4.6365,
       "extra": {
         "moving_time_s": 2417,
         "distance_m": 7461,
@@ -5997,7 +5997,7 @@
       }
     },
     "2025-10-20": {
-      "value": 5.8865,
+      "value": 3.6577,
       "extra": {
         "moving_time_s": 1909,
         "distance_m": 5886,
@@ -6005,7 +6005,7 @@
       }
     },
     "2025-10-23": {
-      "value": 5.8671,
+      "value": 3.6456,
       "extra": {
         "moving_time_s": 1918,
         "distance_m": 5867,
@@ -6013,7 +6013,7 @@
       }
     },
     "2025-10-26": {
-      "value": 5.8676,
+      "value": 3.646,
       "extra": {
         "moving_time_s": 1836,
         "distance_m": 5867,
@@ -6021,7 +6021,7 @@
       }
     },
     "2025-10-28": {
-      "value": 5.7937,
+      "value": 3.6,
       "extra": {
         "moving_time_s": 1800,
         "distance_m": 5793,
@@ -6029,7 +6029,7 @@
       }
     },
     "2025-10-31": {
-      "value": 4.8516,
+      "value": 3.0146,
       "extra": {
         "moving_time_s": 1496,
         "distance_m": 4851,
@@ -6037,7 +6037,7 @@
       }
     },
     "2025-11-04": {
-      "value": 5.6601,
+      "value": 3.517,
       "extra": {
         "moving_time_s": 1827,
         "distance_m": 5660,
@@ -6045,7 +6045,7 @@
       }
     },
     "2025-11-06": {
-      "value": 5.4995,
+      "value": 3.4172,
       "extra": {
         "moving_time_s": 1815,
         "distance_m": 5499,
@@ -6053,7 +6053,7 @@
       }
     },
     "2025-11-09": {
-      "value": 5.8305,
+      "value": 3.6229,
       "extra": {
         "moving_time_s": 1828,
         "distance_m": 5830,
@@ -6061,7 +6061,7 @@
       }
     },
     "2025-11-11": {
-      "value": 5.9202,
+      "value": 3.6786,
       "extra": {
         "moving_time_s": 1829,
         "distance_m": 5920,
@@ -6069,7 +6069,7 @@
       }
     },
     "2025-11-13": {
-      "value": 5.9031,
+      "value": 3.668,
       "extra": {
         "moving_time_s": 1902,
         "distance_m": 5903,
@@ -6077,7 +6077,7 @@
       }
     },
     "2025-11-17": {
-      "value": 5.61,
+      "value": 3.4859,
       "extra": {
         "moving_time_s": 1800,
         "distance_m": 5610,
@@ -6085,7 +6085,7 @@
       }
     },
     "2025-11-20": {
-      "value": 5.6806,
+      "value": 3.5298,
       "extra": {
         "moving_time_s": 1839,
         "distance_m": 5680,
@@ -6093,7 +6093,7 @@
       }
     },
     "2025-11-23": {
-      "value": 5.6124,
+      "value": 3.4874,
       "extra": {
         "moving_time_s": 1836,
         "distance_m": 5612,
@@ -6101,7 +6101,7 @@
       }
     },
     "2025-12-06": {
-      "value": 3.1429,
+      "value": 1.9529,
       "extra": {
         "moving_time_s": 1077,
         "distance_m": 3142,
@@ -6109,7 +6109,7 @@
       }
     },
     "2025-12-08": {
-      "value": 5.7638,
+      "value": 3.5815,
       "extra": {
         "moving_time_s": 1914,
         "distance_m": 5763,
@@ -6117,7 +6117,7 @@
       }
     },
     "2025-12-11": {
-      "value": 5.521,
+      "value": 3.4306,
       "extra": {
         "moving_time_s": 1882,
         "distance_m": 5521,
@@ -6125,7 +6125,7 @@
       }
     },
     "2025-12-13": {
-      "value": 5.7564,
+      "value": 3.5769,
       "extra": {
         "moving_time_s": 1892,
         "distance_m": 5756,
@@ -6133,7 +6133,7 @@
       }
     },
     "2025-12-16": {
-      "value": 5.6604,
+      "value": 3.5172,
       "extra": {
         "moving_time_s": 1939,
         "distance_m": 5660,
@@ -6141,7 +6141,7 @@
       }
     },
     "2025-12-18": {
-      "value": 5.9482,
+      "value": 3.696,
       "extra": {
         "moving_time_s": 2033,
         "distance_m": 5948,
@@ -6149,7 +6149,7 @@
       }
     },
     "2025-12-21": {
-      "value": 5.6123,
+      "value": 3.4873,
       "extra": {
         "moving_time_s": 1934,
         "distance_m": 5612,
@@ -6157,7 +6157,7 @@
       }
     },
     "2025-12-23": {
-      "value": 3.2419,
+      "value": 2.0144,
       "extra": {
         "moving_time_s": 1088,
         "distance_m": 3241,
@@ -6165,7 +6165,7 @@
       }
     },
     "2025-12-28": {
-      "value": 7.9744,
+      "value": 4.9551,
       "extra": {
         "moving_time_s": 2659,
         "distance_m": 7974,
@@ -6173,7 +6173,7 @@
       }
     },
     "2025-12-30": {
-      "value": 5.6259,
+      "value": 3.4958,
       "extra": {
         "moving_time_s": 1846,
         "distance_m": 5625,
@@ -6181,7 +6181,7 @@
       }
     },
     "2026-01-02": {
-      "value": 7.9469,
+      "value": 4.938,
       "extra": {
         "moving_time_s": 2618,
         "distance_m": 7946,
@@ -6189,7 +6189,7 @@
       }
     },
     "2026-01-04": {
-      "value": 8.1397,
+      "value": 5.0578,
       "extra": {
         "moving_time_s": 2592,
         "distance_m": 8139,
@@ -6197,7 +6197,7 @@
       }
     },
     "2026-01-06": {
-      "value": 5.7389,
+      "value": 3.566,
       "extra": {
         "moving_time_s": 1843,
         "distance_m": 5738,
@@ -6205,7 +6205,7 @@
       }
     },
     "2026-01-08": {
-      "value": 5.5332,
+      "value": 3.4382,
       "extra": {
         "moving_time_s": 1778,
         "distance_m": 5533,
@@ -6213,7 +6213,7 @@
       }
     },
     "2026-01-11": {
-      "value": 7.2684,
+      "value": 4.5164,
       "extra": {
         "moving_time_s": 2419,
         "distance_m": 7268,
@@ -6221,7 +6221,7 @@
       }
     },
     "2026-01-13": {
-      "value": 5.8269,
+      "value": 3.6207,
       "extra": {
         "moving_time_s": 1949,
         "distance_m": 5826,
@@ -6229,7 +6229,7 @@
       }
     },
     "2026-01-18": {
-      "value": 9.4462,
+      "value": 5.8696,
       "extra": {
         "moving_time_s": 3100,
         "distance_m": 9446,
@@ -6237,7 +6237,7 @@
       }
     },
     "2026-01-22": {
-      "value": 8.4413,
+      "value": 5.2452,
       "extra": {
         "moving_time_s": 2757,
         "distance_m": 8441,
@@ -6245,7 +6245,7 @@
       }
     },
     "2026-01-25": {
-      "value": 3.6482,
+      "value": 2.2669,
       "extra": {
         "moving_time_s": 1394,
         "distance_m": 3648,
@@ -6253,7 +6253,7 @@
       }
     },
     "2026-01-31": {
-      "value": 6.0823,
+      "value": 3.7794,
       "extra": {
         "moving_time_s": 2108,
         "distance_m": 6082,
@@ -6261,7 +6261,7 @@
       }
     },
     "2026-02-02": {
-      "value": 5.9967,
+      "value": 3.7262,
       "extra": {
         "moving_time_s": 2114,
         "distance_m": 5996,
@@ -6269,7 +6269,7 @@
       }
     },
     "2026-02-04": {
-      "value": 5.8946,
+      "value": 3.6627,
       "extra": {
         "moving_time_s": 2096,
         "distance_m": 5894,
@@ -6277,7 +6277,7 @@
       }
     },
     "2026-02-16": {
-      "value": 7.6132,
+      "value": 4.7306,
       "extra": {
         "moving_time_s": 2468,
         "distance_m": 7613,
@@ -6285,7 +6285,7 @@
       }
     },
     "2026-02-22": {
-      "value": 3.4668,
+      "value": 2.1542,
       "extra": {
         "moving_time_s": 1165,
         "distance_m": 3466,
@@ -6293,7 +6293,7 @@
       }
     },
     "2026-02-25": {
-      "value": 6.0112,
+      "value": 3.7352,
       "extra": {
         "moving_time_s": 2214,
         "distance_m": 6011,
@@ -6301,7 +6301,7 @@
       }
     },
     "2026-03-07": {
-      "value": 8.0841,
+      "value": 5.0232,
       "extra": {
         "moving_time_s": 2604,
         "distance_m": 8084,
@@ -6309,7 +6309,7 @@
       }
     },
     "2026-03-09": {
-      "value": 5.9935,
+      "value": 3.7242,
       "extra": {
         "moving_time_s": 1973,
         "distance_m": 5993,
@@ -6317,7 +6317,7 @@
       }
     },
     "2026-03-12": {
-      "value": 5.7706,
+      "value": 3.5857,
       "extra": {
         "moving_time_s": 1977,
         "distance_m": 5770,
@@ -6325,7 +6325,7 @@
       }
     },
     "2026-03-14": {
-      "value": 3.4138,
+      "value": 2.1212,
       "extra": {
         "moving_time_s": 1088,
         "distance_m": 3413,
@@ -6333,7 +6333,7 @@
       }
     },
     "2026-03-17": {
-      "value": 3.6626,
+      "value": 2.2758,
       "extra": {
         "moving_time_s": 1245,
         "distance_m": 3662,
@@ -6341,7 +6341,7 @@
       }
     },
     "2026-03-20": {
-      "value": 5.906,
+      "value": 3.6698,
       "extra": {
         "moving_time_s": 2059,
         "distance_m": 5906,
@@ -6349,7 +6349,7 @@
       }
     },
     "2026-03-22": {
-      "value": 3.2889,
+      "value": 2.0436,
       "extra": {
         "moving_time_s": 1079,
         "distance_m": 3288,
@@ -6357,7 +6357,7 @@
       }
     },
     "2026-03-24": {
-      "value": 3.5627,
+      "value": 2.2138,
       "extra": {
         "moving_time_s": 1123,
         "distance_m": 3562,
@@ -6365,7 +6365,7 @@
       }
     },
     "2026-03-26": {
-      "value": 5.4366,
+      "value": 3.3781,
       "extra": {
         "moving_time_s": 1799,
         "distance_m": 5436,
@@ -6373,7 +6373,7 @@
       }
     },
     "2026-03-29": {
-      "value": 3.2553,
+      "value": 2.0227,
       "extra": {
         "moving_time_s": 1063,
         "distance_m": 3255,
@@ -6381,7 +6381,7 @@
       }
     },
     "2026-03-31": {
-      "value": 5.7044,
+      "value": 3.5445,
       "extra": {
         "moving_time_s": 1801,
         "distance_m": 5704,
@@ -6389,7 +6389,7 @@
       }
     },
     "2026-04-02": {
-      "value": 3.7081,
+      "value": 2.3041,
       "extra": {
         "moving_time_s": 1243,
         "distance_m": 3708,
@@ -6397,7 +6397,7 @@
       }
     },
     "2026-04-05": {
-      "value": 8.3014,
+      "value": 5.1583,
       "extra": {
         "moving_time_s": 2809,
         "distance_m": 8301,
@@ -6405,7 +6405,7 @@
       }
     },
     "2026-04-07": {
-      "value": 8.0749,
+      "value": 5.0175,
       "extra": {
         "moving_time_s": 2668,
         "distance_m": 8074,
@@ -6413,7 +6413,7 @@
       }
     },
     "2026-04-09": {
-      "value": 3.5973,
+      "value": 2.2353,
       "extra": {
         "moving_time_s": 1222,
         "distance_m": 3597,
@@ -6421,7 +6421,7 @@
       }
     },
     "2026-04-11": {
-      "value": 5.7725,
+      "value": 3.5869,
       "extra": {
         "moving_time_s": 1903,
         "distance_m": 5772,
@@ -6429,7 +6429,7 @@
       }
     },
     "2026-04-13": {
-      "value": 7.8964,
+      "value": 4.9066,
       "extra": {
         "moving_time_s": 2629,
         "distance_m": 7896,
@@ -6437,7 +6437,7 @@
       }
     },
     "2026-04-16": {
-      "value": 5.7477,
+      "value": 3.5715,
       "extra": {
         "moving_time_s": 1950,
         "distance_m": 5747,
@@ -6445,7 +6445,7 @@
       }
     },
     "2026-04-19": {
-      "value": 3.6315,
+      "value": 2.2565,
       "extra": {
         "moving_time_s": 1226,
         "distance_m": 3631,
@@ -6453,7 +6453,7 @@
       }
     },
     "2026-04-21": {
-      "value": 3.4472,
+      "value": 2.142,
       "extra": {
         "moving_time_s": 1209,
         "distance_m": 3447,
@@ -6461,7 +6461,7 @@
       }
     },
     "2026-04-25": {
-      "value": 3.6375,
+      "value": 2.2602,
       "extra": {
         "moving_time_s": 1137,
         "distance_m": 3637,
@@ -6469,7 +6469,7 @@
       }
     },
     "2026-04-28": {
-      "value": 6.0599,
+      "value": 3.7654,
       "extra": {
         "moving_time_s": 1985,
         "distance_m": 6059,
@@ -6477,7 +6477,7 @@
       }
     },
     "2026-04-30": {
-      "value": 3.7352,
+      "value": 2.3209,
       "extra": {
         "moving_time_s": 1178,
         "distance_m": 3735,
@@ -6485,7 +6485,7 @@
       }
     },
     "2026-05-06": {
-      "value": 3.7301,
+      "value": 2.3178,
       "extra": {
         "moving_time_s": 1286,
         "distance_m": 3730,
@@ -6493,7 +6493,7 @@
       }
     },
     "2026-05-11": {
-      "value": 3.4364,
+      "value": 2.1353,
       "extra": {
         "moving_time_s": 1103,
         "distance_m": 3436,
@@ -6501,7 +6501,7 @@
       }
     },
     "2026-05-15": {
-      "value": 3.3769,
+      "value": 2.0983,
       "extra": {
         "moving_time_s": 1068,
         "distance_m": 3376,
@@ -6509,7 +6509,7 @@
       }
     },
     "2026-05-17": {
-      "value": 5.8102,
+      "value": 3.6103,
       "extra": {
         "moving_time_s": 1877,
         "distance_m": 5810,
@@ -6517,7 +6517,7 @@
       }
     },
     "2026-05-23": {
-      "value": 5.6828,
+      "value": 3.5311,
       "extra": {
         "moving_time_s": 1736,
         "distance_m": 5682,
@@ -6525,7 +6525,7 @@
       }
     },
     "2026-05-26": {
-      "value": 3.4386,
+      "value": 2.1366,
       "extra": {
         "moving_time_s": 1108,
         "distance_m": 3438,
@@ -6533,7 +6533,7 @@
       }
     },
     "2026-05-28": {
-      "value": 5.8176,
+      "value": 3.6149,
       "extra": {
         "moving_time_s": 1864,
         "distance_m": 5817,
@@ -6541,7 +6541,7 @@
       }
     },
     "2026-05-31": {
-      "value": 7.2924,
+      "value": 4.5313,
       "extra": {
         "moving_time_s": 2418,
         "distance_m": 7292,
@@ -6549,7 +6549,7 @@
       }
     },
     "2026-06-02": {
-      "value": 3.5386,
+      "value": 2.1988,
       "extra": {
         "moving_time_s": 1175,
         "distance_m": 3538,
@@ -6557,7 +6557,7 @@
       }
     },
     "2026-06-06": {
-      "value": 5.8087,
+      "value": 3.6094,
       "extra": {
         "moving_time_s": 1920,
         "distance_m": 5808,
@@ -6565,7 +6565,7 @@
       }
     },
     "2026-06-08": {
-      "value": 3.4289,
+      "value": 2.1306,
       "extra": {
         "moving_time_s": 1188,
         "distance_m": 3428,
@@ -6573,7 +6573,7 @@
       }
     },
     "2026-06-10": {
-      "value": 8.0652,
+      "value": 5.0115,
       "extra": {
         "moving_time_s": 2623,
         "distance_m": 8065,
@@ -6581,7 +6581,7 @@
       }
     },
     "2026-06-13": {
-      "value": 5.9763,
+      "value": 3.7135,
       "extra": {
         "moving_time_s": 1932,
         "distance_m": 5976,
@@ -6589,7 +6589,7 @@
       }
     },
     "2026-06-15": {
-      "value": 7.9901,
+      "value": 4.9648,
       "extra": {
         "moving_time_s": 2630,
         "distance_m": 7990,
@@ -6597,7 +6597,7 @@
       }
     },
     "2026-06-17": {
-      "value": 3.5032,
+      "value": 2.1768,
       "extra": {
         "moving_time_s": 1125,
         "distance_m": 3503,
@@ -6605,7 +6605,7 @@
       }
     },
     "2026-06-19": {
-      "value": 6.7764,
+      "value": 4.2107,
       "extra": {
         "moving_time_s": 2257,
         "distance_m": 6776,
@@ -6613,7 +6613,7 @@
       }
     },
     "2026-06-23": {
-      "value": 3.774,
+      "value": 2.3451,
       "extra": {
         "moving_time_s": 1278,
         "distance_m": 3774,
@@ -6621,7 +6621,7 @@
       }
     },
     "2026-06-25": {
-      "value": 5.9054,
+      "value": 3.6694,
       "extra": {
         "moving_time_s": 1943,
         "distance_m": 5905,
@@ -6629,7 +6629,7 @@
       }
     },
     "2026-06-27": {
-      "value": 8.2507,
+      "value": 5.1267,
       "extra": {
         "moving_time_s": 2664,
         "distance_m": 8250,
@@ -6637,7 +6637,7 @@
       }
     },
     "2026-06-29": {
-      "value": 6.2427,
+      "value": 3.879,
       "extra": {
         "moving_time_s": 2031,
         "distance_m": 6242,
@@ -6645,7 +6645,7 @@
       }
     },
     "2026-07-01": {
-      "value": 3.5887,
+      "value": 2.2299,
       "extra": {
         "moving_time_s": 1225,
         "distance_m": 3588,
@@ -6653,7 +6653,7 @@
       }
     },
     "2026-07-08": {
-      "value": 6.002,
+      "value": 3.7295,
       "extra": {
         "moving_time_s": 1975,
         "distance_m": 6002,
@@ -6661,7 +6661,7 @@
       }
     },
     "2026-07-09": {
-      "value": 3.3363,
+      "value": 2.0731,
       "extra": {
         "moving_time_s": 1128,
         "distance_m": 3336,
@@ -6669,7 +6669,7 @@
       }
     },
     "2026-07-10": {
-      "value": 8.0656,
+      "value": 5.0117,
       "extra": {
         "moving_time_s": 2714,
         "distance_m": 8065,
@@ -6677,7 +6677,7 @@
       }
     },
     "2026-07-13": {
-      "value": 6.0756,
+      "value": 3.7752,
       "extra": {
         "moving_time_s": 1985,
         "distance_m": 6075,
@@ -6685,7 +6685,7 @@
       }
     },
     "2026-07-14": {
-      "value": 5.7851,
+      "value": 3.5947,
       "extra": {
         "moving_time_s": 1998,
         "distance_m": 5785,
@@ -6693,7 +6693,7 @@
       }
     },
     "2026-07-24": {
-      "value": 8.1402,
+      "value": 5.0581,
       "extra": {
         "moving_time_s": 2738,
         "distance_m": 8140,
@@ -6701,7 +6701,7 @@
       }
     },
     "2026-07-25": {
-      "value": 8.1253,
+      "value": 5.0488,
       "extra": {
         "moving_time_s": 2683,
         "distance_m": 8125,
@@ -6709,7 +6709,7 @@
       }
     },
     "2026-07-27": {
-      "value": 8.1109,
+      "value": 5.0399,
       "extra": {
         "moving_time_s": 2685,
         "distance_m": 8110,
@@ -6717,7 +6717,7 @@
       }
     },
     "2026-07-29": {
-      "value": 8.1527,
+      "value": 5.0659,
       "extra": {
         "moving_time_s": 2765,
         "distance_m": 8152,
@@ -6725,7 +6725,7 @@
       }
     },
     "2026-08-01": {
-      "value": 8.1453,
+      "value": 5.0613,
       "extra": {
         "moving_time_s": 2710,
         "distance_m": 8145,
@@ -6733,7 +6733,7 @@
       }
     },
     "2026-08-03": {
-      "value": 5.9509,
+      "value": 3.6977,
       "extra": {
         "moving_time_s": 2053,
         "distance_m": 5950,
@@ -6741,7 +6741,7 @@
       }
     },
     "2026-08-04": {
-      "value": 7.3136,
+      "value": 4.5445,
       "extra": {
         "moving_time_s": 2529,
         "distance_m": 7313,
@@ -6749,7 +6749,7 @@
       }
     },
     "2026-08-06": {
-      "value": 7.6339,
+      "value": 4.7435,
       "extra": {
         "moving_time_s": 2625,
         "distance_m": 7633,
@@ -6757,7 +6757,7 @@
       }
     },
     "2026-08-10": {
-      "value": 5.1453,
+      "value": 3.1971,
       "extra": {
         "moving_time_s": 1728,
         "distance_m": 5145,
@@ -6765,7 +6765,7 @@
       }
     },
     "2026-08-11": {
-      "value": 3.5065,
+      "value": 2.1788,
       "extra": {
         "moving_time_s": 1195,
         "distance_m": 3506,
@@ -6773,7 +6773,7 @@
       }
     },
     "2026-08-13": {
-      "value": 5.9911,
+      "value": 3.7227,
       "extra": {
         "moving_time_s": 1982,
         "distance_m": 5991,
@@ -6781,7 +6781,7 @@
       }
     },
     "2026-08-17": {
-      "value": 6.0548,
+      "value": 3.7623,
       "extra": {
         "moving_time_s": 2028,
         "distance_m": 6054,
@@ -6789,7 +6789,7 @@
       }
     },
     "2026-08-19": {
-      "value": 5.6823,
+      "value": 3.5308,
       "extra": {
         "moving_time_s": 1847,
         "distance_m": 5682,
@@ -6797,7 +6797,7 @@
       }
     },
     "2026-08-22": {
-      "value": 8.1769,
+      "value": 5.0809,
       "extra": {
         "moving_time_s": 2761,
         "distance_m": 8176,
@@ -6805,7 +6805,7 @@
       }
     },
     "2026-08-23": {
-      "value": 2.4716,
+      "value": 1.5358,
       "extra": {
         "moving_time_s": 972,
         "distance_m": 2471,
@@ -6813,7 +6813,7 @@
       }
     },
     "2026-08-24": {
-      "value": 5.9715,
+      "value": 3.7105,
       "extra": {
         "moving_time_s": 2022,
         "distance_m": 5971,
@@ -6821,7 +6821,7 @@
       }
     },
     "2026-08-26": {
-      "value": 3.6583,
+      "value": 2.2732,
       "extra": {
         "moving_time_s": 1187,
         "distance_m": 3658,

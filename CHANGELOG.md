@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.1 — 2026-08-30
+
+### Changed
+
+- The running habit is measured in miles rather than kilometres. `fetch_strava.py` divides Strava's metres by 1609.344 on the way out and writes `"unit": "mi"`, and the existing 853 days in `running.json` were converted in place — `extra.distance_m` still carries the raw metres, so the conversion is reversible
+
 ## 2.4.0 — 2026-08-30
 
 ### Added
