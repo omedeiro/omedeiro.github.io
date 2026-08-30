@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.5.0 — 2026-08-30
+
+### Added
+
+- `/maths/bertrand-paradox` is interactive. Four ways of drawing a chord at random — two points on the circle, a point along a random radius, a point anywhere in the disc, and the line through two interior points — each sampled live, with a **Compare all four** mode that puts them side by side. **Show → Midpoints** swaps each chord for its own midpoint, which is where the methods separate most clearly, and **Run** streams the sample in so the estimate can be watched settling
+- `public/maths/bertrand-paradox.js` — the sampler. Every rotation-invariant method reduces to a density on `p`, the chord's distance from the centre, and the chord beats the triangle side exactly when `p < 1/2`; all four densities are known in closed form, so the strip under the circle draws the sampled histogram against the exact curve and shades the half whose area *is* the answer. Sampling runs off a seeded generator, one stream per method, so raising the count extends the sample rather than drawing an unrelated one
+- A fourth method Bertrand did not list: the line through two uniform points in the disc. Pairs of interior points on a chord number as the cube of its length, so the induced density is `(16/3pi)(1-p^2)^(3/2)` and the answer is `1/3 + 3*sqrt(3)/(4*pi) ~ 0.7468`, checked against 4e6 Monte Carlo samples
+- The page now says outright that the question has every answer in `(0,1)`, not three: `f(p) = (a+1)p^a` gives `P = (1/2)^(a+1)`, and two of Bertrand's own answers are already in that family. Plus Jaynes' invariance argument for `1/2`, and why it does not make the other constructions wrong
+
+### Changed
+
+- The `/maths` index no longer singles Bertrand out as the static one; all three pages run live
+
+### Fixed
+
+- The old listing's second method — *fix one endpoint, choose the other at random* — was labelled `P = 1/2`. It is the first method with the rotation already applied, and gives `1/3`. The page now makes that the point of its own section, since it is the most common way to get the paradox wrong
+
+### Removed
+
+- The MATLAB listing and `bertrand_paradox.m`. The four methods run live, at any sample count. `bertrand.png` stays as the page's opening figure, with a caption noting that its third panel's colours are inverted — the code coloured `|y| > r/2` as the long case when that is exactly the short one
+
 ## 2.4.2 — 2026-08-30
 
 ### Changed
