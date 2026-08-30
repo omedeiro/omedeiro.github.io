@@ -9,7 +9,7 @@
 ### Changed
 
 - The two theses duplicated in the publications list now point at the same MIT handles as the entries in the Theses section
-- The 2026 Nature Electronics memory-array paper carries its final citation — 9, 69–77 — in place of the advance-online `1–9`
+- Both Nature Electronics entries now carry the journal's own citation, checked against Nature's "Cite this article" block. The 2026 memory-array paper moves from the advance-online `1–9` to its final `9, 69–77`, and the 2025 rectifier loses the `(5)` — Nature cites by volume and page only, and that issue number came from Google Scholar rather than the publisher
 
 ### Removed
 

@@ -39,7 +39,7 @@ Over the past two decades, superconducting nanowire single photon detectors have
 ### 2025
 
 1. **[A superconducting full-wave bridge rectifier](https://doi.org/10.1038/s41928-025-01376-4)**
-   <span class="pub-venue">Nature Electronics, 8(5), 417–425 (2025)</span>
+   <span class="pub-venue">Nature Electronics, 8, 417–425 (2025)</span>
 2. **[Time-tagging data acquisition system for testing superconducting electronics based on an RFSoC and custom analog frontend](https://doi.org/10.1088/1748-0221/20/09/P09018)**
    <span class="pub-venue">Journal of Instrumentation, 20(09), P09018 (2025)</span>
 3. **[High-Fidelity Control of a Strongly Coupled Electro-Nuclear Spin-Photon Interface](https://arxiv.org/abs/2505.09267)**
