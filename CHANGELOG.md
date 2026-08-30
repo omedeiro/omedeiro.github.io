@@ -4,15 +4,16 @@
 
 ### Added
 
-- Every entry in the `/research` publications list is now a link — 26 of 27, resolved to the publisher of record: DOIs (`doi.org`) for journal articles, `opg.optica.org` abstracts for the three CLEO papers, IEEE Xplore for the two conference papers without a findable DOI, arXiv for the two preprints, and the DSpace handles already used above for the two theses
+- Every entry in the `/research` publications list is now a link, resolved to the publisher of record: DOIs (`doi.org`) for journal articles, `opg.optica.org` abstracts for the three CLEO papers, IEEE Xplore for the two conference papers without a findable DOI, arXiv for the two preprints, and the DSpace handles already used above for the two theses
 
 ### Changed
 
 - The two theses duplicated in the publications list now point at the same MIT handles as the entries in the Theses section
+- The 2026 Nature Electronics memory-array paper carries its final citation — 9, 69–77 — in place of the advance-online `1–9`
 
-### Known gaps
+### Removed
 
-- *Control of bulk superconductivity via surface-bound electric fields in ion-gated niobium nitride thin films* (Proc. 11th Conf. "Solid State Surfaces and Interfaces", 2020) stays unlinked: the proceedings volume has no DOI or publisher record that could be found online
+- *Control of bulk superconductivity via surface-bound electric fields in ion-gated niobium nitride thin films* (Proc. 11th Conf. "Solid State Surfaces and Interfaces", 2020). The proceedings volume has no DOI or publisher record anywhere online, so the entry could not be linked like the rest. It remains in `references.bib`
 
 ## 2.5.0 — 2026-08-30
 
