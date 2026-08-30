@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.4.0 — 2026-08-30
+
+### Added
+
+- `/maths/euler-spiral` is interactive. One curve reached three ways, each with its own sliders: the Fresnel integrals, the turtle walk the page used to show in MATLAB, and the road transition the curve exists for. Drag to pan, pinch or scroll to zoom, **Trace** to walk a point along the curve with the circle matching its curvature at each moment. The strip under the plot draws curvature against arc length, which is the definition of the curve as a straight line
+- `public/maths/euler-spiral.js` — the viewer. Curves are sampled by tangent turn rather than by parameter, since the Fresnel phase grows quadratically and the coils at `s = 8` need 25x the samples per unit length that the straight middle does; the midpoint rule then lands within `2e-5` of tabulated `C(t)` and `S(t)` across the whole slider range. Every sample carries its own closed-form curvature rather than having it differenced back out of the polyline
+
+### Changed
+
+- The transition comparison holds both alignments between the **same two straights**, the way the choice actually presents itself, rather than starting both from one straight. Sharing an entry tangent instead makes the two curves diverge by roughly the tangent distance — half a radius at 90° — which swamps the shift `p = L²/24R` the comparison exists to show. Between fixed tangents the difference is exactly that shift plus the earlier start, and both are checked against the geometry rather than taken from the series
+- The `/maths` index now calls out Bertrand as the one page that is still a MATLAB listing; the tiling and Euler spiral pages both run live
+
+### Fixed
+
+- A display equation too wide for the 42rem column now scrolls in its own box rather than pushing the page sideways on a phone (`.katex-display { overflow-x: auto }`)
+
+### Removed
+
+- The MATLAB listing, `euler_spiral.m` and `euler.png`. The turtle mode is that loop, running live
+
 ## 2.3.0 — 2026-08-29
 
 ### Added

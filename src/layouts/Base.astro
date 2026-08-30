@@ -313,6 +313,125 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       .tiling.is-expanded canvas { height: 100%; }
       .tiling.is-expanded figcaption { margin: 0; }
       body.tiling-locked { overflow: hidden; }
+      /* A display equation too wide for the column scrolls in its own box
+         rather than pushing the whole page sideways on a phone. */
+      .katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+      /* Euler spiral viewer. Scoped to /maths/euler-spiral, the second page
+         that loads client-side JS: a curve you can pan, zoom and trace needs a
+         canvas. The --euler-* variables are read back out by the script, so the
+         drawing follows the light and dark palettes without repeating them in
+         JS. */
+      .euler {
+        --euler-curve: #8a4b2d;
+        --euler-alt: #6b6b66;
+        --euler-grid: rgba(28, 28, 26, 0.07);
+        --euler-axis: rgba(28, 28, 26, 0.4);
+        --euler-bg: #fbfaf8;
+        margin: 1.75rem 0 1.5rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        .euler {
+          --euler-curve: #d99a72;
+          --euler-alt: #9a988f;
+          --euler-grid: rgba(232, 230, 225, 0.07);
+          --euler-axis: rgba(232, 230, 225, 0.38);
+          --euler-bg: #121211;
+        }
+      }
+      .euler-stage { position: relative; }
+      .euler canvas {
+        display: block;
+        width: 100%;
+        height: min(60vh, 31rem);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--euler-bg);
+        cursor: grab;
+        /* The canvas owns every gesture on it, so a drag pans instead of
+           scrolling the page. Expand gives it the whole screen. */
+        touch-action: none;
+      }
+      .euler canvas.is-dragging { cursor: grabbing; }
+      .euler canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .euler-zoom {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .euler-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem 1.1rem;
+        margin-top: 0.65rem;
+      }
+      .euler-controls,
+      .euler figcaption {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      .euler-field {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .euler-field[hidden] { display: none; }
+      .euler-field select,
+      .euler button {
+        font: inherit;
+        color: var(--fg);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+      }
+      .euler button { cursor: pointer; }
+      .euler button:hover { border-color: var(--accent); color: var(--accent); }
+      .euler-zoom button {
+        width: 1.9rem;
+        height: 1.9rem;
+        padding: 0;
+        font-size: 1rem;
+        line-height: 1;
+        background: var(--bg);
+      }
+      .euler-buttons { gap: 0.4rem; }
+      .euler-field input[type="range"] {
+        width: 8.5rem;
+        accent-color: var(--accent);
+      }
+      .euler-field output {
+        min-width: 3.2rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--fg);
+      }
+      .euler-readout { font-variant-numeric: tabular-nums; }
+      .euler-legend { display: inline-flex; flex-wrap: wrap; gap: 0.9rem; margin-left: 0.9rem; }
+      .euler-key { display: inline-flex; align-items: center; gap: 0.35rem; }
+      .euler-key i {
+        width: 11px;
+        height: 3px;
+        border-radius: 2px;
+      }
+      .euler.is-expanded {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        margin: 0;
+        padding: 0.75rem;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .euler.is-expanded .euler-stage { flex: 1 1 auto; min-height: 0; }
+      .euler.is-expanded canvas { height: 100%; }
+      .euler.is-expanded figcaption { margin: 0; }
+      body.euler-locked { overflow: hidden; }
       footer.site {
         margin-top: 4rem;
         padding-top: 1.25rem;
