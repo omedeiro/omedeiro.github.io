@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.4.1 — 2026-08-30
+
+### Changed
+
+- `/projects/tdgl-simulation` is rebuilt around the current solver. The page had one MATLAB gif and a code sample for an API (`TDGLSolver`) that no longer exists; it now carries eight figures from [`omedeiro/nanowire_tdgl`](https://github.com/omedeiro/nanowire_tdgl) and the results they demonstrate — the 3x3 array of 4 um holes where the flux front stalls at the array perimeter and field-cooling is the only way to trap anything, the S/I/S ring that expels flux to 9.2 mT because the plane screens rather than because the hole is small, vortex nucleation, screening currents around a hole, and the cross-sections against the London and pair-breaking-wall solutions. Every number on the page comes from the repo's own figures
+- Source link points at `nanowire_tdgl` (the Python package) rather than `simulation6336`, which is now credited as the MATLAB original. The install and quick-start snippets are the real `tdgl3d` API
+- Both MATLAB gifs are kept, moved into a closing provenance section
+
+### Added
+
+- `public/projects/tdgl/` gains six PNGs and two gifs. Every figure links to its full-resolution file, since the four- and six-panel ones are not legible at 42rem, and every image is `loading="lazy"` — the page is 8 MB of figures and only the first one is above the fold
+- `nb-hole-array-trapped.gif` is requantised to a 64-colour palette with dithering off: 8.4 MB to 3.1 MB with no visible change to the physics panel, since dithering adds exactly the per-pixel noise GIF's run-length coding cannot compress
+
 ## 2.4.0 — 2026-08-30
 
 ### Added
