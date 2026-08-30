@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.5.0 — 2026-08-30
+
+### Added
+
+- `/maths/mandelbrot` — an interactive Mandelbrot and Julia viewer, and the fourth page on the site to carry JS. Drag to pan, pinch or scroll to zoom, **Orbit** to follow the sequence `z0, z1, z2, ...` under the pointer and read off the period of the cycle it settles into. Switching to **Julia** takes `c` from wherever the parameter plane is centred and puts a thumbnail of the Mandelbrot set in the corner; dragging its marker moves `c` live, so the Fatou-Julia dichotomy — connected inside `M`, Cantor dust outside — becomes a gesture rather than a claim. The fragment records mode, centre and magnification, so a view is a link, and is applied on `hashchange` as well as at load
+- `public/maths/mandelbrot.js` — the viewer. Escape time is smoothed to a fractional count, `nu = n - log2(ln|z_n| / ln R)` at `R = 256`, which is `-log2` of the escape potential up to an additive constant: checked against a reference at `R = 1e8` over 60,000 parameters, the two agree to `4e-6` (at `R = 4` the error is `0.07`, enough to see the bands move). The image is built by progressive refinement — 16x16 blocks, then 8, 4, 2, 1, each pass computing only what the last one skipped, which totals exactly one image, so the coarse preview costs nothing — and the work is time-sliced across frames, with the last finished image blitted under the new transform while a gesture is live
+- Interior points are shortcut three ways: closed-form tests for the main cardioid and the period-2 disc, then Brent-style period checking for everything else. Over 200,000 random parameters at a budget of 6,000 iterations the shortcuts and plain iteration disagree nowhere, and pixel-counting the area with the same kernel gives 1.509 against the accepted 1.5065
+- `.mandel-*` styles in `Base.astro`, including the five palette stops the script bakes into a 2,048-entry lookup table. The inset thumbnail ramps towards `--mandel-mark` rather than towards the ink, which is what keeps it legible in dark mode where the ink and the panel background are both nearly black
+
+### Changed
+
+- The `/maths` index lists four pages rather than three, gains a `description` (it was falling back to the site-wide one, which is about superconducting electronics), and now says that three of the four run in the browser and link their own source, with Bertrand the one still a MATLAB listing
+- The zoom stops at `x1e14`, measured rather than guessed: at `x1e13` a pixel near `c = -0.74` is `5e-16` against a `1.6e-16` gap between doubles and the image is clean, at `x1e14` it goes grainy, and at `x1e15` whole rows of pixels collapse onto one value and the view is bands of noise. The readout says when the view is into that range
+- `AGENTS.md` and the CSS comments count four JS pages, not three; the Euler spiral block called itself the second, which the tiling block also did
+
 ## 2.4.2 — 2026-08-30
 
 ### Changed
