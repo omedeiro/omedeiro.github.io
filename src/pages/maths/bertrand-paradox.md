@@ -4,6 +4,11 @@ title: Bertrand's Paradox
 description: An interactive sampler for Bertrand's paradox — four ways of drawing a chord at random, four different answers, and the single number that separates them.
 ---
 
+<figure>
+  <img src="/maths/bertrand.png" alt="Three circles filled with chords, each chord coloured by whether it is longer than the side of the inscribed equilateral triangle" />
+  <figcaption>The MATLAB figure this page has carried until now: a hundred chords from each of three constructions — two random endpoints in the middle, one endpoint pinned at the top, chords of a random height at the bottom — orange where the chord beats the triangle's side. The colours in that last panel are inverted, since it is the chords through the middle that are long. Which is the sort of thing a still picture cannot argue with, and the sampler below can.</figcaption>
+</figure>
+
 Joseph Bertrand set the problem in his *Calcul des probabilités* of 1889, and answered it three
 times. Draw a chord of a circle at random: what is the probability that it comes out longer
 than the side of the inscribed equilateral triangle? Three constructions, each a reasonable

@@ -19,7 +19,7 @@
 
 ### Removed
 
-- The MATLAB listing, `bertrand_paradox.m` and `bertrand.png` (490 KB). The four methods run live, at any sample count
+- The MATLAB listing and `bertrand_paradox.m`. The four methods run live, at any sample count. `bertrand.png` stays as the page's opening figure, with a caption noting that its third panel's colours are inverted — the code coloured `|y| > r/2` as the long case when that is exactly the short one
 
 ## 2.4.1 — 2026-08-30
 
