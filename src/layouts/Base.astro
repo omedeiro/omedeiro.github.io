@@ -200,6 +200,119 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       }
       .habits-source { color: var(--muted); font-size: 0.85em; }
       .habits-empty { border-left: 2px solid var(--border); padding-left: 0.75rem; }
+      /* Aperiodic tiling builder. Scoped to /maths/aperiodic-tiles, the second
+         page that loads client-side JS: an interactive tiling needs a canvas.
+         The --tile-* variables are read back out by the script so the drawing
+         follows the light and dark palettes without duplicating them in JS. */
+      .tiling {
+        --tile-a: #f2e3d2;
+        --tile-b: #d3a978;
+        --tile-line: rgba(28, 28, 26, 0.42);
+        --tile-bg: #fbfaf8;
+        margin: 1.75rem 0 1.5rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        .tiling {
+          --tile-a: #322b26;
+          --tile-b: #8a5730;
+          --tile-line: rgba(232, 230, 225, 0.28);
+          --tile-bg: #121211;
+        }
+      }
+      .tiling-stage { position: relative; }
+      .tiling canvas {
+        display: block;
+        width: 100%;
+        height: min(58vh, 30rem);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--tile-bg);
+        cursor: grab;
+        /* The canvas owns every gesture on it, so a drag pans instead of
+           scrolling the page. Expand gives it the whole screen. */
+        touch-action: none;
+      }
+      .tiling canvas.is-dragging { cursor: grabbing; }
+      .tiling canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .tiling-zoom {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .tiling-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem 1.1rem;
+        margin-top: 0.65rem;
+      }
+      .tiling-controls,
+      .tiling figcaption {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      .tiling-field {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .tiling-field[hidden] { display: none; }
+      .tiling-field select,
+      .tiling button {
+        font: inherit;
+        color: var(--fg);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+      }
+      .tiling button { cursor: pointer; }
+      .tiling button:hover { border-color: var(--accent); color: var(--accent); }
+      .tiling-zoom button {
+        width: 1.9rem;
+        height: 1.9rem;
+        padding: 0;
+        font-size: 1rem;
+        line-height: 1;
+        background: var(--bg);
+      }
+      .tiling-buttons { gap: 0.4rem; }
+      .tiling-field input[type="range"] {
+        width: 8.5rem;
+        accent-color: var(--accent);
+      }
+      .tiling-field output {
+        min-width: 1.5rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--fg);
+      }
+      .tiling-legend { display: inline-flex; flex-wrap: wrap; gap: 0.9rem; margin-left: 0.9rem; }
+      .tiling-key { display: inline-flex; align-items: center; gap: 0.35rem; }
+      .tiling-key i {
+        width: 11px;
+        height: 11px;
+        border: 1px solid var(--tile-line);
+        border-radius: 2px;
+      }
+      .tiling.is-expanded {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        margin: 0;
+        padding: 0.75rem;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .tiling.is-expanded .tiling-stage { flex: 1 1 auto; min-height: 0; }
+      .tiling.is-expanded canvas { height: 100%; }
+      .tiling.is-expanded figcaption { margin: 0; }
+      body.tiling-locked { overflow: hidden; }
       /* A display equation too wide for the column scrolls in its own box
          rather than pushing the whole page sideways on a phone. */
       .katex-display { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
