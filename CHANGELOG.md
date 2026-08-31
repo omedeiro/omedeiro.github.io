@@ -10,6 +10,7 @@
 
 ### Fixed
 
+- The guide named a "Find Workouts" Shortcuts action that does not exist. The real action is **Find Health Samples** with its *Type* set to Workouts, and per-item dates come from **Get Details of Health Sample** rather than off the repeat item directly. It now also opens by running that one action bare, which is the only reliable way to learn what Bend calls itself in the *Source* field — guessing that string is the likeliest way to end up with a Shortcut that runs cleanly and sends nothing
 - An explicit zero-session day (`2026-08-29,0`) was rejected as an unparseable line, so the simplest possible Shortcut — one that sends today's count once a day — would have failed its run every rest day, which is exactly the false alarm `--empty-ok` exists to prevent. A zero count is now recognised and dropped; the heatmap already reads an absent day as zero
 - Sessions were counted against the runner's local date, which on a UTC runner files a 22:30 session under the following day. `stretching.yml` pins `TZ: America/New_York`
 - A JSON payload collapsed into one unparseable line. `split_lines` now decodes a JSON object or array properly before falling back to stripping delimiters as noise; it also splits on semicolons, since joining lines with a separator is markedly less fiddly in Shortcuts than building a multi-line text variable

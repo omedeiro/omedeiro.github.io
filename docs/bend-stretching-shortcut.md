@@ -54,55 +54,79 @@ tokens** → Generate new token:
 Nothing else. This token can write to one repo and do nothing else with the
 account, which is the point of putting it on a phone.
 
-### 2. The Shortcut — start with the five-action version
+### 2. Look before you build
 
-Build this one first. It is five actions with no loop, it proves the whole pipe
-end to end, and the span version below is a drop-in replacement once you trust
-it. New Shortcut, named something like *Push Bend to habits*:
+There is no "Find Workouts" action in Shortcuts — an earlier draft of this guide
+said there was, and it does not exist. The action is **Find Health Samples**,
+with its *Type* set to **Workouts**.
 
-1. **Find Workouts** — Filter: **Source** `is` **Bend**, and **Start Date**
-   `is` **Today**
-2. **Count** — *Items* in the workouts from step 1
-3. **Format Date** — Date: **Current Date**, Format: **Custom**,
-   Format String: `yyyy-MM-dd`
+Before assembling anything, add that one action on its own and press ▶:
+
+- **Find Health Samples** — Type: **Workouts**, Filter: **Start Date** `is in
+  the last` **30** **days**. No source filter yet.
+
+Shortcuts shows you the result right there. This answers, in one tap, the two
+questions everything else depends on: whether your Bend sessions are visible to
+Shortcuts at all, and what Bend calls itself in the *Source* field. Add
+`Source is <whatever it actually said>` as a second filter only once you have
+seen it. Guessing the source string is the single most likely way to end up
+with a Shortcut that runs perfectly and sends nothing.
+
+### 3. The five-action version — build this one first
+
+Five actions, no loop, no date arithmetic. It proves the whole pipe end to end,
+and the span version below is a drop-in replacement once you trust it. New
+Shortcut, named something like *Push Bend to habits*:
+
+1. **Find Health Samples** — Type: **Workouts**; Filter: **Start Date** `is`
+   **Today**; Filter: **Source** `is` **Bend** (or whatever step 2 showed)
+2. **Count** — *Items* in **Health Samples**
+3. **Format Date** — Date: **Current Date**, Format: **Custom**, Format String:
+   `yyyy-MM-dd`
 4. **Text** — `[Formatted Date][,][Count]`, giving one line like `2026-08-29,2`
 5. **Get Contents of URL** — as in *Posting it* below, with the **Text** from
    step 4 as `sessions`
 
-That is the whole phone side. What you give up is only tooltip detail — no
-routine names, no minutes — and the self-healing window: it sends today, so a
-day the phone is off stays missing. Both come back with the span version.
+On a day you don't stretch, step 2 counts zero and the line reads
+`2026-08-29,0`. That is understood and dropped, not treated as an error, so a
+rest day is a quiet green run.
 
-### 2b. The span version, once the short one works
+What you give up is only tooltip detail — no routine names, no minutes — and
+the self-healing window: this sends today, so a day the phone is off stays
+missing. Both come back with the span version.
+
+### 3b. The span version, once the short one works
 
 Same shape, but it sends the last seven days with times and routine names,
 which is what makes a missed run repair itself:
 
-1. **Find Workouts** — *(Health → Find Workouts; some iOS versions call this
-   "Find Health Samples" with the type set to Workouts. The filters are what
-   matter, not the name.)*
-   - Filter: **Source** `is` **Bend**
+1. **Find Health Samples** — Type: **Workouts**
    - Filter: **Start Date** `is in the last` **7** **days**
-   - Sort by Start Date, no limit
+   - Filter: **Source** `is` **Bend**
+   - Sort by **Start Date**, no limit
 
-   Match on the *source*, not the workout type — Bend has filed sessions as
+   Filter on the *source*, not the workout type — Bend has filed sessions as
    Flexibility, Yoga, and Mind & Body across versions, and matching on type
-   silently loses whichever one it isn't. If your Shortcuts build offers no
-   Source filter, filter on those three types instead and accept that a future
-   Bend release may add a fourth.
+   silently loses whichever one it isn't.
 
 2. **Repeat with Each** over the result:
-   - **Format Date** — Date: *Repeat Item → Start Date*, Format: **Custom**,
-     Format String: `yyyy-MM-dd'T'HH:mm:ssZ`
-   - **Format Date** — same, on *Repeat Item → End Date*
-   - **Text**: `[Formatted Date][,][Formatted Date 2][,][Repeat Item → Workout Type]`
-     — one line, the two dates and the name separated by commas. The name is
-     optional; it becomes the tooltip on `/habits`.
+   - **Get Details of Health Sample** — Detail: **Start Date**, from *Repeat Item*
+   - **Format Date** — on that, Format: **Custom**, Format String:
+     `yyyy-MM-dd'T'HH:mm:ssZ`
+   - **Get Details of Health Sample** — Detail: **End Date**, from *Repeat Item*
+   - **Format Date** — same format string
+   - **Text**: `[Formatted Date][,][Formatted Date 2]` — one line, the two
+     stamps separated by a comma. Append `,` and the workout's name or activity
+     type if you want it in the `/habits` tooltip; it is optional.
    - **Add to Variable** → `lines`
 
 3. **Combine Text** — Input: `lines`, Separator: **New Lines**
 
 4. **Get Contents of URL** — as below, with the **Combined Text** as `sessions`
+
+`Z` in that format string means the numeric offset (`-0400`), not a literal Z.
+Getting it wrong is the one failure the workflow reports loudly rather than
+silently.
 
 ### Posting it
 
@@ -128,7 +152,7 @@ a permission prompt inside a scheduled automation just fails. A successful run
 returns an empty body and a 204; check the repo's Actions tab for an *Ingest
 stretching* run.
 
-### 3. Schedule it
+### 4. Schedule it
 
 Shortcuts → **Automation** → **+** → **Time of Day** → 11:30 PM, Daily →
 **Run Immediately**, and turn *Notify When Run* off.
@@ -184,11 +208,14 @@ echo '2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400,Wake Up' \
 - **Sessions land on the wrong day.** A session is filed under the local date it
   started, so the runner has to agree with the phone about "local". That is what
   `TZ: America/New_York` in the workflow is for — change it if you move.
-- **The Shortcut finds no workouts.** Check Bend → Settings → Apple Health is
-  still granted write access, and Health → Sharing → Apps → Bend. If a full
+- **The Shortcut finds no workouts.** Almost always the *Source* filter not
+  matching what Bend actually calls itself. Strip every filter but
+  `Start Date is in the last 30 days` and press ▶ — if workouts come back, the
+  source string was wrong; if none do, the problem is upstream, in
+  Bend → Settings → Apple Health, or Health → Sharing → Apps → Bend. If a full
   `export.zip` is handy, `python scripts/import_health.py export.zip
-  --list-sources` prints every source and activity type the export actually
-  contains, which settles what the filter should say.
+  --list-sources` prints every source and activity type it contains, which
+  settles the question outright.
 - **Nothing has run at all.** The nightly *Refresh habit data* job warns when
   `stretching.json` has not moved in more than four days, so a Shortcut that
   quietly stopped shows up as an annotation rather than as a column that just
