@@ -26,8 +26,17 @@ overlaps the previous run's cannot double-count a session. That is what makes a
 rolling 7-day window safe to send daily, which in turn is what makes a missed
 day self-healing.
 
-Three line formats are accepted, so the Shortcut can use whichever is easiest
-to produce from whatever Bend actually writes:
+The payload may also be a list of **workout objects** rather than lines. That is
+the practical case: Bend writes only `HKWorkout` records, stock Shortcuts cannot
+read those at all, and the tools that can (Toolbox Pro's "Get Workouts", Health
+Auto Export) hand back objects. Reading them here — unwrapping a `sessions`,
+`workouts` or `data` wrapper, accepting whichever spelling of `startDate` the
+producer uses, and filtering on source — keeps the phone side to "fetch the
+workouts, post them", with no date formatting or source matching in Shortcuts.
+Both are fiddly there and both fail silently.
+
+Three line formats are also accepted, so anything that can produce text can use
+whichever is easiest:
 
     2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400        # one session
     2026-08-26T07:12:00-0400,2026-08-26T07:20:00-0400,Wake Up # ... named
@@ -119,25 +128,100 @@ def parse_line(line: str) -> tuple[str, object] | None:
     return ("span", ((start.timestamp(), end.timestamp()), label))
 
 
-def _lines_from_json(decoded: object) -> list[str] | None:
+# Key spellings different producers use for the same three fields. Nothing that
+# can read an HKWorkout emits our line format: Toolbox Pro's "Get Workouts" and
+# Health Auto Export both hand back objects, and they do not agree with each
+# other on names. Reading the object directly is what keeps the phone side down
+# to "fetch the workouts, post them" instead of a Repeat loop formatting dates
+# by hand -- which is the part that cannot be tested from here.
+_START_KEYS = ("start", "startdate", "start_date", "starttime", "start_time")
+_END_KEYS = ("end", "enddate", "end_date", "endtime", "end_time")
+_LABEL_KEYS = ("name", "workouttype", "workout_type", "activitytype",
+               "activity_type", "activity", "type")
+_SOURCE_KEYS = ("source", "sourcename", "source_name", "app", "appname",
+                "app_name", "device")
+
+
+def _pick(obj: dict, keys: tuple[str, ...]) -> str:
+    """First non-empty value among ``keys``, matched ignoring case, _ and spaces."""
+    flat = {
+        str(k).casefold().replace("_", "").replace(" ", ""): v
+        for k, v in obj.items()
+    }
+    for key in keys:
+        val = flat.get(key.replace("_", ""))
+        if val not in (None, "", []):
+            return str(val)
+    return ""
+
+
+def _line_from_object(obj: dict, source: str) -> str | None:
+    """Render one workout object as a ``start,end[,label]`` line, or None.
+
+    ``source`` filters here rather than on the phone. Getting a Shortcut to
+    filter workouts by their source app is the fiddliest part of the phone
+    side and the part that fails silently when the string is slightly wrong;
+    doing it in Python means it can be tested, and a mismatch shows up as a
+    line count in the log rather than as an empty heatmap column. An object
+    that carries no recognisable source field is kept, since there is nothing
+    to judge it on.
+    """
+    start, end = _pick(obj, _START_KEYS), _pick(obj, _END_KEYS)
+    if not start or not end:
+        return None
+    if source:
+        got = _pick(obj, _SOURCE_KEYS)
+        if got and source.casefold() not in got.casefold():
+            return None
+    label = _pick(obj, _LABEL_KEYS).replace(",", " ").strip()
+    return f"{start},{end},{label}" if label else f"{start},{end}"
+
+
+def _lines_from_json(decoded: object, source: str, _depth: int = 0) -> list[str] | None:
     """Pull session lines out of a decoded JSON payload, or None if it isn't one.
 
     A ``repository_dispatch`` arrives as ``{"sessions": "...\\n..."}``, and a
     Shortcut's "Get Contents of URL" body builder is happiest producing exactly
-    that. Decoding it properly matters: the fallback below strips quotes and
-    brackets as noise, which would leave a JSON payload's ``\\n`` escapes as
-    literal backslash-n and collapse every session onto one unparseable line.
+    that. Decoding it properly matters: the fallback in ``split_lines`` strips
+    quotes and brackets as noise, which would leave a JSON payload's ``\\n``
+    escapes as literal backslash-n and collapse every session onto one
+    unparseable line.
+
+    ``sessions`` may also arrive as a list of workout objects, or as a string
+    that is itself JSON -- Shortcuts stringifies a list variable dropped into a
+    text field, so a payload can end up encoded twice through no fault of
+    whoever built the Shortcut.
     """
     if isinstance(decoded, dict):
-        decoded = decoded.get("sessions")
+        for key in ("sessions", "workouts", "data"):
+            if key in decoded:
+                return _lines_from_json(decoded[key], source, _depth + 1)
+        line = _line_from_object(decoded, source)   # a bare object, not a wrapper
+        return [line] if line else []
+
     if isinstance(decoded, str):
+        stripped = decoded.strip()
+        if _depth < 4 and stripped[:1] in "[{":
+            try:
+                return _lines_from_json(json.loads(stripped), source, _depth + 1)
+            except ValueError:
+                pass
         return decoded.splitlines()
+
     if isinstance(decoded, list):
-        return [str(item) for item in decoded]
+        lines: list[str] = []
+        for item in decoded:
+            if isinstance(item, dict):
+                line = _line_from_object(item, source)
+                if line:
+                    lines.append(line)
+            else:
+                lines.append(str(item))
+        return lines
     return None
 
 
-def split_lines(body: str) -> list[str]:
+def split_lines(body: str, source: str = "") -> list[str]:
     """Break a drop file or a dispatch payload into candidate lines.
 
     Semicolons split as well as newlines. Shortcuts can build a multi-line text
@@ -150,7 +234,7 @@ def split_lines(body: str) -> list[str]:
             decoded = json.loads(stripped)
         except ValueError:
             decoded = None
-        lines = _lines_from_json(decoded) if decoded is not None else None
+        lines = _lines_from_json(decoded, source) if decoded is not None else None
         if lines is not None:
             return [part for line in lines for part in line.split(";")]
 
@@ -165,10 +249,11 @@ def collect(
     body: str,
     spans: dict[tuple[float, float], str],
     days: dict[str, int],
+    source: str = "",
 ) -> int:
     """Fold one file or payload into ``spans``/``days``; returns lines skipped."""
     skipped = 0
-    for line in split_lines(body):
+    for line in split_lines(body, source):
         got = parse_line(line)
         if got is None:
             skipped += 1 if line.strip() else 0
@@ -187,7 +272,7 @@ def collect(
     return skipped
 
 
-def read_payload(path: str):
+def read_payload(path: str, source: str = ""):
     """Return deduped spans, per-day counts, and unparsed line count.
 
     The unparsed count is what lets ``--empty-ok`` tell a rest week (a payload
@@ -202,7 +287,7 @@ def read_payload(path: str):
         with open(os.path.expanduser(path), encoding="utf-8-sig", errors="replace") as fh:
             body = fh.read()
 
-    skipped = collect(body, spans, days)
+    skipped = collect(body, spans, days, source)
     hc.log(
         f"  payload: {len(spans)} session(s), {len(days)} pre-counted day(s)"
         + (f", {skipped} line(s) unparsed" if skipped else "")
@@ -210,7 +295,7 @@ def read_payload(path: str):
     return spans, days, skipped
 
 
-def read_drop(drop_dir: str):
+def read_drop(drop_dir: str, source: str = ""):
     """Return deduped spans, per-day counts, and unparsed line count."""
     spans: dict[tuple[float, float], str] = {}
     days: dict[str, int] = {}
@@ -233,7 +318,7 @@ def read_drop(drop_dir: str):
         except OSError as exc:
             hc.log(f"  cannot read {os.path.basename(path)} ({exc})")
             continue
-        skipped += collect(body, spans, days)
+        skipped += collect(body, spans, days, source)
 
     hc.log(
         f"  {len(files)} file(s): {len(spans)} session(s), "
@@ -295,6 +380,11 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--payload-file", help="read session lines from this file "
                                            "('-' for stdin) instead of the drop folder")
     ap.add_argument("--days", type=int, default=120, help="how far back to keep")
+    ap.add_argument("--source", default="Bend",
+                    help="keep only workout objects whose source contains this "
+                         "(default: Bend). Applies to object payloads only — a "
+                         "plain line carries no source to judge. Pass '' to keep "
+                         "everything.")
     ap.add_argument("--empty-ok", action="store_true",
                     help="succeed when the payload holds no sessions at all "
                          "(a rest week), while still failing on one that holds "
@@ -306,7 +396,7 @@ def main(argv: list[str]) -> int:
         source = "stdin" if args.payload_file == "-" else args.payload_file
         hc.log(f"reading stretching payload from {source}")
         try:
-            spans, counted, skipped = read_payload(args.payload_file)
+            spans, counted, skipped = read_payload(args.payload_file, args.source)
         except OSError as exc:
             hc.log(f"cannot read payload ({exc})")
             return 1
@@ -316,7 +406,7 @@ def main(argv: list[str]) -> int:
             hc.log(f"note: {drop_dir} not found — no shortcut drop to import")
             return 1
         hc.log(f"reading stretching drops from {drop_dir}")
-        spans, counted, skipped = read_drop(drop_dir)
+        spans, counted, skipped = read_drop(drop_dir, args.source)
 
     if not spans and not counted:
         # An empty window and a misconfigured Shortcut both produce no sessions,

@@ -85,74 +85,51 @@ In order of preference:
 Whichever you use, note the exact **Source** string Bend reports. Guessing it is
 the likeliest way to end up with a Shortcut that runs cleanly and sends nothing.
 
-### 2b. If Bend writes only workouts
+### 2b. Bend writes only workouts, so you need Toolbox Pro
 
-Then the stock app cannot reach it, and there are three ways forward:
+Confirmed against this account: Health → profile → Apps → Bend shows Bend
+*writing* Workouts and only reading Active Energy. No Mindful Minutes, and Bend
+never appears in any Source list because it never writes a queryable sample
+type. The stock app genuinely cannot see these sessions.
 
-- **Toolbox Pro** (App Store, paid) — adds a `Get Workouts` action to Shortcuts.
-  It drops straight into step 1 of the five-action version; every other step
-  here is unchanged. Smallest change by far.
-- **Health Auto Export** (App Store, paid) — scheduled REST exports with no
-  Shortcut at all. More robust than any Shortcut, but it posts its own JSON
-  shape, so `import_shortcut_stretching.py` would need a small adapter for it.
-- **A periodic full export** — `import_health.py export.zip`, by hand every few
-  weeks. No new apps, no token, no automation.
+[Toolbox Pro](https://apps.apple.com/us/app/toolbox-pro-for-shortcuts/id1476205977)
+closes that gap — free download, one-time unlock, and it adds a **Get Workouts**
+action to the Shortcuts action list.
 
-### 3. The five-action version — build this one first
+### 3. The Shortcut — two actions
 
-Five actions, no loop, no date arithmetic. It proves the whole pipe end to end,
-and the span version below is a drop-in replacement once you trust it. New
-Shortcut, named something like *Push Bend to habits*:
+The importer reads workout *objects* directly and filters them by source in
+Python, so the phone does not have to format dates or match source strings.
+Both of those are fiddly in Shortcuts and both fail silently. So:
 
-1. **Find Health Samples** — Type: **Workouts**; Filter: **Start Date** `is`
-   **Today**; Filter: **Source** `is` **Bend** (or whatever step 2 showed)
-2. **Count** — *Items* in **Health Samples**
-3. **Format Date** — Date: **Current Date**, Format: **Custom**, Format String:
-   `yyyy-MM-dd`
-4. **Text** — `[Formatted Date][,][Count]`, giving one line like `2026-08-29,2`
-5. **Get Contents of URL** — as in *Posting it* below, with the **Text** from
-   step 4 as `sessions`
+1. **Get Workouts** (Toolbox Pro) — date range: **the last 7 days**. No source
+   filter needed. If Toolbox Pro offers one, setting it to Bend is harmless but
+   redundant.
+2. **Get Contents of URL** — as in *Posting it* below, with the workouts from
+   step 1 as `sessions`.
 
-On a day you don't stretch, step 2 counts zero and the line reads
-`2026-08-29,0`. That is understood and dropped, not treated as an error, so a
-rest day is a quiet green run.
+That is the entire phone side.
 
-What you give up is only tooltip detail — no routine names, no minutes — and
-the self-healing window: this sends today, so a day the phone is off stays
-missing. Both come back with the span version.
+What arrives is a list of workout objects. The importer:
 
-### 3b. The span version, once the short one works
+- reads `start`/`startDate`/`start_time` and the matching end key, whichever
+  spelling the app uses, and unwraps a `sessions`, `workouts` or `data` wrapper
+- keeps only workouts whose source contains **Bend**, so a Strava run in the
+  same window is dropped rather than counted as stretching (`--source`, default
+  `Bend`; pass `''` to keep everything)
+- takes the workout's name or activity type as the `/habits` tooltip
+- unwraps a payload that got JSON-encoded twice, which is what happens when
+  Shortcuts stringifies a list variable dropped into a text field
 
-Same shape, but it sends the last seven days with times and routine names,
-which is what makes a missed run repair itself:
+If the whole window turns out to be Strava runs and no Bend, that is an empty
+window — a green run and no commit, not a failure.
 
-1. **Find Health Samples** — Type: **Workouts**
-   - Filter: **Start Date** `is in the last` **7** **days**
-   - Filter: **Source** `is` **Bend**
-   - Sort by **Start Date**, no limit
+### 3b. If you would rather not buy anything
 
-   Filter on the *source*, not the workout type — Bend has filed sessions as
-   Flexibility, Yoga, and Mind & Body across versions, and matching on type
-   silently loses whichever one it isn't.
-
-2. **Repeat with Each** over the result:
-   - **Get Details of Health Sample** — Detail: **Start Date**, from *Repeat Item*
-   - **Format Date** — on that, Format: **Custom**, Format String:
-     `yyyy-MM-dd'T'HH:mm:ssZ`
-   - **Get Details of Health Sample** — Detail: **End Date**, from *Repeat Item*
-   - **Format Date** — same format string
-   - **Text**: `[Formatted Date][,][Formatted Date 2]` — one line, the two
-     stamps separated by a comma. Append `,` and the workout's name or activity
-     type if you want it in the `/habits` tooltip; it is optional.
-   - **Add to Variable** → `lines`
-
-3. **Combine Text** — Input: `lines`, Separator: **New Lines**
-
-4. **Get Contents of URL** — as below, with the **Combined Text** as `sessions`
-
-`Z` in that format string means the numeric offset (`-0400`), not a literal Z.
-Getting it wrong is the one failure the workflow reports loudly rather than
-silently.
+The plain line formats above still work, so any other route that can produce
+`start,end` lines feeds the same endpoint. The importer does not care what
+produced them. A periodic `python scripts/import_health.py export.zip` also
+remains available and needs no phone automation at all.
 
 ### Posting it
 

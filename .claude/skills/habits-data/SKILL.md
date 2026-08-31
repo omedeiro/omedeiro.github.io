@@ -158,7 +158,12 @@ Pro sells a `Get Workouts` action for exactly this gap. What *is* readable nativ
 alongside the workout, and it carries start and end dates, so it feeds the span format
 unchanged) and **Active Energy** filtered by source (a quantity sample; many samples per
 session, so it establishes that a day had a session but not how many). Check
-Health → profile → Apps → Bend to see which Bend actually writes.
+Health → profile → Apps → Bend to see which Bend actually writes. **For this account it
+is workouts only** — checked 2026-08-29 — so the stock app cannot reach it and Toolbox
+Pro's `Get Workouts` is the route. `import_shortcut_stretching.py` therefore accepts a
+list of workout **objects** and filters them by source itself (`--source`, default
+`Bend`), which is what keeps the Shortcut down to two actions: date formatting and
+source matching both fail silently in Shortcuts, so neither belongs there.
 
 **The CI route needs `TZ` pinned.** A session is filed under the local date it started, so
 `stretching.yml` sets `TZ: America/New_York`; on a bare UTC runner a 22:30 session lands
