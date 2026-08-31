@@ -26,8 +26,8 @@ this Mac can read, and a human moving data by hand.
 One JSON file per habit in `src/data/habits/`, all the same shape:
 
 ```json
-{ "id": "running", "label": "Running", "source": "Strava", "unit": "km",
-  "updated_at": "...", "days": { "2026-08-22": { "value": 8.4, "extra": {...} } } }
+{ "id": "running", "label": "Running", "source": "Strava", "unit": "mi",
+  "updated_at": "...", "days": { "2026-08-22": { "value": 5.2, "extra": {...} } } }
 ```
 
 `value` is what the heatmap buckets on; `extra` is free-form detail for the

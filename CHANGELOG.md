@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.4.0 — 2026-08-29
+## 2.6.0 — 2026-08-31
 
 ### Added
 - Bend → `/habits` now updates on its own, without the Mac. A scheduled iOS Shortcut reads the last seven days of Bend workouts out of Apple Health and POSTs them as a `repository_dispatch`; `.github/workflows/stretching.yml` merges them into `stretching.json`, commits, and the usual Cloudflare deploy follows. HealthKit is on-device only and Health does not reach the Mac, so a push from the phone is the only transport that exists — the previous route had one, but it landed in iCloud Drive and was picked up by a LaunchAgent, so it only ran when the Mac happened to be on. That is why stretching stopped at 2026-08-22
@@ -20,6 +20,66 @@
 ### Changed
 
 - `AGENTS.md`, `docs/habits-pipeline.md`, and the `habits-data` skill all recorded that Bend does not sync to Apple Health. That described the 2026-08-23 export, taken before the connection was on, and it is no longer true — all three now point at `import_health.py --list-sources` as the way to settle it for a given export rather than asserting either answer
+
+## 2.5.0 — 2026-08-30
+
+### Added
+
+- `/maths/bertrand-paradox` is interactive. Four ways of drawing a chord at random — two points on the circle, a point along a random radius, a point anywhere in the disc, and the line through two interior points — each sampled live, with a **Compare all four** mode that puts them side by side. **Show → Midpoints** swaps each chord for its own midpoint, which is where the methods separate most clearly, and **Run** streams the sample in so the estimate can be watched settling
+- `public/maths/bertrand-paradox.js` — the sampler. Every rotation-invariant method reduces to a density on `p`, the chord's distance from the centre, and the chord beats the triangle side exactly when `p < 1/2`; all four densities are known in closed form, so the strip under the circle draws the sampled histogram against the exact curve and shades the half whose area *is* the answer. Sampling runs off a seeded generator, one stream per method, so raising the count extends the sample rather than drawing an unrelated one
+- A fourth method Bertrand did not list: the line through two uniform points in the disc. Pairs of interior points on a chord number as the cube of its length, so the induced density is `(16/3pi)(1-p^2)^(3/2)` and the answer is `1/3 + 3*sqrt(3)/(4*pi) ~ 0.7468`, checked against 4e6 Monte Carlo samples
+- The page now says outright that the question has every answer in `(0,1)`, not three: `f(p) = (a+1)p^a` gives `P = (1/2)^(a+1)`, and two of Bertrand's own answers are already in that family. Plus Jaynes' invariance argument for `1/2`, and why it does not make the other constructions wrong
+
+### Changed
+
+- The `/maths` index no longer singles Bertrand out as the static one; all three pages run live
+
+### Fixed
+
+- The old listing's second method — *fix one endpoint, choose the other at random* — was labelled `P = 1/2`. It is the first method with the rotation already applied, and gives `1/3`. The page now makes that the point of its own section, since it is the most common way to get the paradox wrong
+
+### Removed
+
+- The MATLAB listing and `bertrand_paradox.m`. The four methods run live, at any sample count. `bertrand.png` stays as the page's opening figure, with a caption noting that its third panel's colours are inverted — the code coloured `|y| > r/2` as the long case when that is exactly the short one
+
+## 2.4.2 — 2026-08-30
+
+### Changed
+
+- `/projects/tdgl-simulation` is rebuilt around the current solver. The page had one MATLAB gif and a code sample for an API (`TDGLSolver`) that no longer exists; it now carries eight figures from [`omedeiro/nanowire_tdgl`](https://github.com/omedeiro/nanowire_tdgl) and the results they demonstrate — the 3x3 array of 4 um holes where the flux front stalls at the array perimeter and field-cooling is the only way to trap anything, the S/I/S ring that expels flux to 9.2 mT because the plane screens rather than because the hole is small, vortex nucleation, screening currents around a hole, and the cross-sections against the London and pair-breaking-wall solutions. Every number on the page comes from the repo's own figures
+- Source link points at `nanowire_tdgl` (the Python package) rather than `simulation6336`, which is now credited as the MATLAB original. The install and quick-start snippets are the real `tdgl3d` API
+- Both MATLAB gifs are kept, moved into a closing provenance section
+
+### Added
+
+- `public/projects/tdgl/` gains six PNGs and two gifs. Every figure links to its full-resolution file, since the four- and six-panel ones are not legible at 42rem, and every image is `loading="lazy"` — the page is 8 MB of figures and only the first one is above the fold
+- `nb-hole-array-trapped.gif` is requantised to a 64-colour palette with dithering off: 8.4 MB to 3.1 MB with no visible change to the physics panel, since dithering adds exactly the per-pixel noise GIF's run-length coding cannot compress
+
+## 2.4.1 — 2026-08-30
+
+### Changed
+
+- The running habit is measured in miles rather than kilometres. `fetch_strava.py` divides Strava's metres by 1609.344 on the way out and writes `"unit": "mi"`, and the existing 853 days in `running.json` were converted in place — `extra.distance_m` still carries the raw metres, so the conversion is reversible
+
+## 2.4.0 — 2026-08-30
+
+### Added
+
+- `/maths/euler-spiral` is interactive. One curve reached three ways, each with its own sliders: the Fresnel integrals, the turtle walk the page used to show in MATLAB, and the road transition the curve exists for. Drag to pan, pinch or scroll to zoom, **Trace** to walk a point along the curve with the circle matching its curvature at each moment. The strip under the plot draws curvature against arc length, which is the definition of the curve as a straight line
+- `public/maths/euler-spiral.js` — the viewer. Curves are sampled by tangent turn rather than by parameter, since the Fresnel phase grows quadratically and the coils at `s = 8` need 25x the samples per unit length that the straight middle does; the midpoint rule then lands within `2e-5` of tabulated `C(t)` and `S(t)` across the whole slider range. Every sample carries its own closed-form curvature rather than having it differenced back out of the polyline
+
+### Changed
+
+- The transition comparison holds both alignments between the **same two straights**, the way the choice actually presents itself, rather than starting both from one straight. Sharing an entry tangent instead makes the two curves diverge by roughly the tangent distance — half a radius at 90° — which swamps the shift `p = L²/24R` the comparison exists to show. Between fixed tangents the difference is exactly that shift plus the earlier start, and both are checked against the geometry rather than taken from the series
+- The `/maths` index now calls out Bertrand as the one page that is still a MATLAB listing; the tiling and Euler spiral pages both run live
+
+### Fixed
+
+- A display equation too wide for the 42rem column now scrolls in its own box rather than pushing the page sideways on a phone (`.katex-display { overflow-x: auto }`)
+
+### Removed
+
+- The MATLAB listing, `euler_spiral.m` and `euler.png`. The turtle mode is that loop, running live
 
 ## 2.3.0 — 2026-08-29
 

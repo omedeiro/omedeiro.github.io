@@ -8,10 +8,10 @@ Every habit feeds the ``/habits`` heatmap through one JSON file per habit in
       "id": "running",
       "label": "Running",
       "source": "Strava",
-      "unit": "km",
+      "unit": "mi",
       "updated_at": "2026-08-23T06:12:00Z",
       "days": {
-        "2026-08-22": {"value": 8.4, "extra": {"moving_time_s": 2520}}
+        "2026-08-22": {"value": 5.2, "extra": {"moving_time_s": 2520}}
       }
     }
 
