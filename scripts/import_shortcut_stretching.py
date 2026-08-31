@@ -66,6 +66,7 @@ import datetime as dt
 import glob
 import json
 import os
+import re
 import sys
 
 import habits_common as hc
@@ -87,6 +88,14 @@ MAX_SESSION_H = 3
 # one, which would climb forever; refuse it rather than record it.
 MAX_SESSIONS_PER_DAY = 20
 
+# A bare ISO date anywhere in a line we could not read as a span or a count.
+# Toolbox Pro's workout list renders as "Flexibility 2026-08-31 at 8:35 AM",
+# and Shortcuts coerces a list variable to those display strings when it is
+# dropped into a text field. One such line is one session on that date: less
+# detail than a span, but the session count -- which is what the heatmap
+# buckets on -- comes out exactly right.
+ISO_DATE = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
+
 
 def parse_line(line: str) -> tuple[str, object] | None:
     """Classify one line as a session span or a finished day, or reject it."""
@@ -95,7 +104,9 @@ def parse_line(line: str) -> tuple[str, object] | None:
         return None
     parts = [p.strip() for p in line.replace("\t", ",").split(",")]
     if len(parts) < 2:
-        return None
+        # No delimiter at all — a display string like
+        # "Flexibility 2026-08-31 at 8:35 AM" rather than a pair.
+        return _tally(line)
 
     # A finished day: a bare date and a session count.
     try:
@@ -121,11 +132,28 @@ def parse_line(line: str) -> tuple[str, object] | None:
 
     start, end = parse_stamp(parts[0]), parse_stamp(parts[1])
     if start is None or end is None or end <= start:
-        return None
+        return _tally(line)
     if (end - start).total_seconds() > MAX_SESSION_H * 3600:
-        return None
+        return _tally(line)
     label = parts[2] if len(parts) > 2 and parts[2] else ""
     return ("span", ((start.timestamp(), end.timestamp()), label))
+
+
+def _tally(line: str) -> tuple[str, object] | None:
+    """Last resort: one session on whatever ISO date the line mentions.
+
+    Deliberately narrow. It needs a full ``YYYY-MM-DD``, so a line in another
+    date format still fails loudly rather than being quietly half-read, and it
+    only ever adds one session -- it cannot invent a number.
+    """
+    found = ISO_DATE.search(line)
+    if not found:
+        return None
+    try:
+        dt.date.fromisoformat(found.group(1))
+    except ValueError:
+        return None
+    return ("tally", found.group(1))
 
 
 # Key spellings different producers use for the same three fields. Nothing that
@@ -249,6 +277,7 @@ def collect(
     body: str,
     spans: dict[tuple[float, float], str],
     days: dict[str, int],
+    tally: dict[str, int],
     source: str = "",
 ) -> int:
     """Fold one file or payload into ``spans``/``days``; returns lines skipped."""
@@ -266,10 +295,20 @@ def collect(
         elif got[0] == "day":
             key, count = got[1]
             days[key] = max(days.get(key, 0), count)
+        elif got[0] == "tally":
+            # Summed, not maxed: two display-string lines on one date are two
+            # sessions. An explicit count still wins over a tally below.
+            key = str(got[1])
+            tally[key] = min(tally.get(key, 0) + 1, MAX_SESSIONS_PER_DAY)
         # ("skip", None) is a line we understood and deliberately dropped — an
         # explicit zero-session day. Not counted as unparsed, so a rest day
         # still reads as an empty window rather than a broken payload.
     return skipped
+
+
+def _combine(days: dict[str, int], tally: dict[str, int]) -> dict[str, int]:
+    """Explicit per-day counts win over counts derived from date-only lines."""
+    return {k: days.get(k) or tally.get(k, 0) for k in {*days, *tally}}
 
 
 def read_payload(path: str, source: str = ""):
@@ -281,24 +320,27 @@ def read_payload(path: str, source: str = ""):
     """
     spans: dict[tuple[float, float], str] = {}
     days: dict[str, int] = {}
+    tally: dict[str, int] = {}
     if path == "-":
         body = sys.stdin.read()
     else:
         with open(os.path.expanduser(path), encoding="utf-8-sig", errors="replace") as fh:
             body = fh.read()
 
-    skipped = collect(body, spans, days, source)
+    skipped = collect(body, spans, days, tally, source)
     hc.log(
         f"  payload: {len(spans)} session(s), {len(days)} pre-counted day(s)"
+        + (f", {sum(tally.values())} counted from date-only line(s)" if tally else "")
         + (f", {skipped} line(s) unparsed" if skipped else "")
     )
-    return spans, days, skipped
+    return spans, _combine(days, tally), skipped
 
 
 def read_drop(drop_dir: str, source: str = ""):
     """Return deduped spans, per-day counts, and unparsed line count."""
     spans: dict[tuple[float, float], str] = {}
     days: dict[str, int] = {}
+    tally: dict[str, int] = {}
     # README files are excluded deliberately: the folder documents its own
     # format, and worked examples in prose are one careless edit away from
     # being imported as real sessions.
@@ -318,14 +360,15 @@ def read_drop(drop_dir: str, source: str = ""):
         except OSError as exc:
             hc.log(f"  cannot read {os.path.basename(path)} ({exc})")
             continue
-        skipped += collect(body, spans, days, source)
+        skipped += collect(body, spans, days, tally, source)
 
     hc.log(
         f"  {len(files)} file(s): {len(spans)} session(s), "
         f"{len(days)} pre-counted day(s)"
+        + (f", {sum(tally.values())} counted from date-only line(s)" if tally else "")
         + (f", {skipped} line(s) unparsed" if skipped else "")
     )
-    return spans, days, skipped
+    return spans, _combine(days, tally), skipped
 
 
 def merge_and_write(

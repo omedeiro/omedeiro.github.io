@@ -58,7 +58,12 @@ jobs:
           else
             printf '%s\n' "$MANUAL" > "$RUNNER_TEMP/stretching.json"
           fi
-          echo "Payload is $(wc -c < "$RUNNER_TEMP/stretching.json") bytes."
+          echo "Payload is $(wc -c < "$RUNNER_TEMP/stretching.json") bytes. First 400:"
+          # Printed because the shape of what the phone sends is the one thing
+          # that cannot be checked from a laptop, and a run that parses nothing
+          # is otherwise indistinguishable from a run that received nothing.
+          # No new exposure: the same timestamps get committed to stretching.json.
+          head -c 400 "$RUNNER_TEMP/stretching.json"; echo
 
       # No pip install: the importers are standard-library only, so this job
       # stays fast and cannot break on a dependency release.

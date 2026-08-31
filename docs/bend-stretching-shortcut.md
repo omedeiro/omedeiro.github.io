@@ -124,6 +124,23 @@ What arrives is a list of workout objects. The importer:
 If the whole window turns out to be Strava runs and no Bend, that is an empty
 window — a green run and no commit, not a failure.
 
+**Toolbox Pro filters by workout type, not source.** Set it to **Flexibility**,
+which is what Bend files these under. That is also why a Strava run cannot leak
+in through this route: a run is typed Running. Watch for Bend filing a session
+as Yoga or Mind & Body, which older versions did — those would be missed by a
+Flexibility-only filter, and the symptom is a day you stretched showing empty.
+
+**If the workouts arrive as display strings**, e.g.
+`Flexibility 2026-08-31 at 8:35 AM`, that is Shortcuts coercing a list variable
+to text rather than to JSON. It still works: a line carrying a bare `YYYY-MM-DD`
+and nothing else parseable counts as one session on that date, and two such
+lines on one date count as two. You lose the minutes in the tooltip, nothing
+else. If you later get real objects flowing, they overwrite the counted day and
+the minutes appear — no cleanup needed.
+
+The run's log prints the first 400 bytes of what arrived, so whichever shape it
+is, the first run tells you.
+
 ### 3b. If you would rather not buy anything
 
 The plain line formats above still work, so any other route that can produce
