@@ -54,23 +54,49 @@ tokens** → Generate new token:
 Nothing else. This token can write to one repo and do nothing else with the
 account, which is the point of putting it on a phone.
 
-### 2. Look before you build
+### 2. What Shortcuts can and cannot read
 
-There is no "Find Workouts" action in Shortcuts — an earlier draft of this guide
-said there was, and it does not exist. The action is **Find Health Samples**,
-with its *Type* set to **Workouts**.
+**Stock Shortcuts cannot enumerate workouts.** `Find Health Samples` covers
+quantity and category samples; an `HKWorkout` is neither, so *Workouts* simply
+is not in its Type list. Toolbox Pro sells a `Get Workouts` action precisely
+because the built-in actions can't do it. Two earlier drafts of this guide said
+otherwise — first naming a "Find Workouts" action that does not exist, then
+claiming `Find Health Samples` could be set to Workouts. Both were wrong. Don't
+go looking again.
 
-Before assembling anything, add that one action on its own and press ▶:
+So before building anything, find out which readable type Bend writes.
+**Health → your profile → Apps → Bend** lists exactly what it is permitted to
+write, which settles it in one look. Failing that, add a bare
+`Find Health Samples` action, set the Type below, filter
+`Start Date is in the last 30 days`, and press ▶.
 
-- **Find Health Samples** — Type: **Workouts**, Filter: **Start Date** `is in
-  the last` **30** **days**. No source filter yet.
+In order of preference:
 
-Shortcuts shows you the result right there. This answers, in one tap, the two
-questions everything else depends on: whether your Bend sessions are visible to
-Shortcuts at all, and what Bend calls itself in the *Source* field. Add
-`Source is <whatever it actually said>` as a second filter only once you have
-seen it. Guessing the source string is the single most likely way to end up
-with a Shortcut that runs perfectly and sends nothing.
+1. **Mindful Minutes** — a category sample, so it *is* in the Type list. Several
+   stretching apps write one per session alongside the workout. If Bend does,
+   this is the whole answer: each sample carries a start and an end date, which
+   is exactly what the span format below wants, and nothing else in this guide
+   changes.
+2. **Active Energy**, filtered to `Source is Bend` — a quantity sample, so
+   always readable. Coarser, because one session writes many samples: enough to
+   prove a session happened on a given day, not enough to cleanly separate two.
+   Good enough for the `YYYY-MM-DD,1` day form, not for spans.
+
+Whichever you use, note the exact **Source** string Bend reports. Guessing it is
+the likeliest way to end up with a Shortcut that runs cleanly and sends nothing.
+
+### 2b. If Bend writes only workouts
+
+Then the stock app cannot reach it, and there are three ways forward:
+
+- **Toolbox Pro** (App Store, paid) — adds a `Get Workouts` action to Shortcuts.
+  It drops straight into step 1 of the five-action version; every other step
+  here is unchanged. Smallest change by far.
+- **Health Auto Export** (App Store, paid) — scheduled REST exports with no
+  Shortcut at all. More robust than any Shortcut, but it posts its own JSON
+  shape, so `import_shortcut_stretching.py` would need a small adapter for it.
+- **A periodic full export** — `import_health.py export.zip`, by hand every few
+  weeks. No new apps, no token, no automation.
 
 ### 3. The five-action version — build this one first
 

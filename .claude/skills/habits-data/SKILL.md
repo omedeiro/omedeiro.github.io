@@ -149,6 +149,17 @@ however it arrived and the routes can overlap freely. Spans dedupe on the exact
 `(start, end)` pair and every affected day is recounted, which is what makes a rolling
 7-day window safe to send daily — and a missed day self-healing.
 
+**Stock Shortcuts cannot enumerate workouts — do not go looking for a way.**
+`Find Health Samples` covers quantity and category samples only; an `HKWorkout` is
+neither, so *Workouts* is absent from its Type list, and there is no `Find Workouts`
+action (two drafts of the guide claimed each of these in turn; both were wrong). Toolbox
+Pro sells a `Get Workouts` action for exactly this gap. What *is* readable natively:
+**Mindful Minutes** (a category sample — several stretching apps write one per session
+alongside the workout, and it carries start and end dates, so it feeds the span format
+unchanged) and **Active Energy** filtered by source (a quantity sample; many samples per
+session, so it establishes that a day had a session but not how many). Check
+Health → profile → Apps → Bend to see which Bend actually writes.
+
 **The CI route needs `TZ` pinned.** A session is filed under the local date it started, so
 `stretching.yml` sets `TZ: America/New_York`; on a bare UTC runner a 22:30 session lands
 on the following day. This is tested and real, not theoretical.
