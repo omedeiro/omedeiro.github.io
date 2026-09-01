@@ -30,7 +30,8 @@ out of `export.zip` produce the same number rather than two subtly different
 ones. The third shape is there so a Shortcut that can only count sessions still
 has something to send.
 
-**Send a rolling window, not just today.** Seven days is a good default. Spans
+**Send a rolling window, not just today.** Whatever the sending tool scopes by —
+a date range or a count of recent events — reach back well past yesterday. Spans
 are deduped on their exact `(start, end)` pair and every affected day is
 recounted from scratch, so re-sending a day cannot double-count it — which
 means a run the phone misses (locked, offline, out of battery) is repaired by
@@ -102,9 +103,13 @@ The importer reads workout *objects* directly and filters them by source in
 Python, so the phone does not have to format dates or match source strings.
 Both of those are fiddly in Shortcuts and both fail silently. So:
 
-1. **Get Workouts** (Toolbox Pro) — date range: **the last 7 days**. No source
-   filter needed. If Toolbox Pro offers one, setting it to Bend is harmless but
-   redundant.
+1. **Get Workouts** (Toolbox Pro) — type **Flexibility**, **last 25 events**.
+   Toolbox Pro scopes by a count of events, not by a date range, which suits
+   this better than a window would: at roughly a session a day it reaches back
+   about 25 days, so a run the phone misses is repaired by the next one for
+   weeks rather than for a week. Re-sending costs nothing — days are recomputed
+   from scratch, sessions dedupe, and the workflow skips the commit when nothing
+   actually changed. No source filter needed; the importer does that.
 2. **Get Contents of URL** — as in *Posting it* below, with the workouts from
    step 1 as `sessions`.
 

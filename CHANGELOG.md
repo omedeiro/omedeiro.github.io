@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.1 — 2026-09-01
+
+### Fixed
+
+- The Shortcut guide told you to set Toolbox Pro's Get Workouts to a seven-day date range. It scopes by a count of recent events instead, so that setting does not exist. Documented as **last 25 events**, which suits the pipeline better than a window would: at roughly a session a day it reaches back about 25 days, so a missed run is repaired by the next one for weeks rather than for a week
+
 ## 2.6.0 — 2026-08-31
 
 ### Added
