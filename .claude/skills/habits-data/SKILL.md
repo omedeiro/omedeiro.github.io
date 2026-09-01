@@ -165,6 +165,15 @@ list of workout **objects** and filters them by source itself (`--source`, defau
 `Bend`), which is what keeps the Shortcut down to two actions: date formatting and
 source matching both fail silently in Shortcuts, so neither belongs there.
 
+**HealthKit cannot be read while the phone is locked** — access is relinquished ten
+minutes after the screen locks and returns only on unlock. So a *time-of-day* Shortcuts
+automation is the wrong trigger for anything reading Health: it fires whether or not the
+phone is in use, and on a locked phone the read fails before any network call, which
+presents as a vanished request rather than as a Health error. Trigger on **Bend → Is
+Closed** instead; the phone is unlocked by construction. Scoping by last-25-events rather
+than a date window is what makes an unreliable trigger acceptable — one successful run
+recomputes ~25 days, so a fortnight of misses is repaired by the next success.
+
 **The CI route needs `TZ` pinned.** A session is filed under the local date it started, so
 `stretching.yml` sets `TZ: America/New_York`; on a bare UTC runner a 22:30 session lands
 on the following day. This is tested and real, not theoretical.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.2 — 2026-09-01
+
+### Fixed
+
+- The guide told you to schedule the Shortcut as a daily time-of-day automation at 11:30 PM. That cannot work: HealthKit refuses to read while the device is locked — access is relinquished ten minutes after the screen locks and returns only on unlock — so a fixed-time automation fires on a locked phone, `Get Workouts` cannot reach the Health store, and the Shortcut dies before it sends anything. The failure presents as a request that never arrives, which looks like a network or token fault and is neither. Documented the **Bend → Is Closed** app trigger instead, where the phone is unlocked by construction and the session is pushed seconds after it happens. Also spelled out why last-25-events scoping is what makes an unreliable trigger tolerable: any single successful run recomputes ~25 days, so a run of failures is repaired completely by the next success
+
 ## 2.6.1 — 2026-09-01
 
 ### Fixed

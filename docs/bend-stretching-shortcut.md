@@ -177,13 +177,33 @@ a permission prompt inside a scheduled automation just fails. A successful run
 returns an empty body and a 204; check the repo's Actions tab for an *Ingest
 stretching* run.
 
-### 4. Schedule it
+### 4. Trigger it — not on a timer
 
-Shortcuts → **Automation** → **+** → **Time of Day** → 11:30 PM, Daily →
-**Run Immediately**, and turn *Notify When Run* off.
+**A time-of-day automation does not work for this, and the reason is structural.**
+HealthKit refuses to read while the device is locked: access is relinquished ten
+minutes after the screen locks and returns only when you unlock with Face ID or
+a passcode. A fixed-time automation fires whether or not you happen to be
+holding the phone, so on any night you are already asleep, `Get Workouts` cannot
+reach the Health store and the Shortcut fails before it ever sends anything. It
+looks like a network or token problem and is neither.
 
-11:30 PM catches the whole day, and the 7-day window covers any night the phone
-was locked or offline at the time.
+Trigger on something that *implies* an unlocked phone instead:
+
+**Shortcuts → Automation → + → App → Bend → Is Closed → Run Immediately**,
+with *Notify When Run* off.
+
+The phone is unlocked by construction at that moment — you were just using it —
+and the session gets pushed within seconds of finishing rather than hours later.
+
+This is also why scoping by **last 25 events** rather than a date window
+matters. The trigger does not have to fire every day, or reliably, or at any
+particular time. Any one successful run recomputes roughly the last 25 days from
+scratch, so a fortnight of failed triggers is repaired completely by the next
+run that does go through. The pipeline is built to tolerate exactly this.
+
+If you would rather keep a time-based automation as well, pick an hour you are
+reliably awake and using the phone. It will fail silently on the nights you are
+not, which is harmless — just noisy.
 
 ## Route B — iCloud Drive (fallback, needs the Mac)
 
