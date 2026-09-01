@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.6.0 — 2026-08-31
+
+### Added
+- Bend → `/habits` now updates on its own, without the Mac. A scheduled iOS Shortcut reads the last seven days of Bend workouts out of Apple Health and POSTs them as a `repository_dispatch`; `.github/workflows/stretching.yml` merges them into `stretching.json`, commits, and the usual Cloudflare deploy follows. HealthKit is on-device only and Health does not reach the Mac, so a push from the phone is the only transport that exists — the previous route had one, but it landed in iCloud Drive and was picked up by a LaunchAgent, so it only ran when the Mac happened to be on. That is why stretching stopped at 2026-08-22
+- `docs/bend-stretching-shortcut.md` — the phone-side build guide that `AGENTS.md` has referred to since 2.2.0 without it existing: token scope, every action in the Shortcut, how to test the route with no phone involved, and what each failure mode looks like. Leads with a five-action Shortcut that sends only today's count, since it proves the whole pipe with no loop and no date arithmetic; the seven-day span version is a drop-in replacement, and a span overwrites the day-count for the same date, so upgrading needs no cleanup
+- A date-only fallback, so a payload of workout *display strings* still counts correctly. Shortcuts coerces a list variable dropped into a text field to strings like `Flexibility 2026-08-31 at 8:35 AM` rather than to JSON, and that is a plausible shape for what Toolbox Pro's `Get Workouts` hands over. A line carrying a bare `YYYY-MM-DD` and nothing else parseable now counts as one session on that date, and two such lines on one date count as two — summed, where an explicit `date,count` is still taken at its word. Deliberately narrow: it needs a full ISO date, so a line in any other date format still fails loudly rather than being quietly half-read. Session counts, which is what the heatmap buckets on, come out exact; only the tooltip minutes are lost, and a later object payload overwrites the day and restores them
+- The ingest workflow logs the first 400 bytes of the payload. The shape of what the phone sends is the one thing that cannot be checked from a laptop, and a run that parsed nothing was otherwise indistinguishable from a run that received nothing. No new exposure — the same timestamps are committed to `stretching.json`
+- Workout **objects** as a payload, not just text lines. Bend writes only `HKWorkout` records, which stock Shortcuts cannot read at all, so the payload realistically comes from a tool that hands back objects (Toolbox Pro's `Get Workouts`, Health Auto Export). The importer unwraps a `sessions`/`workouts`/`data` wrapper, accepts whichever spelling of `startDate` the producer uses, survives a payload JSON-encoded twice (what Shortcuts does to a list variable dropped into a text field), and filters on source itself via `--source` (default `Bend`), so a Strava run in the same window is dropped rather than counted as stretching. This is what keeps the phone side to two actions — date formatting and source matching both fail silently in Shortcuts, so neither belongs there
+- `--payload-file` on `import_shortcut_stretching.py`, reading the same session lines from a file or stdin instead of the drop folder. The drop folder, the dispatch payload, and a full `export.zip` all reach the same `union()` and `stretch_days()`, so a session counts identically however it arrived and the routes can overlap without disagreeing
+- A staleness warning in the nightly job when `stretching.json` or `screentime.json` has not moved in more than four days. Neither has a schedule CI can check up on, so a deleted Shortcut or a stopped LaunchAgent previously showed up only as a column that quietly stopped growing
+
+### Fixed
+
+- Stock Shortcuts cannot enumerate workouts at all: `Find Health Samples` covers quantity and category samples, an `HKWorkout` is neither, and *Workouts* is simply absent from its Type list (Toolbox Pro sells a `Get Workouts` action for exactly this gap). The guide now says so plainly and redirects to what *is* readable — Mindful Minutes, a category sample carrying start and end dates that feeds the span format unchanged, or Active Energy filtered by source — with the three paid/manual fallbacks if Bend writes only workouts. Recorded in the `habits-data` skill as a dead end
+- The guide named a "Find Workouts" Shortcuts action that does not exist. The real action is **Find Health Samples** with its *Type* set to Workouts, and per-item dates come from **Get Details of Health Sample** rather than off the repeat item directly. It now also opens by running that one action bare, which is the only reliable way to learn what Bend calls itself in the *Source* field — guessing that string is the likeliest way to end up with a Shortcut that runs cleanly and sends nothing
+- An explicit zero-session day (`2026-08-29,0`) was rejected as an unparseable line, so the simplest possible Shortcut — one that sends today's count once a day — would have failed its run every rest day, which is exactly the false alarm `--empty-ok` exists to prevent. A zero count is now recognised and dropped; the heatmap already reads an absent day as zero
+- Sessions were counted against the runner's local date, which on a UTC runner files a 22:30 session under the following day. `stretching.yml` pins `TZ: America/New_York`
+- A JSON payload collapsed into one unparseable line. `split_lines` now decodes a JSON object or array properly before falling back to stripping delimiters as noise; it also splits on semicolons, since joining lines with a separator is markedly less fiddly in Shortcuts than building a multi-line text variable
+
+### Changed
+
+- `AGENTS.md`, `docs/habits-pipeline.md`, and the `habits-data` skill all recorded that Bend does not sync to Apple Health. That described the 2026-08-23 export, taken before the connection was on, and it is no longer true — all three now point at `import_health.py --list-sources` as the way to settle it for a given export rather than asserting either answer
+
 ## 2.5.0 — 2026-08-30
 
 ### Added
@@ -63,13 +86,24 @@
 ## 2.3.0 — 2026-08-29
 
 ### Added
-
 - `/maths/aperiodic-tiles` — a tiling builder you can pan and zoom on a phone or a desktop. Three tilings, built three different ways: Penrose P3 rhombs by substitution of the two Robinson triangles, Ammann–Beenker by cut and project from `Z^4` through an octagonal window, and the hat from a stored patch. Pointer events cover mouse, trackpad and touch through one code path, so a drag pans, two fingers pinch and a flick glides; the canvas centre is clamped to stay over the patch, since one determined scroll otherwise leaves a blank canvas with no clue which way to come back
 - `public/maths/hat-search.mjs` — the derivation of the hat, as a runnable script. It enumerates all 10,209 8-kite polykites, keeps the 341 whose outline is a simple 13-gon, asks an exact-cover solver which of those can fill discs of radius 5, 12 and 30, and picks out the one that is forced to mix reflections in the ratio `1 : phi^4`. That one is the hat. Runs in about eight seconds, standard library only. The page's hat patch (475 tiles, radius 44) comes from the same solver, and is stored rather than generated because the search grows exponentially — that radius took three random restarts and `8.8e8` nodes, and four restarts at radius 50 each gave up after `2.5e9`
 
 ### Changed
 
 - `/maths` index no longer claims every page is MATLAB, which stopped being true with the tiling page
+
+## 2.2.0 — 2026-08-26
+
+Released without a changelog entry; recorded here after the fact.
+
+### Added
+
+- `scripts/import_shortcut_stretching.py` — merges Bend sessions dropped into `iCloud Drive/habits/stretching/` by a scheduled iOS Shortcut, wired into the nightly LaunchAgent. Reuses `import_health`'s `union()` and `stretch_days()` so a session imported from a Shortcut and the same session from a full Health export produce the same number. Spans dedupe on the exact `(start, end)` pair, so a 7-day window run daily cannot double-count
+
+### Changed
+
+- `/habits` column order: running, commits, screen time, stretching
 
 ## 2.1.5 — 2026-08-25
 
