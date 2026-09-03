@@ -13,7 +13,7 @@ details of the Apple data sources. This is the architectural view.
 |---|---|---|---|---|---|
 | Running | Strava | OAuth web API | CI, nightly | full history | 851 days, from 2019-01-01 |
 | Commits | GitHub | GraphQL contributions API | CI, nightly | full history | 418 days, from 2020-06-04 |
-| Screen time | `knowledgeC.db` + Biome | local files on the Mac | LaunchAgent, daily | **~28 days** | 29 days |
+| Screen time | `knowledgeC.db` + Biome | local files on the Mac | LaunchAgent, 3×/day | **~28 days** | 29 days |
 | Stretching | Bend → Apple Health | Shortcut → `repository_dispatch` | CI, on each push from the phone | ~unlimited | 19 days + whatever the phone has sent |
 | Sleep | Apple Health | export, or Shortcut drop | manual / LaunchAgent | ~unlimited | **none — column removed** |
 
@@ -149,27 +149,40 @@ Each of these exists because its absence produced wrong numbers:
 1. **A lapse loses data permanently.** Screen time retains ~28 days at source.
    If the LaunchAgent stops — Mac off, Full Disk Access revoked by an OS
    update, repo moved — those days cannot be recovered afterward from
-   anywhere. The nightly job now warns when `screentime.json` or
-   `stretching.json` has not moved in more than four days, so the *stopping*
-   is visible even though the loss is still irreversible. Stretching itself is
-   no longer exposed to this: Health keeps its history indefinitely, so a gap
-   there is filled by the next Shortcut run or by a full export.
+   anywhere. Two things now stand between a stall and a hole in the record.
+   The agent gets three chances a day instead of one (login, 12:00, 23:00), so
+   a single closed lid no longer costs a day; and the nightly job *fails* —
+   rather than annotating a run nobody opens — once `screentime.json` is more
+   than 2 days behind or `stretching.json` more than 4. The windows differ
+   because screen time has a day for every day either device was used, while
+   stretching only has days with sessions and rest days are real. Neither
+   makes the loss recoverable; both buy the ~28 days of warning in which it
+   still is. Stretching itself is no longer exposed to this at all: Health
+   keeps its history indefinitely, so a gap there is filled by the next
+   Shortcut run or by a full export.
 2. **No tests.** The `SEGB` parser is hand-reverse-engineered against an
    undocumented format Apple changes between releases. It will break silently
    one day, and `implausible()` only catches failures that produce absurd
    numbers, not ones that produce merely wrong numbers.
-3. **The LaunchAgent's success path is unverified.** Its failure path is tested,
-   and the first real run *did* fail — on Full Disk Access, because the plist
-   pointed at `/usr/bin/python3`, which is a shared Xcode shim that re-execs the
-   real interpreter. TCC judges the post-exec binary, so the grant never applied.
-   Now points at the resolved path; still not observed succeeding end to end.
+3. **The LaunchAgent is the one link with no redundancy.** Its success path is
+   verified now — it collected and pushed on five consecutive nights from
+   2026-08-26 — and its first real run *did* fail, on Full Disk Access, because
+   the plist pointed at `/usr/bin/python3`, a shared Xcode shim that re-execs the
+   real interpreter; TCC judges the post-exec binary, so the grant never applied.
+   It points at the resolved path and is checked into `scripts/` as a template
+   so a reinstall cannot quietly lose that. What remains is that one machine,
+   awake at one of three moments, is the only reader Screen Time data has: it
+   stopped delivering after 2026-08-30 with nothing failing anywhere, which is
+   what risk 1's check is for.
 4. **Full Disk Access on the interpreter is a broad grant.** Narrower than
    `/bin/sh`, but any script run by that Python inherits it. It is also tied to a
-   Command Line Tools path, so a CLT update could invalidate it — silently, since
-   a stalled agent currently goes unnoticed (risk 1).
+   Command Line Tools path, so a CLT update can invalidate it. That failure is no
+   longer silent — the nightly check goes red within 2 days (risk 1) — but it is
+   still invisible on the Mac itself, where the only symptom is an
+   "authorization denied" line in `~/Library/Logs/habits-daily.log`.
 5. **Single machine, single copy.** The habit JSON in git is the only archive
    of screen-time history.
-4. **All-or-nothing sanity gating.** One implausible day blocks the entire
+6. **All-or-nothing sanity gating.** One implausible day blocks the entire
    write, including the good days alongside it.
 
 ## Worth doing next

@@ -206,10 +206,20 @@ code. Both skip the commit when only `updated_at` changed, so a quiet day does n
 trigger a pointless redeploy, and they share a `habits-refresh` concurrency group so the
 two cannot race to push.
 
-The nightly job also warns when `stretching.json` or `screentime.json` has not moved in
-more than four days. Neither has a schedule CI can check up on, so without it a deleted
-Shortcut or a stopped LaunchAgent shows up only as a column that quietly stops growing —
-which is exactly how stretching stalled for a week in August 2026.
+The nightly job also **fails** when `stretching.json` or `screentime.json` stops
+arriving. Neither has a schedule CI can check up on, so without it a deleted Shortcut or
+a stopped LaunchAgent shows up only as a column that quietly stops growing — which is
+exactly how stretching stalled for a week in August 2026. It annotated rather than failed
+until 2.6.3, which was no better: screen time then sat two days stale and a human noticed
+before the run did.
+
+The windows are per habit, and deliberately different. Screen time is stale after **2
+days**: a day is written whenever either device was used at all, so a healthy file is
+never more than a day behind, and 2 catches a single missed LaunchAgent run while there
+is still time to fix it — `knowledgeC.db` and Biome hold roughly four weeks, so the loss
+is not permanent until then. Stretching is stale after **4 days**, because it only has
+days on which a session happened; rest days are real (three 2-day gaps in August 2026)
+and a 2-day window there would cry wolf every weekend.
 
 ### One-time setup
 
@@ -231,12 +241,35 @@ which is exactly how stretching stalled for a week in August 2026.
    (a PAT with `secrets:write`) so the workflow can store rotated Strava tokens itself;
    without it the job warns and you update `STRAVA_REFRESH_TOKEN` by hand.
 4. **Screen time and sleep** — handled by the `com.owenmedeiros.habits` LaunchAgent,
-   which runs `scripts/habits_daily.py` at 23:00 and commits to `main` only. It needs
-   Full Disk Access on `/usr/bin/python3` (System Settings → Privacy & Security → Full
-   Disk Access → **+** → ⌘⇧G → `/usr/bin/python3`). Verify with
-   `launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.habits` and check
-   `~/Library/Logs/habits-daily.log`. Both `knowledgeC.db` and Biome are pruned to
-   roughly four weeks, so a long outage loses days permanently.
+   which runs `scripts/habits_daily.py` and commits to `main` only. Install it from the
+   template in the repo, from the repo root — launchd does not expand `~` or `$HOME`,
+   so the absolute paths are substituted in:
+
+   ```bash
+   sed -e "s|{{HOME}}|$HOME|g" -e "s|{{REPO}}|$(pwd)|g" \
+     scripts/com.owenmedeiros.habits.plist \
+     > ~/Library/LaunchAgents/com.owenmedeiros.habits.plist
+   launchctl bootout gui/$(id -u)/com.owenmedeiros.habits 2>/dev/null
+   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.owenmedeiros.habits.plist
+   ```
+
+   It collects three times — at login, at 12:00, and at 23:00 — rather than once at
+   23:00. `knowledgeC.db` and Biome are pruned to roughly four weeks, so a night the Mac
+   was shut is history nothing can recover afterwards; the extra slots mean a missed
+   23:00 is picked up at noon and a Mac that was off through both is caught at the next
+   login. Re-running costs nothing, since `write_habit` merges and `habits_daily.py`
+   skips the commit when no day changed.
+
+   It needs **Full Disk Access on the interpreter the plist names**, which is the
+   resolved Command Line Tools binary, *not* `/usr/bin/python3` — that is a shared Xcode
+   shim that re-execs the real interpreter, and TCC judges the binary after the exec, so
+   a grant on the shim never applies and `knowledgeC.db` fails with a bare
+   "authorization denied". System Settings → Privacy & Security → Full Disk Access →
+   **+** → ⌘⇧G → the `ProgramArguments` path from the plist. A working Terminal run
+   proves nothing here: interactive shells have their TCC decisions attributed to
+   Terminal, so verify the agent itself with
+   `launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.habits` and read
+   `~/Library/Logs/habits-daily.log`.
 5. **Stretching, daily** — build the iOS Shortcut in
    `docs/bend-stretching-shortcut.md` and schedule it. That is the whole pipeline:
    Bend → Apple Health → Shortcut → `repository_dispatch` → `stretching.yml` → deploy.

@@ -1,16 +1,25 @@
 #!/usr/bin/env python3
-"""Collect the local-only habits and commit them, for the daily LaunchAgent.
+"""Collect the local-only habits and commit them, for the LaunchAgent.
 
-Run by ``~/Library/LaunchAgents/com.owenmedeiros.screentime.plist``. Logs to
-``~/Library/Logs/screentime-daily.log``.
+Run by ``~/Library/LaunchAgents/com.owenmedeiros.habits.plist``, installed from
+the template in ``scripts/com.owenmedeiros.habits.plist``. Logs to
+``~/Library/Logs/habits-daily.log``.
+
+Fires three times — at login, at 12:00 and at 23:00 — because the sources
+behind screen time are pruned to roughly four weeks and a night the Mac was
+shut cannot be recovered later. Repeat runs are harmless by construction:
+``write_habit`` merges, so the noon run's partial day is overwritten by the
+fuller number at 23:00, and the commit below is skipped when no day changed.
 
 This is a Python wrapper rather than a shell one for a Full Disk Access
 reason: TCC grants apply to the binary launchd actually starts, so a shell
 wrapper would mean granting Full Disk Access to ``/bin/sh`` — and every shell
-script on the machine with it. Pointing the agent straight at
-``/usr/bin/python3`` keeps the grant on the interpreter that genuinely needs
-to read ``knowledgeC.db`` and Biome, and off the conda Python used for
-day-to-day work.
+script on the machine with it. Pointing the agent straight at an interpreter
+keeps the grant on the one that genuinely needs to read ``knowledgeC.db`` and
+Biome, and off the conda Python used for day-to-day work. It must be the
+*resolved* Command Line Tools binary rather than ``/usr/bin/python3``: that is
+a shared Xcode shim which re-execs the real interpreter, and TCC judges the
+post-exec binary, so a grant on the shim never applies.
 
 Two sources, because neither can run in CI: screen time, read off
 ``knowledgeC.db`` and Biome by ``fetch_screentime``; and sleep, from whatever

@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.6.3 — 2026-09-03
+
+### Changed
+
+- The screen-time LaunchAgent now collects **three times a day** — at login, at 12:00 and at 23:00 — instead of only at 23:00. `knowledgeC.db` and Biome are pruned to roughly four weeks, so a night the Mac was shut is a day of history no later run can recover, and a single 23:00 slot meant one closed lid cost a day. The noon run picks up a missed night; `RunAtLoad` catches a Mac that was off through both. Repeat runs are free by construction: `write_habit` merges, so the noon run's partial day is overwritten by the fuller number at 23:00, and `habits_daily.py` skips the commit when no day changed
+- The nightly staleness check **fails the run** rather than printing a warning annotation, and screen time's window drops from 4 days to 2. Annotating was no better than nothing: screen time stopped delivering after 2026-08-30 and sat stale for days with every run green, because a `::warning::` is only visible to someone who opens the run. Stretching keeps the 4-day window — it only has days on which a session happened, and rest days are real (three 2-day gaps in August 2026), so 2 days there would cry wolf every weekend. Both habits are checked before the step exits, so one stall cannot hide another
+
+### Added
+
+- `scripts/com.owenmedeiros.habits.plist`, the LaunchAgent as a checked-in template with `{{HOME}}`/`{{REPO}}` placeholders and a one-line `sed` install in AGENTS.md. It was previously only ever a file on one Mac, which is how it came to point at `/usr/bin/python3` — a shared Xcode shim that re-execs the real interpreter, so the Full Disk Access grant on it never applied and `knowledgeC.db` failed with a bare "authorization denied". The template names the resolved Command Line Tools binary and says why, so a reinstall cannot quietly reintroduce that
+
+### Fixed
+
+- `habits_daily.py`'s docstring named a plist and a log file that have not existed since the agent stopped being screen-time-only (`com.owenmedeiros.screentime.plist`, `screentime-daily.log`), and still recommended pointing launchd at `/usr/bin/python3`, which is the exact configuration that failed
+
 ## 2.6.2 — 2026-09-01
 
 ### Fixed

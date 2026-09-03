@@ -216,15 +216,22 @@ Granted **per application**, to the binary that opens the file. Consequences:
 ## Daily automation
 
 Two schedules now. In CI, `.github/workflows/habits.yml` runs nightly (Strava, GitHub,
-plus a staleness warning when `stretching.json` or `screentime.json` has not moved in more
-than four days) and `.github/workflows/stretching.yml` runs whenever the phone dispatches.
+plus a staleness check that **fails the run** once `screentime.json` is more than 2 days
+behind or `stretching.json` more than 4 — different windows because screen time has a day
+for every day a device was used, while stretching only has days with sessions and rest
+days are real) and `.github/workflows/stretching.yml` runs whenever the phone dispatches.
 Both share the `habits-refresh` concurrency group so they cannot race to push.
 
 On the Mac, `scripts/habits_daily.py`, run by
-`~/Library/LaunchAgents/com.owenmedeiros.habits.plist` at 23:00, logging to
-`~/Library/Logs/habits-daily.log`. It runs screen time and sleep independently — one
-failing does not stop the other — collects on any branch (a skipped day is lost for good),
-and commits only on `main`, only the habit JSON files that changed, via a path-limited
+`~/Library/LaunchAgents/com.owenmedeiros.habits.plist` at login, 12:00 and 23:00, logging
+to `~/Library/Logs/habits-daily.log`. The plist lives in the repo as
+`scripts/com.owenmedeiros.habits.plist` with `{{HOME}}`/`{{REPO}}` placeholders (launchd
+does not expand `~`); AGENTS.md step 4 has the install. Three fire times rather than one
+because the sources are pruned to ~4 weeks and a night the Mac was shut is gone — repeat
+runs are free, since `write_habit` merges and the commit is skipped when no day changed.
+
+It runs screen time and sleep independently — one failing does not stop the other —
+collects on any branch (a skipped day is lost for good), and commits only on `main`, only the habit JSON files that changed, via a path-limited
 commit, never mid-rebase or mid-merge.
 
 Test it without waiting:

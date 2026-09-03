@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Template, not the installed file. {{HOME}} and {{REPO}} are substituted on
+  install; see the "Screen time and sleep" step in AGENTS.md. launchd does not
+  expand ~ or $HOME, so every path here has to be absolute.
+
+  Three chances a day to collect, rather than one, because the Mac is the only
+  machine that can read knowledgeC.db and Biome and both are pruned to roughly
+  four weeks — a night the laptop was shut is a night of history that no later
+  run can recover:
+
+    - RunAtLoad, so a Mac that was off through both slots collects at the next
+      login instead of waiting for tomorrow;
+    - 12:00, which catches a laptop that was closed at 23:00 the night before;
+    - 23:00, the real one, late enough to have most of the day in it.
+
+  Running repeatedly is free: write_habit merges, so the noon run's partial day
+  is simply overwritten by the fuller number at 23:00, and habits_daily.py
+  skips the commit entirely when no day changed.
+
+  The interpreter is the RESOLVED Command Line Tools binary on purpose.
+  /usr/bin/python3 is a shared Xcode shim that re-execs the real one, and TCC
+  judges the post-exec binary, so a Full Disk Access grant on the shim never
+  applies — knowledgeC.db then fails with a bare "authorization denied". Check
+  the version path still exists after a CLT update; grant FDA to whatever this
+  points at.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.owenmedeiros.habits</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9</string>
+    <string>{{REPO}}/scripts/habits_daily.py</string>
+  </array>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Hour</key>
+      <integer>12</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+    <dict>
+      <key>Hour</key>
+      <integer>23</integer>
+      <key>Minute</key>
+      <integer>0</integer>
+    </dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>{{HOME}}/Library/Logs/habits-daily.log</string>
+  <key>StandardErrorPath</key>
+  <string>{{HOME}}/Library/Logs/habits-daily.log</string>
+</dict>
+</plist>

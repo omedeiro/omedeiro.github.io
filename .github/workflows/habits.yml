@@ -121,31 +121,57 @@ jobs:
 
       # The habits pushed from the phone and the Mac have no schedule this job
       # can check up on -- if the Shortcut is deleted or the LaunchAgent stops,
-      # nothing fails, the column simply stops growing. Annotate rather than
-      # fail: a stale column is worth noticing, not worth mailing a red run for
-      # every night until it is fixed.
-      - name: Warn on stale locally-pushed habits
+      # nothing fails, the column simply stops growing. This used to annotate
+      # and stay green, which meant a stall was only visible to someone who
+      # opened the run: screen time sat two days stale in September 2026 and a
+      # human noticed first. A failing run mails you instead, which is worth the
+      # noise here because screen time cannot be backfilled -- knowledgeC.db and
+      # Biome are pruned to roughly four weeks, so every day of a stall that
+      # outlasts that window is gone for good.
+      #
+      # The windows differ because the two columns mean different things. Screen
+      # time gets a day written whenever either device was used at all, so a
+      # healthy file is never more than a day behind and 2 catches a single
+      # missed LaunchAgent run. Stretching only has days on which a session
+      # happened, and rest days are real -- three 2-day gaps in August 2026 --
+      # so the same threshold there would cry wolf every weekend.
+      - name: Check locally-pushed habits are still arriving
         if: always()
+        env:
+          TZ: America/New_York # a habit is filed under its local date, not UTC
         run: |
           python - <<'PY'
-          import datetime as dt, json, pathlib
+          import datetime as dt, json, pathlib, sys
 
-          STALE_AFTER_DAYS = 4
+          HABITS = (
+              ("screentime", 2, "the Mac LaunchAgent (launchctl kickstart -p "
+                                "gui/$(id -u)/com.owenmedeiros.habits, then read "
+                                "~/Library/Logs/habits-daily.log)"),
+              ("stretching", 4, "the Bend Shortcut on the phone"),
+          )
+
           today = dt.date.today()
-          for habit, how in (("stretching", "the Bend Shortcut"),
-                             ("screentime", "the Mac LaunchAgent")):
+          stale = []
+          for habit, stale_after, how in HABITS:
               path = pathlib.Path("src/data/habits") / f"{habit}.json"
               days = json.loads(path.read_text()).get("days") or {}
               if not days:
-                  print(f"::warning::{habit}.json holds no days at all.")
+                  print(f"::error::{habit}.json holds no days at all.")
+                  stale.append(habit)
                   continue
               newest = max(days)
               age = (today - dt.date.fromisoformat(newest)).days
-              if age > STALE_AFTER_DAYS:
-                  print(f"::warning::{habit}.json has not moved since {newest} "
-                        f"({age} days). Check {how}.")
+              if age > stale_after:
+                  print(f"::error::{habit}.json has not moved since {newest} "
+                        f"({age} days, stale after {stale_after}). Check {how}.")
+                  stale.append(habit)
               else:
                   print(f"{habit}: newest day {newest} ({age}d old), fine.")
+
+          if stale:
+              # Fail rather than warn, and fail after checking every habit so one
+              # stall does not hide another.
+              sys.exit(f"stale: {', '.join(stale)}")
           PY
 
       # Runs last so a partial failure still commits what did work, but the run
