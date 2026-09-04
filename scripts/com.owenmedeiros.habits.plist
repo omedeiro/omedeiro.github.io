@@ -19,12 +19,31 @@
   is simply overwritten by the fuller number at 23:00, and habits_daily.py
   skips the commit entirely when no day changed.
 
-  The interpreter is the RESOLVED Command Line Tools binary on purpose.
-  /usr/bin/python3 is a shared Xcode shim that re-execs the real one, and TCC
-  judges the post-exec binary, so a Full Disk Access grant on the shim never
-  applies — knowledgeC.db then fails with a bare "authorization denied". Check
-  the version path still exists after a CLT update; grant FDA to whatever this
-  points at.
+  The interpreter is /usr/bin/python3, and the Full Disk Access grant has to be
+  on that exact path. It is worth knowing that /usr/bin/python3 is a stub —
+  the same inode as /usr/bin/git, one of 78 hard links — which hands off to the
+  Command Line Tools interpreter, and an earlier version of this file argued
+  from that fact that a grant on it could never apply. That is not what this
+  machine does. TCC keys the decision to the path launchd is told to execute:
+
+    - /Library/Application Support/com.apple.TCC/TCC.db lists /usr/bin/python3
+      as allowed for kTCCServiceSystemPolicyAllFiles, and has no row of any
+      kind for the Command Line Tools binary;
+    - pointed at /usr/bin/python3 the agent read knowledgeC.db every night
+      through 2026-09-02; pointed at the CLT binary on 2026-09-03 it failed
+      twice in a row with "cannot open knowledgeC.db (authorization denied)".
+
+  So grant Full Disk Access to /usr/bin/python3 and nothing else. Re-check with
+  the sqlite3 query above rather than from memory if it ever fails again — the
+  grant is per-binary, and the symptom of granting the wrong one is a bare
+  "authorization denied" that names no path.
+
+  EnvironmentVariables/PATH is not optional. launchd starts jobs with
+  PATH=/usr/bin:/bin:/usr/sbin:/sbin, which does not contain git-lfs
+  (/opt/homebrew/bin/git-lfs). This repo tracks PDFs through LFS and .git/hooks/
+  pre-push tests for the binary with `command -v git-lfs`, so without Homebrew
+  on PATH every push aborts in the hook: the run commits, logs "push failed ...
+  'git-lfs' was not found on your path", and nothing reaches GitHub.
 -->
 <plist version="1.0">
 <dict>
@@ -33,9 +52,15 @@
 
   <key>ProgramArguments</key>
   <array>
-    <string>/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9</string>
+    <string>/usr/bin/python3</string>
     <string>{{REPO}}/scripts/habits_daily.py</string>
   </array>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
 
   <key>RunAtLoad</key>
   <true/>

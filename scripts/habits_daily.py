@@ -16,10 +16,11 @@ reason: TCC grants apply to the binary launchd actually starts, so a shell
 wrapper would mean granting Full Disk Access to ``/bin/sh`` — and every shell
 script on the machine with it. Pointing the agent straight at an interpreter
 keeps the grant on the one that genuinely needs to read ``knowledgeC.db`` and
-Biome, and off the conda Python used for day-to-day work. It must be the
-*resolved* Command Line Tools binary rather than ``/usr/bin/python3``: that is
-a shared Xcode shim which re-execs the real interpreter, and TCC judges the
-post-exec binary, so a grant on the shim never applies.
+Biome, and off the conda Python used for day-to-day work. That interpreter is
+``/usr/bin/python3``, and the grant has to name that exact path: it is the one
+this machine's TCC database actually allows, and pointing the plist at the
+Command Line Tools binary it hands off to fails with "authorization denied"
+because that path was never granted.
 
 Two sources, because neither can run in CI: screen time, read off
 ``knowledgeC.db`` and Biome by ``fetch_screentime``; and sleep, from whatever

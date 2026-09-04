@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.6.4 — 2026-09-03
+
+### Fixed
+
+- The `com.owenmedeiros.habits` LaunchAgent template named the wrong Python. 2.6.3 pointed it at the resolved Command Line Tools binary on the theory that `/usr/bin/python3` is a shim whose Full Disk Access grant can never apply; that reasoning is wrong on this machine, and the change broke the agent the first time it was installed from the template — two consecutive runs on 2026-09-03 died with "cannot open knowledgeC.db (authorization denied)". TCC keys the decision to the path launchd is told to execute, and `/Library/Application Support/com.apple.TCC/TCC.db` allows `/usr/bin/python3` while holding no row of any kind for the CLT binary. Back to `/usr/bin/python3`, which is what AGENTS.md documented all along and what read `knowledgeC.db` nightly through 2026-09-02. The comment now records the evidence and the `sqlite3` query to re-check it, instead of an argument from how the binary is built
+- The template had no `EnvironmentVariables` key, so every push the agent made aborted. launchd starts jobs with `PATH=/usr/bin:/bin:/usr/sbin:/sbin`, which does not contain `git-lfs` (`/opt/homebrew/bin/git-lfs`); this repo tracks PDFs through LFS and its `pre-push` hook tests for the binary with `command -v git-lfs`, so the run committed, logged `push failed ... 'git-lfs' was not found on your path`, and nothing reached GitHub. Setting `PATH` to put Homebrew first fixed it on the next run. Independent of the interpreter, and needed by any future agent that pushes
+- The documented install redirected `sed` output straight onto `~/Library/LaunchAgents/com.owenmedeiros.habits.plist`. The shell truncates the target before the command on the left runs, so a failure — most easily the template not being on the branch you have checked out — leaves a 0-byte plist, which unloads the service silently. That is how the agent went dark on 2026-09-03. Now it builds into a temp file, runs `plutil -lint`, and moves the result into place, so a working install survives a failed reinstall
+
 ## 2.6.3 — 2026-09-03
 
 ### Changed

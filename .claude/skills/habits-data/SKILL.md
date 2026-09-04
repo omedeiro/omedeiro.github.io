@@ -202,11 +202,22 @@ Granted **per application**, to the binary that opens the file. Consequences:
   Terminal's grant. Check what owns the shell before concluding a grant failed.
 - TCC attributes access to the *responsible* parent app, so a `python3` spawned
   by another app is judged by that app, not by `/usr/bin/python3`.
-- **`/usr/bin/python3` is not Python.** It is a shared Xcode shim — the same inode as
-  `/usr/bin/git`, 78 hard links — that re-execs the real interpreter. TCC evaluates the
-  executable after the exec, so an FDA grant on the shim never applies and fails with a
-  bare "authorization denied". Point launchd at the resolved binary:
-  `/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9`. Same reasoning rules out a shell wrapper.
+- **Grant FDA to `/usr/bin/python3`, the path the plist names.** `/usr/bin/python3` is a
+  stub — the same inode as `/usr/bin/git`, 78 hard links — that hands off to the Command
+  Line Tools interpreter, and it is easy to conclude from that that a grant on it lands
+  on the wrong binary. It does not, here: `TCC.db` allows `/usr/bin/python3` and holds no
+  row for the CLT binary, and the agent read `knowledgeC.db` under it nightly through
+  2026-09-02. Pointing the plist at
+  `/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9`
+  instead failed on 2026-09-03 with a bare "authorization denied". Check the grant, do not
+  reason about it:
+  `sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "select client, auth_value from access where service = 'kTCCServiceSystemPolicyAllFiles'"`
+  — `auth_value` 2 is allowed. A shell wrapper is still ruled out: that would put the
+  grant on `/bin/sh`.
+- **launchd's `PATH` has no Homebrew in it.** Agents start with
+  `/usr/bin:/bin:/usr/sbin:/sbin`, so `git-lfs` (`/opt/homebrew/bin/git-lfs`) is missing
+  and this repo's LFS `pre-push` hook aborts every push while the commits pile up
+  locally. The plist sets `EnvironmentVariables` → `PATH` to fix that.
 - **A working Terminal run proves nothing about launchd.** Interactive shells have their
   TCC decisions attributed to the parent app, so anything run from Terminal inherits
   Terminal's grant. Verify the agent itself with `launchctl kickstart`.

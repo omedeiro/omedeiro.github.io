@@ -166,17 +166,20 @@ Each of these exists because its absence produced wrong numbers:
    numbers, not ones that produce merely wrong numbers.
 3. **The LaunchAgent is the one link with no redundancy.** Its success path is
    verified now — it collected and pushed on five consecutive nights from
-   2026-08-26 — and its first real run *did* fail, on Full Disk Access, because
-   the plist pointed at `/usr/bin/python3`, a shared Xcode shim that re-execs the
-   real interpreter; TCC judges the post-exec binary, so the grant never applied.
-   It points at the resolved path and is checked into `scripts/` as a template
-   so a reinstall cannot quietly lose that. What remains is that one machine,
+   2026-08-26 — but it has failed twice, in two different ways, and both are
+   configuration that a reinstall can reintroduce. Full Disk Access is granted
+   to `/usr/bin/python3` and only to that path, so the plist has to name it;
+   pointing it at the Command Line Tools binary that `/usr/bin/python3` hands
+   off to failed on 2026-09-03 with "authorization denied", because that path
+   was never granted. And launchd's `PATH` omits `/opt/homebrew/bin`, so the
+   LFS `pre-push` hook could not find `git-lfs` and every push aborted after a
+   successful commit until the plist set `EnvironmentVariables` → `PATH`. Both
+   live in the `scripts/` template so a reinstall cannot quietly lose them. What remains is that one machine,
    awake at one of three moments, is the only reader Screen Time data has: it
    stopped delivering after 2026-08-30 with nothing failing anywhere, which is
    what risk 1's check is for.
 4. **Full Disk Access on the interpreter is a broad grant.** Narrower than
-   `/bin/sh`, but any script run by that Python inherits it. It is also tied to a
-   Command Line Tools path, so a CLT update can invalidate it. That failure is no
+   `/bin/sh`, but any script run by that Python inherits it. That failure is no
    longer silent — the nightly check goes red within 2 days (risk 1) — but it is
    still invisible on the Mac itself, where the only symptom is an
    "authorization denied" line in `~/Library/Logs/habits-daily.log`.
