@@ -206,10 +206,20 @@ code. Both skip the commit when only `updated_at` changed, so a quiet day does n
 trigger a pointless redeploy, and they share a `habits-refresh` concurrency group so the
 two cannot race to push.
 
-The nightly job also warns when `stretching.json` or `screentime.json` has not moved in
-more than four days. Neither has a schedule CI can check up on, so without it a deleted
-Shortcut or a stopped LaunchAgent shows up only as a column that quietly stops growing —
-which is exactly how stretching stalled for a week in August 2026.
+The nightly job also **fails** when `stretching.json` or `screentime.json` stops
+arriving. Neither has a schedule CI can check up on, so without it a deleted Shortcut or
+a stopped LaunchAgent shows up only as a column that quietly stops growing — which is
+exactly how stretching stalled for a week in August 2026. It annotated rather than failed
+until 2.6.3, which was no better: screen time then sat two days stale and a human noticed
+before the run did.
+
+The windows are per habit, and deliberately different. Screen time is stale after **2
+days**: a day is written whenever either device was used at all, so a healthy file is
+never more than a day behind, and 2 catches a single missed LaunchAgent run while there
+is still time to fix it — `knowledgeC.db` and Biome hold roughly four weeks, so the loss
+is not permanent until then. Stretching is stale after **4 days**, because it only has
+days on which a session happened; rest days are real (three 2-day gaps in August 2026)
+and a 2-day window there would cry wolf every weekend.
 
 ### One-time setup
 
@@ -231,12 +241,60 @@ which is exactly how stretching stalled for a week in August 2026.
    (a PAT with `secrets:write`) so the workflow can store rotated Strava tokens itself;
    without it the job warns and you update `STRAVA_REFRESH_TOKEN` by hand.
 4. **Screen time and sleep** — handled by the `com.owenmedeiros.habits` LaunchAgent,
-   which runs `scripts/habits_daily.py` at 23:00 and commits to `main` only. It needs
-   Full Disk Access on `/usr/bin/python3` (System Settings → Privacy & Security → Full
-   Disk Access → **+** → ⌘⇧G → `/usr/bin/python3`). Verify with
-   `launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.habits` and check
-   `~/Library/Logs/habits-daily.log`. Both `knowledgeC.db` and Biome are pruned to
-   roughly four weeks, so a long outage loses days permanently.
+   which runs `scripts/habits_daily.py` and commits to `main` only. Install it from the
+   template in the repo, from the repo root — launchd does not expand `~` or `$HOME`,
+   so the absolute paths are substituted in:
+
+   ```bash
+   mkdir -p ~/Library/LaunchAgents
+   tmp=$(mktemp -t habits.plist)
+   sed -e "s|{{HOME}}|$HOME|g" -e "s|{{REPO}}|$(pwd)|g" \
+     scripts/com.owenmedeiros.habits.plist > "$tmp" \
+     && plutil -lint "$tmp" \
+     && mv "$tmp" ~/Library/LaunchAgents/com.owenmedeiros.habits.plist
+   launchctl bootout gui/$(id -u)/com.owenmedeiros.habits 2>/dev/null
+   launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.owenmedeiros.habits.plist
+   ```
+
+   **Build it in a temp file and move it into place**; do not redirect straight onto the
+   installed plist. The shell creates the target and truncates it *before* running the
+   command on the left, so any failure — the template not on the branch you have checked
+   out, a typo in the path — leaves a 0-byte plist behind, and a 0-byte plist unloads the
+   service without saying anything. That is exactly how the agent went dark on
+   2026-09-03. `plutil -lint` between the two steps means a malformed substitution is
+   caught before it can replace a working file.
+
+   It collects three times — at login, at 12:00, and at 23:00 — rather than once at
+   23:00. `knowledgeC.db` and Biome are pruned to roughly four weeks, so a night the Mac
+   was shut is history nothing can recover afterwards; the extra slots mean a missed
+   23:00 is picked up at noon and a Mac that was off through both is caught at the next
+   login. Re-running costs nothing, since `write_habit` merges and `habits_daily.py`
+   skips the commit when no day changed.
+
+   It needs **Full Disk Access on `/usr/bin/python3`**, the interpreter the plist names
+   (System Settings → Privacy & Security → Full Disk Access → **+** → ⌘⇧G →
+   `/usr/bin/python3`). The grant is per-binary and it has to be on that exact path:
+   `/usr/bin/python3` is a stub sharing an inode with `/usr/bin/git` that hands off to
+   the Command Line Tools interpreter, and it is tempting to conclude from that that the
+   grant lands on the wrong binary — but this machine grants and honours it on the stub
+   path. Pointing the plist at the resolved CLT binary instead failed immediately with
+   "authorization denied", because nothing ever granted *that* path. Check rather than
+   reason about it:
+
+   ```bash
+   sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" \
+     "select client, auth_value from access
+        where service = 'kTCCServiceSystemPolicyAllFiles'"
+   ```
+
+   `auth_value` 2 is allowed. A working Terminal run proves nothing here: interactive
+   shells have their TCC decisions attributed to Terminal, so verify the agent itself
+   with `launchctl kickstart -p gui/$(id -u)/com.owenmedeiros.habits` and read
+   `~/Library/Logs/habits-daily.log`.
+
+   The plist also sets `EnvironmentVariables` → `PATH` so that `/opt/homebrew/bin` is on
+   it. launchd's default `PATH` is `/usr/bin:/bin:/usr/sbin:/sbin`, which has no
+   `git-lfs`; see [Git LFS](#git-lfs) for what that breaks.
 5. **Stretching, daily** — build the iOS Shortcut in
    `docs/bend-stretching-shortcut.md` and schedule it. That is the whole pipeline:
    Bend → Apple Health → Shortcut → `repository_dispatch` → `stretching.yml` → deploy.
@@ -274,3 +332,12 @@ PDFs tracked via LFS (`.gitattributes`). If pushing fails with "git-lfs not foun
 git lfs install
 git push
 ```
+
+`.git/hooks/pre-push` tests for the binary with `command -v git-lfs` and exits non-zero
+when it is missing, so a missing `git-lfs` fails the *push*, not the commit — the work is
+committed locally and simply never leaves the machine. In an interactive shell Homebrew is
+already on `PATH` and this does not come up; under **launchd it always does**, because
+agents start with `PATH=/usr/bin:/bin:/usr/sbin:/sbin` and `git-lfs` lives in
+`/opt/homebrew/bin`. That is why `scripts/com.owenmedeiros.habits.plist` sets
+`EnvironmentVariables` → `PATH`. Any new LaunchAgent that pushes needs the same key;
+without it the symptom is a log full of successful commits and `push failed`.

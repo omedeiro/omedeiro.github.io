@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.6.4 — 2026-09-03
+
+### Fixed
+
+- The `com.owenmedeiros.habits` LaunchAgent template named the wrong Python. 2.6.3 pointed it at the resolved Command Line Tools binary on the theory that `/usr/bin/python3` is a shim whose Full Disk Access grant can never apply; that reasoning is wrong on this machine, and the change broke the agent the first time it was installed from the template — two consecutive runs on 2026-09-03 died with "cannot open knowledgeC.db (authorization denied)". TCC keys the decision to the path launchd is told to execute, and `/Library/Application Support/com.apple.TCC/TCC.db` allows `/usr/bin/python3` while holding no row of any kind for the CLT binary. Back to `/usr/bin/python3`, which is what AGENTS.md documented all along and what read `knowledgeC.db` nightly through 2026-09-02. The comment now records the evidence and the `sqlite3` query to re-check it, instead of an argument from how the binary is built
+- The template had no `EnvironmentVariables` key, so every push the agent made aborted. launchd starts jobs with `PATH=/usr/bin:/bin:/usr/sbin:/sbin`, which does not contain `git-lfs` (`/opt/homebrew/bin/git-lfs`); this repo tracks PDFs through LFS and its `pre-push` hook tests for the binary with `command -v git-lfs`, so the run committed, logged `push failed ... 'git-lfs' was not found on your path`, and nothing reached GitHub. Setting `PATH` to put Homebrew first fixed it on the next run. Independent of the interpreter, and needed by any future agent that pushes
+- The documented install redirected `sed` output straight onto `~/Library/LaunchAgents/com.owenmedeiros.habits.plist`. The shell truncates the target before the command on the left runs, so a failure — most easily the template not being on the branch you have checked out — leaves a 0-byte plist, which unloads the service silently. That is how the agent went dark on 2026-09-03. Now it builds into a temp file, runs `plutil -lint`, and moves the result into place, so a working install survives a failed reinstall
+
+## 2.6.3 — 2026-09-03
+
+### Changed
+
+- The screen-time LaunchAgent now collects **three times a day** — at login, at 12:00 and at 23:00 — instead of only at 23:00. `knowledgeC.db` and Biome are pruned to roughly four weeks, so a night the Mac was shut is a day of history no later run can recover, and a single 23:00 slot meant one closed lid cost a day. The noon run picks up a missed night; `RunAtLoad` catches a Mac that was off through both. Repeat runs are free by construction: `write_habit` merges, so the noon run's partial day is overwritten by the fuller number at 23:00, and `habits_daily.py` skips the commit when no day changed
+- The nightly staleness check **fails the run** rather than printing a warning annotation, and screen time's window drops from 4 days to 2. Annotating was no better than nothing: screen time stopped delivering after 2026-08-30 and sat stale for days with every run green, because a `::warning::` is only visible to someone who opens the run. Stretching keeps the 4-day window — it only has days on which a session happened, and rest days are real (three 2-day gaps in August 2026), so 2 days there would cry wolf every weekend. Both habits are checked before the step exits, so one stall cannot hide another
+
+### Added
+
+- `scripts/com.owenmedeiros.habits.plist`, the LaunchAgent as a checked-in template with `{{HOME}}`/`{{REPO}}` placeholders and a one-line `sed` install in AGENTS.md. It was previously only ever a file on one Mac, which is how it came to point at `/usr/bin/python3` — a shared Xcode shim that re-execs the real interpreter, so the Full Disk Access grant on it never applied and `knowledgeC.db` failed with a bare "authorization denied". The template names the resolved Command Line Tools binary and says why, so a reinstall cannot quietly reintroduce that
+
+### Fixed
+
+- `habits_daily.py`'s docstring named a plist and a log file that have not existed since the agent stopped being screen-time-only (`com.owenmedeiros.screentime.plist`, `screentime-daily.log`), and still recommended pointing launchd at `/usr/bin/python3`, which is the exact configuration that failed
+
 ## 2.6.2 — 2026-09-01
 
 ### Fixed

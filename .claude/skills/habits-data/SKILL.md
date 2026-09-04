@@ -202,11 +202,22 @@ Granted **per application**, to the binary that opens the file. Consequences:
   Terminal's grant. Check what owns the shell before concluding a grant failed.
 - TCC attributes access to the *responsible* parent app, so a `python3` spawned
   by another app is judged by that app, not by `/usr/bin/python3`.
-- **`/usr/bin/python3` is not Python.** It is a shared Xcode shim — the same inode as
-  `/usr/bin/git`, 78 hard links — that re-execs the real interpreter. TCC evaluates the
-  executable after the exec, so an FDA grant on the shim never applies and fails with a
-  bare "authorization denied". Point launchd at the resolved binary:
-  `/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9`. Same reasoning rules out a shell wrapper.
+- **Grant FDA to `/usr/bin/python3`, the path the plist names.** `/usr/bin/python3` is a
+  stub — the same inode as `/usr/bin/git`, 78 hard links — that hands off to the Command
+  Line Tools interpreter, and it is easy to conclude from that that a grant on it lands
+  on the wrong binary. It does not, here: `TCC.db` allows `/usr/bin/python3` and holds no
+  row for the CLT binary, and the agent read `knowledgeC.db` under it nightly through
+  2026-09-02. Pointing the plist at
+  `/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9`
+  instead failed on 2026-09-03 with a bare "authorization denied". Check the grant, do not
+  reason about it:
+  `sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" "select client, auth_value from access where service = 'kTCCServiceSystemPolicyAllFiles'"`
+  — `auth_value` 2 is allowed. A shell wrapper is still ruled out: that would put the
+  grant on `/bin/sh`.
+- **launchd's `PATH` has no Homebrew in it.** Agents start with
+  `/usr/bin:/bin:/usr/sbin:/sbin`, so `git-lfs` (`/opt/homebrew/bin/git-lfs`) is missing
+  and this repo's LFS `pre-push` hook aborts every push while the commits pile up
+  locally. The plist sets `EnvironmentVariables` → `PATH` to fix that.
 - **A working Terminal run proves nothing about launchd.** Interactive shells have their
   TCC decisions attributed to the parent app, so anything run from Terminal inherits
   Terminal's grant. Verify the agent itself with `launchctl kickstart`.
@@ -216,15 +227,22 @@ Granted **per application**, to the binary that opens the file. Consequences:
 ## Daily automation
 
 Two schedules now. In CI, `.github/workflows/habits.yml` runs nightly (Strava, GitHub,
-plus a staleness warning when `stretching.json` or `screentime.json` has not moved in more
-than four days) and `.github/workflows/stretching.yml` runs whenever the phone dispatches.
+plus a staleness check that **fails the run** once `screentime.json` is more than 2 days
+behind or `stretching.json` more than 4 — different windows because screen time has a day
+for every day a device was used, while stretching only has days with sessions and rest
+days are real) and `.github/workflows/stretching.yml` runs whenever the phone dispatches.
 Both share the `habits-refresh` concurrency group so they cannot race to push.
 
 On the Mac, `scripts/habits_daily.py`, run by
-`~/Library/LaunchAgents/com.owenmedeiros.habits.plist` at 23:00, logging to
-`~/Library/Logs/habits-daily.log`. It runs screen time and sleep independently — one
-failing does not stop the other — collects on any branch (a skipped day is lost for good),
-and commits only on `main`, only the habit JSON files that changed, via a path-limited
+`~/Library/LaunchAgents/com.owenmedeiros.habits.plist` at login, 12:00 and 23:00, logging
+to `~/Library/Logs/habits-daily.log`. The plist lives in the repo as
+`scripts/com.owenmedeiros.habits.plist` with `{{HOME}}`/`{{REPO}}` placeholders (launchd
+does not expand `~`); AGENTS.md step 4 has the install. Three fire times rather than one
+because the sources are pruned to ~4 weeks and a night the Mac was shut is gone — repeat
+runs are free, since `write_habit` merges and the commit is skipped when no day changed.
+
+It runs screen time and sleep independently — one failing does not stop the other —
+collects on any branch (a skipped day is lost for good), and commits only on `main`, only the habit JSON files that changed, via a path-limited
 commit, never mid-rebase or mid-merge.
 
 Test it without waiting:
