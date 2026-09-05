@@ -153,8 +153,8 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       li { margin: 0.25rem 0; }
       .pub-list li { margin: 0.8rem 0; }
       .pub-venue { color: var(--muted); font-style: italic; }
-      /* Habits heatmap. Scoped to /habits, which is also the one page that
-         loads client-side JS (for the tooltip). */
+      /* Habits heatmap. Scoped to /habits, the first of the five pages that
+         carry client-side JS — here only for the tooltip. */
       .habits-chart { position: relative; margin: 2rem 0 1rem; }
       .habits-scroll { overflow-x: auto; overflow-y: visible; }
       .habits-chart svg { display: block; }
@@ -523,6 +523,128 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       .bertrand.is-expanded canvas { flex: 1 1 auto; min-height: 0; height: 100%; }
       .bertrand.is-expanded figcaption { margin: 0; }
       body.bertrand-locked { overflow: hidden; }
+      /* Mandelbrot viewer. Scoped to /maths/mandelbrot, the fifth page that
+         loads client-side JS: a set defined by iterating every pixel has to be
+         computed on the client, and pan and zoom are the whole point. Same
+         arrangement as the three above — the --mandel-* variables are read back
+         out by the script, with the five stops baked into its colour lookup
+         table, so the drawing follows the light and dark palettes without
+         repeating them in JS. */
+      .mandel {
+        --mandel-ink: #14100c;
+        --mandel-s0: #fdf6ec;
+        --mandel-s1: #d9a86a;
+        --mandel-s2: #a8532a;
+        --mandel-s3: #5b2d1c;
+        --mandel-s4: #8f7f6a;
+        --mandel-mark: #1c1c1a;
+        --mandel-accent: #8a4b2d;
+        --mandel-line: #6b6b66;
+        --mandel-bg: #fbfaf8;
+        margin: 1.75rem 0 1.5rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        .mandel {
+          --mandel-ink: #0b0a09;
+          --mandel-s0: #2a211c;
+          --mandel-s1: #7c4423;
+          --mandel-s2: #d99a72;
+          --mandel-s3: #f2e0cb;
+          --mandel-s4: #6d5b4a;
+          --mandel-mark: #f4e9dc;
+          --mandel-accent: #d99a72;
+          --mandel-line: #9a988f;
+          --mandel-bg: #121211;
+        }
+      }
+      .mandel-stage { position: relative; }
+      .mandel canvas {
+        display: block;
+        width: 100%;
+        height: min(62vh, 32rem);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--mandel-bg);
+        cursor: grab;
+        /* The canvas owns every gesture on it, so a drag pans instead of
+           scrolling the page. Expand gives it the whole screen. */
+        touch-action: none;
+      }
+      .mandel canvas.is-dragging { cursor: grabbing; }
+      .mandel canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .mandel-zoom {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .mandel-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem 1.1rem;
+        margin-top: 0.65rem;
+      }
+      .mandel-controls,
+      .mandel figcaption {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+      .mandel-field {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .mandel-field[hidden] { display: none; }
+      .mandel-field select,
+      .mandel button {
+        font: inherit;
+        color: var(--fg);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+      }
+      .mandel button { cursor: pointer; }
+      .mandel button:hover { border-color: var(--accent); color: var(--accent); }
+      .mandel button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+      .mandel-zoom button {
+        width: 1.9rem;
+        height: 1.9rem;
+        padding: 0;
+        font-size: 1rem;
+        line-height: 1;
+        background: var(--bg);
+      }
+      .mandel-buttons { gap: 0.4rem; }
+      .mandel-field input[type="range"] {
+        width: 8.5rem;
+        accent-color: var(--accent);
+      }
+      .mandel-field output {
+        min-width: 2.6rem;
+        font-variant-numeric: tabular-nums;
+        color: var(--fg);
+      }
+      .mandel-readout { font-variant-numeric: tabular-nums; }
+      .mandel.is-expanded {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        margin: 0;
+        padding: 0.75rem;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      .mandel.is-expanded .mandel-stage { flex: 1 1 auto; min-height: 0; }
+      .mandel.is-expanded canvas { height: 100%; }
+      .mandel.is-expanded figcaption { margin: 0; }
+      body.mandel-locked { overflow: hidden; }
       footer.site {
         margin-top: 4rem;
         padding-top: 1.25rem;
