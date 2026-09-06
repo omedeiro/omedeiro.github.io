@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.7.1 — 2026-09-06
+
+### Fixed
+
+- `scripts/habits_daily.py` rebases onto `origin/main` before pushing. A push to a branch that has moved on is rejected outright, and the agent swallows the failure to stay alive, so the commit sat unpushed while every run still reported success — three days of screen time were stranded that way at the start of September, surfacing only when someone read the log. Nothing upstream prevents it: `habits.yml` and `stretching.yml` push habit data of their own, so `main` moves without this machine involved. The pull carries `--autostash`, because collection can leave unrelated files dirty and a rebase refuses to start on a dirty tree, and `--no-edit`, so nothing can open `$EDITOR` on an agent with no terminal attached. A conflict aborts the rebase rather than leaving it half-applied, which would make `busy()` refuse to commit on every later run and turn one bad day into a silent permanent stall
+
 ## 2.7.0 — 2026-09-05
 
 ### Added

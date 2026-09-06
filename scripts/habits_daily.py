@@ -33,6 +33,12 @@ pruned to roughly four weeks and a skipped day is gone for good. Committing is
 the guarded part: only on ``main``, only these data files, never mid-rebase.
 ``write_habit`` merges, so days collected while on a feature branch are still
 committed by a later run.
+
+Pushing rebases onto ``origin/main`` first. The nightly workflows push habit
+data of their own, so the remote moves without this machine involved, and a
+push to a branch that has moved on is simply rejected — quietly, since the
+failure is swallowed to keep the agent alive. Rebasing first is what stops a
+rejected push from stranding a day's collection indefinitely.
 """
 
 from __future__ import annotations
@@ -128,6 +134,34 @@ def main() -> int:
         log(f"commit failed: {done.stderr.strip()}")
         return 1
     log(f"committed {git('rev-parse', '--short', 'HEAD')}")
+
+    # Rebase onto the remote before pushing. A push to a branch that has moved
+    # on is rejected outright, and because the failure is logged and swallowed
+    # the commit then sits here unpushed with the agent still reporting success
+    # every night — three days of screen time went that way in September 2026,
+    # ending only when someone read the log. Nothing upstream prevents this:
+    # habits.yml and stretching.yml both push habit data of their own, so main
+    # moves without this machine involved.
+    #
+    # --autostash because collection can leave unrelated files dirty and a
+    # rebase refuses to start on a dirty tree; --no-edit so a merge commit can
+    # never open $EDITOR and hang the agent with no terminal attached.
+    synced = subprocess.run(
+        [GIT, "pull", "--rebase", "--autostash", "--no-edit", "-q", "origin", "main"],
+        cwd=REPO, capture_output=True, text=True, check=False,
+    )
+    if synced.returncode:
+        # Abort rather than leave the rebase half-applied: busy() would then
+        # refuse to commit on every later run, turning one conflicted day into
+        # a silent permanent stall — the failure this whole block exists to
+        # prevent, in a harder-to-spot form. The commit stays local and the
+        # next run retries from a clean tree.
+        subprocess.run(
+            [GIT, "rebase", "--abort"],
+            cwd=REPO, capture_output=True, text=True, check=False,
+        )
+        log(f"rebase onto origin/main failed ({synced.stderr.strip()}) — commit is local")
+        return 0
 
     pushed = subprocess.run(
         [GIT, "push", "-q", "origin", "main"],
